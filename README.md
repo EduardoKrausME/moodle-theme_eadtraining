@@ -1,39 +1,43 @@
-# Boost Training - Tema Moodle
+# Boost Training - Moodle Theme
 
-**Boost Training** é um tema responsivo e altamente configurável para Moodle, baseado nos temas **Boost**, com foco em acessibilidade, identidade visual institucional e personalização completa da interface.
+**Boost Training** is a responsive and highly configurable Moodle theme, based on the **Boost** theme, focused on accessibility, institutional visual identity, and full interface customization.
 
-## 🎯 Principais Recursos
+## 🎯 Key Features
 
-### ✅ Acessibilidade Aprimorada
+### ✅ Enhanced Accessibility
 
-O Boost Training oferece uma série de ferramentas para melhorar a experiência de navegação de usuários com diferentes necessidades:
+Boost Training provides several tools to improve the browsing experience for users with different needs:
 
-- **Contraste ajustável**: alternância entre alto contraste, sépia e modo noturno
-- **Ajuste de tamanho da fonte**: aumentar ou diminuir conforme necessidade
-- **Fonte para dislexia**: aplicação automática de fonte amigável
-- **Navegação por teclado**: suporte completo a navegação via TAB/ENTER
-- **Menu de acessibilidade flutuante**: acesso rápido a todas as opções
-- **VLibras**: tradutor de Libras ativado para usuários no Brasil
+* **Adjustable contrast**: toggle between high contrast, sepia, and night mode
+* **Font size adjustment**: increase or decrease as needed
+* **Dyslexia-friendly font**: automatically applies a more accessible font
+* **Keyboard navigation**: full support for TAB/ENTER navigation
+* **Floating accessibility menu**: quick access to all options
+* **VLibras**: Brazilian Sign Language translator enabled for users in Brazil
 
-### 🎨 Identidade Visual
-- Suporte a **logotipo institucional**
-- Upload de **favicon personalizado**
-- Personalização de cores diretamente no painel administrativo
+### 🎨 Visual Identity
 
-### 📥 Rodapé Inteligente
-- Cor de fundo personalizável
-- **4 blocos de conteúdo HTML** totalmente independentes e customizáveis
-- Ideal para: informações institucionais, redes sociais, contatos, política de privacidade, etc.
+* Support for **institutional logo**
+* Upload of **custom favicon**
+* Color customization directly from the admin panel
 
-## 📦 Instalação
+### 📥 Smart Footer
 
-1. Baixe ou clone este repositório na pasta de temas do seu Moodle:
+* Customizable background color
+* **4 fully customizable HTML content blocks**
+* Ideal for: institutional information, social media, contact info, privacy policy, etc.
+
+## 📦 Installation
+
+1. Download or clone this repository into your Moodle's theme folder:
+
    ```bash
    git clone https://github.com/EduardoKrausME/moodle-theme_boost_training.git moodle/theme/boost_training
+   ```
 
 ## 📧 Contact
 
-Author: Eduardo Kraus  
+Author: Eduardo Kraus
 Website: [eduardokraus.com/contact](https://eduardokraus.com/contato)
 
 If you encounter any issues or have suggestions, feel free to open an issue! 😊
