@@ -142,5 +142,7 @@ if (optional_param("embed-frame-top", 0, PARAM_INT)) {
         }
     }
 
+    $templatecontext["footer_show_copywriter"] = get_config("theme_boost_training", "footer_show_copywriter");
+
     echo $OUTPUT->render_from_template('theme_boost_training/drawers', $templatecontext);
 }

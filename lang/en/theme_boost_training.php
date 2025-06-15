@@ -73,8 +73,19 @@ $string['details-teachers'] = 'Teachers';
 $string['details-users'] = 'Students';
 $string['footer_background_color'] = 'Footer background color';
 $string['footer_background_color_desc'] = 'Select the background color that will be applied to the footer section of the site.';
+$string['footer_copywriter'] = 'Made with ❤️';
+$string['footer_heading'] = 'Bloco {$a}';
+$string['footer_heading_description_title'] = 'The theme automatically adapts to the number of footer blocks you fill in:';
+$string['footer_heading_description_desc'] = '<ul>
+  <li><strong>No blocks filled:</strong> the footer will not be displayed.</li>
+  <li><strong>1 block filled:</strong> the content will be displayed as text, without block formatting.</li>
+  <li><strong>2, 3, or 4 blocks filled:</strong> the theme will automatically adjust the layout to display the blocks responsively and proportionally.</li>
+</ul>
+Fill in only the blocks you need, the theme takes care of the rest.';
 $string['footer_html'] = 'HTML do Bloco {$a} do Rodapé';
 $string['footer_html_desc'] = 'Adicione o código HTML personalizado que será exibido no bloco {$a} do rodapé.';
+$string['footer_show_copywriter'] = 'Show Made with ❤️';
+$string['footer_show_copywriter_desc'] = 'Uncheck if you want to hide the "Made with ❤️"';
 $string['footer_title'] = 'Título do Bloco {$a}';
 $string['footer_title_desc'] = 'Defina o título que aparecerá acima do conteúdo HTML no bloco {$a} do rodapé.';
 $string['footersettings'] = 'Configurações do rodapé';

@@ -33,7 +33,16 @@ $setting = new admin_setting_configcolourpicker("theme_boost_training/footer_bac
 $setting->set_updatedcallback("theme_reset_all_caches");
 $page->add($setting);
 
+$setting = new admin_setting_heading("theme_boost_training_footer_heading_description",
+    get_string("footer_heading_description_title", "theme_boost_training"),
+    get_string("footer_heading_description_desc", "theme_boost_training"));
+$page->add($setting);
+
 for ($i = 1; $i <= 4; $i++) {
+
+    $setting = new admin_setting_heading("theme_boost_training_footer_heading_{$i}",
+        get_string("footer_heading", "theme_boost_training", $i), "");
+    $page->add($setting);
 
     $setting = new admin_setting_configtext("theme_boost_training/footer_title_{$i}",
         get_string("footer_title", "theme_boost_training", $i),
@@ -45,5 +54,14 @@ for ($i = 1; $i <= 4; $i++) {
         get_string("footer_html_desc", "theme_boost_training", $i), "");
     $page->add($setting);
 }
+
+$setting = new admin_setting_heading('theme_boost_training_footerblock_copywriter',
+    get_string('footer_copywriter', 'theme_boost_training'), '');
+$page->add($setting);
+
+$setting = new admin_setting_configcheckbox('theme_boost_training/footer_show_copywriter',
+    get_string('footer_show_copywriter', 'theme_boost_training'),
+    get_string('footer_show_copywriter_desc', 'theme_boost_training'), 1);
+$page->add($setting);
 
 $settings->add($page);
