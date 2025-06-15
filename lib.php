@@ -63,6 +63,8 @@ function theme_boost_training_get_extra_scss($theme) {
             }";
     }
 
+    // $primary:       $blue !default;
+
     // Always return the background image with the scss when we have it.
     return !empty($theme->settings->scss) ? "{$theme->settings->scss}  \n  {$content}" : $content;
 }
@@ -167,9 +169,10 @@ function theme_boost_training_get_pre_scss($theme) {
         "brandcolor" => ["primary"],
     ];
 
+    $configboost = get_config("theme_boost");
     // Prepend variables first.
     foreach ($configurable as $configkey => $targets) {
-        $value = isset($theme->settings->{$configkey}) ? $theme->settings->{$configkey} : null;
+        $value = isset($configboost->{$configkey}) ? $configboost->{$configkey} : null;
         if (empty($value)) {
             continue;
         }
@@ -395,4 +398,62 @@ function theme_boost_training_coursemodule_edit_post_actions($data, $course) {
     }
 
     return $data;
+}
+
+/**
+ * List colors.
+ *
+ * @return array
+ */
+function theme_boost_training_colors(){
+    return [
+        "#000428", // Azul Escuro.
+        "#070000", // Preto.
+        "#1a2a6c", // Azul Escuro.
+        "#314755", // Cinza Escuro.
+        "#007bc3", // Azul.
+        "#007fff", // Azul Neon.
+        "#00bf8f", // Verde Azulado.
+        "#00c3b0", // Turquesa.
+        "#30e8bf", // Verde Claro.
+        "#83a4d4", // Azul Claro.
+        "#7303c0", // Roxo.
+        "#8000ff", // Roxo Neon.
+        "#86377b", // Roxo Escuro.
+        "#b21f1f", // Vermelho Escuro.
+        "#c10f41", // Vermelho.
+        "#d12924", // Vermelho Claro.
+        "#fc354c", // Vermelho Claro.
+        "#ff0000", // Vermelho Brilhante.
+        "#ff007f", // Rosa Neon.
+        "#ff00ff", // Magenta Brilhante.
+        "#f55ff2", // Rosa.
+        "#fd81b5", // Rosa Claro.
+        "#ff512f", // Laranja Claro.
+        "#e65c00", // Laranja.
+        "#ff8000", // Laranja Neon.
+        "#c99b10", // Amarelo Neon.
+        "#997540", // Bege.
+    ];
+}
+
+/**
+ * Change color.
+ *
+ * @throws dml_exception
+ */
+function theme_boost_training_change_color() {
+    $configboosttraining = get_config("theme_boost_training");
+    $configboost = get_config("theme_boost");
+
+    if (isset($configboosttraining->startcolor[5])) {
+        $brandcolor = $configboosttraining->startcolor;
+    } else {
+        $brandcolor = $configboost->brandcolor;
+    }
+
+    set_config("startcolor", "#000", "theme_boost_training");
+    set_config("footer_background_color", $brandcolor, "theme_boost_training");
+
+    theme_reset_all_caches();
 }

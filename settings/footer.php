@@ -24,13 +24,25 @@
 
 defined('MOODLE_INTERNAL') || die;
 
+global $PAGE, $CFG, $OUTPUT;
+
 // Footer section.
 $page = new admin_settingpage("theme_boost_training_footer", get_string("footersettings", "theme_boost_training"));
 
-$setting = new admin_setting_configcolourpicker("theme_boost_training/footer_background_color",
+$htmlselect = "<link rel=\"stylesheet\" href=\"{$CFG->wwwroot}/theme/boost_training/scss/colors.css\" />";
+foreach (theme_boost_training_colors() as $color) {
+    $htmlselect .= "\n\n" . $OUTPUT->render_from_template("theme_boost_training/settings/color", [
+            "background" => $color,
+            "footercolor" => true,
+        ]);
+}
+
+$setting = new admin_setting_configtext("theme_boost_training/footer_background_color",
     get_string("footer_background_color", "theme_boost_training"),
-    get_string("footer_background_color_desc", "theme_boost_training"), "#000819");
+    get_string("footer_background_color_desc", "theme_boost_training") . $htmlselect,
+    "#1a2a6c");
 $setting->set_updatedcallback("theme_reset_all_caches");
+$PAGE->requires->js_call_amd("theme_boost_training/settings", "minicolors", [$setting->get_id()]);
 $page->add($setting);
 
 $setting = new admin_setting_heading("theme_boost_training_footer_heading_description",

@@ -24,15 +24,44 @@
 
 defined('MOODLE_INTERNAL') || die;
 
-$page = new admin_settingpage("theme_boost_training_general", get_string("generalsettings", "theme_boost_training"));
+global $CFG, $OUTPUT, $PAGE;
 
-// We use an empty default value because the default colour should come from the preset.
-$name = 'theme_boost/brandcolor';
-$title = get_string('brandcolor', 'theme_boost');
-$description = get_string('brandcolor_desc', 'theme_boost');
-$setting = new admin_setting_configcolourpicker($name, $title, $description, '');
-$setting->set_updatedcallback('theme_reset_all_caches');
-$page->add($setting);
+$page = new admin_settingpage("theme_boost_training_general", get_string("generalsettings", "theme_boost_training"));
+$htmlselect = "<link rel=\"stylesheet\" href=\"{$CFG->wwwroot}/theme/boost_training/scss/colors.css\" />";
+
+$config = get_config("theme_boost_training");
+if (!isset($config->startcolor[2])) {
+    foreach (theme_boost_training_colors() as $color) {
+        $htmlselect .= "\n\n" . $OUTPUT->render_from_template("theme_boost_training/settings/color", [
+                "background" => $color,
+                "startcolor" => true,
+            ]);
+    }
+
+    $setting = new admin_setting_configtext("theme_boost_training/startcolor",
+        get_string('brandcolor', 'theme_boost'),
+        get_string('brandcolor_desc', 'theme_boost_training') . "<div class='mb-3'>{$htmlselect}</div>",
+        "#1a2a6c");
+    $PAGE->requires->js_call_amd("theme_boost_training/settings", "minicolors", [$setting->get_id()]);
+    $setting->set_updatedcallback("theme_boost_training_change_color");
+    $page->add($setting);
+}else {
+    foreach (theme_boost_training_colors() as $color) {
+        $htmlselect .= "\n\n" . $OUTPUT->render_from_template("theme_boost_training/settings/color", [
+                "background" => $color,
+                "brandcolor" => true,
+            ]);
+    }
+
+    // We use an empty default value because the default colour should come from the preset.
+    $setting = new admin_setting_configtext("theme_boost/brandcolor",
+        get_string('brandcolor', 'theme_boost'),
+        get_string('brandcolor_desc', 'theme_boost_training') . "<div class='mb-3'>{$htmlselect}</div>",
+        '#1a2a6c');
+    $setting->set_updatedcallback("theme_boost_training_change_color");
+    $page->add($setting);
+    $PAGE->requires->js_call_amd("theme_boost_training/settings", "minicolors", [$setting->get_id()]);
+}
 
 // Background image setting.
 $name = "theme_boost_training/backgroundimage";

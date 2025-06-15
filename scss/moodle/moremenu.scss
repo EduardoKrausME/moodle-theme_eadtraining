@@ -26,7 +26,8 @@
             background-color: $gray-100;
             border-color: transparent;
             border-bottom-color: $primary;
-            color: $primary;
+            font-weight: 700;
+            color: #{mix(black, $primary, 15%)};
 
             &:focus,
             &:hover {

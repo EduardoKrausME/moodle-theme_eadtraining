@@ -28,15 +28,15 @@ defined('MOODLE_INTERNAL') || die;
 $page = new admin_settingpage("theme_boost_training_advanced", get_string("advancedsettings", "theme_boost_training"));
 
 // Raw SCSS to include before the content.
-$setting = new admin_setting_scsscode("theme_boost_training/scsspre",
-    get_string("rawscsspre", "theme_boost_training"), get_string("rawscsspre_desc", "theme_boost_training"), "", PARAM_RAW);
-$setting->set_updatedcallback("theme_reset_all_caches");
+$setting = new admin_setting_scsscode('theme_boost_training/scsspre',
+    get_string('rawscsspre', 'theme_boost'), get_string('rawscsspre_desc', 'theme_boost'), '', PARAM_RAW);
+$setting->set_updatedcallback('theme_reset_all_caches');
 $page->add($setting);
 
 // Raw SCSS to include after the content.
-$setting = new admin_setting_scsscode("theme_boost_training/scss", get_string("rawscss", "theme_boost_training"),
-    get_string("rawscss_desc", "theme_boost_training"), "", PARAM_RAW);
-$setting->set_updatedcallback("theme_reset_all_caches");
+$setting = new admin_setting_scsscode('theme_boost_training/scss', get_string('rawscss', 'theme_boost'),
+    get_string('rawscss_desc', 'theme_boost'), '', PARAM_RAW);
+$setting->set_updatedcallback('theme_reset_all_caches');
 $page->add($setting);
 
 $settings->add($page);

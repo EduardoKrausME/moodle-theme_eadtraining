@@ -28,7 +28,8 @@
  * @return void
  * @throws Exception
  */
-function xmldb_theme_boost_training_install() {
+function xmldb_theme_boost_training_install()
+{
     global $DB, $CFG;
 
     // Category.
@@ -112,4 +113,27 @@ function xmldb_theme_boost_training_install() {
     ];
     $fs->create_file_from_pathname($filerecord, "{$CFG->dirroot}/theme/boost_training/pix/user-modal-background.jpg");
     set_config("background_profile_image", "/user-modal-background.jpg", "theme_boost_training");
+
+    set_config("backgroundimage", "", "theme_boost_training");
+    set_config("loginbackgroundimage", "", "theme_boost_training");
+    set_config("unaddableblocks", "", "theme_boost_training");
+
+    set_config("scsspre", "", "theme_boost_training");
+    set_config("scss", "", "theme_boost_training");
+
+    // set_config("enable_accessibility", "1", "theme_boost_training");
+    // set_config("enable_vlibras", "0", "theme_boost_training");
+    set_config("course_summary", "0", "theme_boost_training");
+
+    set_config("footer_background_color", "", "theme_boost_training");
+    set_config("footer_title_1", "", "theme_boost_training");
+    set_config("footer_html_1", "", "theme_boost_training");
+    set_config("footer_title_2", "", "theme_boost_training");
+    set_config("footer_html_2", "", "theme_boost_training");
+    set_config("footer_title_3", "", "theme_boost_training");
+    set_config("footer_html_3", "", "theme_boost_training");
+    set_config("footer_title_4", "", "theme_boost_training");
+    set_config("footer_html_4", "", "theme_boost_training");
+
+    set_config("footer_show_copywriter", "1", "theme_boost_training");
 }

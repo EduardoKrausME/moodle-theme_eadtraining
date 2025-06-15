@@ -56,6 +56,7 @@ $string['background_profile_image'] = 'Default course background image';
 $string['background_profile_image_desc'] = 'Sets a default background image for the header of all courses. This image will be displayed at the top of the course page and can be individually replaced in the course settings.';
 $string['backgroundimage'] = 'Background image';
 $string['backgroundimage_desc'] = 'The image to display as a background of the site. The background image you upload here will override the background image in your theme preset files.';
+$string['brandcolor_desc'] = 'Set the highlight color using the selection above or by choosing from the palette below.';
 $string['choosereadme'] = 'Boost Training is a modern highly-customisable theme. This theme is intended to be used directly, or as a parent theme when creating new themes utilising Bootstrap 4.';
 $string['configtitle'] = 'Boost Training';
 $string['course_summary'] = 'Show course summary before the Course';
@@ -75,13 +76,13 @@ $string['footer_background_color'] = 'Footer background color';
 $string['footer_background_color_desc'] = 'Select the background color that will be applied to the footer section of the site.';
 $string['footer_copywriter'] = 'Made with ❤️';
 $string['footer_heading'] = 'Bloco {$a}';
-$string['footer_heading_description_title'] = 'The theme automatically adapts to the number of footer blocks you fill in:';
 $string['footer_heading_description_desc'] = '<ul>
   <li><strong>No blocks filled:</strong> the footer will not be displayed.</li>
   <li><strong>1 block filled:</strong> the content will be displayed as text, without block formatting.</li>
   <li><strong>2, 3, or 4 blocks filled:</strong> the theme will automatically adjust the layout to display the blocks responsively and proportionally.</li>
 </ul>
 Fill in only the blocks you need, the theme takes care of the rest.';
+$string['footer_heading_description_title'] = 'The theme automatically adapts to the number of footer blocks you fill in:';
 $string['footer_html'] = 'HTML do Bloco {$a} do Rodapé';
 $string['footer_html_desc'] = 'Adicione o código HTML personalizado que será exibido no bloco {$a} do rodapé.';
 $string['footer_show_copywriter'] = 'Show Made with ❤️';
@@ -101,10 +102,6 @@ $string['privacy:metadata'] = 'The Boost Training theme does not store any perso
 $string['privacy:metadata:preference:draweropenblock'] = 'The user\'s preference for hiding or showing the drawer with blocks.';
 $string['privacy:metadata:preference:draweropenindex'] = 'The user\'s preference for hiding or showing the drawer with course index.';
 $string['privacy:metadata:preference:draweropennav'] = 'The user\'s preference for hiding or showing the drawer menu navigation.';
-$string['rawscss'] = 'Raw SCSS';
-$string['rawscss_desc'] = 'Use this field to provide SCSS or CSS code which will be injected at the end of the style sheet.';
-$string['rawscsspre'] = 'Raw initial SCSS';
-$string['rawscsspre_desc'] = 'In this field you can provide initialising SCSS code, it will be injected before everything else. Most of the time you will use this setting to define variables.';
 $string['region-side-pre'] = 'Right';
 $string['settings_accessibility'] = 'Enable accessibility options';
 $string['settings_accessibility_desc'] = 'Allows customization of options to improve platform accessibility, such as contrast, font size, and keyboard navigation.';

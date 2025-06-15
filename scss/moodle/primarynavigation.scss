@@ -6,10 +6,14 @@
             height: $navbar-height;
             border-top: 3px solid transparent;
             font-weight: 600;
-            color: $gray-900;
+            color: $primary;
             font-family: "Open Sans", sans-serif;
             font-size: 14px;
             padding: 13px;
+            &.active {
+                font-weight: 700;
+                color: #{mix(black, $primary, 15%)};
+            }
         }
     }
 }

@@ -1,10 +1,9 @@
 define(["jquery", "theme_boost_training/minicolors"], function($, minicolors) {
-    var theme_boost_training = {
-
+    return {
         minicolors: function(elementid) {
+            window.$ = $;
+            console.log(elementid);
             $("#" + elementid).minicolors();
         }
     };
-
-    return theme_boost_training;
 });
