@@ -25,7 +25,7 @@
 defined('MOODLE_INTERNAL') || die();
 
 if ($ADMIN->fulltree) {
-    $settings = new theme_boost_training_admin_settingspage_tabs('themesettingboost_training',
+    $settings = new theme_boost_admin_settingspage_tabs('themesettingboost_training',
         get_string('configtitle', 'theme_boost_training'));
 
     $ADMIN->add('themes', new admin_category('theme_boost_training', get_string('pluginname', 'theme_boost_training')));
