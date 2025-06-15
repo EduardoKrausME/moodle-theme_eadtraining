@@ -1,0 +1,497 @@
+<?php
+// This file is part of Moodle - http://moodle.org/
+//
+// Moodle is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+//
+// Moodle is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+//
+// You should have received a copy of the GNU General Public License
+// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+
+namespace theme_boost_training\output;
+
+use context_system;
+use moodle_url;
+use html_writer;
+use user_picture;
+
+/**
+ * Renderers to align Moodle's HTML with that expected by Bootstrap
+ *
+ * @package    theme_boost_training
+ * @copyright  2012 Bas Brands, www.basbrands.nl
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
+class core_renderer extends \core_renderer {
+
+    /**
+     * Returns HTML to display a "Turn editing on/off" button in a form.
+     *
+     * @param moodle_url $url The URL + params to send through when clicking the button
+     * @param string $method
+     *
+     * @return string HTML the button
+     *
+     * @throws \Exception
+     */
+    public function edit_button(moodle_url $url, string $method = 'post') {
+        if ($this->page->theme->haseditswitch) {
+            return;
+        }
+        $url->param('sesskey', sesskey());
+        if ($this->page->user_is_editing()) {
+            $url->param('edit', 'off');
+            $editstring = get_string('turneditingoff');
+        } else {
+            $url->param('edit', 'on');
+            $editstring = get_string('turneditingon');
+        }
+        $button = new \single_button($url, $editstring, $method, \single_button::BUTTON_PRIMARY);
+        return $this->render_single_button($button);
+    }
+
+    /**
+     * Renders the "breadcrumb" for all pages in boost.
+     *
+     * @return string the HTML for the navbar.
+     */
+    public function navbar(): string {
+        $newnav = new \theme_boost_training\boost_trainingnavbar($this->page);
+        return $this->render_from_template('core/navbar', $newnav);
+    }
+
+    /**
+     * Renders the context header for the page.
+     *
+     * @param array $headerinfo Heading information.
+     * @param int $headinglevel What 'h' level to make the heading.
+     *
+     * @return string A rendered context header.
+     *
+     * @throws \Exception
+     */
+    public function context_header($headerinfo = null, $headinglevel = 1): string {
+        global $DB, $USER, $CFG;
+        require_once($CFG->dirroot . '/user/lib.php');
+        $context = $this->page->context;
+        $heading = null;
+        $imagedata = null;
+        $userbuttons = null;
+
+        // Make sure to use the heading if it has been set.
+        if (isset($headerinfo['heading'])) {
+            $heading = $headerinfo['heading'];
+        } else {
+            $heading = $this->page->heading;
+        }
+
+        // The user context currently has images and buttons. Other contexts may follow.
+        if ((isset($headerinfo['user']) || $context->contextlevel == CONTEXT_USER) && $this->page->pagetype !== 'my-index') {
+            if (isset($headerinfo['user'])) {
+                $user = $headerinfo['user'];
+            } else {
+                // Look up the user information if it is not supplied.
+                $user = $DB->get_record('user', ['id' => $context->instanceid]);
+            }
+
+            // If the user context is set, then use that for capability checks.
+            if (isset($headerinfo['usercontext'])) {
+                $context = $headerinfo['usercontext'];
+            }
+
+            // Only provide user information if the user is the current user, or a user which the current user can view.
+            // When checking user_can_view_profile(), either:
+            // If the page context is course, check the course context (from the page object) or;
+            // If page context is NOT course, then check across all courses.
+            $course = ($this->page->context->contextlevel == CONTEXT_COURSE) ? $this->page->course : null;
+
+            if (user_can_view_profile($user, $course)) {
+                // Use the user's full name if the heading isn't set.
+                if (empty($heading)) {
+                    $heading = fullname($user);
+                }
+
+                $imagedata = $this->user_picture($user, ['size' => 100]);
+
+                // Check to see if we should be displaying a message button.
+                if (!empty($CFG->messaging) && has_capability('moodle/site:sendmessage', $context)) {
+                    $userbuttons = [
+                        'messages' => [
+                            'buttontype' => 'message',
+                            'title' => get_string('message', 'message'),
+                            'url' => new moodle_url('/message/index.php', ['id' => $user->id]),
+                            'image' => 't/message',
+                            'linkattributes' => \core_message\helper::messageuser_link_params($user->id),
+                            'page' => $this->page,
+                        ],
+                    ];
+
+                    if ($USER->id != $user->id) {
+                        $iscontact = \core_message\api::is_contact($USER->id, $user->id);
+                        $isrequested = \core_message\api::get_contact_requests_between_users($USER->id, $user->id);
+                        $contacturlaction = '';
+                        $linkattributes = \core_message\helper::togglecontact_link_params(
+                            $user,
+                            $iscontact,
+                            true,
+                            !empty($isrequested),
+                            );
+                        // If the user is not a contact.
+                        if (!$iscontact) {
+                            if ($isrequested) {
+                                // We just need the first request.
+                                $requests = array_shift($isrequested);
+                                if ($requests->userid == $USER->id) {
+                                    // If the user has requested to be a contact.
+                                    $contacttitle = 'contactrequestsent';
+                                } else {
+                                    // If the user has been requested to be a contact.
+                                    $contacttitle = 'waitingforcontactaccept';
+                                }
+                                $linkattributes = array_merge($linkattributes, [
+                                    'class' => 'disabled',
+                                    'tabindex' => '-1',
+                                ]);
+                            } else {
+                                // If the user is not a contact and has not requested to be a contact.
+                                $contacttitle = 'addtoyourcontacts';
+                                $contacturlaction = 'addcontact';
+                            }
+                            $contactimage = 't/addcontact';
+                        } else {
+                            // If the user is a contact.
+                            $contacttitle = 'removefromyourcontacts';
+                            $contacturlaction = 'removecontact';
+                            $contactimage = 't/removecontact';
+                        }
+                        $userbuttons['togglecontact'] = [
+                            'buttontype' => 'togglecontact',
+                            'title' => get_string($contacttitle, 'message'),
+                            'url' => new moodle_url('/message/index.php', [
+                                'user1' => $USER->id,
+                                'user2' => $user->id,
+                                $contacturlaction => $user->id,
+                                'sesskey' => sesskey()],
+                                ),
+                            'image' => $contactimage,
+                            'linkattributes' => $linkattributes,
+                            'page' => $this->page,
+                        ];
+                    }
+
+                    $this->page->requires->string_for_js('changesmadereallygoaway', 'moodle');
+                }
+            } else {
+                $heading = null;
+            }
+        }
+
+        $prefix = null;
+        if ($context->contextlevel == CONTEXT_MODULE) {
+            if ($this->page->course->format === 'singleactivity') {
+                $heading = format_string($this->page->course->fullname, true, ['context' => $context]);
+            } else {
+                $heading = $this->page->cm->get_formatted_name();
+                $iconurl = $this->page->cm->get_icon_url();
+                $iconclass = $iconurl->get_param('filtericon') ? '' : 'nofilter';
+                $iconattrs = [
+                    'class' => "icon activityicon $iconclass",
+                    'aria-hidden' => 'true',
+                ];
+                $imagedata = html_writer::img($iconurl->out(false), '', $iconattrs);
+                $purposeclass = plugin_supports('mod', $this->page->activityname, FEATURE_MOD_PURPOSE);
+                $purposeclass .= ' activityiconcontainer icon-size-6';
+                $purposeclass .= ' modicon_' . $this->page->activityname;
+                $isbranded = component_callback('mod_' . $this->page->activityname, 'is_branded', [], false);
+                $imagedata = html_writer::tag('div', $imagedata, ['class' => $purposeclass . ($isbranded ? ' isbranded' : '')]);
+                if (!empty($USER->editing)) {
+                    $prefix = get_string('modulename', $this->page->activityname);
+                }
+            }
+        }
+
+        $contextheader = new \context_header($heading, $headinglevel, $imagedata, $userbuttons, $prefix);
+        return $this->render($contextheader);
+    }
+
+    /**
+     * See if this is the first view of the current cm in the session if it has fake blocks.
+     *
+     * (We track up to 100 cms so as not to overflow the session.)
+     * This is done for drawer regions containing fake blocks so we can show blocks automatically.
+     *
+     * @return boolean true if the page has fakeblocks and this is the first visit.
+     */
+    public function firstview_fakeblocks(): bool {
+        global $SESSION;
+
+        $firstview = false;
+        if ($this->page->cm) {
+            if (!$this->page->blocks->region_has_fakeblocks('side-pre')) {
+                return false;
+            }
+            if (!property_exists($SESSION, 'firstview_fakeblocks')) {
+                $SESSION->firstview_fakeblocks = [];
+            }
+            if (array_key_exists($this->page->cm->id, $SESSION->firstview_fakeblocks)) {
+                $firstview = false;
+            } else {
+                $SESSION->firstview_fakeblocks[$this->page->cm->id] = true;
+                $firstview = true;
+                if (count($SESSION->firstview_fakeblocks) > 100) {
+                    array_shift($SESSION->firstview_fakeblocks);
+                }
+            }
+        }
+        return $firstview;
+    }
+
+    /**
+     * Wrapper for header elements.
+     *
+     * @return string HTML to display the main header.
+     * @throws \dml_exception
+     * @throws \coding_exception
+     */
+    public function full_header() {
+        $pagetype = $this->page->pagetype;
+        $homepage = get_home_page();
+
+        $homepagetype = null;
+        // Add a special case since /my/courses is a part of the /my subsystem.
+        if ($homepage == HOMEPAGE_MY || $homepage == HOMEPAGE_MYCOURSES) {
+            $homepagetype = 'my-index';
+        } else if ($homepage == HOMEPAGE_SITE) {
+            $homepagetype = 'site-index';
+        }
+        if (
+            $this->page->include_region_main_settings_in_header_actions() &&
+            !$this->page->blocks->is_block_present('settings')
+        ) {
+            // Only include the region main settings if the page has requested it and it doesn't already have
+            // the settings block on it. The region main settings are included in the settings block and
+            // duplicating the content causes behat failures.
+            $this->page->add_header_action(html_writer::div(
+                $this->region_main_settings_menu(),
+                'd-print-none',
+                ['id' => 'region-main-settings-menu']
+            ));
+        }
+
+        $header = new \stdClass();
+        $header->settingsmenu = $this->context_header_settings_menu();
+        $header->contextheader = $this->context_header();
+        $header->hasnavbar = empty($this->page->layout_options['nonavbar']);
+        $header->navbar = $this->navbar();
+        $header->pageheadingbutton = $this->page_heading_button();
+        $header->courseheader = $this->course_header();
+        $header->headeractions = $this->page->get_header_actions();
+        if (!empty($pagetype) && !empty($homepagetype) && $pagetype == $homepagetype) {
+            $header->welcomemessage = \core_user::welcome_message();
+        }
+        if (strpos($_SERVER["REQUEST_URI"], "course/view.php") || strpos($_SERVER["REQUEST_URI"], "course/section.php")) {
+
+            global $DB, $CFG;
+
+            $header->hasnavbarcourse = true;
+            $header->categoryname = $DB->get_field("course_categories", "name", ["id" => $this->page->course->category]);
+
+            // Imagem do curso.
+            $sql = "
+                SELECT *
+                  FROM {files}
+                 WHERE contextid   = :contextid
+                   AND component   = 'course'
+                   AND filearea    = 'overviewfiles'
+                   AND mimetype LIKE 'image%'
+                LIMIT 1";
+            $coursefile = $DB->get_record_sql($sql, ["contextid" => $this->page->context->id]);
+            if ($coursefile) {
+                $header->overviewfiles =
+                    "{$CFG->wwwroot}/pluginfile.php/{$coursefile->contextid}/course/overviewfiles/{$coursefile->filename}";
+            }
+
+            if (has_capability('moodle/category:manage', $this->page->context)) {
+
+                $cache = \cache::make("theme_boost_training", "course_cache");
+                $cachekey = "header_details_{$this->page->course->id}";
+                if ($cache->has($cachekey)) {
+                    $header->details = json_decode($cache->get($cachekey));
+                } else {
+                    $decsep = get_string("decsep", "langconfig");
+                    $thousandssep = get_string("thousandssep", "langconfig");
+                    $header->details = [];
+
+                    // Students.
+                    $sql = "
+                        SELECT COUNT(DISTINCT userid)
+                          FROM {role_assignments}
+                         WHERE roleid    = 5
+                           AND contextid = :contextid";
+                    $total = $DB->get_field_sql($sql, ['contextid' => $this->page->context->id]);
+                    $header->details[] = [
+                        "id" => "users",
+                        "icon" => "fa-users fa-fw",
+                        "link" => false,
+                        "number" => number_format($total, 0, $decsep, $thousandssep),
+                        "text" => get_string("details-users", "theme_boost_training"),
+                    ];
+
+                    // Teachers.
+                    $sql = "
+                        SELECT u.id, u.picture, u.firstname, u.lastname, u.firstnamephonetic, u.lastnamephonetic,
+                               u.middlename, u.alternatename, u.imagealt, u.email
+                          FROM {role_assignments} ra
+                          JOIN {user}              u ON u.id = ra.userid
+                         WHERE ra.roleid    IN(3,4)
+                           AND ra.contextid = :contextid";
+                    $teachers = $DB->get_records_sql($sql, ['contextid' => $this->page->context->id]);
+                    if (count($teachers)) {
+                        $teachershtml = "";
+                        foreach ($teachers as $teacher) {
+                            // URL da imagem de perfil.
+                            $userpicture = new user_picture($teacher);
+                            $userpicture->size = 1; // 1 = small, 0 = large.
+                            $imgurl = $userpicture->get_url($this->page)->out(false);
+
+                            $name = fullname($teacher);
+                            $teachershtml .= "<div><img class='teacher-icon' src='{$imgurl}' alt='{$name}'></div>";
+                        }
+                        $header->details[] = [
+                            "id" => "teachers",
+                            "icon" => "fa fa-graduation-cap fa-fw",
+                            "link" => false,
+                            "number" => "<div class='d-flex'>{$teachershtml}</div>",
+                            "text" => get_string("details-teachers", "theme_boost_training"),
+                        ];
+                    }
+
+                    // Completo e em progresso.
+                    $sql = "
+                        SELECT DISTINCT ra.userid, cc.timecompleted
+                          FROM {role_assignments}    ra
+                     LEFT JOIN {course_completions} cc ON cc.userid = ra.userid
+                                                      AND cc.course = :courseid
+                         WHERE ra.contextid = :contextid";
+                    $users = $DB->get_records_sql($sql, [
+                        'contextid' => $this->page->context->id,
+                        "courseid" => $this->page->course->id,
+                    ]);
+
+                    // Separa por status.
+                    $completaram = 0;
+                    $emprogresso = 0;
+
+                    foreach ($users as $user) {
+                        if (!empty($user->timecompleted)) {
+                            $completaram++;
+                        } else {
+                            $emprogresso++;
+                        }
+                    }
+
+                    $header->details[] = [
+                        "id" => "emprogresso",
+                        "icon" => "fa fa-spinner fa-fw",
+                        "link" => false,
+                        "number" => number_format($emprogresso, 0, $decsep, $thousandssep),
+                        "text" => get_string("details-emprogresso", "theme_boost_training"),
+                    ];
+                    $header->details[] = [
+                        "id" => "completaram",
+                        "icon" => "fa fa-user-slash fa-fw",
+                        "link" => false,
+                        "number" => number_format($completaram, 0, $decsep, $thousandssep),
+                        "text" => get_string("details-completaram", "theme_boost_training"),
+                    ];
+
+                    // Usuários que nunca acessaram.
+                    $sql = "
+                        SELECT COUNT(DISTINCT ra.userid) AS total
+                          FROM {role_assignments}  ra
+                     LEFT JOIN {user_lastaccess}   la ON la.userid = ra.userid
+                         WHERE ra.contextid = :contextid
+                           AND la.timeaccess IS NULL";
+                    $total = $DB->get_field_sql($sql, ['contextid' => $this->page->context->id]);
+                    $header->details[] = [
+                        "id" => "not-access",
+                        "icon" => "fa fa-user-slash fa-fw",
+                        "link" => false,
+                        "number" => number_format($total, 0, $decsep, $thousandssep),
+                        "text" => get_string("details-not-access", "theme_boost_training"),
+                    ];
+
+                    $cache->set($cachekey, json_encode($header->details));
+                }
+            }
+        }
+
+        return $this->render_from_template('theme_boost_training/core/full_header', $header);
+    }
+
+    /**
+     * Whether we should display the logo in the navbar.
+     *
+     * We will when there are no main logos, and we have compact logo.
+     *
+     * @return bool
+     * @throws \dml_exception
+     */
+    public function should_display_navbar_logo() {
+        $logo = $this->get_compact_logo_url();
+        return !empty($logo);
+    }
+
+    /**
+     * Return the site's compact logo URL, if any.
+     *
+     * @param int $maxwidth  The maximum width, or null when the maximum width does not matter.
+     * @param int $maxheight The maximum height, or null when the maximum height does not matter.
+     *
+     * @return moodle_url|false
+     *
+     * @throws \dml_exception
+     */
+    public function get_compact_logo_url($maxwidth = 300, $maxheight = 300) {
+
+        static $return = null;
+        if ($return !== null) {
+            return $return;
+        }
+
+        $callbacks = get_plugins_with_function("theme_boost_training_get_logo");
+        foreach ($callbacks as $plugintype => $plugins) {
+            foreach ($plugins as $plugin => $callback) {
+                $urllogo = $callback();
+
+                if ($urllogo) {
+                    return $return = $urllogo->out(false);
+                }
+            }
+        }
+
+        $logo = get_config('core_admin', 'logocompact');
+        if (empty($logo)) {
+            return $return = false;
+        }
+
+        // Hide the requested size in the file path.
+        $filepath = ((int)$maxwidth . 'x' . (int)$maxheight) . '/';
+
+        // Use $CFG->themerev to prevent browser caching when the file changes.
+        return $return = moodle_url::make_pluginfile_url(
+            context_system::instance()->id,
+            'core_admin',
+            'logocompact',
+            $filepath,
+            theme_get_revision(),
+            $logo
+        );
+    }
+}

@@ -1,0 +1,75 @@
+body.format-weeks,
+body.format-topics {
+    &:not(.editing) {
+        #module-customiconid {
+            position: relative;
+            width: calc(20% - 14px);
+            margin-top: 10px;
+            margin-left: 11px;
+            border-top: none;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            transition: transform 0.3s ease;
+            padding: 0 0 50px;
+            &:hover {
+                transform: scale(1.02);
+            }
+            .activity-item {
+                background-image: url('{imageurl}');
+                background-size: cover;
+                background-position: center;
+                border: none;
+                padding: 50% 7px 7px;
+                border-radius: 8px 8px 0 0;
+                .activity-groupmode-info {
+                    width: auto;
+                    border: none;
+                    padding-top: 0;
+                    margin-top: 12px;
+                    .groupmode-icon-info {
+                        width: min-content;
+                        display: none;
+                    }
+                }
+                .activity-completion {
+                    position: absolute;
+                    top: -42px;
+                    right: 7px;
+                }
+                .activity-altcontent.activity-description {
+                    display: none;
+                }
+            }
+            .activity-grid {
+                position: absolute;
+                bottom: 0;
+                right: 0;
+                left: 9px;
+                height: 49px;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                .activityiconcontainer {
+                    display: none;
+                }
+                .instancename {
+                    color: #4e4e4e;
+                    font-size: 14px;
+                    font-weight: 600;
+                }
+            }
+            @media (max-width: 992px) {
+                width: calc(25% - 14px);
+            }
+            @media (max-width: 700px) {
+                width: calc(33.333% - 14px);
+            }
+            @media (max-width: 575px) {
+                width: calc(50% - 14px);
+            }
+            @media (max-width: 360px) {
+                width: calc(100% - 14px);
+            }
+        }
+    }
+}

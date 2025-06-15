@@ -1,0 +1,49 @@
+.primary-navigation {
+    .navigation {
+        height: $navbar-height;
+
+        .nav-link {
+            height: $navbar-height;
+            border-top: 3px solid transparent;
+            font-weight: 600;
+            color: $gray-900;
+            font-family: "Open Sans", sans-serif;
+            font-size: 14px;
+            padding: 13px;
+        }
+    }
+}
+
+@include media-breakpoint-down(md) {
+    .primary-navigation {
+        display: none;
+    }
+    .editmode-switch-form label {
+        @include visually-hidden();
+    }
+}
+
+.editmode-switch-form {
+    label {
+        display: none;
+    }
+
+    .custom-control-input {
+        width: 100%;
+        z-index: 1;
+    }
+}
+
+.drawer-primary .drawercontent {
+    padding: 0;
+
+    .list-group {
+        border-radius: 0;
+        margin-top: -1px;
+
+        .list-group-item {
+            border-left: 0;
+            border-right: 0;
+        }
+    }
+}
