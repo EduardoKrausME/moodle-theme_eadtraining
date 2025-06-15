@@ -45,7 +45,7 @@ if (!isset($config->startcolor[2])) {
     $PAGE->requires->js_call_amd("theme_boost_training/settings", "minicolors", [$setting->get_id()]);
     $setting->set_updatedcallback("theme_boost_training_change_color");
     $page->add($setting);
-}else {
+} else {
     foreach (theme_boost_training_colors() as $color) {
         $htmlselect .= "\n\n" . $OUTPUT->render_from_template("theme_boost_training/settings/color", [
                 "background" => $color,

@@ -28,8 +28,7 @@
  * @return void
  * @throws Exception
  */
-function xmldb_theme_boost_training_install()
-{
+function xmldb_theme_boost_training_install()  {
     global $DB, $CFG;
 
     // Category.
@@ -121,8 +120,6 @@ function xmldb_theme_boost_training_install()
     set_config("scsspre", "", "theme_boost_training");
     set_config("scss", "", "theme_boost_training");
 
-    // set_config("enable_accessibility", "1", "theme_boost_training");
-    // set_config("enable_vlibras", "0", "theme_boost_training");
     set_config("course_summary", "0", "theme_boost_training");
 
     set_config("footer_background_color", "", "theme_boost_training");
