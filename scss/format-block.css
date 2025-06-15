@@ -1,0 +1,100 @@
+.section-item .content .section {
+  display: flex !important;
+  flex-wrap: wrap !important;
+}
+.section-item .content .section li {
+  width: 100% !important;
+}
+
+body.format-weeks:not(.editing) #module-customiconid,
+body.format-topics:not(.editing) #module-customiconid {
+  position: relative;
+  width: calc(20% - 14px) !important;
+  margin-top: 10px;
+  margin-left: 11px;
+  border-top: none;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  transition: transform 0.3s ease;
+  padding: 0 0 50px;
+}
+body.format-weeks:not(.editing) #module-customiconid:hover,
+body.format-topics:not(.editing) #module-customiconid:hover {
+  transform: scale(1.02);
+}
+body.format-weeks:not(.editing) #module-customiconid .activity-item,
+body.format-topics:not(.editing) #module-customiconid .activity-item {
+  background-image: url("{imageurl}");
+  background-size: cover;
+  background-position: center;
+  border: none;
+  padding: 50% 7px 7px;
+  border-radius: 8px 8px 0 0;
+}
+body.format-weeks:not(.editing) #module-customiconid .activity-item .activity-groupmode-info,
+body.format-topics:not(.editing) #module-customiconid .activity-item .activity-groupmode-info {
+  width: auto;
+  border: none;
+  padding-top: 0;
+  margin-top: 12px;
+}
+body.format-weeks:not(.editing) #module-customiconid .activity-item .activity-groupmode-info .groupmode-icon-info,
+body.format-topics:not(.editing) #module-customiconid .activity-item .activity-groupmode-info .groupmode-icon-info {
+  width: min-content;
+  display: none;
+}
+body.format-weeks:not(.editing) #module-customiconid .activity-item .activity-completion,
+body.format-topics:not(.editing) #module-customiconid .activity-item .activity-completion {
+  position: absolute;
+  top: -42px;
+  right: 7px;
+}
+body.format-weeks:not(.editing) #module-customiconid .activity-item .activity-altcontent.activity-description,
+body.format-topics:not(.editing) #module-customiconid .activity-item .activity-altcontent.activity-description {
+  display: none;
+}
+body.format-weeks:not(.editing) #module-customiconid .activity-grid,
+body.format-topics:not(.editing) #module-customiconid .activity-grid {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  left: 9px;
+  height: 49px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+body.format-weeks:not(.editing) #module-customiconid .activity-grid .activityiconcontainer,
+body.format-topics:not(.editing) #module-customiconid .activity-grid .activityiconcontainer {
+  display: none;
+}
+body.format-weeks:not(.editing) #module-customiconid .activity-grid .instancename,
+body.format-topics:not(.editing) #module-customiconid .activity-grid .instancename {
+  color: #4e4e4e;
+  font-size: 14px;
+  font-weight: 600;
+}
+@media (max-width: 992px) {
+  body.format-weeks:not(.editing) #module-customiconid,
+body.format-topics:not(.editing) #module-customiconid {
+    width: calc(25% - 14px);
+  }
+}
+@media (max-width: 700px) {
+  body.format-weeks:not(.editing) #module-customiconid,
+body.format-topics:not(.editing) #module-customiconid {
+    width: calc(33.333% - 14px);
+  }
+}
+@media (max-width: 575px) {
+  body.format-weeks:not(.editing) #module-customiconid,
+body.format-topics:not(.editing) #module-customiconid {
+    width: calc(50% - 14px);
+  }
+}
+@media (max-width: 360px) {
+  body.format-weeks:not(.editing) #module-customiconid,
+body.format-topics:not(.editing) #module-customiconid {
+    width: calc(100% - 14px);
+  }
+}

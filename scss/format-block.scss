@@ -1,9 +1,16 @@
+.section-item .content .section {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    li {
+        width: 100% !important;
+    }
+}
 body.format-weeks,
 body.format-topics {
     &:not(.editing) {
         #module-customiconid {
             position: relative;
-            width: calc(20% - 14px);
+            width: calc(20% - 14px) !important;
             margin-top: 10px;
             margin-left: 11px;
             border-top: none;

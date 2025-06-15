@@ -57,12 +57,6 @@ class core_hook_output {
             if (false && $cache->has($cachekey)) {
                 $iconscss = $cache->get($cachekey);
             } else {
-                $iconscss .= "
-                    .section-item .content .section {
-                        display: flex !important;
-                        flex-wrap: wrap;
-                    }";
-
                 // Backgrounds images modules.
                 $sql = "
                     SELECT itemid, contextid, filename
