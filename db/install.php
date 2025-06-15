@@ -28,7 +28,7 @@
  * @return void
  * @throws Exception
  */
-function xmldb_theme_boost_training_install()  {
+function xmldb_theme_boost_training_install() {
     global $DB, $CFG;
 
     // Category.

@@ -25,6 +25,7 @@
 defined('MOODLE_INTERNAL') || die;
 
 global $CFG, $OUTPUT, $PAGE;
+require_once("{$CFG->dirroot}/theme/boost_training/lib.php");
 
 $page = new admin_settingpage("theme_boost_training_general", get_string("generalsettings", "theme_boost_training"));
 $htmlselect = "<link rel=\"stylesheet\" href=\"{$CFG->wwwroot}/theme/boost_training/scss/colors.css\" />";

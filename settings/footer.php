@@ -25,6 +25,7 @@
 defined('MOODLE_INTERNAL') || die;
 
 global $PAGE, $CFG, $OUTPUT;
+require_once("{$CFG->dirroot}/theme/boost_training/lib.php");
 
 // Footer section.
 $page = new admin_settingpage("theme_boost_training_footer", get_string("footersettings", "theme_boost_training"));
