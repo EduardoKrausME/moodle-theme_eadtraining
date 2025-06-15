@@ -54,7 +54,7 @@ class core_hook_output {
 
             $cache = \cache::make("theme_boost_training", "css_cache");
             $cachekey = "theme_boost_training_customimages_{$COURSE->id}";
-            if (false && $cache->has($cachekey)) {
+            if ($cache->has($cachekey)) {
                 $iconscss = $cache->get($cachekey);
             } else {
                 // Backgrounds images modules.
