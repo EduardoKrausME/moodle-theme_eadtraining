@@ -31,6 +31,7 @@ if ($ADMIN->fulltree) {
     $ADMIN->add('themes', new admin_category('theme_boost_training', get_string('pluginname', 'theme_boost_training')));
 
     require_once("settings/general.php");
+    require_once("settings/advanced.php");
     require_once("settings/userprofile.php");
     require_once("settings/accessibility.php");
     require_once("settings/logos.php");
