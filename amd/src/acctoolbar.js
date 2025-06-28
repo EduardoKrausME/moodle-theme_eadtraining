@@ -4,10 +4,8 @@
 define(["core/templates"], function (Templates) {
     return {
         init: function () {
-            console.log("OK1");
             Templates.render('theme_boost_training/settings/acctoolbar', {})
                 .then(function (html, js) {
-                    console.log("OK2");
                     window.micAccessTool = new boost_training_AccessTool(html);
                 })
                 .fail(function (ex) {
@@ -147,6 +145,7 @@ boost_training_AccessTool.prototype.buildToolBox = function (html) {
     var i = document.createElement("div");
     i.id = "mic-init-access-tool";
     i.innerHTML = html;
+    i.style.display = "none";
     document.body.insertBefore(i, document.body.firstChild);
 
     return true;
