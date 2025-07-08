@@ -64,6 +64,10 @@ if (!isset($config->startcolor[2])) {
     $PAGE->requires->js_call_amd("theme_boost_training/settings", "minicolors", [$setting->get_id()]);
 }
 
+$page->add(new admin_setting_configcheckbox("theme_boost_training/brandcolor_background_menu",
+    get_string("brandcolor_background_menu", "theme_boost_training"),
+    get_string("brandcolor_background_menu_desc", "theme_boost_training"), 0));
+
 // Background image setting.
 $name = "theme_boost_training/backgroundimage";
 $title = get_string("backgroundimage", "theme_boost_training");
