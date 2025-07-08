@@ -188,6 +188,37 @@ $navbar-color: #b5bcc7;
         height: 100%;
         display: flex;
     }
+
+    &.brandcolor-background {
+        background-color: $primary !important;
+        .nav-link,
+        .navbar-brand {
+            color: #ffffff;
+            &.active {
+                font-weight: 700;
+                color: #ffffff;
+                background-color: transparent;
+                border-bottom-color: #ffffff;
+            }
+        }
+        .simplesearchform {
+            background: #ecf3fa66;
+            .btn {
+                border-left: 1px solid #FFFFFF9C !important;
+                .icon {
+                    color: #ffffff;
+                }
+            }
+            .form-control::placeholder {
+                color: #ffffff;
+                opacity: .7;
+            }
+        }
+        .form-check-input:checked{
+            background-color: mix(white, $primary, 30%);
+            border-color: mix(black, $primary, 40%);
+        }
+    }
 }
 
 .usermenu-modal-userlinks {
