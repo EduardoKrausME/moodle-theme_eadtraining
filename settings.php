@@ -24,7 +24,7 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-if ($ADMIN->fulltree) {
+if (is_siteadmin()) {
     $settings = new theme_boost_admin_settingspage_tabs('themesettingboost_training',
         get_string('configtitle', 'theme_boost_training'));
 
