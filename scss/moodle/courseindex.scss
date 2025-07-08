@@ -7,13 +7,14 @@ $courseindex-item-dragging-border: shift-color($info, -70%) !default;
 $courseindex-item-active-border: $gray-300 !default;
 $courseindex-item-active-bg: $gray-100 !default;
 $courseindex-item-page-bg: $primary !default;
-$courseindex-item-padding-y: 0.5rem;
-$courseindex-item-padding-x: 0.5rem;
+$courseindex-item-padding-y: 5px;
+$courseindex-item-padding-x: 6px;
 $courseindex-item-radius: $border-radius !default;
 $courseindex-item-current: $primary !default;
 @mixin courseindex-item-hover() {
     &:hover,
-    &:focus {
+    &:focus,
+    &.pageitem {
         color: $courseindex-link-hover-color;
 
         .courseindex-link,
@@ -66,9 +67,19 @@ $courseindex-item-current: $primary !default;
         border: $border-width solid transparent;
         @include border-radius($courseindex-item-radius);
 
-        &.courseindex-section-title a {
-            font-size: 18px;
-            font-weight: 700;
+        &.courseindex-section-title {
+            padding: 10px 1px 10px 9px;
+            color: $primary;
+            //background-color: #0051f919;
+            background: rgba($primary, .1);
+            border-radius: 0;
+            text-decoration: none;
+            flex-direction: row-reverse;
+            justify-content: space-between;
+            a {
+                font-size: 18px;
+                font-weight: 700;
+            }
         }
 
         .icons-collapse-expand {
@@ -78,7 +89,7 @@ $courseindex-item-current: $primary !default;
         .courseindex-link,
         .courseindex-chevron {
             color: $courseindex-link-color;
-
+            text-decoration: none;
             &:hover,
             &:focus {
                 color: $courseindex-link-hover-color;
@@ -131,7 +142,7 @@ $courseindex-item-current: $primary !default;
             scroll-margin: 6rem;
 
             a {
-                color: $courseindex-link-color-selected;
+                color: $primary;
             }
         }
 
@@ -156,7 +167,13 @@ $courseindex-item-current: $primary !default;
     // The full section collapsable.
     .courseindex-section {
         @include courseindex-item-dragging();
-        border-left: solid 3px transparent;
+        box-shadow: unset;
+        border-radius: 8px;
+        // border-left: solid 3px transparent;
+        border: 1px solid rgba($primary, .3);
+        &:not(:last-child) {
+            margin-bottom: 3px;
+        }
 
         .current-badge {
             line-height: $line-height-base;
@@ -218,6 +235,31 @@ $courseindex-item-current: $primary !default;
         .w-100 {
             height: 1rem;
             margin: 0.5rem 0;
+        }
+    }
+}
+
+.personal-icon {
+    .courseindex-link {
+        display: flex;
+        align-items: center;
+        &::before {
+            content: '';
+            display: block;
+            height: 20px;
+            width: 20px;
+            min-width: 20px;
+            background-size: contain;
+            background-repeat: no-repeat;
+            margin-right: 5px;
+        }
+    }
+    &.pageitem {
+        .courseindex-link::before {
+            filter: invert(1);
+        }
+        &:hover .courseindex-link::before {
+            filter: invert(0);
         }
     }
 }
