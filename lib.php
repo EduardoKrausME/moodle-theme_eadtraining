@@ -25,7 +25,7 @@
 /**
  * Post process the CSS tree.
  *
- * @param string $tree        The CSS tree.
+ * @param string $tree The CSS tree.
  * @param theme_config $theme The theme config object.
  */
 function theme_boost_training_css_tree_post_processor($tree, $theme) {
@@ -179,6 +179,15 @@ function theme_boost_training_get_pre_scss($theme) {
         }, (array)$targets);
     }
 
+    $callbacks = get_plugins_with_function("theme_boost_training_get_pre_scss");
+    foreach ($callbacks as $plugintype => $plugins) {
+        foreach ($plugins as $plugin => $callback) {
+            if ($newscss = $callback($configurable)) {
+                $scss = $newscss;
+            }
+        }
+    }
+
     // Prepend pre-scss.
     if (!empty($theme->settings->scsspre)) {
         $scss .= $theme->settings->scsspre;
@@ -271,7 +280,7 @@ function theme_boost_training_setting_file_url($setting) {
  * theme_boost_training_coursemodule_standard_elements
  *
  * @param moodleform_mod $formwrapper The moodle quickforms wrapper object.
- * @param MoodleQuickForm $mform      The actual form object (required to modify the form).
+ * @param MoodleQuickForm $mform The actual form object (required to modify the form).
  *
  * @throws coding_exception
  */
@@ -340,7 +349,8 @@ function theme_boost_training_coursemodule_standard_elements(&$formwrapper, $mfo
         $mform->addElement("text", "theme_boost_training_customcolor",
             get_string("settings_icons_color_icon", "theme_boost_training"), []);
         $mform->setType("theme_boost_training_customcolor", PARAM_TEXT);
-        $PAGE->requires->js_call_amd("theme_boost_training/settings", "minicolors", ["id_theme_boost_training_customcolor"]);
+        $PAGE->requires->js_call_amd("theme_boost_training/settings", "minicolors",
+            ["id_theme_boost_training_customcolor"]);
 
         $mform->addElement("static", "theme_boost_training_custom", "",
             get_string("settings_icons_color_icon_desc", "theme_boost_training"));
@@ -362,11 +372,8 @@ function theme_boost_training_coursemodule_edit_post_actions($data, $course) {
 
     if (isset($data->theme_boost_training_customimage)) {
         $options = ["subdirs" => true, "embed" => true];
-        $filesave = file_save_draft_area_files(
-            $data->theme_boost_training_customimage,
-            $context->id,
-            "theme_boost_training", "theme_boost_training_customimage", $data->coursemodule,
-            $options);
+        $filesave = file_save_draft_area_files($data->theme_boost_training_customimage, $context->id,
+            "theme_boost_training", "theme_boost_training_customimage", $data->coursemodule, $options);
 
         $name = "theme_boost_training_customimage_{$data->coursemodule}";
         set_config($name, $filesave, "theme_boost_training");
@@ -376,11 +383,8 @@ function theme_boost_training_coursemodule_edit_post_actions($data, $course) {
 
     if (isset($data->theme_boost_training_customicon)) {
         $options = ["subdirs" => true, "embed" => true];
-        $filesave = file_save_draft_area_files(
-            $data->theme_boost_training_customicon,
-            $context->id,
-            "theme_boost_training", "theme_boost_training_customicon", $data->coursemodule,
-            $options);
+        $filesave = file_save_draft_area_files($data->theme_boost_training_customicon, $context->id,
+            "theme_boost_training", "theme_boost_training_customicon", $data->coursemodule, $options);
 
         $name = "theme_boost_training_customicon_{$data->coursemodule}";
         set_config($name, $filesave, "theme_boost_training");
@@ -404,8 +408,7 @@ function theme_boost_training_coursemodule_edit_post_actions($data, $course) {
  * @return array
  */
 function theme_boost_training_colors() {
-    return [
-        "#000428", // Azul Escuro.
+    return ["#000428", // Azul Escuro.
         "#070000", // Preto.
         "#1a2a6c", // Azul Escuro.
         "#314755", // Cinza Escuro.
@@ -441,11 +444,11 @@ function theme_boost_training_colors() {
  * @throws dml_exception
  */
 function theme_boost_training_change_color() {
-    $configboosttraining = get_config("theme_boost_training");
+    $config = get_config("theme_boost_training");
     $configboost = get_config("theme_boost");
 
-    if (isset($configboosttraining->startcolor[5])) {
-        $brandcolor = $configboosttraining->startcolor;
+    if (isset($config->startcolor[5])) {
+        $brandcolor = $config->startcolor;
     } else {
         $brandcolor = $configboost->brandcolor;
     }
