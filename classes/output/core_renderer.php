@@ -80,7 +80,6 @@ class core_renderer extends \core_renderer {
         global $DB, $USER, $CFG;
         require_once($CFG->dirroot . '/user/lib.php');
         $context = $this->page->context;
-        $heading = null;
         $imagedata = null;
         $userbuttons = null;
 
@@ -295,7 +294,11 @@ class core_renderer extends \core_renderer {
         if (!empty($pagetype) && !empty($homepagetype) && $pagetype == $homepagetype) {
             $header->welcomemessage = \core_user::welcome_message();
         }
-        if (strpos($_SERVER["REQUEST_URI"], "course/view.php") || strpos($_SERVER["REQUEST_URI"], "course/section.php")) {
+
+        $header->hasnavbarcourse = false;
+        $hasuri = strpos($_SERVER["REQUEST_URI"], "course/view.php") || strpos($_SERVER["REQUEST_URI"], "course/section.php");
+        $showcoursesummary = get_config("theme_boost_training", "course_summary");
+        if ($hasuri && $showcoursesummary) {
 
             global $DB, $CFG;
 
@@ -493,5 +496,16 @@ class core_renderer extends \core_renderer {
             theme_get_revision(),
             $logo
         );
+    }
+
+    /**
+     * Brandcolor background menu class
+     *
+     * @return string
+     * @throws \dml_exception
+     */
+    public function brandcolor_background_menu_class() {
+        $background = get_config("theme_boost_training", "brandcolor_background_menu");
+        return $background ? "brandcolor-background" : "";
     }
 }
