@@ -109,7 +109,7 @@ class core_hook_output {
                 $images["icons"][] = ["cmid" => $customicon->itemid, "thumb" => $imageurl->out()];
             }
 
-            // Icons Color
+            // Icons Color.
             $sql = "
                 SELECT *
                   FROM {config_plugins}
@@ -126,7 +126,7 @@ class core_hook_output {
         }
 
         global $PAGE;
-        foreach ($images["blocks"]  as $block) {
+        foreach ($images["blocks"] as $block) {
             $PAGE->requires->js_call_amd("theme_{$theme}/blocks", "create", [$block["cmid"], $block["thumb"]]);
         }
         foreach ($images["icons"] as $icons) {
