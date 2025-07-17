@@ -124,6 +124,7 @@ function compile_pages($pages) {
                 }
             }
             if (isset($info->form->styles)) {
+                $PAGE->requires->css("/theme/boost_training/_editor/model/{$info->template}/style.css");
                 foreach ($info->form->styles as $style) {
                     if ($style == "bootstrap") {
                         // Theme already has bootstrap.
