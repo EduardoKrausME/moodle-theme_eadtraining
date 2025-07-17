@@ -3,7 +3,7 @@
 use core_course\external\course_summary_exporter;
 use core_external\util;
 
-function banner_EadFlix_op2_createblocks($page) {
+function banner_eadflix_op2_createblocks($page) {
     global $DB, $OUTPUT, $CFG;
 
     $accesscourse = get_string("access_course", "theme_boost_training");

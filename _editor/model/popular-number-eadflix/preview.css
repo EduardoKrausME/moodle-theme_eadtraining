@@ -81,7 +81,7 @@
   filter: blur(40px);
   margin-top: -62px;
 }
-.popular-section .owl-courses-content .top-courses-item .top-courses-inner.top-courses-number .EadFlix-nunber {
+.popular-section .owl-courses-content .top-courses-item .top-courses-inner.top-courses-number .eadflix-nunber {
   -webkit-text-stroke: 1px #ffffff;
   -webkit-text-fill-color: transparent;
   font-size: 160px;
@@ -110,7 +110,7 @@
 .popular-section .owl-courses-content .top-courses-item .top-courses-inner.top-courses-number:hover a img {
   transform: scale(1.1);
 }
-.popular-section .owl-courses-content .top-courses-item .top-courses-inner.top-courses-number:hover .EadFlix-nunber {
+.popular-section .owl-courses-content .top-courses-item .top-courses-inner.top-courses-number:hover .eadflix-nunber {
   font-size: 200px;
 }
 .popular-section a, .popular-section h6 a {

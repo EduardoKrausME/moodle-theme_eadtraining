@@ -29,7 +29,7 @@ function popular_number_eadflix_createblocks($page) {
                 $blocks .= "
                    <div class=\"top-courses-item slider-item\">
                        <div class=\"top-courses-inner top-courses-number\">
-                           <div class=\"EadFlix-nunber\">{$num}</div>
+                           <div class=\"eadflix-nunber\">{$num}</div>
                            <a href=\"{$CFG->wwwroot}/course/view.php?id={$course->id}\"
                               style=\"
                                     background:          url('{$courseimage}');
