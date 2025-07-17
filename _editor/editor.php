@@ -88,7 +88,7 @@ $chave = $page->local;
 
 $pageinfo = json_decode($page->info);
 
-$cssfiles = "@import url(\"model/{$pageinfo->template}/editor.css\"); \n";
+$cssfiles = "@import url(\"model/{$pageinfo->template}/style.css\"); \n";
 if(isset($pageinfo->form->styles)) {
     foreach ($pageinfo->form->styles as $styles) {
         if ($styles == "bootstrap") {
@@ -109,15 +109,10 @@ echo $page->lang ?>">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="js/build/index.min.js"></script>
     <script src="js/build/tableComponent.min.js"></script>
-    <script src="js/build/fsLightboxComponent.min.js"></script>
-    <script src="js/build/lightGalleryComponent.min.js"></script>
     <script src="js/build/iconifyComponent.min.js"></script>
-    <script src="js/build/accordionComponent.min.js"></script>
     <script src="js/build/flexComponent.min.js"></script>
     <script src="js/build/canvasEmptyState.min.js"></script>
-    <script src="js/build/canvasFullSize.min.js"></script>
     <script src="js/build/layoutSidebarButtons.min.js"></script>
-    <script src="js/build/youtubeAssetProvider.min.js"></script>
     <script src="js/build/prosemirror.min.js"></script>
     <link rel="stylesheet" href="css/style.css"/>
     <link rel="stylesheet" href="css/grapes.css"/>
@@ -186,7 +181,7 @@ if ($page->type == "form") { // Only form.
 
     GrapesJsStudioSDK.createStudioEditor({
         root: "#studio-editor",
-        licenseKey: "UNIQUE_LICENSE_KEY",
+        licenseKey: "DEMO_LOCALHOST_KEY",
         theme: "dark",
         project: {
             type: "web",
@@ -237,12 +232,7 @@ if ($page->type == "form") { // Only form.
         storage: {
             type: "self",
             onSave: async function ({project, editor}) {
-                console.log(event);
-                console.log(project);
-                console.log(editor);
-
                 const files = await editor.runCommand("studio:projectFiles");
-                console.log(files);
                 const html = files.find(file => file.mimeType === "text/html").content;
                 const css = files.find(file => file.mimeType === "text/css").content;
 
@@ -260,17 +250,12 @@ if ($page->type == "form") { // Only form.
             autosaveIntervalMs: 500,
         },
         plugins: [
+            StudioSdkPlugins_prosemirror.init({ /* Plugin options: https://app.grapesjs.com/docs-sdk/plugins/rte/prosemirror */ }),
+            StudioSdkPlugins_layoutSidebarButtons.init({ /* Plugin options: https://app.grapesjs.com/docs-sdk/plugins/layout/sidebar-buttons */ }),
             StudioSdkPlugins_tableComponent.init({ /* Plugin options: https://app.grapesjs.com/docs-sdk/plugins/components/table */}),
-            StudioSdkPlugins_fsLightboxComponent.init({ /* Plugin options: https://app.grapesjs.com/docs-sdk/plugins/components/fslightbox */}),
-            StudioSdkPlugins_lightGalleryComponent.init({ /* Plugin options: https://app.grapesjs.com/docs-sdk/plugins/components/lightGallery */}),
             StudioSdkPlugins_iconifyComponent.init({ /* Plugin options: https://app.grapesjs.com/docs-sdk/plugins/components/iconify */}),
-            StudioSdkPlugins_accordionComponent.init({ /* Plugin options: https://app.grapesjs.com/docs-sdk/plugins/components/accordion */}),
             StudioSdkPlugins_flexComponent.init({ /* Plugin options: https://app.grapesjs.com/docs-sdk/plugins/components/flex */}),
             StudioSdkPlugins_canvasEmptyState.init({ /* Plugin options: https://app.grapesjs.com/docs-sdk/plugins/canvas/emptyState */}),
-            StudioSdkPlugins_canvasFullSize.init({ /* Plugin options: https://app.grapesjs.com/docs-sdk/plugins/canvas/full-size */}),
-            StudioSdkPlugins_layoutSidebarButtons.init({ /* Plugin options: https://app.grapesjs.com/docs-sdk/plugins/layout/sidebar-buttons */}),
-            StudioSdkPlugins_youtubeAssetProvider.init({ /* Plugin options: https://app.grapesjs.com/docs-sdk/plugins/asset-providers/youtube-asset-provider */}),
-            StudioSdkPlugins_prosemirror.init({ /* Plugin options: https://app.grapesjs.com/docs-sdk/plugins/rte/prosemirror */})
         ],
     });
 </script>
