@@ -144,6 +144,7 @@ $divider-hover-color: $primary !default;
             display: flex;
             flex-direction: row-reverse;
             justify-content: space-between;
+            gap: 12px;
             a, .icon {
                 color: #666666;
                 font-weight: 800;

@@ -127,16 +127,19 @@
     text-align: left;
 }
 
-#page-admin-index .upgradekeyreq {
-    min-width: 220px;
-}
-
-#page-admin-index .adminwarning.availableupdatesinfo .moodleupdateinfo span {
-    display: block;
-}
-
-#page-admin-index .updateplugin div {
-    margin-bottom: 0.5em;
+#page-admin-index {
+    .upgradekeyreq {
+        min-width: 220px;
+    }
+    .adminwarning.availableupdatesinfo .moodleupdateinfo span {
+        display: block;
+    }
+    .updateplugin div {
+        margin-bottom: 0.5em;
+    }
+    #region-main .alert.alert-info.alert-block {
+        display: none;
+    }
 }
 
 #page-admin-user-user_bulk #users .fgroup {

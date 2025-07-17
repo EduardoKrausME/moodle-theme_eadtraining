@@ -10,7 +10,7 @@
         border-radius: 8px;
 
         path {
-            fill: var(--primary);
+            fill: $primary;
         }
     }
 
@@ -110,7 +110,7 @@
         width: 370px;
         top: 10px;
         left: 10px;
-        background-color: var(--primary);
+        background-color: $primary;
         z-index: 9999999;
         visibility: hidden;
         opacity: 0;

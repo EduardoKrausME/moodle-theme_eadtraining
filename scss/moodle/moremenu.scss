@@ -1,5 +1,7 @@
 .moremenu {
-    opacity: 0;
+    @media (max-width: 767px) {
+        opacity: 0;
+    }
     height: $moremenu-height;
 
     &.observed {

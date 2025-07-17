@@ -2719,9 +2719,9 @@ $picker-emojis-per-row: 7 !default;
         --#{$prefix}nav-tabs-link-active-color: #{$nav-pills-link-active-color};
         --#{$prefix}nav-tabs-link-active-bg: #{$nav-pills-link-active-bg};
         margin: 0;
-        border: 0;
         padding: $spacer * 0.125;
-        background-color: $gray-200;
+        //border: 0;
+        //background-color: $gray-200;
 
         .nav-item {
             flex: 1 1 auto;
