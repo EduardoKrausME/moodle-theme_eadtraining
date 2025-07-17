@@ -101,8 +101,10 @@ $templatecontext["footer_show_copywriter"] = $config->footer_show_copywriter;
 if (isset($USER->editing) && $USER->editing) {
     $sesskey = sesskey();
     $templatecontext["editing"] = true;
-    $templatecontext["homemode_form_action"] = "{$CFG->wwwroot}/theme/boost_training/_editor/actions.php?action=homemode&chave=editing&sesskey={$sesskey}";
-    $templatecontext["homemode_add_action"] = "{$CFG->wwwroot}/theme/boost_training/_editor/?action=home&chave=editing&sesskey={$sesskey}";
+    $templatecontext["homemode_form_action"] =
+        "{$CFG->wwwroot}/theme/boost_training/_editor/actions.php?action=homemode&chave=editing&sesskey={$sesskey}";
+    $templatecontext["homemode_add_action"] =
+        "{$CFG->wwwroot}/theme/boost_training/_editor/?action=home&chave=editing&sesskey={$sesskey}";
 }
 
 if (isset($config->homemode) && $config->homemode) {
