@@ -73,3 +73,20 @@
   outline: none;
   box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
 }
+#form-itens.form-itens-form {
+  max-height: initial;
+  overflow-y: initial;
+}
+#form-itens #botoes-editor-action .btn-primary {
+  float: right;
+}
+#form-itens #botoes-editor-action.form-itens-form {
+  display: flex;
+  justify-content: space-between;
+}
+#form-itens #botoes-editor-action.form-itens-form .btn-primary {
+  float: none;
+}
+#form-itens #botoes-editor-action.form-itens-form .btn-secondary {
+  margin-left: auto;
+}

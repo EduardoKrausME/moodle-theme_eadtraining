@@ -72,4 +72,23 @@
             }
         }
     }
+    &.form-itens-form {
+        max-height: initial;
+        overflow-y: initial;
+    }
+    #botoes-editor-action {
+        .btn-primary {
+            float: right;
+        }
+        &.form-itens-form {
+            display: flex;
+            justify-content: space-between;
+            .btn-primary {
+                float: none;
+            }
+            .btn-secondary {
+                margin-left: auto;
+            }
+        }
+    }
 }

@@ -140,40 +140,38 @@ echo $page->lang ?>">
         $jquery = $plugins["jquery"]["files"][0];
         $jqueryui = $plugins["ui"]["files"][0];
         $jqueryuicss = $plugins["ui-css"]["files"][0]; ?>
-    <input type="hidden" id="form-itens-json" value="<?php echo base64_encode($page->info) ?>">
-    <div id="form-itens">
-        <h3 class="d-flex align-items-center gap-2">
-            <span><?php echo get_string("language") ?>:</span>
-            <select class="form-control" id="change-lang" style="width: auto;">
-                <?php
-                echo "<option value=\"all\">" . get_string("language_all", "theme_boost_training") . "</option>\n";
-                foreach ($languages as $langcode => $label) {
-                    $selected = $page->lang == $langcode ? "selected" : "";
-                    echo "<option {$selected} value=\"{$langcode}\">{$label}</option>\n";
-                } ?>
-            </select>
-        </h3>
+        <input type="hidden" id="form-itens-json" value="<?php echo base64_encode($page->info) ?>">
+        <div id="form-itens" class="form-itens-<?php echo $page->type; ?>">
+            <h3 class="d-flex align-items-center gap-2">
+                <label for="change-lang"><?php echo get_string("language") ?>:</label>
+                <select class="form-control" id="change-lang" style="width: auto;">
+                    <?php
+                    echo "<option value=\"all\">" . get_string("language_all", "theme_boost_training") . "</option>\n";
+                    foreach ($languages as $langcode => $label) {
+                        $selected = $page->lang == $langcode ? "selected" : "";
+                        echo "<option {$selected} value=\"{$langcode}\">{$label}</option>\n";
+                    } ?>
+                </select>
+            </h3>
 
-        <div class="itens"></div>
-        <div id="botoes-editor-action" class="f-flex mt-3">
-            <input type="submit" class="btn btn-primary me-3 float-end" value="<?php echo get_string("save") ?>">
-            <input type="button" class="btn btn-primary me-3 float-end"
-                   id="btn-editor-preview"
-                   value="<?php echo get_string("preview") ?>">
-            <button id="btn-add-block" type="button" class="btn btn-secondary me-3" style="display:none">
-                <?php echo get_string("add_block", "theme_boost_training") ?></button>
+            <div class="itens"></div>
+            <div id="botoes-editor-action" class="f-flex mt-3 form-itens-<?php echo $page->type; ?>">
+                <input type="submit" class="btn btn-primary me-3" value="<?php echo get_string("save") ?>">
+                <input type="button" class="btn btn-primary me-3"
+                       id="btn-editor-preview"
+                       value="<?php echo get_string("preview") ?>">
+                <button id="btn-add-block" type="button" class="btn btn-secondary me-3" style="display:none">
+                    <?php echo get_string("add_block", "theme_boost_training") ?></button>
+            </div>
         </div>
-    </div>
-    <link rel="stylesheet" href="css/bootstrap.css"/>
-    <link rel="stylesheet" href="css/form-itens.css"/>
-    <link rel="stylesheet" href="<?php echo "{$CFG->wwwroot}/lib/jquery/{$jqueryuicss}"; ?>"/>
+        <link rel="stylesheet" href="css/bootstrap.css"/>
+        <link rel="stylesheet" href="css/form-itens.css"/>
+        <link rel="stylesheet" href="<?php echo "{$CFG->wwwroot}/lib/jquery/{$jqueryuicss}"; ?>"/>
         <script src="<?php echo "{$CFG->wwwroot}/lib/jquery/{$jquery}"; ?>"></script>
         <script src="<?php echo "{$CFG->wwwroot}/lib/jquery/{$jqueryui}"; ?>"></script>
-        <script src="js/amd/form-itens.js"></script>
-    <?php
+        <script src="js/amd/form-itens.js"></script><?php
     } else { ?>
-    <input type="submit" style="display:none">
-    <?php
+        <input type="submit" style="display:none"><?php
     } ?>
 </form>
 <?php
