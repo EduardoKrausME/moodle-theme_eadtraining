@@ -1,10 +1,9 @@
 {
   "title": "Banner EadFlix - Com vídeo",
-  "type": "html-form",
+  "type": "form",
   "form": {
     "title": "Módulo com Blocos Múltiplos",
     "label": "Adicione quantos blocos forem necessários e, em cada um deles, selecione o curso desejado.<br>Ao ser exibido, o Tema organizará os cursos de acordo com a ordem dos blocos definidos aqui.",
-    "info": "Os blocos gerados acima substituirão o marcador <code>[[change-to-blocks]]</code> no editor abaixo. Por isso, não edite nem remova essa chave.",
     "blocks": {
       "courseid": {
         "type": "select",

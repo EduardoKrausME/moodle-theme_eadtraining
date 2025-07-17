@@ -70,16 +70,6 @@ if (required_param("dataid", PARAM_TEXT) == "create") {
 $dataid = required_param("dataid", PARAM_INT);
 $page = $DB->get_record("theme_boost_training_pages", ["id" => $dataid], "*", MUST_EXIST);
 
-if (optional_param("changelang", false, PARAM_INT)) {
-    $page->lang = required_param("lang", PARAM_TEXT);
-
-    $DB->update_record("theme_boost_training_pages", $page);
-
-    header("Content-Type: application/json");
-    echo json_encode(["status" => "ok"]);
-    die;
-}
-
 $formitens = false;
 switch ($page->type) {
     case "html":
@@ -130,11 +120,11 @@ echo $page->lang ?>">
     <script src="js/build/prosemirror.min.js"></script>
     <link rel="stylesheet" href="css/style.css"/>
     <link rel="stylesheet" href="css/grapes.css"/>
-    <title>GrapesJs Studio</title>
+    <title>GrapesJs</title>
 </head>
 <body style="margin: 0;">
 <form method="post" action="<?php echo actionurl("page-save") ?>" id="form-save-editor">
-    <input type="hidden" name="html" id="html-body">
+    <input type="hidden" name="html" id="html-body" value="<?php echo htmlentities($page->html) ?>">
     <input type="hidden" name="css" id="css-body">
     <input type="hidden" id="editor-sesskey" value="<?php echo sesskey() ?>">
     <input type="hidden" id="editor-lang" value="<?php echo $page->lang ?>">
@@ -189,9 +179,7 @@ echo $page->lang ?>">
 //die; ?>
 <div id="studio-editor" style="height:100dvh"></div>
 <script>
-    var pagehtml = `<?php echo $page->html; ?>`;
     window.GrapesJsCSS = `<?php echo $cssfiles; ?>`
-    document.getElementById("html-body").value = pagehtml;
 
     GrapesJsStudioSDK.createStudioEditor({
         root: "#studio-editor",
@@ -203,7 +191,7 @@ echo $page->lang ?>">
                 pages: [
                     {
                         name: "<?php echo $page->title ?>",
-                        component: pagehtml,
+                        component: `<?php echo $page->html; ?>`,
                     },
                 ],
             },

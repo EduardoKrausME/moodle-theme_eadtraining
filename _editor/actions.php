@@ -41,7 +41,18 @@ $action = required_param('action', PARAM_TEXT);
 $component = 'theme_boost_training';
 $filearea = "editor_{$chave}";
 
-if ($action == "homemode") {
+if ($action == "langedit") {
+    $dataid = required_param("dataid", PARAM_INT);
+
+    $page = $DB->get_record("theme_boost_training_pages", ["id" => $dataid], "*", MUST_EXIST);
+    $page->lang = required_param("lang", PARAM_TEXT);
+
+    $DB->update_record("theme_boost_training_pages", $page);
+
+    header("Content-Type: application/json");
+    echo json_encode(["status" => "ok"]);
+    die;
+} elseif ($action == "homemode") {
     $homemode = optional_param("homemode", 0, PARAM_INT);
     set_config("homemode", $homemode, "theme_boost_training");
 
@@ -64,19 +75,22 @@ if ($action == "homemode") {
     }
 
     redirect(new moodle_url("/", ["redirect" => 0]));
-}
-elseif ($action == "loaddata") {
+} elseif ($action == "loaddata") {
     $datakey = required_param("datakey", PARAM_TEXT);
     switch ($datakey) {
         case "courses":
-            $courses = $DB->get_records_select("course", "id>1 AND visible=1", null, "fullname ASC",
-                "id,fullname AS name");
+            $courses = $DB->get_records_select(
+                "course",
+                "id>1 AND visible=1",
+                null,
+                "fullname ASC",
+                "id,fullname AS name"
+            );
 
             header("Content-Type: application/json");
             echo json_encode(array_values($courses));
     }
-}
-elseif ($action == "page-save") {
+} elseif ($action == "page-save") {
     $dataid = required_param("dataid", PARAM_INT);
     $page = $DB->get_record("theme_boost_training_pages", ["id" => $dataid], "*", MUST_EXIST);
 
@@ -99,8 +113,7 @@ elseif ($action == "page-save") {
         redirect(new moodle_url("/", ["redirect" => 0]));
     }
     die;
-}
-elseif ($action == "page-order"){
+} elseif ($action == "page-order") {
     $orders = boost_training_clear_params_array($_POST["order"], PARAM_INT);
 
     $pageorder = 0;
@@ -120,10 +133,8 @@ elseif ($action == "page-order"){
 
     \cache::make("theme_boost_training", "frontpage_cache")->purge();
     die("OK");
-}
-elseif ($action == "file-upload") {
+} elseif ($action == "file-upload") {
     if (isset($_FILES['files']['name'])) {
-
         $aloweb = ['png', 'jpg', 'jpeg', 'gif', 'svg', 'webp', 'webm', 'mp4', 'mp3', 'pdf', 'doc', 'docx'];
 
         $extension = pathinfo($_FILES['files']['name'], PATHINFO_EXTENSION);
@@ -132,16 +143,17 @@ elseif ($action == "file-upload") {
             $filerecord = (object)["component" => $component, "contextid" => $context->id, "userid" => $USER->id, "filearea" => $filearea, "filepath" => '/', "itemid" => time() - 1714787612, "filename" => $_FILES['files']['name'],];
             $fs->create_file_from_pathname($filerecord, $_FILES['files']['tmp_name']);
 
-            $url = moodle_url::make_file_url("$CFG->wwwroot/pluginfile.php",
-                "/{$context->id}/theme_boost_training/{$filerecord->filearea}/{$filerecord->itemid}{$filerecord->filepath}{$filerecord->filename}");
+            $url = moodle_url::make_file_url(
+                "$CFG->wwwroot/pluginfile.php",
+                "/{$context->id}/theme_boost_training/{$filerecord->filearea}/{$filerecord->itemid}{$filerecord->filepath}{$filerecord->filename}"
+            );
 
             echo json_encode([(object)["name" => $_FILES['files']['name'], "type" => "image", "src" => $url->out(false), "size" => filesize($_FILES['files']['tmp_name']),]]);
 
             die();
         }
     }
-}
-elseif ($action == "file-delete") {
+} elseif ($action == "file-delete") {
     $fs = get_file_storage();
     $files = $fs->get_area_files($context->id, $component, $filearea, false, $sort = "filename", false);
 
@@ -154,18 +166,26 @@ elseif ($action == "file-delete") {
             $file->delete();
         }
     }
-
-}
-elseif ($action == "file-list") {
+} elseif ($action == "file-list") {
     $fs = get_file_storage();
     $files = $fs->get_area_files($context->id, $component, $filearea, false, $sort = "filename", false);
 
     $items = [];
     /** @var stored_file $file */
     foreach ($files as $file) {
-        $url = moodle_url::make_file_url("{$CFG->wwwroot}/pluginfile.php",
-            "/{$context->id}/theme_boost_training/{$file->get_filearea()}/{$file->get_itemid()}{$file->get_filepath()}{$file->get_filename()}");
-        $items[] = ["id" => $file->get_id(), "name" => $file->get_filename(), "type" => "image", "src" => $url->out(false), "size" => $file->get_filesize(), "info" => "Upload file", "delete" => true,];
+        $url = moodle_url::make_file_url(
+            "{$CFG->wwwroot}/pluginfile.php",
+            "/{$context->id}/theme_boost_training/{$file->get_filearea()}/{$file->get_itemid()}{$file->get_filepath()}{$file->get_filename()}"
+        );
+        $items[] = [
+            "id" => $file->get_id(),
+            "name" => $file->get_filename(),
+            "type" => "image",
+            "src" => $url->out(false),
+            "size" => $file->get_filesize(),
+            "info" => "Upload file",
+            "delete" => true,
+        ];
     }
 
     $sql = "SELECT * FROM {course}";
@@ -176,11 +196,21 @@ elseif ($action == "file-list") {
         foreach ($courseobj->get_course_overviewfiles() as $file) {
             $isimage = $file->is_valid_image();
             if ($isimage) {
-                $courseimage = file_encode_url("{$CFG->wwwroot}/pluginfile.php",
+                $courseimage = file_encode_url(
+                    "{$CFG->wwwroot}/pluginfile.php",
                     "/{$file->get_contextid()}/{$file->get_component()}/" . "{$file->get_filearea()}{$file->get_filepath()}{$file->get_filename()}",
-                    !$isimage);
+                    !$isimage
+                );
 
-                $items[] = ["id" => 2, "name" => $file->get_filename(), "type" => "image", "src" => $courseimage, "size" => $file->get_filesize(), "info" => "Course file", "delete" => false,];
+                $items[] = [
+                    "id" => 2,
+                    "name" => $file->get_filename(),
+                    "type" => "image",
+                    "src" => $courseimage,
+                    "size" => $file->get_filesize(),
+                    "info" => "Course file",
+                    "delete" => false,
+                ];
             }
         }
     }
