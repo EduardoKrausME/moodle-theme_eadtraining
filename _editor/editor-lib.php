@@ -48,11 +48,11 @@ function editor_create_page() {
     $lang = required_param("lang", PARAM_TEXT);
     $chave = required_param("chave", PARAM_TEXT);
 
-    $infofile = "model/{$template}/info.json";
+    $infofile = __DIR__ . "/model/{$template}/info.json";
     if (file_exists($infofile)) {
         $info = json_decode(file_get_contents($infofile));
         $info->template = $template;
-        $htmlfile = "model/{$template}/editor.html";
+        $htmlfile = __DIR__ . "/model/{$template}/editor.html";
         $html = file_get_contents($htmlfile);
 
         $html = str_replace("src=\"../", "src=\"{$CFG->wwwroot}/theme/boost_training/_editor/model/{$template}/../", $html);
@@ -90,8 +90,8 @@ function compile_pages($pages) {
 
         if (isset($page->info[5])) {
             $info = json_decode($page->info);
-            if ($info->type == "html-form") {
-                $file = "model/{$info->template}/create-block.php";
+            if ($info->type == "html-form" || $info->type == "form") {
+                $file = __DIR__ . "/model/{$info->template}/create-block.php";
                 if (file_exists($file)) {
                     require_once($file);
 
@@ -117,7 +117,7 @@ function compile_pages($pages) {
                     } elseif (strpos($script, "http") === 0) {
                         $PAGE->requires->js_init_code("require(['jquery'],function($){ $.getScript('{$script}')})");
                     } else {
-                        if (file_exists("model/{$info->template}/{$script}")) {
+                        if (file_exists(__DIR__ . "/model/{$info->template}/{$script}")) {
                             $PAGE->requires->js("/theme/boost_training/_editor/model/{$info->template}/{$script}");
                         }
                     }
@@ -128,7 +128,7 @@ function compile_pages($pages) {
                     if ($style == "bootstrap") {
                         // Theme already has bootstrap.
                     } else {
-                        if (file_exists("model/{$info->template}/{$style}")) {
+                        if (file_exists(__DIR__ . "/model/{$info->template}/{$style}")) {
                             $PAGE->requires->css("/theme/boost_training/_editor/model/{$info->template}/{$style}");
                         };
                     }
