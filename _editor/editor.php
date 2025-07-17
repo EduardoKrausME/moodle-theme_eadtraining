@@ -76,6 +76,7 @@ switch ($page->type) {
         $formitens = false;
         break;
     case "html-form":
+    case "form":
         $formitens = true;
         break;
     default:
@@ -176,7 +177,11 @@ echo $page->lang ?>">
     } ?>
 </form>
 <?php
-//die; ?>
+if ($page->type == "form") { // Only form.
+    echo "</body><html>";
+    die;
+}
+?>
 <div id="studio-editor" style="height:100dvh"></div>
 <script>
     window.GrapesJsCSS = `<?php echo $cssfiles; ?>`
