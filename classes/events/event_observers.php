@@ -50,6 +50,7 @@ class event_observers {
             case '\core\event\config_log_created':
                 \cache::make("theme_boost_training", "course_cache")->purge();
                 \cache::make("theme_boost_training", "css_cache")->purge();
+                \cache::make("theme_boost_training", "frontpage_cache")->purge();
                 break;
         }
     }
@@ -76,10 +77,8 @@ class event_observers {
 
         $fs = get_file_storage();
         foreach ($files as $file) {
-            $f = $fs->get_file(
-                $file->contextid, $file->component,
-                $file->filearea, $file->itemid,
-                $file->filepath, $file->filename);
+            $f = $fs->get_file($file->contextid, $file->component, $file->filearea, $file->itemid, $file->filepath,
+                $file->filename);
             $f->delete();
         }
     }
