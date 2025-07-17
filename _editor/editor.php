@@ -98,12 +98,15 @@ if(isset($pageinfo->form->styles)) {
     }
 }
 
+if (preg_match('/<body[^>]*>(.*?)<\/body>/is', $page->html, $matches)) {
+    $page->html = trim($matches[1]);
+}
+
 $languages = get_string_manager()->get_list_of_translations();
 ?>
 
 <!DOCTYPE html>
-<html lang="<?php
-echo $page->lang ?>">
+<html lang="<?php echo $page->lang ?>">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">

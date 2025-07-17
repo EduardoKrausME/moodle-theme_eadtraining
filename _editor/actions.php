@@ -97,7 +97,9 @@ if ($action == "langedit") {
     $html = required_param("html", PARAM_RAW);
     $css = required_param("css", PARAM_RAW);
     if (isset($html[3]) && isset($css[3])) {
-        $html = preg_replace('/<\/?body.*?>/', '', $html);
+        if (preg_match('/<body[^>]*>(.*?)<\/body>/is', $html, $matches)) {
+            $html = trim($matches[1]);
+        }
         $page->html = "{$html}<style>{$css}</style>";
     }
 
