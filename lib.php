@@ -275,7 +275,6 @@ function theme_boost_training_setting_file_url($setting) {
     return $url;
 }
 
-
 /**
  * theme_boost_training_coursemodule_standard_elements
  *
@@ -293,7 +292,7 @@ function theme_boost_training_coursemodule_standard_elements(&$formwrapper, $mfo
     }
 
     global $CFG, $PAGE;
-    if ($CFG->theme == "boost_training") {
+    if ($CFG->theme == "boost_training" || $CFG->theme == "eadflix") {
 
         // Icones.
         $mform->addElement("header", "theme_boost_training_icons",
