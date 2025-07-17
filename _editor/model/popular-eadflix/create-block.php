@@ -3,8 +3,8 @@
 use core_course\external\course_summary_exporter;
 use core_external\util;
 
-function popular_EadFlix_createblocks($page) {
-    global $DB, $PAGE, $CFG;
+function popular_eadflix_createblocks($page) {
+    global $DB, $OUTPUT, $CFG;
 
     $page->info = json_decode($page->info);
 
@@ -18,7 +18,7 @@ function popular_EadFlix_createblocks($page) {
                 $courseimage = course_summary_exporter::get_course_image($course);
                 if (!$courseimage) {
                     $coursecontext = context_course::instance($course->id, IGNORE_MISSING);
-                    $courseimage = $PAGE->output->get_generated_url_for_course($coursecontext);
+                    $courseimage = $OUTPUT->get_generated_url_for_course($coursecontext);
                 }
 
                 $context = context_course::instance($course->id, IGNORE_MISSING);

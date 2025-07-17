@@ -2,23 +2,27 @@
 
 use core_course\external\course_summary_exporter;
 
-function popular_number_EadFlix_createblocks($page) {
-    global $DB, $PAGE, $CFG;
+/**
+ * @param $page
+ * @return void
+ */
+function popular_number_eadflix_createblocks($page) {
+    global $DB, $OUTPUT, $CFG;
 
     $page->info = json_decode($page->info);
 
     $num = 0;
     $blocks = "";
-    if (isset($page->info->savedata->courseid)) {
-        foreach ($page->info->savedata->courseid as $courseid) {
-            $course = $DB->get_record("course", array("id" => $courseid));
+    if (isset($page->info->savedata[0]->courseid)) {
+        foreach ($page->info->savedata as $course) {
+            $course = $DB->get_record("course", array("id" => $course->courseid));
             if ($course) {
                 $course = new core_course_list_element($course);
 
                 $courseimage = course_summary_exporter::get_course_image($course);
                 if (!$courseimage) {
                     $coursecontext = context_course::instance($course->id, IGNORE_MISSING);
-                    $courseimage = $PAGE->output->get_generated_url_for_course($coursecontext);
+                    $courseimage = $OUTPUT->get_generated_url_for_course($coursecontext);
                 }
 
                 $num++;
