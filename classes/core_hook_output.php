@@ -41,6 +41,12 @@ class core_hook_output {
     public static function before_footer_html_generation() {
         global $CFG, $DB, $COURSE, $SITE;
 
+        static $processed = false;
+        if ($processed) {
+            return;
+        }
+        $processed = true;
+
         $theme = $CFG->theme;
         if (isset($_SESSION["SESSION"]->theme)) {
             $theme = $_SESSION["SESSION"]->theme;
@@ -135,7 +141,6 @@ class core_hook_output {
         foreach ($images["colors"] as $color) {
             $PAGE->requires->js_call_amd("theme_boost_training/blocks", "color", [$color["cmid"], $color["color"]]);
         }
-
     }
 
     /**
@@ -149,6 +154,8 @@ class core_hook_output {
         $cachekey = "background_profile_image";
         if ($cache->has($cachekey)) {
             $css = $cache->get($cachekey);
+            echo "<style>{$css}</style>";
+            return;
         } else {
             $backgroundprofileurl = theme_boost_training_setting_file_url("background_profile_image");
             if ($backgroundprofileurl) {
@@ -156,9 +163,10 @@ class core_hook_output {
 
                 $cache->set($cachekey, $profileimagecss);
                 $css = $profileimagecss;
+                echo "<style>{$css}</style>";
+                return;
             }
         }
-        echo "<style>{$css}</style>";
     }
 
     /**
