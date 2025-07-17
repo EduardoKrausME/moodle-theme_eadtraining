@@ -90,6 +90,8 @@ function compile_pages($pages) {
 
         if (isset($page->info[5])) {
             $info = json_decode($page->info);
+            $page->template = $info->template;
+
             if ($info->type == "html-form" || $info->type == "form") {
                 $file = __DIR__ . "/model/{$info->template}/create-block.php";
                 if (file_exists($file)) {
@@ -98,7 +100,7 @@ function compile_pages($pages) {
                     $createblocks = str_replace("-", "_", "{$info->template}_createblocks");
                     $block = $createblocks($page);
 
-                    if (strpos($page->html, "[[change-to-blocks]]")) {
+                    if (strpos($page->html, "[[change-to-blocks]]") !== false) {
                         $page->html = str_replace("[[change-to-blocks]]", $block, $page->html);
                     } else {
                         $page->html = $page->html . $block;
