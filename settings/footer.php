@@ -35,6 +35,7 @@ foreach (theme_boost_training_colors() as $color) {
     $htmlselect .= "\n\n" . $OUTPUT->render_from_template("theme_boost_training/settings/color", [
             "background" => $color,
             "footercolor" => true,
+            "color" => $color,
         ]);
 }
 

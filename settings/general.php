@@ -36,6 +36,7 @@ if (!isset($config->startcolor[2])) {
         $htmlselect .= "\n\n" . $OUTPUT->render_from_template("theme_boost_training/settings/color", [
                 "background" => $color,
                 "startcolor" => true,
+                "color" => $color,
             ]);
     }
 
@@ -51,6 +52,7 @@ if (!isset($config->startcolor[2])) {
         $htmlselect .= "\n\n" . $OUTPUT->render_from_template("theme_boost_training/settings/color", [
                 "background" => $color,
                 "brandcolor" => true,
+                "color" => $color,
             ]);
     }
 
@@ -82,15 +84,6 @@ $title = get_string("loginbackgroundimage", "theme_boost_training");
 $description = get_string("loginbackgroundimage_desc", "theme_boost_training");
 $setting = new admin_setting_configstoredfile($name, $title, $description, "loginbackgroundimage");
 $setting->set_updatedcallback("theme_reset_all_caches");
-$page->add($setting);
-
-// Unaddable blocks.
-// Blocks to be excluded when this theme is enabled in the "Add a block" list: Administration, Navigation, Courses and
-// Section links.
-$default = "navigation,settings,course_list,section_links";
-$setting = new admin_setting_configtext("theme_boost_training/unaddableblocks",
-    get_string("unaddableblocks", "theme_boost_training"),
-    get_string("unaddableblocks_desc", "theme_boost_training"), $default, PARAM_TEXT);
 $page->add($setting);
 
 $settings->add($page);
