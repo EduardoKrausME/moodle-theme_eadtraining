@@ -15,7 +15,8 @@
     },
     "scripts": [
       "jquery",
-      "../_assets/owl.carousel.js"
+      "../_assets/owl.carousel.js",
+      "../_assets/owl.init.js"
     ],
     "styles": [
       "bootstrap",

@@ -22,8 +22,9 @@
     },
     "scripts": [
       "jquery",
+      "https://www.youtube.com/iframe_api",
       "../_assets/owl.carousel.js",
-      "https://www.youtube.com/iframe_api"
+      "../_assets/owl.init.js"
     ],
     "styles": [
       "bootstrap",

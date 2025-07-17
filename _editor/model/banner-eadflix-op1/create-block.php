@@ -25,15 +25,20 @@ function banner_EadFlix_op1_createblocks($page) {
                 $blocks .= "
                     <div class=\"course-banner-item\">
                         <div class=\"course-bg-banner\">
-                            <div style=\"background-image: url('{$courseimage}');\" class=\"course-bg-images\"></div>
-                            <div class=\"video-bg-player\" data-trailer=\"{$data->youtubeid}\"></div>
+                            <div style=\"background-image:url('{$courseimage}');\" class=\"course-bg-images\">
+                            </div>
+                            <div class=\"video-bg-player\"
+                                 data-trailer=\"https://www.youtube.com/watch?v={$data->youtubeid}\">
+                            </div>
                             <div class=\"course-bg-overlay\"></div>
                         </div>
                         <div class=\"course-banner-content\">
                             <h3 class=\"course-title\">
                                 <a href=\"{$CFG->wwwroot}/course/view.php?id={$course->id}\">{$course->fullname}</a>
                             </h3>
-                            <div class=\"course-text-description\">{$data->description}</div>
+                            <div class=\"course-text-description\">
+                                {$data->description}
+                            </div>
                             <a class=\"btn btn-access\" href=\"{$CFG->wwwroot}/course/view.php?id={$course->id}\">{$accesscourse}</a>
                         </div>
                     </div>\n";

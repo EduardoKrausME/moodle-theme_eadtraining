@@ -25,9 +25,8 @@ function banner_EadFlix_op2_createblocks($page) {
                 $blocks .= "
                     <div class=\"course-banner-item\">
                         <div class=\"course-bg-banner\">
-                            <div class=\"img-bg-banner\">
-                                <img src=\"{$courseimage}\" alt=\"{$course->fullname}\">
-                            </div>
+                            <div class=\"course-bg-images video-bg-player\"
+                                 style=\"background-image:url('{$courseimage}')\"></div>
                             <div class=\"course-bg-overlay\"></div>
                         </div>
                         <div class=\"course-banner-content\">
@@ -44,5 +43,5 @@ function banner_EadFlix_op2_createblocks($page) {
         }
     }
 
-    return "<div class=\"owl-courses-content owl-carousel\">{$blocks}</div>";
+    return "<div class=\"owl-carousel owl-course-banner\">{$blocks}</div>";
 }
