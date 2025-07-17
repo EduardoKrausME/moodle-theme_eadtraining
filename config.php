@@ -33,7 +33,6 @@ $THEME->editor_scss = ["editor"];
 $THEME->usefallback = true;
 $THEME->extrascsscallback = "theme_boost_training_get_extra_scss";
 $THEME->prescsscallback = "theme_boost_training_get_pre_scss";
-//$THEME->precompiledcsscallback = "theme_boost_training_get_precompiled_css";
 $THEME->scss = function ($theme) {
     return theme_boost_training_get_main_scss_content($theme);
 };
