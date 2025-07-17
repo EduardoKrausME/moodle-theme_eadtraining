@@ -94,14 +94,23 @@ if ($action == "langedit") {
     $dataid = required_param("dataid", PARAM_INT);
     $page = $DB->get_record("theme_boost_training_pages", ["id" => $dataid], "*", MUST_EXIST);
 
-    $html = required_param("html", PARAM_RAW);
-    $css = required_param("css", PARAM_RAW);
-    if (isset($html[3]) && isset($css[3])) {
-        if (preg_match('/<body[^>]*>(.*?)<\/body>/is', $html, $matches)) {
-            $html = trim($matches[1]);
-        }
-        $page->html = "{$html}<style>{$css}</style>";
+    switch ($page->type) {
+        case "html":
+        case "html-form":
+            $html = required_param("html", PARAM_RAW);
+            $css = required_param("css", PARAM_RAW);
+            if (isset($html[3]) && isset($css[3])) {
+                if (preg_match('/<body[^>]*>(.*?)<\/body>/is', $html, $matches)) {
+                    $html = trim($matches[1]);
+                }
+                $page->html = "{$html}<style>{$css}</style>";
+            }
+        case "form":
+            break;
+        default:
+            throw new Exception("Type not found");
     }
+
 
     $savedata = boost_training_clear_params_array($_POST["save"], PARAM_RAW);
     $info = json_decode($page->info);
