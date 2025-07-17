@@ -121,6 +121,4 @@ $string['settings_icons_upload_icon'] = 'Upload the custom icon.';
 $string['settings_icons_upload_image'] = 'Block Image';
 $string['settings_icons_upload_image_desc'] = 'If an image is uploaded, the theme will convert the item link into a block and use this image as its background. The image must be 300x300 pixels.';
 $string['showfooter'] = 'Show footer';
-$string['unaddableblocks'] = 'Unneeded blocks';
-$string['unaddableblocks_desc'] = 'The blocks specified are not needed when using this theme and will not be listed in the \'Add a block\' menu.';
 $string['userprofilesettings'] = 'User Profile';

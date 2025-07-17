@@ -35,7 +35,6 @@ function xmldb_theme_boost_training_uninstall() {
 
     unset_config("backgroundimage", "theme_boost_training");
     unset_config("loginbackgroundimage", "theme_boost_training");
-    unset_config("unaddableblocks", "theme_boost_training");
 
     unset_config("scsspre", "theme_boost_training");
     unset_config("scss", "theme_boost_training");

@@ -44,10 +44,10 @@ function xmldb_theme_boost_training_install() {
     ];
     $fs->create_file_from_pathname($filerecord, "{$CFG->dirroot}/theme/boost_training/pix/user-modal-background.jpg");
     set_config("background_profile_image", "/user-modal-background.jpg", "theme_boost_training");
+    set_config("brandcolor_background_menu", 0, "theme_boost_training");
 
     set_config("backgroundimage", "", "theme_boost_training");
     set_config("loginbackgroundimage", "", "theme_boost_training");
-    set_config("unaddableblocks", "", "theme_boost_training");
 
     set_config("scsspre", "", "theme_boost_training");
     set_config("scss", "", "theme_boost_training");
