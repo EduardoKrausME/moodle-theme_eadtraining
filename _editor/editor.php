@@ -70,6 +70,16 @@ if (required_param("dataid", PARAM_TEXT) == "create") {
 $dataid = required_param("dataid", PARAM_INT);
 $page = $DB->get_record("theme_boost_training_pages", ["id" => $dataid], "*", MUST_EXIST);
 
+if (optional_param("changelang", false, PARAM_INT)) {
+    $page->lang = required_param("lang", PARAM_TEXT);
+
+    $DB->update_record("theme_boost_training_pages", $page);
+
+    header("Content-Type: application/json");
+    echo json_encode(["status" => "ok"]);
+    die;
+}
+
 $formitens = false;
 switch ($page->type) {
     case "html":
@@ -141,10 +151,11 @@ echo $page->lang ?>">
         $jqueryuicss = $plugins["ui-css"]["files"][0]; ?>
     <input type="hidden" id="form-itens-json" value="<?php echo base64_encode($page->info) ?>">
     <div id="form-itens">
-        <h3 class="d-flex align-content-center gap-2">
+        <h3 class="d-flex align-items-center gap-2">
             <span><?php echo get_string("language") ?>:</span>
-            <select class="form-control" name="course" style="width: auto;">
+            <select class="form-control" id="change-lang" style="width: auto;">
                 <?php
+                echo "<option value=\"all\">" . get_string("language_all", "theme_boost_training") . "</option>\n";
                 foreach ($languages as $langcode => $label) {
                     $selected = $page->lang == $langcode ? "selected" : "";
                     echo "<option {$selected} value=\"{$langcode}\">{$label}</option>\n";
@@ -167,7 +178,7 @@ echo $page->lang ?>">
     <link rel="stylesheet" href="<?php echo "{$CFG->wwwroot}/lib/jquery/{$jqueryuicss}"; ?>"/>
         <script src="<?php echo "{$CFG->wwwroot}/lib/jquery/{$jquery}"; ?>"></script>
         <script src="<?php echo "{$CFG->wwwroot}/lib/jquery/{$jqueryui}"; ?>"></script>
-        <script src="js/form-itens.js"></script>
+        <script src="js/amd/form-itens.js"></script>
     <?php
     } else { ?>
     <input type="submit" style="display:none">

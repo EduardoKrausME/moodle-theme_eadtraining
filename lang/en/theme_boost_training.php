@@ -98,6 +98,7 @@ $string['frontpage_add_block_title'] = 'Select the sample block to add';
 $string['frontpage_change_editor'] = 'Create the homepage with the Page editor?';
 $string['frontpage_enable_editing'] = 'Enable editing to add items to the homepage';
 $string['generalsettings'] = 'General settings';
+$string['language_all'] = 'All available languages';
 $string['loginbackgroundimage'] = 'Login page background image';
 $string['loginbackgroundimage_desc'] = 'The image to display as a background for the login page.';
 $string['pluginname'] = 'Boost Training';
