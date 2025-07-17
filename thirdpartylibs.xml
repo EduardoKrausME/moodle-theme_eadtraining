@@ -1,6 +1,12 @@
 <?xml version="1.0"?>
 <libraries>
     <library>
+        <location>_editor</location>
+        <name>GrapsJS</name>
+        <version>1.0.27</version>
+        <license>BSD 3-Clause</license>
+    </library>
+    <library>
         <location>scss/bootstrap</location>
         <name>Twitter Bootstrap</name>
         <description>HTML, CSS, and JavaScript framework for developing responsive, mobile-first projects on the web.

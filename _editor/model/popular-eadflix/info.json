@@ -1,0 +1,25 @@
+{
+  "title": "Top cursos - EadFlix",
+  "type": "html-form",
+  "form": {
+    "title": "Módulo com Blocos Múltiplos",
+    "label": "Este é um módulo do tipo múltiplo, onde os blocos são criados dinamicamente e adicionados ao item abaixo. Adicione quantos blocos forem necessários e, em cada um deles, selecione o curso desejado.\nAo ser exibido, o Tema organizará os cursos de acordo com a ordem dos blocos definidos aqui.",
+    "info": "Os blocos gerados acima substituirão o marcador <code>[[change-to-blocks]]</code> no editor abaixo. Por isso, não edite nem remova essa chave.",
+    "blocks": {
+      "courseid": {
+        "type": "select",
+        "label": "Selecione um curso",
+        "data": "courses",
+        "required": true
+      }
+    },
+    "scripts": [
+      "jquery",
+      "../_assets/owl.carousel.js"
+    ],
+    "styles": [
+      "bootstrap",
+      "../_assets/owl.carousel.css"
+    ]
+  }
+}
