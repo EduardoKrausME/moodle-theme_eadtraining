@@ -120,6 +120,6 @@ $string['settings_icons_color_icon'] = 'Set a custom color for the icon.';
 $string['settings_icons_color_icon_desc'] = 'Select the background color for the icon displayed in the course list. Leave blank to use the theme\'s default color.';
 $string['settings_icons_upload_icon'] = 'Upload the custom icon.';
 $string['settings_icons_upload_image'] = 'Block Image';
-$string['settings_icons_upload_image_desc'] = 'If an image is uploaded, the theme will convert the item link into a block and use this image as its background. The image must be 300x300 pixels.';
+$string['settings_icons_upload_image_desc'] = 'If an image is provided, the theme will convert the module row into a block, using the image as its background. The image must have a 16:9 aspect ratio.';
 $string['showfooter'] = 'Show footer';
 $string['userprofilesettings'] = 'User Profile';

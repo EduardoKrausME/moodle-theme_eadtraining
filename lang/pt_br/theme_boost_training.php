@@ -97,7 +97,7 @@ $string['settings_icons_color_icon'] = 'Definir uma cor personalizada para o íc
 $string['settings_icons_color_icon_desc'] = 'Selecione a cor de fundo para o ícone exibido na lista de cursos. Deixe em branco para usar a cor padrão do tema.';
 $string['settings_icons_upload_icon'] = 'Enviar ícone personalizado.';
 $string['settings_icons_upload_image'] = 'Imagem do Bloco';
-$string['settings_icons_upload_image_desc'] = 'Se uma imagem for enviada, o tema converterá o link do item em um bloco e usará esta imagem como fundo. A imagem deve ter 300x300 pixels.';
+$string['settings_icons_upload_image_desc'] = 'Se uma imagem for enviada, o tema converterá a linha do módulo em um bloco, utilizando essa imagem como plano de fundo. A imagem deve ter proporção 16:9.';
 
 $string['footer_background_color'] = 'Cor de fundo do rodapé';
 $string['footer_background_color_desc'] = 'Selecione a cor de fundo que será aplicada à seção do rodapé do site.';
