@@ -1,23 +1,9 @@
 
-{{#js}}
-require(["jquery"], function ($) {
-    // Cria a estrutura HTML do VLibras.
-    let vlibDiv = $('<div>', {class: 'enabled', vw: ''});
-    let accessButton = $('<div>', {class: 'active', 'vw-access-button': ''});
-    let pluginWrapper = $('<div>', {'vw-plugin-wrapper': ''});
-    let pluginTop = $('<div>', {class: 'vw-plugin-top-wrapper'});
-
-    pluginWrapper.append(pluginTop);
-    vlibDiv.append(accessButton, pluginWrapper);
-    $('body').append(vlibDiv);
-
-    // Carrega o plugin VLibras via jQuery e inicializa.
-    $.getScript('https://vlibras.gov.br/app/vlibras-plugin.js')
-            .done(function () {
-                new window.VLibras.Widget('https://vlibras.gov.br/app');
-            })
-            .fail(function () {
-                console.error('Erro ao carregar o script do VLibras.');
-            });
-});
-{{/js}}
+<div vw class="enabled">
+    <div vw-access-button class="active"></div>
+    <div vw-plugin-wrapper>
+        <div class="vw-plugin-top-wrapper"></div>
+    </div>
+</div>
+<script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
+<script>new window.VLibras.Widget('https://vlibras.gov.br/app');</script>
