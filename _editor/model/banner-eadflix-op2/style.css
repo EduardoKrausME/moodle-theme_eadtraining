@@ -30,6 +30,21 @@
   position: relative;
   padding-top: 36%;
 }
+@media (max-width: 767px) {
+  .owl-course-banner .course-banner-item .course-bg-banner .video-bg-player {
+    padding-top: 45%;
+  }
+}
+@media (max-width: 650px) {
+  .owl-course-banner .course-banner-item .course-bg-banner .video-bg-player {
+    padding-top: 50%;
+  }
+}
+@media (max-width: 550px) {
+  .owl-course-banner .course-banner-item .course-bg-banner .video-bg-player {
+    padding-top: 79%;
+  }
+}
 .owl-course-banner .course-banner-item .course-bg-banner .video-bg-player video,
 .owl-course-banner .course-banner-item .course-bg-banner .video-bg-player iframe {
   border: none;
@@ -123,4 +138,29 @@
   margin-top: -48px;
   margin-left: -17px;
   width: calc(100% + 30px);
+}
+
+@media (min-width: 1071px) {
+  [data-basename=boost_training] .block-home-banner-eadflix-op2 {
+    width: calc(100% + 68px + 68px);
+    margin-top: -48px;
+    margin-left: -68px;
+    margin-right: -68px;
+  }
+}
+@media (max-width: 1070px) {
+  [data-basename=boost_training] .block-home-banner-eadflix-op2 {
+    width: calc(100% + 56px + 56px);
+    margin-top: -48px;
+    margin-left: -56px;
+    margin-right: -56px;
+  }
+}
+@media (max-width: 767px) {
+  [data-basename=boost_training] .block-home-banner-eadflix-op2 {
+    width: calc(100% + 8px + 8px);
+    margin-top: -48px;
+    margin-left: -8px;
+    margin-right: -8px;
+  }
 }

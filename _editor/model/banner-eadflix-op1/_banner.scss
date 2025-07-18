@@ -28,6 +28,15 @@
             .video-bg-player {
                 position: relative;
                 padding-top: 36%;
+                @media (max-width: 767px) {
+                    padding-top: 45%;
+                }
+                @media (max-width: 650px) {
+                    padding-top: 50%;
+                }
+                @media (max-width: 550px) {
+                    padding-top: 79%;
+                }
                 video,
                 iframe {
                     border: none;

@@ -51,10 +51,6 @@
   transform: none;
 }
 
-.popular-section {
-  background: #00031c;
-  color: #ffffff;
-}
 .popular-section a, .popular-section h6 a {
   color: #ffffff;
   font-size: 16px;

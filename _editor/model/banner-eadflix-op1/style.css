@@ -30,6 +30,21 @@
   position: relative;
   padding-top: 36%;
 }
+@media (max-width: 767px) {
+  .owl-course-banner .course-banner-item .course-bg-banner .video-bg-player {
+    padding-top: 45%;
+  }
+}
+@media (max-width: 650px) {
+  .owl-course-banner .course-banner-item .course-bg-banner .video-bg-player {
+    padding-top: 50%;
+  }
+}
+@media (max-width: 550px) {
+  .owl-course-banner .course-banner-item .course-bg-banner .video-bg-player {
+    padding-top: 79%;
+  }
+}
 .owl-course-banner .course-banner-item .course-bg-banner .video-bg-player video,
 .owl-course-banner .course-banner-item .course-bg-banner .video-bg-player iframe {
   border: none;

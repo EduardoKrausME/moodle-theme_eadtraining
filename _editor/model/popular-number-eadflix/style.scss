@@ -1,7 +1,7 @@
 @import "../popular-default/popular";
 .popular-section {
-    background: #00031c;
-    color: #ffffff;
+    //background: #00031c;
+    //color: #ffffff;
     .owl-courses-content {
         .top-courses-item {
             .top-courses-inner {
@@ -74,6 +74,19 @@
     .owl-carousel .owl-nav > button {
         &:hover {
             background: #7b61ff;
+        }
+    }
+}
+[data-basename=boost_training] {
+    .popular-section .owl-courses-content .top-courses-item .top-courses-inner.top-courses-number {
+        &:before {
+            background:
+                linear-gradient(248.28deg, #2d2b30 9.54%, rgba(142, 97, 255, 0) 32.8%),
+                radial-gradient(81.71% 279.87% at -16.57% -92%, #619bff 28.69%, rgba(205, 219, 248, 0) 69.54%),
+                #b4b0cb;
+        }
+        .eadflix-nunber {
+            -webkit-text-stroke: 2px #707888;
         }
     }
 }
