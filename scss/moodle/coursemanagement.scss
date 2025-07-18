@@ -196,6 +196,11 @@
     .detail-pair {
         > * {
             display: inline-block;
+            > span,
+            > div {
+                display: flex;
+                flex-wrap: wrap;
+            }
         }
 
         .pair-key {
@@ -275,7 +280,7 @@
  */
 @media (min-width: 1200px) and (max-width: 1600px) {
     #course-category-listings.columns-3 {
-        background-color: $body-bg;
+        //background-color: $body-bg;
         border: 0;
 
         #category-listing,
@@ -286,12 +291,12 @@
         #category-listing > div,
         #course-listing > div,
         #course-detail > div {
-            background-color: $body-bg;
+            //background-color: $body-bg;
         }
 
         #course-detail {
             width: 100%;
-            margin-top: 1em;
+            margin-bottom: 1em;
             order: -1;
         }
     }
