@@ -159,7 +159,6 @@ $fa-version: "6.3.0" !default;
 @import "moodle/reportbuilder";
 @import "moodle/courseindex";
 @import "moodle/frontpage";
-@import "moodle/format-block";
 @import "moodle/moremenu";
 @import "moodle/primarynavigation";
 @import "moodle/secondarynavigation";
@@ -170,7 +169,7 @@ $fa-version: "6.3.0" !default;
 @import "moodle/task-indicator";
 @import "moodle/acctoolbar";
 @import "moodle/minicolors";
-
+@import "moodle/format-block";
 
 //
 // Preset CSS
