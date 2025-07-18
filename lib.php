@@ -284,6 +284,12 @@ function theme_boost_training_setting_file_url($setting) {
  * @throws coding_exception
  */
 function theme_boost_training_coursemodule_standard_elements(&$formwrapper, $mform) {
+    static $executed = false;
+    if ($executed) {
+        return;
+    }
+    $executed = true;
+
     if ($formwrapper->get_current()->modulename == "label") {
         return;
     }
