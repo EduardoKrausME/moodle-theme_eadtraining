@@ -6,7 +6,9 @@ define(["jquery"], function ($) {
             $module.find(".activity-item")
                 .css({"background-image": `url('${thumb}')`})
                 .click(function () {
-                    location.href = $module.find("a.aalink").attr("href");
+                    if (event.target === this) {
+                        location.href = $module.find("a.aalink").attr("href");
+                    }
                 });
             $module.append($module.find(".activity-completion"));
         },
