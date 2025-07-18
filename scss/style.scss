@@ -105,13 +105,72 @@ $enable-transitions: not $behatsite !default;
 $enable-smooth-scroll: not $behatsite !default;
 
 // Import FontAwesome.
-@import "fontawesome";
+$fa-version: "6.3.0" !default;
+@import "fontawesome/brands";
+@import "fontawesome/regular";
+@import "fontawesome/solid";
+@import "fontawesome/v4-shims";
+@import "fontawesome/fontawesome";
 
 // Import All of Bootstrap
 @import "bootstrap/bootstrap";
 
 // Import Core moodle CSS
-@import "moodle";
+// Old Moodle stuff from base theme.
+// Massive, needs broken up.
+@import "moodle/variables";
+@import "moodle/core";
+@import "moodle/action-menu";
+@import "moodle/icons";
+@import "moodle/admin";
+@import "moodle/blocks";
+@import "moodle/calendar";
+@import "moodle/contentbank";
+@import "moodle/course";
+@import "moodle/coursemanagement";
+@import "moodle/courselisting";
+@import "moodle/drawer";
+@import "moodle/filemanager";
+@import "moodle/message";
+@import "moodle/question";
+@import "moodle/user";
+@import "moodle/search";
+@import "moodle/forms";
+@import "moodle/login";
+@import "moodle/modules";
+@import "moodle/reports";
+@import "moodle/backup-restore";
+@import "moodle/tables";
+@import "moodle/buttons";
+@import "moodle/grade";
+@import "moodle/templates";
+@import "moodle/undo";
+@import "moodle/debug";
+@import "moodle/sticky-footer";
+@import "moodle/popover-region";
+@import "moodle/tool_usertours";
+@import "moodle/print";
+@import "moodle/modal";
+@import "moodle/layout";
+@import "moodle/prefixes";
+@import "moodle/atto";
+@import "moodle/toasts";
+@import "moodle/navbar";
+@import "moodle/reportbuilder";
+@import "moodle/courseindex";
+@import "moodle/frontpage";
+@import "moodle/format-block";
+@import "moodle/moremenu";
+@import "moodle/primarynavigation";
+@import "moodle/secondarynavigation";
+@import "moodle/tertiarynavigation";
+@import "moodle/process-monitor";
+@import "moodle/moodlenet";
+@import "moodle/dropdown";
+@import "moodle/task-indicator";
+@import "moodle/acctoolbar";
+@import "moodle/minicolors";
+
 
 //
 // Preset CSS
