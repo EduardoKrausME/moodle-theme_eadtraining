@@ -313,6 +313,15 @@ $blocks-plus-gutter: calc(#{$blocks-column-width} + (#{$grid-gutter-width} * 0.5
 .block_myoverview {
     .content {
         min-height: 19.35rem;
+        [role=search] .row > {
+            * {
+                width: auto;
+            }
+            .mb-1.me-1.flex-grow-1 {
+                order: 5;
+                margin-left: 23px;
+            }
+        }
     }
 
     .paged-content-page-container {
@@ -472,4 +481,7 @@ $blocks-plus-gutter: calc(#{$blocks-column-width} + (#{$grid-gutter-width} * 0.5
             text-decoration: underline;
         }
     }
+}
+[data-region="core/userfeedback"] {
+    display: none !important;
 }
