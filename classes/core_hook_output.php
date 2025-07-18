@@ -133,7 +133,7 @@ class core_hook_output {
 
         global $PAGE;
         foreach ($images["blocks"] as $block) {
-            $PAGE->requires->js_call_amd("theme_{$theme}/blocks", "create", [$block["cmid"], $block["thumb"]]);
+            $PAGE->requires->js_call_amd("theme_boost_training/blocks", "create", [$block["cmid"], $block["thumb"]]);
         }
         foreach ($images["icons"] as $icons) {
             $PAGE->requires->js_call_amd("theme_boost_training/blocks", "icons", [$icons["cmid"], $icons["thumb"]]);
@@ -155,7 +155,6 @@ class core_hook_output {
         if ($cache->has($cachekey)) {
             $css = $cache->get($cachekey);
             echo "<style>{$css}</style>";
-            return;
         } else {
             $backgroundprofileurl = theme_boost_training_setting_file_url("background_profile_image");
             if ($backgroundprofileurl) {
@@ -164,7 +163,6 @@ class core_hook_output {
                 $cache->set($cachekey, $profileimagecss);
                 $css = $profileimagecss;
                 echo "<style>{$css}</style>";
-                return;
             }
         }
     }
