@@ -2719,18 +2719,22 @@ $picker-emojis-per-row: 7 !default;
         --#{$prefix}nav-tabs-link-active-color: #{$nav-pills-link-active-color};
         --#{$prefix}nav-tabs-link-active-bg: #{$nav-pills-link-active-bg};
         margin: 0;
-        padding: $spacer * 0.125;
+        padding: 0;
         //border: 0;
         //background-color: $gray-200;
 
         .nav-item {
-            flex: 1 1 auto;
-            text-align: center;
+            // flex: 1 1 auto;
+            // text-align: center;
         }
 
         .nav-link {
             border: 0;
-            margin: $spacer * 0.125;
+            margin: 0;
+            .active {
+                background: transparent !important;
+                border-bottom: 2px solid var(--bs-nav-tabs-link-active-bg);
+            }
 
             &:not(.active) {
                 background-color: var(--#{$prefix}body-bg);
