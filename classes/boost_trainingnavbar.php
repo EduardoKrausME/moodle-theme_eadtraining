@@ -68,7 +68,10 @@ class boost_trainingnavbar implements \renderable {
             }
         }
         if ($this->page->context->contextlevel == CONTEXT_COURSE) {
-            $removesections = course_get_format($this->page->course)->can_sections_be_removed_from_navigation();
+            $courseformat = course_get_format($this->page->course);
+            if (method_exists($courseformat, "can_sections_be_removed_from_navigation")) {
+                $removesections = $courseformat->can_sections_be_removed_from_navigation();
+            }
             // Remove any duplicate navbar nodes.
             $this->remove_duplicate_items();
             // Remove 'My courses' and 'Courses' if we are in the course context.
@@ -115,12 +118,14 @@ class boost_trainingnavbar implements \renderable {
                 $this->remove($item->key, \breadcrumb_navigation_node::TYPE_CATEGORY);
             }
             $courseformat = course_get_format($this->page->course);
-            $removesections = $courseformat->can_sections_be_removed_from_navigation();
-            if ($removesections) {
-                // If the course sections are removed, we need to add the anchor of current section to the Course.
-                $coursenode = $this->get_item($this->page->course->id);
-                if (!is_null($coursenode) && $this->page->cm->sectionnum !== null) {
-                    $coursenode->action = course_get_format($this->page->course)->get_view_url($this->page->cm->sectionnum);
+            if (method_exists($courseformat, "can_sections_be_removed_from_navigation")) {
+                $removesections = $courseformat->can_sections_be_removed_from_navigation();
+                if ($removesections) {
+                    // If the course sections are removed, we need to add the anchor of current section to the Course.
+                    $coursenode = $this->get_item($this->page->course->id);
+                    if (!is_null($coursenode) && $this->page->cm->sectionnum !== null) {
+                        $coursenode->action = course_get_format($this->page->course)->get_view_url($this->page->cm->sectionnum);
+                    }
                 }
             }
         }
