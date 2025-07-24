@@ -218,10 +218,10 @@
         }
 
         div[role="main"] {
-            background: #fff;
+            background: rgba(255, 255, 255, .52);
             padding: 32px;
             border-radius: 8px;
-            box-shadow: 0 13px 37px rgba(92, 107, 121, .1);
+            box-shadow: 3px 4px 13px rgba(mix($primary, #FFFFFF, 80%), .1);
         }
 
         .hasnavbarcourse div[role="main"] {
