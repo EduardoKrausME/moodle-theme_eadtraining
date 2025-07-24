@@ -122,4 +122,6 @@ $string['settings_icons_upload_icon'] = 'Upload the custom icon.';
 $string['settings_icons_upload_image'] = 'Block Image';
 $string['settings_icons_upload_image_desc'] = 'If an image is provided, the theme will convert the module row into a block, using the image as its background. The image must have a 16:9 aspect ratio.';
 $string['showfooter'] = 'Show footer';
+$string['svg_animate'] = 'Use animated SVG in default image icons';
+$string['svg_animate_desc'] = 'Enable this option to display default image icons with SVG animations. This can enhance visual appearance but may affect performance on older devices.';
 $string['userprofilesettings'] = 'User Profile';
