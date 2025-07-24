@@ -32,4 +32,9 @@ $setting = new admin_setting_configcheckbox("theme_boost_training/course_summary
     get_string("course_summary_desc", "theme_boost_training"), 0);
 $page->add($setting);
 
+$setting = new admin_setting_configcheckbox("theme_boost_training/svg_animate",
+    get_string("svg_animate", "theme_boost_training"),
+    get_string("svg_animate_desc", "theme_boost_training"), 0);
+$page->add($setting);
+
 $settings->add($page);

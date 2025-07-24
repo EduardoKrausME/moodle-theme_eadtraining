@@ -246,8 +246,7 @@ class course_renderer extends \core_course_renderer {
 
         $courseimage = \core_course\external\course_summary_exporter::get_course_image($course);
         if (!$courseimage) {
-            $coursecontext = context_course::instance($course->id, IGNORE_MISSING);
-            $courseimage = $this->output->get_generated_url_for_course($coursecontext);
+            $courseimage = $this->output->get_default_image_for_courseid($course->id);
         }
 
         $cardhomemustache = [

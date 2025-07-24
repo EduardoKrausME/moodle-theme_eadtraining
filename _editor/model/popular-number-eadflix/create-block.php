@@ -21,8 +21,7 @@ function popular_number_eadflix_createblocks($page) {
 
                 $courseimage = course_summary_exporter::get_course_image($course);
                 if (!$courseimage) {
-                    $coursecontext = context_course::instance($course->id, IGNORE_MISSING);
-                    $courseimage = $OUTPUT->get_generated_url_for_course($coursecontext);
+                    $courseimage = $OUTPUT->get_default_image_for_courseid($course->id);
                 }
 
                 $num++;

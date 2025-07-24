@@ -16,7 +16,12 @@
 
 namespace theme_boost_training\output;
 
+use context;
 use context_system;
+use core\context\course as context_course;
+use core_message\api;
+use core_message\helper;
+use Exception;
 use moodle_url;
 use html_writer;
 use user_picture;
@@ -38,19 +43,19 @@ class core_renderer extends \core_renderer {
      *
      * @return string HTML the button
      *
-     * @throws \Exception
+     * @throws Exception
      */
-    public function edit_button(moodle_url $url, string $method = 'post') {
+    public function edit_button(moodle_url $url, string $method = "post") {
         if ($this->page->theme->haseditswitch) {
             return;
         }
-        $url->param('sesskey', sesskey());
+        $url->param("sesskey", sesskey());
         if ($this->page->user_is_editing()) {
-            $url->param('edit', 'off');
-            $editstring = get_string('turneditingoff');
+            $url->param("edit", "off");
+            $editstring = get_string("turneditingoff");
         } else {
-            $url->param('edit', 'on');
-            $editstring = get_string('turneditingon');
+            $url->param("edit", "on");
+            $editstring = get_string("turneditingon");
         }
         $button = new \single_button($url, $editstring, $method, \single_button::BUTTON_PRIMARY);
         return $this->render_single_button($button);
@@ -63,7 +68,7 @@ class core_renderer extends \core_renderer {
      */
     public function navbar(): string {
         $newnav = new \theme_boost_training\boost_trainingnavbar($this->page);
-        return $this->render_from_template('core/navbar', $newnav);
+        return $this->render_from_template("core/navbar", $newnav);
     }
 
     /**
@@ -74,34 +79,34 @@ class core_renderer extends \core_renderer {
      *
      * @return string A rendered context header.
      *
-     * @throws \Exception
+     * @throws Exception
      */
     public function context_header($headerinfo = null, $headinglevel = 1): string {
         global $DB, $USER, $CFG;
-        require_once($CFG->dirroot . '/user/lib.php');
+        require_once("{$CFG->dirroot}/user/lib.php");
         $context = $this->page->context;
         $imagedata = null;
         $userbuttons = null;
 
         // Make sure to use the heading if it has been set.
-        if (isset($headerinfo['heading'])) {
-            $heading = $headerinfo['heading'];
+        if (isset($headerinfo["heading"])) {
+            $heading = $headerinfo["heading"];
         } else {
             $heading = $this->page->heading;
         }
 
         // The user context currently has images and buttons. Other contexts may follow.
-        if ((isset($headerinfo['user']) || $context->contextlevel == CONTEXT_USER) && $this->page->pagetype !== 'my-index') {
-            if (isset($headerinfo['user'])) {
-                $user = $headerinfo['user'];
+        if ((isset($headerinfo["user"]) || $context->contextlevel == CONTEXT_USER) && $this->page->pagetype !== "my-index") {
+            if (isset($headerinfo["user"])) {
+                $user = $headerinfo["user"];
             } else {
                 // Look up the user information if it is not supplied.
-                $user = $DB->get_record('user', ['id' => $context->instanceid]);
+                $user = $DB->get_record("user", ["id" => $context->instanceid]);
             }
 
             // If the user context is set, then use that for capability checks.
-            if (isset($headerinfo['usercontext'])) {
-                $context = $headerinfo['usercontext'];
+            if (isset($headerinfo["usercontext"])) {
+                $context = $headerinfo["usercontext"];
             }
 
             // Only provide user information if the user is the current user, or a user which the current user can view.
@@ -116,31 +121,31 @@ class core_renderer extends \core_renderer {
                     $heading = fullname($user);
                 }
 
-                $imagedata = $this->user_picture($user, ['size' => 100]);
+                $imagedata = $this->user_picture($user, ["size" => 100]);
 
                 // Check to see if we should be displaying a message button.
-                if (!empty($CFG->messaging) && has_capability('moodle/site:sendmessage', $context)) {
+                if (!empty($CFG->messaging) && has_capability("moodle/site:sendmessage", $context)) {
                     $userbuttons = [
-                        'messages' => [
-                            'buttontype' => 'message',
-                            'title' => get_string('message', 'message'),
-                            'url' => new moodle_url('/message/index.php', ['id' => $user->id]),
-                            'image' => 't/message',
-                            'linkattributes' => \core_message\helper::messageuser_link_params($user->id),
-                            'page' => $this->page,
+                        "messages" => [
+                            "buttontype" => "message",
+                            "title" => get_string("message", "message"),
+                            "url" => new moodle_url("/message/index.php", ["id" => $user->id]),
+                            "image" => "t/message",
+                            "linkattributes" => helper::messageuser_link_params($user->id),
+                            "page" => $this->page,
                         ],
                     ];
 
                     if ($USER->id != $user->id) {
-                        $iscontact = \core_message\api::is_contact($USER->id, $user->id);
-                        $isrequested = \core_message\api::get_contact_requests_between_users($USER->id, $user->id);
-                        $contacturlaction = '';
-                        $linkattributes = \core_message\helper::togglecontact_link_params(
+                        $iscontact = api::is_contact($USER->id, $user->id);
+                        $isrequested = api::get_contact_requests_between_users($USER->id, $user->id);
+                        $contacturlaction = "";
+                        $linkattributes = helper::togglecontact_link_params(
                             $user,
                             $iscontact,
                             true,
                             !empty($isrequested),
-                            );
+                        );
                         // If the user is not a contact.
                         if (!$iscontact) {
                             if ($isrequested) {
@@ -148,43 +153,43 @@ class core_renderer extends \core_renderer {
                                 $requests = array_shift($isrequested);
                                 if ($requests->userid == $USER->id) {
                                     // If the user has requested to be a contact.
-                                    $contacttitle = 'contactrequestsent';
+                                    $contacttitle = "contactrequestsent";
                                 } else {
                                     // If the user has been requested to be a contact.
-                                    $contacttitle = 'waitingforcontactaccept';
+                                    $contacttitle = "waitingforcontactaccept";
                                 }
                                 $linkattributes = array_merge($linkattributes, [
-                                    'class' => 'disabled',
-                                    'tabindex' => '-1',
+                                    "class" => "disabled",
+                                    "tabindex" => "-1",
                                 ]);
                             } else {
                                 // If the user is not a contact and has not requested to be a contact.
-                                $contacttitle = 'addtoyourcontacts';
-                                $contacturlaction = 'addcontact';
+                                $contacttitle = "addtoyourcontacts";
+                                $contacturlaction = "addcontact";
                             }
-                            $contactimage = 't/addcontact';
+                            $contactimage = "t/addcontact";
                         } else {
                             // If the user is a contact.
-                            $contacttitle = 'removefromyourcontacts';
-                            $contacturlaction = 'removecontact';
-                            $contactimage = 't/removecontact';
+                            $contacttitle = "removefromyourcontacts";
+                            $contacturlaction = "removecontact";
+                            $contactimage = "t/removecontact";
                         }
-                        $userbuttons['togglecontact'] = [
-                            'buttontype' => 'togglecontact',
-                            'title' => get_string($contacttitle, 'message'),
-                            'url' => new moodle_url('/message/index.php', [
-                                'user1' => $USER->id,
-                                'user2' => $user->id,
+                        $userbuttons["togglecontact"] = [
+                            "buttontype" => "togglecontact",
+                            "title" => get_string($contacttitle, "message"),
+                            "url" => new moodle_url("/message/index.php", [
+                                "user1" => $USER->id,
+                                "user2" => $user->id,
                                 $contacturlaction => $user->id,
-                                'sesskey' => sesskey()],
-                                ),
-                            'image' => $contactimage,
-                            'linkattributes' => $linkattributes,
-                            'page' => $this->page,
+                                "sesskey" => sesskey()
+                            ],),
+                            "image" => $contactimage,
+                            "linkattributes" => $linkattributes,
+                            "page" => $this->page,
                         ];
                     }
 
-                    $this->page->requires->string_for_js('changesmadereallygoaway', 'moodle');
+                    $this->page->requires->string_for_js("changesmadereallygoaway", "moodle");
                 }
             } else {
                 $heading = null;
@@ -193,24 +198,24 @@ class core_renderer extends \core_renderer {
 
         $prefix = null;
         if ($context->contextlevel == CONTEXT_MODULE) {
-            if ($this->page->course->format === 'singleactivity') {
-                $heading = format_string($this->page->course->fullname, true, ['context' => $context]);
+            if ($this->page->course->format === "singleactivity") {
+                $heading = format_string($this->page->course->fullname, true, ["context" => $context]);
             } else {
                 $heading = $this->page->cm->get_formatted_name();
                 $iconurl = $this->page->cm->get_icon_url();
-                $iconclass = $iconurl->get_param('filtericon') ? '' : 'nofilter';
+                $iconclass = $iconurl->get_param("filtericon") ? "" : "nofilter";
                 $iconattrs = [
-                    'class' => "icon activityicon $iconclass",
-                    'aria-hidden' => 'true',
+                    "class" => "icon activityicon $iconclass",
+                    "aria-hidden" => "true",
                 ];
-                $imagedata = html_writer::img($iconurl->out(false), '', $iconattrs);
-                $purposeclass = plugin_supports('mod', $this->page->activityname, FEATURE_MOD_PURPOSE);
-                $purposeclass .= ' activityiconcontainer icon-size-6';
-                $purposeclass .= ' modicon_' . $this->page->activityname;
-                $isbranded = component_callback('mod_' . $this->page->activityname, 'is_branded', [], false);
-                $imagedata = html_writer::tag('div', $imagedata, ['class' => $purposeclass . ($isbranded ? ' isbranded' : '')]);
+                $imagedata = html_writer::img($iconurl->out(false), "", $iconattrs);
+                $purposeclass = plugin_supports("mod", $this->page->activityname, FEATURE_MOD_PURPOSE);
+                $purposeclass .= " activityiconcontainer icon-size-6";
+                $purposeclass .= " modicon_" . $this->page->activityname;
+                $isbranded = component_callback("mod_" . $this->page->activityname, "is_branded", [], false);
+                $imagedata = html_writer::tag("div", $imagedata, ["class" => $purposeclass . ($isbranded ? " isbranded" : "")]);
                 if (!empty($USER->editing)) {
-                    $prefix = get_string('modulename', $this->page->activityname);
+                    $prefix = get_string("modulename", $this->page->activityname);
                 }
             }
         }
@@ -232,10 +237,10 @@ class core_renderer extends \core_renderer {
 
         $firstview = false;
         if ($this->page->cm) {
-            if (!$this->page->blocks->region_has_fakeblocks('side-pre')) {
+            if (!$this->page->blocks->region_has_fakeblocks("side-pre")) {
                 return false;
             }
-            if (!property_exists($SESSION, 'firstview_fakeblocks')) {
+            if (!property_exists($SESSION, "firstview_fakeblocks")) {
                 $SESSION->firstview_fakeblocks = [];
             }
             if (array_key_exists($this->page->cm->id, $SESSION->firstview_fakeblocks)) {
@@ -255,8 +260,7 @@ class core_renderer extends \core_renderer {
      * Wrapper for header elements.
      *
      * @return string HTML to display the main header.
-     * @throws \dml_exception
-     * @throws \coding_exception
+     * @throws Exception
      */
     public function full_header() {
         $pagetype = $this->page->pagetype;
@@ -265,28 +269,29 @@ class core_renderer extends \core_renderer {
         $homepagetype = null;
         // Add a special case since /my/courses is a part of the /my subsystem.
         if ($homepage == HOMEPAGE_MY || $homepage == HOMEPAGE_MYCOURSES) {
-            $homepagetype = 'my-index';
-        } else if ($homepage == HOMEPAGE_SITE) {
-            $homepagetype = 'site-index';
+            $homepagetype = "my-index";
+        } else {
+            if ($homepage == HOMEPAGE_SITE) {
+                $homepagetype = "site-index";
+            }
         }
-        if (
-            $this->page->include_region_main_settings_in_header_actions() &&
-            !$this->page->blocks->is_block_present('settings')
-        ) {
+        if ($this->page->include_region_main_settings_in_header_actions() && !$this->page->blocks->is_block_present("settings")) {
             // Only include the region main settings if the page has requested it and it doesn't already have
             // the settings block on it. The region main settings are included in the settings block and
             // duplicating the content causes behat failures.
-            $this->page->add_header_action(html_writer::div(
-                $this->region_main_settings_menu(),
-                'd-print-none',
-                ['id' => 'region-main-settings-menu']
-            ));
+            $this->page->add_header_action(
+                html_writer::div(
+                    $this->region_main_settings_menu(),
+                    "d-print-none",
+                    ["id" => "region-main-settings-menu"]
+                )
+            );
         }
 
         $header = new \stdClass();
         $header->settingsmenu = $this->context_header_settings_menu();
         $header->contextheader = $this->context_header();
-        $header->hasnavbar = empty($this->page->layout_options['nonavbar']);
+        $header->hasnavbar = empty($this->page->layout_options["nonavbar"]);
         $header->navbar = $this->navbar();
         $header->pageheadingbutton = $this->page_heading_button();
         $header->courseheader = $this->course_header();
@@ -299,7 +304,6 @@ class core_renderer extends \core_renderer {
         $hasuri = strpos($_SERVER["REQUEST_URI"], "course/view.php") || strpos($_SERVER["REQUEST_URI"], "course/section.php");
         $showcoursesummary = get_config("theme_boost_training", "course_summary");
         if ($hasuri && $showcoursesummary) {
-
             global $DB, $CFG;
 
             $header->hasnavbarcourse = true;
@@ -316,12 +320,10 @@ class core_renderer extends \core_renderer {
                 LIMIT 1";
             $coursefile = $DB->get_record_sql($sql, ["contextid" => $this->page->context->id]);
             if ($coursefile) {
-                $header->overviewfiles =
-                    "{$CFG->wwwroot}/pluginfile.php/{$coursefile->contextid}/course/overviewfiles/{$coursefile->filename}";
+                $header->overviewfiles = "{$CFG->wwwroot}/pluginfile.php/{$coursefile->contextid}/course/overviewfiles/{$coursefile->filename}";
             }
 
-            if (has_capability('moodle/category:manage', $this->page->context)) {
-
+            if (has_capability("moodle/category:manage", $this->page->context)) {
                 $cache = \cache::make("theme_boost_training", "course_cache");
                 $cachekey = "header_details_{$this->page->course->id}";
                 if ($cache->has($cachekey)) {
@@ -337,7 +339,7 @@ class core_renderer extends \core_renderer {
                           FROM {role_assignments}
                          WHERE roleid    = 5
                            AND contextid = :contextid";
-                    $total = $DB->get_field_sql($sql, ['contextid' => $this->page->context->id]);
+                    $total = $DB->get_field_sql($sql, ["contextid" => $this->page->context->id]);
                     $header->details[] = [
                         "id" => "users",
                         "icon" => "fa-users fa-fw",
@@ -354,7 +356,7 @@ class core_renderer extends \core_renderer {
                           JOIN {user}              u ON u.id = ra.userid
                          WHERE ra.roleid    IN(3,4)
                            AND ra.contextid = :contextid";
-                    $teachers = $DB->get_records_sql($sql, ['contextid' => $this->page->context->id]);
+                    $teachers = $DB->get_records_sql($sql, ["contextid" => $this->page->context->id]);
                     if (count($teachers)) {
                         $teachershtml = "";
                         foreach ($teachers as $teacher) {
@@ -383,7 +385,7 @@ class core_renderer extends \core_renderer {
                                                       AND cc.course = :courseid
                          WHERE ra.contextid = :contextid";
                     $users = $DB->get_records_sql($sql, [
-                        'contextid' => $this->page->context->id,
+                        "contextid" => $this->page->context->id,
                         "courseid" => $this->page->course->id,
                     ]);
 
@@ -421,7 +423,7 @@ class core_renderer extends \core_renderer {
                      LEFT JOIN {user_lastaccess}   la ON la.userid = ra.userid
                          WHERE ra.contextid = :contextid
                            AND la.timeaccess IS NULL";
-                    $total = $DB->get_field_sql($sql, ['contextid' => $this->page->context->id]);
+                    $total = $DB->get_field_sql($sql, ["contextid" => $this->page->context->id]);
                     $header->details[] = [
                         "id" => "not-access",
                         "icon" => "fa fa-user-slash fa-fw",
@@ -435,7 +437,7 @@ class core_renderer extends \core_renderer {
             }
         }
 
-        return $this->render_from_template('theme_boost_training/core/full_header', $header);
+        return $this->render_from_template("theme_boost_training/core/full_header", $header);
     }
 
     /**
@@ -444,7 +446,7 @@ class core_renderer extends \core_renderer {
      * We will when there are no main logos, and we have compact logo.
      *
      * @return bool
-     * @throws \dml_exception
+     * @throws Exception
      */
     public function should_display_navbar_logo() {
         $logo = $this->get_compact_logo_url();
@@ -454,15 +456,14 @@ class core_renderer extends \core_renderer {
     /**
      * Return the site's compact logo URL, if any.
      *
-     * @param int $maxwidth  The maximum width, or null when the maximum width does not matter.
+     * @param int $maxwidth The maximum width, or null when the maximum width does not matter.
      * @param int $maxheight The maximum height, or null when the maximum height does not matter.
      *
      * @return moodle_url|false
      *
-     * @throws \dml_exception
+     * @throws Exception
      */
     public function get_compact_logo_url($maxwidth = 300, $maxheight = 300) {
-
         static $return = null;
         if ($return !== null) {
             return $return;
@@ -479,19 +480,19 @@ class core_renderer extends \core_renderer {
             }
         }
 
-        $logo = get_config('core_admin', 'logocompact');
+        $logo = get_config("core_admin", "logocompact");
         if (empty($logo)) {
             return $return = false;
         }
 
         // Hide the requested size in the file path.
-        $filepath = ((int)$maxwidth . 'x' . (int)$maxheight) . '/';
+        $filepath = ((int)$maxwidth . "x" . (int)$maxheight) . "/";
 
         // Use $CFG->themerev to prevent browser caching when the file changes.
         return $return = moodle_url::make_pluginfile_url(
             context_system::instance()->id,
-            'core_admin',
-            'logocompact',
+            "core_admin",
+            "logocompact",
             $filepath,
             theme_get_revision(),
             $logo
@@ -499,10 +500,26 @@ class core_renderer extends \core_renderer {
     }
 
     /**
+     * Get the course pattern image URL.
+     *
+     * @param int $courseid course id
+     * @return string URL of the course pattern image in SVG format
+     */
+    public function get_default_image_for_courseid($courseid): string {
+        global $PAGE;
+
+        $imageid = "svg-courseid-{$courseid}-" . uniqid();
+        $PAGE->requires->js_call_amd("theme_boost_training/default_image", "generateimage", [$imageid, $courseid]);
+
+        $imagesvg = "<svg id=\"{$imageid}\" xmlns=\"http://www.w3.org/2000/svg\"></svg>";
+        return "data:image/svg+xml;utf8,{$imagesvg}";
+    }
+
+    /**
      * Brandcolor background menu class
      *
      * @return string
-     * @throws \dml_exception
+     * @throws Exception
      */
     public function brandcolor_background_menu_class() {
         $background = get_config("theme_boost_training", "brandcolor_background_menu");
