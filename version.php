@@ -24,12 +24,12 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-$plugin->version = 2025071800;
-$plugin->requires = 2024100100;
+$plugin->version  = 2025071800;
+$plugin->requires = 2022000000;
 $plugin->release = "8.3.16";
 $plugin->maturity = MATURITY_STABLE;
 $plugin->component = 'theme_boost_training';
 $plugin->dependencies = [
     "customfield_picture" => 2024100800,
-    "theme_boost" => 2024100100,
+    "theme_boost" => 2022000000,
 ];
