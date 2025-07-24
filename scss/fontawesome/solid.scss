@@ -15,7 +15,8 @@
     font-weight: 900;
     font-display: $fa-font-display;
     src: url('[[font:core|fa-solid-900.woff2]]') format('woff2'),
-    url('[[font:core|fa-solid-900.ttf]]') format('truetype');
+    url('[[font:core|fa-solid-900.ttf]]') format('truetype'),
+    url('[[font:core|fontawesome-webfont.woff]]') format('woff');
 }
 .fas,
 .#{$fa-css-prefix}-solid {
