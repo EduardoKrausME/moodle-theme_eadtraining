@@ -127,7 +127,12 @@ $divider-hover-color: $primary !default;
             height: 12px;
         }
     }
-    .course-section-header {
+    .course-section-header:not([id^="course-section-header-"]){
+        display: flex;
+        flex-wrap: nowrap;
+        flex-direction: column;
+    }
+    .course-section-header[id^="course-section-header-"] {
         background-color: mix(white, $primary, 90%);
         border: 1px solid mix(white, $primary, 70%);
         border-radius: 0.25rem;
@@ -613,7 +618,7 @@ $divider-hover-color: $primary !default;
 // These styles will make the activity and section dividers buttons visible (but still without opacity) so
 // buttons can be keyboard focusable.
 .activity:focus-within + .activity .divider .divider-content,
-.course-section-header:focus-within + .content .section .activity:first-child .divider .divider-content,
+.course-section-header[id^="course-section-header-"]:focus-within + .content .section .activity:first-child .divider .divider-content,
 .content .section .activity:focus-within .divider .divider-content,
 .course-content:focus-within .changenumsections .divider .divider-content {
     visibility: visible;
@@ -702,7 +707,7 @@ $divider-hover-color: $primary !default;
         }
     }
 
-    .course-section-header .bulkselect {
+    .course-section-header[id^="course-section-header-"] .bulkselect {
         left: -2.75rem;
         position: relative;
         width: 0;
@@ -1069,7 +1074,7 @@ $divider-hover-color: $primary !default;
         border-bottom: 1px solid $dropzone-border;
     }
 
-    .course-section-header.dropready.drop-zone {
+    .course-section-header[id^="course-section-header-"].dropready.drop-zone {
         margin-top: -2px;
     }
 
