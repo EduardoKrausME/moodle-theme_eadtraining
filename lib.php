@@ -463,3 +463,9 @@ function theme_boost_training_change_color() {
 
     theme_reset_all_caches();
 }
+
+if (!function_exists('str_starts_with')) {
+    function str_starts_with(string $haystack, string $needle): bool {
+        return $needle !== '' && strncmp($haystack, $needle, strlen($needle)) === 0;
+    }
+}
