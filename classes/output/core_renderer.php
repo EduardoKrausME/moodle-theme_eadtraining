@@ -181,8 +181,8 @@ class core_renderer extends \core_renderer {
                                 "user1" => $USER->id,
                                 "user2" => $user->id,
                                 $contacturlaction => $user->id,
-                                "sesskey" => sesskey()
-                            ],),
+                                "sesskey" => sesskey(),
+                            ]),
                             "image" => $contactimage,
                             "linkattributes" => $linkattributes,
                             "page" => $this->page,
@@ -320,7 +320,8 @@ class core_renderer extends \core_renderer {
                 LIMIT 1";
             $coursefile = $DB->get_record_sql($sql, ["contextid" => $this->page->context->id]);
             if ($coursefile) {
-                $header->overviewfiles = "{$CFG->wwwroot}/pluginfile.php/{$coursefile->contextid}/course/overviewfiles/{$coursefile->filename}";
+                $header->overviewfiles =
+                    "{$CFG->wwwroot}/pluginfile.php/{$coursefile->contextid}/course/overviewfiles/{$coursefile->filename}";
             }
 
             if (has_capability("moodle/category:manage", $this->page->context)) {
@@ -506,10 +507,8 @@ class core_renderer extends \core_renderer {
      * @return string URL of the course pattern image in SVG format
      */
     public function get_default_image_for_courseid($courseid): string {
-        global $PAGE;
-
         $imageid = "svg-courseid-{$courseid}-" . uniqid();
-        $PAGE->requires->js_call_amd("theme_boost_training/default_image", "generateimage", [$imageid, $courseid]);
+        $this->page->requires->js_call_amd("theme_boost_training/default_image", "generateimage", [$imageid, $courseid]);
 
         $imagesvg = "<svg id=\"{$imageid}\" xmlns=\"http://www.w3.org/2000/svg\"></svg>";
         return "data:image/svg+xml;utf8,{$imagesvg}";
