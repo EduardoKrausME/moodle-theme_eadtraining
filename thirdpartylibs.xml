@@ -7,6 +7,12 @@
         <license>BSD 3-Clause</license>
     </library>
     <library>
+        <location>amd/src/trianglify.js</location>
+        <name>Trianglify</name>
+        <version>4.1.1</version>
+        <license> GPL-3.0 license</license>
+    </library>
+    <library>
         <location>scss/bootstrap</location>
         <name>Twitter Bootstrap</name>
         <description>HTML, CSS, and JavaScript framework for developing responsive, mobile-first projects on the web.
