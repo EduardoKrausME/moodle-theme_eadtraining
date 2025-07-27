@@ -1,6 +1,6 @@
 define(["jquery", "theme_boost_training/trianglify"], function ($, trianglify) {
     return {
-        generateimage: function (imageid, courseid) {
+        generateimage: function (imageid, courseid, animate) {
             courseid = Math.pow((courseid + 10000), 2);
             const $img = $(`img[src*="${imageid}"],[style*="${imageid}"]`);
 
@@ -75,40 +75,43 @@ define(["jquery", "theme_boost_training/trianglify"], function ($, trianglify) {
                 return Math.floor(createRandom(courseid + sum) * (max - min + 1)) + min;
             }
 
-
-            const extraSvg = `
-                <style>
-                    #color-stop-1 {
-                        -webkit-animation: change-color-1 ${randon(0, 15, 40)}s ease-in-out infinite alternate;
-                        animation: change-color-1 ${randon(0, 15, 40)}s ease-in-out infinite alternate
-                    }
-                    #color-stop-2 {
-                        -webkit-animation: change-color-2 ${randon(0, 15, 40)}s ease-in-out infinite alternate;
-                        animation: change-color-2 ${randon(0, 15, 40)}s ease-in-out infinite alternate
-                    }
-                    #color-stop-3 {
-                        -webkit-animation: change-color-3 ${randon(0, 15, 40)}s ease-in-out infinite alternate;
-                        animation: change-color-3 ${randon(0, 15, 40)}s ease-in-out infinite alternate
-                    }
-                    @keyframes change-color-1 {
-                         ${randon(20, 0, 100)}% { stop-color: ${randomColor(10)} }
-                         ${randon(21, 0, 100)}% { stop-color: ${randomColor(11)} }
-                         ${randon(22, 0, 100)}% { stop-color: ${randomColor(12)} }
-                         ${randon(23, 0, 100)}% { stop-color: ${randomColor(13)} }
-                    }
-                    @keyframes change-color-2 {
-                         ${randon(24, 0, 100)}% { stop-color: ${randomColor(14)} }
-                         ${randon(25, 0, 100)}% { stop-color: ${randomColor(15)} }
-                         ${randon(26, 0, 100)}% { stop-color: ${randomColor(16)} }
-                         ${randon(27, 0, 100)}% { stop-color: ${randomColor(17)} }
-                    }
-                    @keyframes change-color-3 {
-                         ${randon(28, 0, 100)}% { stop-color: ${randomColor(18)} }
-                         ${randon(29, 0, 100)}% { stop-color: ${randomColor(19)} }
-                         ${randon(30, 0, 100)}% { stop-color: ${randomColor(20)} }
-                         ${randon(31, 0, 100)}% { stop-color: ${randomColor(21)} }
-                    }
-                </style>
+            let extraSvg = "";
+            if (animate) {
+                extraSvg = `
+                    <style>
+                        #color-stop-1 {
+                            -webkit-animation: change-color-1 ${randon(0, 15, 40)}s ease-in-out infinite alternate;
+                            animation: change-color-1 ${randon(0, 15, 40)}s ease-in-out infinite alternate
+                        }
+                        #color-stop-2 {
+                            -webkit-animation: change-color-2 ${randon(0, 15, 40)}s ease-in-out infinite alternate;
+                            animation: change-color-2 ${randon(0, 15, 40)}s ease-in-out infinite alternate
+                        }
+                        #color-stop-3 {
+                            -webkit-animation: change-color-3 ${randon(0, 15, 40)}s ease-in-out infinite alternate;
+                            animation: change-color-3 ${randon(0, 15, 40)}s ease-in-out infinite alternate
+                        }
+                        @keyframes change-color-1 {
+                             ${randon(20, 0, 100)}% { stop-color: ${randomColor(10)} }
+                             ${randon(21, 0, 100)}% { stop-color: ${randomColor(11)} }
+                             ${randon(22, 0, 100)}% { stop-color: ${randomColor(12)} }
+                             ${randon(23, 0, 100)}% { stop-color: ${randomColor(13)} }
+                        }
+                        @keyframes change-color-2 {
+                             ${randon(24, 0, 100)}% { stop-color: ${randomColor(14)} }
+                             ${randon(25, 0, 100)}% { stop-color: ${randomColor(15)} }
+                             ${randon(26, 0, 100)}% { stop-color: ${randomColor(16)} }
+                             ${randon(27, 0, 100)}% { stop-color: ${randomColor(17)} }
+                        }
+                        @keyframes change-color-3 {
+                             ${randon(28, 0, 100)}% { stop-color: ${randomColor(18)} }
+                             ${randon(29, 0, 100)}% { stop-color: ${randomColor(19)} }
+                             ${randon(30, 0, 100)}% { stop-color: ${randomColor(20)} }
+                             ${randon(31, 0, 100)}% { stop-color: ${randomColor(21)} }
+                        }
+                    </style>`;
+            }
+            extraSvg += `
                 <defs>
                     <linearGradient x1="0%" y1="0%" y2="${randon(3, 60, 140)}%" id="url-${courseid}">
                         <stop id="color-stop-1" stop-color="${randomColor(1)}" offset="0%"></stop>
@@ -122,7 +125,7 @@ define(["jquery", "theme_boost_training/trianglify"], function ($, trianglify) {
             svgString = svgString.replace(/<svg[^>]*?>/, match => `${match}\n${extraSvg}`);
             const base64 = btoa(unescape(encodeURIComponent(svgString)));
             if ($img.is("img")) {
-                $img.src = `data:image/svg+xml;base64,${base64}`;
+                $img.attr("src", `data:image/svg+xml;base64,${base64}`) ;
             } else {
                 $img.css({"background-image": `url("data:image/svg+xml;base64,${base64}")`})
             }

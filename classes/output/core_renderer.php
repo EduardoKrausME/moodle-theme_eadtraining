@@ -507,10 +507,11 @@ class core_renderer extends \core_renderer {
      * @return string URL of the course pattern image in SVG format
      */
     public function get_default_image_for_courseid($courseid): string {
+        $animate = get_config("theme_boost_training", "svg_animate");
         $imageid = "svg-courseid-{$courseid}-" . uniqid();
-        $this->page->requires->js_call_amd("theme_boost_training/default_image", "generateimage", [$imageid, $courseid]);
+        $this->page->requires->js_call_amd("theme_boost_training/default_image", "generateimage", [$imageid, $courseid, $animate]);
 
-        $imagesvg = "<svg id=\"{$imageid}\" xmlns=\"http://www.w3.org/2000/svg\"></svg>";
+        $imagesvg = "<svg id={$imageid}></svg>";
         return "data:image/svg+xml;utf8,{$imagesvg}";
     }
 
