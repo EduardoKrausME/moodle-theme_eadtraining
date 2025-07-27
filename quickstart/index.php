@@ -70,7 +70,7 @@ if (optional_param("POST", false, PARAM_INT)) {
     $syscontext = context_system::instance();
     foreach ($filefields as $fieldname => $component) {
         if (!empty($_FILES[$fieldname]) && is_uploaded_file($_FILES[$fieldname]["tmp_name"])) {
-            // Apaga arquivos antigos (se quiser manter um único arquivo).
+            // Delete old files (if you want to keep a single file).
             $fs->delete_area_files($syscontext->id, $component, $fieldname, 0);
             $filename = clean_param($_FILES[$fieldname]["name"], PARAM_FILE);
             $filerecord = [
@@ -125,8 +125,6 @@ foreach ($pages as $page) {
 $homemustache = [
     "homemode" => get_config("theme_boost_training", "homemode"),
     "templates" => $templates,
-
-    "return" => false,
     "next" => "courses",
 ];
 echo $OUTPUT->render_from_template("theme_boost_training/quickstart/home", $homemustache);
@@ -147,7 +145,6 @@ $coursesmustache = [
     "course_summary_2" => get_config("theme_boost_training", "course_summary") == 2,
     "banners" => git::list_all("banner", $template),
     "banner_file_extensions" => "PNG, JPG",
-
     "return" => "home",
     "next" => "logos",
 ];
@@ -159,7 +156,6 @@ $PAGE->requires->js_call_amd("theme_boost_training/default_image", "generateimag
 $logosmustache = [
     "return" => "courses",
     "next" => "user-profile",
-
     "logocompact_url" => $OUTPUT->get_compact_logo_url(300, 300),
     "logocompact_extensions" => "PNG, SVG, JPG",
     "favicon_url" => $OUTPUT->favicon(),
@@ -169,11 +165,10 @@ echo $OUTPUT->render_from_template("theme_boost_training/quickstart/logos", $log
 
 // User profile.
 $usermustache = [
-    "return" => "logos",
-    "next" => "accessibility",
-
     "background_profile_image_url" => theme_boost_training_setting_file_url("background_profile_image")->out(),
     "background_profile_image_extensions" => "PNG, JPG",
+    "return" => "logos",
+    "next" => "accessibility",
 ];
 echo $OUTPUT->render_from_template("theme_boost_training/quickstart/user-profile", $usermustache);
 
@@ -199,7 +194,6 @@ foreach (theme_boost_training_colors() as $color) {
 $footermustache = [
     "footer_background_color" => get_config("theme_boost_training", "footer_background_color"),
     "htmlselect" => $htmlselect,
-
     "blocks" => [
         [
             "num" => 1,
@@ -223,11 +217,8 @@ $footermustache = [
             "footer_html" => get_config("theme_boost_training", "footer_html_4"),
         ],
     ],
-
     "tyni_editor_config" => $editor->tyni_editor_config(),
-
     "return" => "accessibility",
-    "next" => false,
 ];
 echo $OUTPUT->render_from_template("theme_boost_training/quickstart/footer", $footermustache);
 $PAGE->requires->js_call_amd("theme_boost_training/settings", "minicolors", ["id_footer_background_color"]);
