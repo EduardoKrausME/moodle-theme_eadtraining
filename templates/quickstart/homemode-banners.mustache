@@ -21,7 +21,8 @@
 }}
 
 <label>
-    <input type="checkbox" name="homemode_banners[]" value="{{$model}}{{/model}}"
+    <input type="checkbox" id="homemode_banners-{{$model}}{{/model}}"
+           name="homemode_banners[]" value="{{$model}}{{/model}}"
            {{$checked}}{{/checked}}
            style="display: none;">
     <div class="marked-area">
@@ -30,3 +31,14 @@
         <div class="label-caption">{{$label}}{{/label}}</div>
     </div>
 </label>
+
+<script>
+    const checkbox = document.getElementById('homemode_banners-{{$model}}{{/model}}');
+    // If initially marked.
+    if (checkbox.checked) {
+        // Prevents the user from unchecking.
+        checkbox.addEventListener('click', function(event) {
+            event.preventDefault(); // Prevents state change.
+        });
+    }
+</script>
