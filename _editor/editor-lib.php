@@ -116,6 +116,7 @@ function compile_pages($pages) {
                         $PAGE->requires->jquery();
                     } elseif ($script == "jqueryui") {
                         $PAGE->requires->jquery_plugin("ui");
+                        $PAGE->requires->jquery_plugin("ui-css");
                     } elseif (strpos($script, "http") === 0) {
                         $PAGE->requires->js_init_code("require(['jquery'],function($){ $.getScript('{$script}')})");
                     } else {
