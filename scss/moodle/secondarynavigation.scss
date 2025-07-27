@@ -1,5 +1,5 @@
 .secondary-navigation {
-    padding-bottom: 15px;
+    //padding-bottom: 15px;
 
     .navigation {
         border-bottom: 1px solid $nav-tabs-border-color;
@@ -15,6 +15,17 @@
                 border-radius: initial;
             }
         }
+    }
+}
+
+.path-admin .secondary-navigation {
+    .navigation {
+        border-bottom: none;
+    }
+    .moremenu .nav-link.active{
+        border-bottom: none;
+        background: rgba(255, 255, 255, .52);
+        border-radius: 8px 8px 0 0;
     }
 }
 
