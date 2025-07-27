@@ -25,7 +25,8 @@
 defined('MOODLE_INTERNAL') || die;
 
 // Logos section.
-$page = new admin_settingpage("theme_boost_training_logos", get_string("logossettings", "admin"));
+$page = new admin_settingpage("theme_boost_training_logos",
+    get_string("logossettings", "admin"));
 
 // Small logo file setting.
 $title = get_string("logocompact", "admin");

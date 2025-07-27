@@ -28,7 +28,8 @@ global $PAGE, $CFG, $OUTPUT;
 require_once("{$CFG->dirroot}/theme/boost_training/lib.php");
 
 // Footer section.
-$page = new admin_settingpage("theme_boost_training_footer", get_string("footersettings", "theme_boost_training"));
+$page = new admin_settingpage("theme_boost_training_footer",
+    get_string("footersettings", "theme_boost_training"));
 
 $htmlselect = "<link rel=\"stylesheet\" href=\"{$CFG->wwwroot}/theme/boost_training/scss/colors.css\" />";
 foreach (theme_boost_training_colors() as $color) {
