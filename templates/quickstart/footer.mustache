@@ -1,3 +1,51 @@
+{{!
+    This file is part of Moodle - http://moodle.org/
+
+    Moodle is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    Moodle is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+}}
+{{!
+    @template theme_boost_training/quickstart/footer
+
+    Example context (json):
+    {
+        "footer_background_color" => "#f0f",
+        "htmlselect" => "<div options...",
+        "blocks" => [
+            {
+                "num" => 1,
+                "active" => true,
+                "footer_title" => "Block title...",
+                "footer_html" => "<div footer..."
+            }, {
+                "num" => 2,
+                "footer_title" => get_config("theme_boost_training", "footer_title_2"),
+                "footer_html" => "<div footer..."
+            }, {
+                "num" => 3,
+                "footer_title" => get_config("theme_boost_training", "footer_title_3"),
+                "footer_html" => "<div footer..."
+            }, {
+                "num" => 4,
+                "footer_title" => get_config("theme_boost_training", "footer_title_4"),
+                "footer_html" => "<div footer..."
+            },
+        ],
+        "tyni_editor_config" => "{json}",
+        "return" => "accessibility"
+    }
+}}
+
 <link rel="stylesheet" href="{{{config.wwwroot}}}/theme/boost_training/scss/colors.css"/>
 
 <div class="quickstart-collapse" id="footer">

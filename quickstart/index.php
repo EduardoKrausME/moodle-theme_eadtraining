@@ -17,8 +17,8 @@
 /**
  * view file
  *
- * @package   mod_supervideo
- * @copyright 2024 Eduardo kraus (http://eduardokraus.com)
+ * @package   theme_boost_training
+ * @copyright 2025 Eduardo kraus (http://eduardokraus.com)
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -155,7 +155,7 @@ echo $OUTPUT->render_from_template("theme_boost_training/quickstart/courses", $c
 $PAGE->requires->js_call_amd("theme_boost_training/default_image", "generateimage", ["svg-courseid-111", 111, true]);
 $PAGE->requires->js_call_amd("theme_boost_training/default_image", "generateimage", ["svg-courseid-222", 222, false]);
 
-// Courses.
+// Logos.
 $logosmustache = [
     "return" => "courses",
     "next" => "user-profile",
