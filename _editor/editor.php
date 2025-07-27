@@ -65,8 +65,8 @@ if (optional_param("delete", false, PARAM_INT)) {
 if (required_param("dataid", PARAM_TEXT) == "create") {
     $template = required_param("template", PARAM_TEXT);
     $lang = required_param("lang", PARAM_TEXT);
-    $chave = required_param("chave", PARAM_TEXT);
-    $page = editor_create_page($template, $lang, $chave);
+    $local = required_param("local", PARAM_TEXT);
+    $page = editor_create_page($template, $lang, $local);
     redirect("{$CFG->wwwroot}/theme/boost_training/_editor/editor.php?dataid={$page->id}");
     die;
 }
@@ -88,7 +88,7 @@ switch ($page->type) {
 }
 
 $lang = $page->lang;
-$chave = $page->local;
+$local = $page->local;
 
 $pageinfo = json_decode($page->info);
 
@@ -131,7 +131,7 @@ $languages = get_string_manager()->get_list_of_translations();
     <input type="hidden" name="css" id="css-body">
     <input type="hidden" id="editor-sesskey" value="<?php echo sesskey() ?>">
     <input type="hidden" id="editor-lang" value="<?php echo $page->lang ?>">
-    <input type="hidden" id="editor-chave" value="<?php echo $page->local ?>">
+    <input type="hidden" id="editor-local" value="<?php echo $page->local ?>">
     <input type="hidden" id="editor-dataid" name="dataid" value="<?php echo $page->id ?>">
     <input type="hidden" id="editor-wwwroot" value="<?php echo $CFG->wwwroot ?>">
     <?php

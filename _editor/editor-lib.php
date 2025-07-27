@@ -29,8 +29,8 @@
  * @return string
  */
 function actionurl($action) {
-    global $chave, $lang;
-    return "actions.php?action={$action}&chave={$chave}&lang={$lang}&sesskey=" . sesskey();
+    global $local, $lang;
+    return "actions.php?action={$action}&local={$local}&lang={$lang}&sesskey=" . sesskey();
 }
 
 /**
@@ -38,11 +38,11 @@ function actionurl($action) {
  *
  * @param $template
  * @param $lang
- * @param $chave
+ * @param $local
  * @return object
  * @throws Exception
  */
-function editor_create_page($template, $lang, $chave) {
+function editor_create_page($template, $lang, $local) {
     global $CFG, $DB;
 
     $infofile = __DIR__ . "/model/{$template}/info.json";
@@ -58,7 +58,7 @@ function editor_create_page($template, $lang, $chave) {
     }
 
     $page = (object)[
-        "local" => $chave,
+        "local" => $local,
         "type" => $info->type,
         "title" => $info->title,
         "html" => $html,

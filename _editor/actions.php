@@ -35,11 +35,11 @@ if (!has_capability('moodle/site:config', context_system::instance())) {
 $context = context_system::instance();
 require_sesskey();
 
-$chave = required_param('chave', PARAM_TEXT);
+$local = required_param('local', PARAM_TEXT);
 $action = required_param('action', PARAM_TEXT);
 
 $component = 'theme_boost_training';
-$filearea = "editor_{$chave}";
+$filearea = "editor_{$local}";
 
 if ($action == "langedit") {
     $dataid = required_param("dataid", PARAM_INT);

@@ -66,7 +66,7 @@ define(["jquery", "core/modal_factory"], function ($, ModalFactory) {
                                             event.stopImmediatePropagation();
                                         })
                                         bloco.click(function () {
-                                            let url = `${M.cfg.wwwroot}/theme/boost_training/_editor/editor.php?lang=${lang}&chave=home&dataid=create&local=home&template=${item.id}`
+                                            let url = `${M.cfg.wwwroot}/theme/boost_training/_editor/editor.php?lang=${lang}&local=home&dataid=create&template=${item.id}`
                                             location.href = url;
                                         });
                                     });
