@@ -116,7 +116,7 @@ if (isset($config->homemode) && $config->homemode) {
     $previewdataid = optional_param("dataid", false, PARAM_INT);
     $cache = \cache::make("theme_boost_training", "frontpage_cache");
     $cachekey = "homemode_pages";
-    if (false && !$editing && $cache->has($cachekey) && !$previewdataid) {
+    if (!$editing && $cache->has($cachekey) && !$previewdataid) {
         $pages = json_decode($cache->get($cachekey));
     } else {
         $where = "local='home' AND lang IN(:lang, 'all')";

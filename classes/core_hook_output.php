@@ -67,7 +67,7 @@ class core_hook_output {
 
         $cache = \cache::make("theme_boost_training", "css_cache");
         $cachekey = "theme_boost_training_customimages_{$COURSE->id}";
-        if (false && $cache->has($cachekey)) {
+        if ($cache->has($cachekey)) {
             $images = json_decode($cache->get($cachekey), true);
         } else {
             // Backgrounds images modules.
@@ -88,7 +88,8 @@ class core_hook_output {
                         "theme_boost_training_customimage",
                         $customimage->itemid,
                         $customimage->filename,
-                    ]));
+                    ])
+                );
                 $images["blocks"][] = ["cmid" => $customimage->itemid, "thumb" => $imageurl->out()];
             }
 
@@ -110,7 +111,8 @@ class core_hook_output {
                         "theme_boost_training_customicon",
                         $customicon->itemid,
                         $customicon->filename,
-                    ]));
+                    ])
+                );
 
                 $images["icons"][] = ["cmid" => $customicon->itemid, "thumb" => $imageurl->out()];
             }
