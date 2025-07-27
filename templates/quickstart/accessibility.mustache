@@ -1,0 +1,46 @@
+<div class="quickstart-collapse" id="accessibility">
+    <a href="#accessibility" style="background: linear-gradient(135deg, #3a6186 0%, #89253e 100%);">
+        <span class="material-icons">accessibility</span>
+        <span>{{#str}}settings_accessibility_heading,theme_boost_training{{/str}}</span>
+    </a>
+    <div class="content">
+        <div class="inner-content">
+            <div class="settings-content">
+
+                <div class="mb-3 form-check">
+                    <input type="checkbox" class="form-check-input"
+                           id="enable_accessibility" name="enable_accessibility"
+                           {{#enable_accessibility}}checked{{/enable_accessibility}}>
+                    <label class="form-check-label" for="enable_accessibility">
+                        {{#str}}settings_accessibility, theme_boost_training{{/str}}
+                    </label>
+                    <div class="form-text text-muted">
+                        {{#str}}settings_accessibility_desc, theme_boost_training{{/str}}
+                    </div>
+                </div>
+
+                {{#lang_has_ptbr}}
+                    <div class="mb-3 form-check">
+                        <input type="checkbox" class="form-check-input"
+                               id="enable_vlibras" name="enable_vlibras"
+                               {{#enable_vlibras}}checked{{/enable_vlibras}}>
+                        <label class="form-check-label" for="enable_vlibras">
+                            <!-- No translation because only for Brazilians -->
+                            Habilitar VLibras
+                        </label>
+                        <div class="form-text text-muted">
+                            <!-- No translation because only for Brazilians -->
+                            O VLibras é uma ferramenta que traduz conteúdos digitais (textos, áudios e vídeos) para a Língua Brasileira de Sinais (Libras), promovendo acessibilidade para pessoas surdas.<br>
+                            Ao habilitar essa opção, um avatar intérprete de Libras será exibido na interface do sistema para facilitar a compreensão dos conteúdos.<br>
+                            <strong>Disponível apenas para usuários do Brasil.</strong><br>
+                            <a href="https://www.gov.br/governodigital/pt-br/vlibras" target="_blank" rel="noopener noreferrer">Saiba mais sobre o VLibras</a>.
+                        </div>
+                    </div>
+                {{/lang_has_ptbr}}
+
+            </div>
+
+            {{> theme_boost_training/quickstart/btn-next-back }}
+        </div>
+    </div>
+</div>

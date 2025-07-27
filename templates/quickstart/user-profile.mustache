@@ -1,0 +1,37 @@
+<div class="quickstart-collapse" id="user-profile">
+    <a href="#user-profile" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+        <span class="material-icons">person</span>
+        <span>{{#str}}userprofilesettings,theme_boost_training{{/str}}</span>
+    </a>
+    <div class="content">
+        <div class="inner-content">
+            <div class="settings-content">
+
+                <div class="card">
+                    <div class="card-header">
+                        <h5>{{#str}}background_profile_image, theme_boost_training{{/str}}</h5></div>
+                    <div class="card-body">
+                        {{#background_profile_image_url}}
+                            <div class="mb-3 text-center">
+                                <img src="{{background_profile_image_url}}" alt="Logo atual" style="max-width:300px;max-height:100px;">
+                            </div>
+                        {{/background_profile_image_url}}
+                        <div class="mb-3">
+                            <input class="form-control" type="file" name="background_profile_image"
+                                   accept=".png,.jpg,.jpeg">
+                            <div class="form-text text-muted">
+                                {{#str}}background_profile_image_desc, theme_boost_training{{/str}} <br><br>
+                                {{#str}}imageacceptedtypes, theme_boost_training, {{{background_profile_image_extensions}}}{{/str}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+            </div>
+
+            {{> theme_boost_training/quickstart/btn-next-back }}
+        </div>
+    </div>
+</div>

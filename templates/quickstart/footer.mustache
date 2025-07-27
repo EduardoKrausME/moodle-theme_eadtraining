@@ -1,0 +1,128 @@
+<link rel="stylesheet" href="{{{config.wwwroot}}}/theme/boost_training/scss/colors.css"/>
+
+<div class="quickstart-collapse" id="footer">
+    <a href="#footer" style="background: linear-gradient(135deg, #232526 0%, #414345 100%);">
+        <span class="material-icons">web_asset</span>
+        <span>{{#str}}footersettings,theme_boost_training{{/str}}</span>
+    </a>
+
+    <div class="content">
+        <div class="inner-content">
+            <div class="settings-content">
+
+                <div class="card mb-3">
+                    <div class="card-header">
+                        <h5>{{#str}}footer_background_color, theme_boost_training{{/str}}</h5>
+                    </div>
+                    <div class="card-body">
+                        <input type="text" class="form-control" id="id_footer_background_color"
+                               name="footer_background_color" value="{{{footer_background_color}}}">
+                        <div class="form-text text-muted">
+                            {{#str}}footer_background_color_desc, theme_boost_training{{/str}}
+                            <div>{{{htmlselect}}}</div>
+                        </div>
+                    </div>
+                </div>
+
+                <h5>{{#str}}footer_heading_description_title, theme_boost_training{{/str}}</h5>
+                <p>{{#str}}footer_heading_description_desc, theme_boost_training{{/str}}</p>
+
+                <!-- Seletor de blocos -->
+                <div class="mb-3">
+                    <label for="footer_block_count" class="form-label fw-bold">
+                        <h5>{{#str}}quickstart_banner-footer_block_count, theme_boost_training{{/str}}</h5>
+                    </label>
+                    <select id="footer_block_count" class="form-select" name="footer_block_count">
+                        <option value="0">{{#str}}none{{/str}}</option>
+                        <option value="1">1 {{#str}}block{{/str}}</option>
+                        <option value="2">2 {{#str}}blocks{{/str}}</option>
+                        <option value="3">3 {{#str}}blocks{{/str}}</option>
+                        <option value="4">4 {{#str}}blocks{{/str}}</option>
+                    </select>
+                </div>
+
+                <!-- Nav tabs -->
+                <ul class="nav nav-tabs" id="footerTab" role="tablist">
+                    {{#blocks}}
+                        <li class="nav-item" data-block="{{num}}">
+                            <button class="nav-link {{#active}}active{{/active}}"
+                                    id="footer-tab-{{num}}" data-bs-toggle="tab"
+                                    data-bs-target="#footer{{num}}" type="button" role="tab" aria-controls="footer{{num}}"
+                                    aria-selected="{{#active}}true{{/active}}{{^active}}false{{/active}}">
+                                {{#str}}footer_heading, theme_boost_training, {{num}}{{/str}}
+                            </button>
+                        </li>
+                    {{/blocks}}
+                </ul>
+
+                <!-- Tab panes -->
+                <div class="tab-content" id="footerTabContent">
+                    {{#blocks}}
+                        <div class="tab-pane fade {{#active}}show active{{/active}}" id="footer{{num}}"
+                             role="tabpanel" data-block="{{num}}" aria-labelledby="footer-tab-{{num}}">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h5>{{#str}}footer_title, theme_boost_training, {{{num}}} {{/str}}</h5>
+                                    <input type="text" class="form-control" id="footer_title_{{num}}"
+                                           name="footer_title_{{num}}" value="{{{footer_title}}}">
+                                    <div class="form-text text-muted">
+                                        {{#str}}footer_title_desc, theme_boost_training{{/str}}
+                                    </div>
+
+                                    <h5 class="mt-2">{{#str}}footer_html, theme_boost_training, {{{num}}} {{/str}}</h5>
+                                    <textarea class="form-control" id="footer_html_{{num}}" style="height:300px"
+                                              name="footer_html_{{num}}">{{footer_html}}</textarea>
+                                    <div class="form-text text-muted">
+                                        {{#str}}footer_html_desc, theme_boost_training{{/str}}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {{/blocks}}
+                </div>
+
+                <!-- JavaScript to control visibility -->
+                <script>
+                    document.addEventListener('DOMContentLoaded', function () {
+                        const select = document.getElementById('footer_block_count');
+                        const blockElements = document.querySelectorAll('[data-block]');
+
+                        function updateVisibility() {
+                            const count = parseInt(select.value, 10);
+                            blockElements.forEach(el => {
+                                const num = parseInt(el.getAttribute('data-block'), 10);
+                                el.style.display = num <= count ? '' : 'none';
+                            });
+                        }
+
+                        select.addEventListener('change', updateVisibility);
+                        updateVisibility();
+                    });
+                </script>
+
+            </div>
+
+            {{> theme_boost_training/quickstart/btn-next-back }}
+        </div>
+    </div>
+</div>
+{{#js}}
+    /*<script>*/
+    require(["jquery"], function($) {
+        create___editor_tiny_editor( "footer_html_1" );
+        create___editor_tiny_editor( "footer_html_2" );
+        create___editor_tiny_editor( "footer_html_3" );
+        create___editor_tiny_editor( "footer_html_4" );
+
+        function create___editor_tiny_editor( elementId ){
+            M.util.js_pending( "editor_tiny/editor" );
+            require( [ "editor_tiny/editor" ], ( tiny ) => {
+                tiny.setupForElementId( {
+                    elementId : elementId,
+                    options   : {{{tyni_editor_config}}},
+                } );
+                M.util.js_complete( "editor_tiny/editor" );
+            } );
+        }
+    });
+{{/js}}

@@ -1,0 +1,10 @@
+<label>
+    <input type="checkbox" name="homemode_banners[]" value="{{$model}}{{/model}}"
+           {{$checked}}{{/checked}}
+           style="display: none;">
+    <div class="marked-area">
+        <img src="{{{config.wwwroot}}}/theme/boost_training/_editor/model/{{$model}}{{/model}}/print.png"
+             alt="{{$label}}{{/label}}">
+        <div class="label-caption">{{$label}}{{/label}}</div>
+    </div>
+</label>

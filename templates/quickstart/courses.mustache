@@ -1,0 +1,154 @@
+<div class="quickstart-collapse" id="courses">
+    <a href="#courses" style="background: linear-gradient(135deg, #f6d365 0%, #fda085 100%);">
+        <span class="material-icons">menu_book</span>
+        <span>{{#str}}coursesettings,theme_boost_training{{/str}}</span>
+    </a>
+    <div class="content">
+        <div class="inner-content">
+            <div class="settings-content">
+
+                <div class="card mb-4">
+                    <div class="card-header"><h5>{{#str}}course_summary, theme_boost_training{{/str}}</h5></div>
+                    <div class="card-body">
+                        <p>{{#str}}course_summary_desc, theme_boost_training{{/str}}</p>
+                        <div class="radio-wrapper">
+                            <label class="radio-img" data-target="tradicional">
+                                <input class="form-check-input input-course_summary" type="radio" name="course_summary"
+                                       value="0"
+                                       {{#course_summary_0}}checked{{/course_summary_0}} style="display: none;">
+                                <div class="marked-area">
+                                    <h5>{{#str}}course_summary_none, theme_boost_training{{/str}}</h5>
+                                    {{#pix}}quickstart/course-sumary-none, theme_boost_training{{/pix}}
+                                </div>
+                            </label>
+
+                            <label class="radio-img" data-target="editor">
+                                <input class="form-check-input input-course_summary" type="radio" name="course_summary"
+                                       value="1"
+                                       {{#course_summary_1}}checked{{/course_summary_1}} style="display: none;">
+                                <div class="marked-area">
+                                    <h5>{{#str}}course_summary_simple, theme_boost_training{{/str}}</h5>
+                                    {{#pix}}quickstart/course-sumary-simple, theme_boost_training{{/pix}}
+                                </div>
+                            </label>
+
+                            <label class="radio-img" data-target="editor">
+                                <input class="form-check-input input-course_summary" type="radio" name="course_summary"
+                                       value="2"
+                                       {{#course_summary_2}}checked{{/course_summary_2}} style="display: none;">
+                                <div class="marked-area">
+                                    <h5>{{#str}}course_summary_banner, theme_boost_training{{/str}}</h5>
+                                    {{#pix}}quickstart/course-sumary-banner, theme_boost_training{{/pix}}
+                                </div>
+                            </label>
+                        </div>
+
+                        <div id="course_summary_3" class="card p-3" {{^course_summary_2}}style="display:none" {{/course_summary_2}}>
+                            <div class="card">
+                                <div class="card-header">
+                                    <h5>lang::quickstart_course_upload_or_choose</h5></div>
+                                <div class="card-body">
+                                    <div class="mb-3 card">
+                                        <input class="form-control" type="file" name="banner_file"
+                                               accept=".png,.jpg,.jpeg">
+                                        <div class="form-text text-muted">
+                                            {{#str}}imageacceptedtypes, theme_boost_training, {{{banner_file_extensions}}}{{/str}}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card mt-3">
+                                <div class="card-header">
+                                    <h5>lang::quickstart_course_choose_below</h5></div>
+                                <div class="card-body">
+
+                                    {{#banners}}
+                                        <div>
+                                            <h4>{{{title}}}</h4>
+                                            <div class="radio-wrapper" style="gap:0">
+                                                {{#files}}
+                                                    <label class="radio-img"
+                                                           data-target="tradicional">
+                                                        <input type="radio" name="banner_image" value="{{{filename}}}"
+                                                               {{#checked}}checked{{/checked}} style="display:none;">
+                                                        <div class="marked-area">
+                                                            <h5>{{{title}}}</h5>
+                                                            <img src="{{image}}"
+                                                                 alt="image" style="width: 100%;">
+                                                        </div>
+                                                    </label>
+                                                {{/files}}
+                                            </div>
+                                        </div>
+                                    {{/banners}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <script>
+                        const inputs = document.querySelectorAll(".input-course_summary");
+                        inputs.forEach(function (input) {
+                            input.addEventListener("change", function () {
+                                const summary3 = document.getElementById("course_summary_3");
+                                if (this.value === "2" && this.checked) {
+                                    // Mostrar com animação.
+                                    summary3.style.display = "block";
+                                    summary3.style.opacity = 0;
+                                    let opacity = 0;
+                                    const fadeIn = setInterval(function () {
+                                        opacity += 0.1;
+                                        summary3.style.opacity = opacity;
+                                        if (opacity >= 1) clearInterval(fadeIn);
+                                    }, 30);
+                                } else {
+                                    // Esconder com animação.
+                                    let opacity = 1;
+                                    const fadeOut = setInterval(function () {
+                                        opacity -= 0.1;
+                                        summary3.style.opacity = opacity;
+                                        if (opacity <= 0) {
+                                            clearInterval(fadeOut);
+                                            summary3.style.display = "none";
+                                        }
+                                    }, 30);
+                                }
+                            });
+                        });
+                    </script>
+
+                </div>
+
+                <div class="card mb-4">
+                    <div class="card-header"><h5>{{#str}}svg_animate, theme_boost_training{{/str}}</h5></div>
+                    <div class="card-body">
+                        <p>{{#str}}svg_animate_desc, theme_boost_training{{/str}}</p>
+                        <div class="radio-wrapper">
+                            <label class="radio-img" data-target="tradicional">
+                                <input class="form-check-input" type="radio" name="svg_animate" value="1"
+                                       {{#svg_animate}}checked{{/svg_animate}} style="display: none;">
+                                <div class="marked-area">
+                                    <h5>lang::quickstart_course_with_animation</h5>
+                                    <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' id='svg-courseid-111'></svg>"
+                                         style="width:300px;height:150px;">
+                                </div>
+                            </label>
+
+                            <label class="radio-img" data-target="editor">
+                                <input class="form-check-input" type="radio" name="svg_animate" value="0"
+                                       {{^svg_animate}}checked{{/svg_animate}} style="display: none;">
+                                <div class="marked-area">
+                                    <h5>lang::quickstart_course_without_animation</h5>
+                                    <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' id='svg-courseid-222'></svg>"
+                                    style="width:300px;height:150px;">
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            {{> theme_boost_training/quickstart/btn-next-back }}
+        </div>
+    </div>
+</div>

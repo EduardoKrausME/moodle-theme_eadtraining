@@ -1,0 +1,17 @@
+<div class="actions-buttons mt-3">
+    {{#return}}
+        <a class="btn btn-secondary me-3" href="#{{{return}}}">{{#str}}back{{/str}}</a>
+    {{/return}}
+    {{^return}}
+        <button class="btn btn-secondary me-3" disabled>{{#str}}back{{/str}}</button>
+    {{/return}}
+
+    {{#next}}
+        <a class="btn btn-info me-3" href="#{{{next}}}">{{#str}}next{{/str}}</a>
+    {{/next}}
+    {{^next}}
+        <button class="btn btn-info me-3" disabled>{{#str}}next{{/str}}</button>
+    {{/next}}
+
+    <input class="btn btn-primary ms-3" type="submit" value="{{#str}}savechanges, admin{{/str}}">
+</div>
