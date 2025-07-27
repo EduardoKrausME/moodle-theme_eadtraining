@@ -26,7 +26,6 @@
  * function xmldb_supervideo_upgrade
  *
  * @param int $oldversion
- *
  * @return bool
  * @throws Exception
  */
@@ -36,7 +35,6 @@ function xmldb_theme_boost_training_upgrade($oldversion) {
     $dbman = $DB->get_manager(); // Loads ddl manager and xmldb classes.
 
     if ($oldversion < 2025062800) {
-
         // Define table theme_boost_training_pages to be created.
         $table = new xmldb_table("theme_boost_training_pages");
 
@@ -60,6 +58,31 @@ function xmldb_theme_boost_training_upgrade($oldversion) {
 
         // Boost Training savepoint reached.
         upgrade_plugin_savepoint(true, 2025062800, "theme", "boost_training");
+    }
+
+    if ($oldversion < 2025072700) {
+        // Define table theme_boost_training_pages to be created.
+        $table = new xmldb_table("theme_boost_training_pages");
+
+        // Define field template to be added to theme_boost_training_pages.
+        $template = new xmldb_field('template', XMLDB_TYPE_CHAR, '30', null, null, null, null, 'info');
+
+        // Conditionally launch add field template.
+        if (!$dbman->field_exists($table, $template)) {
+            $dbman->add_field($table, $template);
+        }
+
+        $pages = $DB->get_records("theme_boost_training_pages");
+        foreach ($pages as $page) {
+            $info = json_decode($page->info);
+            if (isset($info->template)) {
+                $page->template = $info->template;
+                $DB->update_record("theme_boost_training_pages", $page);
+            }
+        }
+
+        // Boost Training savepoint reached.
+        upgrade_plugin_savepoint(true, 2025072700, "theme", "boost_training");
     }
 
     return true;

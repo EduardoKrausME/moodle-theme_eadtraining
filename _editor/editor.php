@@ -92,13 +92,13 @@ $chave = $page->local;
 
 $pageinfo = json_decode($page->info);
 
-$cssfiles = "@import url(\"model/{$pageinfo->template}/style.css\"); \n";
+$cssfiles = "@import url(\"model/{$page->template}/style.css\"); \n";
 if(isset($pageinfo->form->styles)) {
     foreach ($pageinfo->form->styles as $styles) {
         if ($styles == "bootstrap") {
             continue;
         }
-        $cssfiles .= "@import url(\"model/{$pageinfo->template}/{$styles}\"); \n";
+        $cssfiles .= "@import url(\"model/{$page->template}/{$styles}\"); \n";
     }
 }
 

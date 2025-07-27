@@ -48,7 +48,6 @@ function editor_create_page($template, $lang, $chave) {
     $infofile = __DIR__ . "/model/{$template}/info.json";
     if (file_exists($infofile)) {
         $info = json_decode(load_info_json($infofile));
-        $info->template = $template;
         $htmlfile = __DIR__ . "/model/{$template}/editor.html";
         $html = file_get_contents($htmlfile);
 
@@ -58,7 +57,16 @@ function editor_create_page($template, $lang, $chave) {
         throw new Exception("File template not found");
     }
 
-    $page = (object)["local" => $chave, "type" => $info->type, "title" => $info->title, "html" => $html, "info" => json_encode($info), "lang" => $lang, "sort" => time(),];
+    $page = (object)[
+        "local" => $chave,
+        "type" => $info->type,
+        "title" => $info->title,
+        "html" => $html,
+        "info" => json_encode($info),
+        "template" => $template,
+        "lang" => $lang,
+        "sort" => time(),
+    ];
     $page->id = $DB->insert_record("theme_boost_training_pages", $page);
 
     return $page;
@@ -96,14 +104,13 @@ function compile_pages($pages) {
 
         if (isset($page->info[5])) {
             $info = json_decode($page->info);
-            $page->template = $info->template;
 
             if ($info->type == "html-form" || $info->type == "form") {
-                $file = __DIR__ . "/model/{$info->template}/create-block.php";
+                $file = __DIR__ . "/model/{$page->template}/create-block.php";
                 if (file_exists($file)) {
                     require_once($file);
 
-                    $createblocks = str_replace("-", "_", "{$info->template}_createblocks");
+                    $createblocks = str_replace("-", "_", "{$page->template}_createblocks");
                     $block = $createblocks($page);
 
                     if (strpos($page->html, "[[change-to-blocks]]") !== false) {
@@ -126,20 +133,20 @@ function compile_pages($pages) {
                     } elseif (strpos($script, "http") === 0) {
                         $PAGE->requires->js_init_code("require(['jquery'],function($){ $.getScript('{$script}')})");
                     } else {
-                        if (file_exists(__DIR__ . "/model/{$info->template}/{$script}")) {
-                            $PAGE->requires->js("/theme/boost_training/_editor/model/{$info->template}/{$script}");
+                        if (file_exists(__DIR__ . "/model/{$page->template}/{$script}")) {
+                            $PAGE->requires->js("/theme/boost_training/_editor/model/{$page->template}/{$script}");
                         }
                     }
                 }
             }
             if (isset($info->form->styles)) {
-                $PAGE->requires->css("/theme/boost_training/_editor/model/{$info->template}/style.css");
+                $PAGE->requires->css("/theme/boost_training/_editor/model/{$page->template}/style.css");
                 foreach ($info->form->styles as $style) {
                     if ($style == "bootstrap") {
                         // Theme already has bootstrap.
                     } else {
-                        if (file_exists(__DIR__ . "/model/{$info->template}/{$style}")) {
-                            $PAGE->requires->css("/theme/boost_training/_editor/model/{$info->template}/{$style}");
+                        if (file_exists(__DIR__ . "/model/{$page->template}/{$style}")) {
+                            $PAGE->requires->css("/theme/boost_training/_editor/model/{$page->template}/{$style}");
                         };
                     }
                 }
