@@ -50,7 +50,7 @@ function editor_create_page() {
 
     $infofile = __DIR__ . "/model/{$template}/info.json";
     if (file_exists($infofile)) {
-        $info = json_decode(file_get_contents($infofile));
+        $info = json_decode(load_info_json($infofile));
         $info->template = $template;
         $htmlfile = __DIR__ . "/model/{$template}/editor.html";
         $html = file_get_contents($htmlfile);
@@ -66,6 +66,14 @@ function editor_create_page() {
     redirect("{$CFG->wwwroot}/theme/boost_training/_editor/editor.php?dataid={$page->id}");
 }
 
+/**
+ * compile_pages
+ *
+ * @param $pages
+ * @return array
+ * @throws Exception
+ * @throws coding_exception
+ */
 function compile_pages($pages) {
     global $PAGE;
 
@@ -169,4 +177,37 @@ function boost_training_clear_params_array($in, $type) {
     }
 
     return $out;
+}
+
+/**
+ * load_info_json
+ *
+ * @param $filepath
+ * @return string
+ * @throws Exception
+ */
+function load_info_json($filepath) {
+    $json = file_get_contents($filepath);
+    $data = json_decode($json, true);
+    replace_lang_strings($data);
+
+    return json_encode($data, JSON_PRETTY_PRINT);
+}
+
+/**
+ * replace_lang_strings
+ *
+ * @param $data
+ * @return void
+ * @throws Exception
+ */
+function replace_lang_strings(&$data) {
+    foreach ($data as $key => &$value) {
+        if (is_array($value)) {
+            replace_lang_strings($value); // Chamada recursiva
+        } elseif (is_string($value) && str_starts_with($value, 'lang::')) {
+            $langkey = substr($value, 6); // remove 'lang::'
+            $value = get_string($langkey, 'theme_boost_training');
+        }
+    }
 }

@@ -1,6 +1,7 @@
 <?php
 
-require_once('../../../../config.php');
+require_once("../../../../config.php");
+require_once("../editor-lib.php");
 
 global $CFG;
 
@@ -8,9 +9,9 @@ $files = glob("*");
 
 $items = [];
 foreach ($files as $file) {
-    if (file_exists("{$file}/info.json")) {
-        $data = file_get_contents("{$file}/info.json");
-        $data = json_decode($data);
+    $infojson = "{$file}/info.json";
+    if (file_exists($infojson)) {
+        $data = json_decode(load_info_json($infojson));
         if ($data) {
             $items[] = [
                 "id" => $file,

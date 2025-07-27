@@ -1,18 +1,18 @@
 {
-  "title": "FAQ",
+  "title": "lang::editor_model_faq",
   "type": "html-form",
   "form": {
-    "title": "Módulo com Blocos Múltiplos",
-    "label": "Este é um módulo do tipo múltiplo, onde os blocos são criados dinamicamente e adicionados ao item abaixo. Adicione quantos blocos forem necessários e, em cada um deles, selecione o curso desejado.\nAo ser exibido, o Tema organizará os cursos de acordo com a ordem dos blocos definidos aqui.",
-    "info": "Os blocos gerados acima substituirão o marcador <code>[[change-to-blocks]]</code> no editor abaixo. Por isso, não edite nem remova essa chave.",
+    "title": "lang::editor_model_form_title",
+    "label": "lang::editor_model_form_label",
+    "info": "lang::editor_model_form_info",
     "blocks": {
       "title": {
         "type": "text",
-        "label": "Título do FAQ"
+        "label": "lang::editor_model_faq_title"
       },
       "description": {
         "type": "textarea",
-        "label": "Descrição do FAQ"
+        "label": "lang::editor_model_faq_text"
       }
     },
     "scripts": [

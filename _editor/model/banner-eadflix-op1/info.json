@@ -1,23 +1,23 @@
 {
-  "title": "Banner EadFlix - Com vídeo",
+  "title": "lang::editor_model_banner_video",
   "type": "form",
   "form": {
-    "title": "Módulo com Blocos Múltiplos",
-    "label": "Adicione quantos blocos forem necessários e, em cada um deles, selecione o curso desejado.<br>Ao ser exibido, o Tema organizará os cursos de acordo com a ordem dos blocos definidos aqui.",
+    "title": "lang::editor_model_form_title",
+    "label": "lang::editor_model_form_label2",
     "blocks": {
       "courseid": {
         "type": "select",
-        "label": "Selecione um curso",
+        "label": "lang::editor_model_select_course",
         "data": "courses",
         "required": true
       },
       "youtubeid": {
         "type": "text",
-        "label": "(Opcional) Um vídeo de fundo do Youtube"
+        "label": "lang::editor_model_youtube_video"
       },
       "description": {
         "type": "textarea",
-        "label": "Descrição do curso"
+        "label": "lang::editor_model_course_description"
       }
     },
     "scripts": [
