@@ -511,7 +511,7 @@ class core_renderer extends \core_renderer {
         $imageid = "svg-courseid-{$courseid}-" . uniqid();
         $this->page->requires->js_call_amd("theme_boost_training/default_image", "generateimage", [$imageid, $courseid, $animate]);
 
-        $imagesvg = "<svg id={$imageid}></svg>";
+        $imagesvg = "<svg xmlns='http://www.w3.org/2000/svg' id={$imageid}></svg>";
         return "data:image/svg+xml;utf8,{$imagesvg}";
     }
 
