@@ -31,6 +31,8 @@ require_admin();
 
 if (optional_param("POST", false, PARAM_INT)) {
     require_sesskey();
+
+    // Save configs.
     $configkeys = [
         "homemode" => PARAM_INT,
         "course_summary" => PARAM_INT,
@@ -48,8 +50,6 @@ if (optional_param("POST", false, PARAM_INT)) {
         "footer_title_4" => PARAM_TEXT,
         "footer_html_4" => PARAM_RAW,
     ];
-
-    // Iterate over the keys and save if a value was sent.
     foreach ($configkeys as $name => $type) {
         $value = optional_param($name, false, $type);
         if ($value) {
@@ -57,8 +57,28 @@ if (optional_param("POST", false, PARAM_INT)) {
         }
     }
 
-    require_once("{$CFG->libdir}/filelib.php");
+    // Save banners home.
+    require_once("../_editor/editor-lib.php");
+    $pages = $DB->get_records("theme_boost_training_pages", ["local" => "home"]);
+    $homemode_banners = optional_param_array("homemode_banners", false, PARAM_TEXT);
+    foreach ($homemode_banners as $template) {
+        $located = false;
+        foreach ($pages as $page) {
+            if (isset($page->template[3]) && $page->template == $template) {
+                $located = true;
+            }
+        }
 
+        if (!$located) {
+            try {
+                editor_create_page($template, $USER->lang, "home");
+            } catch (Exception $e) { // phpcs:disable
+            }
+        }
+    }
+
+    // Upload files.
+    require_once("{$CFG->libdir}/filelib.php");
     $filefields = [
         "logocompact" => "core",
         "favicon" => "core",
@@ -117,9 +137,8 @@ echo '<input type="hidden" name="sesskey" value="' . sesskey() . '" />';
 $pages = $DB->get_records("theme_boost_training_pages", ["local" => "home"]);
 $templates = [];
 foreach ($pages as $page) {
-    $info = json_decode($page->info);
-    if (isset($info->template)) {
-        $templates[$info->template] = true;
+    if (isset($page->template[3])) {
+        $templates[$page->template] = true;
     }
 }
 $homemustache = [
@@ -133,9 +152,8 @@ echo $OUTPUT->render_from_template("theme_boost_training/quickstart/home", $home
 $page = $DB->get_record("theme_boost_training_pages", ["local" => "all-courses"]);
 $template = "";
 if ($page) {
-    $info = json_decode($page->info);
-    if (isset($info->template)) {
-        $template = $info->template;
+    if (isset($page->template[3])) {
+        $template = $page->template;
     }
 }
 $coursesmustache = [
