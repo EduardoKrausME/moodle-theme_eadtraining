@@ -36,17 +36,14 @@ function actionurl($action) {
 /**
  * editor_create_page function
  *
- * @return void
- * @throws coding_exception
- * @throws dml_exception
- * @throws moodle_exception
+ * @param $template
+ * @param $lang
+ * @param $chave
+ * @return object
+ * @throws Exception
  */
-function editor_create_page() {
+function editor_create_page($template, $lang, $chave) {
     global $CFG, $DB;
-
-    $template = required_param("template", PARAM_TEXT);
-    $lang = required_param("lang", PARAM_TEXT);
-    $chave = required_param("chave", PARAM_TEXT);
 
     $infofile = __DIR__ . "/model/{$template}/info.json";
     if (file_exists($infofile)) {
@@ -63,7 +60,8 @@ function editor_create_page() {
 
     $page = (object)["local" => $chave, "type" => $info->type, "title" => $info->title, "html" => $html, "info" => json_encode($info), "lang" => $lang, "sort" => time(),];
     $page->id = $DB->insert_record("theme_boost_training_pages", $page);
-    redirect("{$CFG->wwwroot}/theme/boost_training/_editor/editor.php?dataid={$page->id}");
+
+    return $page;
 }
 
 /**

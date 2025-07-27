@@ -63,7 +63,11 @@ if (optional_param("delete", false, PARAM_INT)) {
 }
 
 if (required_param("dataid", PARAM_TEXT) == "create") {
-    editor_create_page();
+    $template = required_param("template", PARAM_TEXT);
+    $lang = required_param("lang", PARAM_TEXT);
+    $chave = required_param("chave", PARAM_TEXT);
+    $page = editor_create_page($template, $lang, $chave);
+    redirect("{$CFG->wwwroot}/theme/boost_training/_editor/editor.php?dataid={$page->id}");
     die;
 }
 
