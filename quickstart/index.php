@@ -60,8 +60,8 @@ if (optional_param("POST", false, PARAM_INT)) {
     // Save banners home.
     require_once("../_editor/editor-lib.php");
     $pages = $DB->get_records("theme_boost_training_pages", ["local" => "home"]);
-    $homemode_banners = optional_param_array("homemode_banners", false, PARAM_TEXT);
-    foreach ($homemode_banners as $template) {
+    $homemodebanners = optional_param_array("homemode_banners", false, PARAM_TEXT);
+    foreach ($homemodebanners as $template) {
         $located = false;
         foreach ($pages as $page) {
             if (isset($page->template[3]) && $page->template == $template) {
