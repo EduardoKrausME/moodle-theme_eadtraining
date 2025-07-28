@@ -215,17 +215,27 @@ $navbar-color: #b5bcc7;
                 font-size: 42px;
             }
             button {
-                background: #ffffff;
+                background: #ffffff !important;
                 border-radius: 12px;
                 width: 40px;
                 height: 40px;
                 margin: 0;
                 padding: 0;
+                order: 3;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                color: #000 !important;
+                &:before{
+                    filter: invert(1);
+                }
             }
             .user-action {
                 display: flex;
                 align-items: center;
                 gap: 12px;
+                margin-left: auto;
+                margin-right: 20px;
                 .languages {
                     position: relative;
                     * {
