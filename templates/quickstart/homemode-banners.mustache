@@ -20,7 +20,7 @@
     Example context (json): {}
 }}
 
-<label>
+<label for="homemode_banners-{{$model}}{{/model}}">
     <input type="checkbox" id="homemode_banners-{{$model}}{{/model}}"
            name="homemode_banners[]" value="{{$model}}{{/model}}"
            {{$checked}}{{/checked}}
@@ -33,12 +33,22 @@
 </label>
 
 <script>
-    const checkbox = document.getElementById('homemode_banners-{{$model}}{{/model}}');
-    // If initially marked.
-    if (checkbox.checked) {
-        // Prevents the user from unchecking.
-        checkbox.addEventListener('click', function(event) {
-            event.preventDefault(); // Prevents state change.
-        });
-    }
+    (function () {
+        const checkbox = document.getElementById("homemode_banners-{{$model}}{{/model}}");
+        // If initially marked.
+        if (checkbox.checked) {
+            // Prevent change on click on associated label.
+            const label = document.querySelector(`label[for="homemode_banners-{{$model}}{{/model}}"]`);
+            label.classList.add("not-editing"); // Add the class.
+            checkbox.classList.add("not-editing"); // Add the class.
+
+            label.addEventListener("click", function (event) {
+                event.preventDefault();
+                event.stopImmediatePropagation();
+
+                home_show_alert(`{{#str}}quickstart_alert_notdelete, theme_boost_training, {{{config.wwwroot}}} {{/str}}`);
+                checkbox.checked = true;
+            });
+        }
+    })();
 </script>

@@ -33,7 +33,7 @@
     <div class="content">
         <div class="inner-content">
             <div id="settings-content-home" class="settings-content card">
-                <div class="card-header"><h5>lang::quickstart_home_selectstyle</h5></div>
+                <div class="card-header"><h5>{{#str}}quickstart_home_selectstyle,theme_boost_training{{/str}}</h5></div>
 
                 <div class="card-body">
                     <div class="radio-wrapper">
@@ -41,7 +41,7 @@
                             <input type="radio" name="homemode" value="0"
                                    {{^homemode}}checked{{/homemode}} style="display:none;">
                             <div class="marked-area">
-                                <h5>lang::quickstart_home_traditional</h5>
+                                <h5>{{#str}}quickstart_home_traditional,theme_boost_training{{/str}}</h5>
                                 {{#pix}}quickstart/home-tradicional, theme_boost_training{{/pix}}
                             </div>
                         </label>
@@ -50,16 +50,17 @@
                             <input type="radio" name="homemode" value="1"
                                    {{#homemode}}checked{{/homemode}} style="display:none;">
                             <div class="marked-area">
-                                <h5>lang::quickstart_home_pagebuilder</h5>
+                                <h5>{{#str}}quickstart_home_pagebuilder,theme_boost_training{{/str}}</h5>
                                 {{#pix}}quickstart/home-editor, theme_boost_training{{/pix}}
                             </div>
                         </label>
                     </div>
 
                     <div id="tradicional" class="content-box card mt-4 {{^homemode}}show{{/homemode}}">
-                        <div class="card-header"><h5>lang::quickstart_home_traditional:</h5></div>
+                        <div class="card-header"><h5>{{#str}}
+                            quickstart_home_traditional,theme_boost_training{{/str}}:</h5></div>
                         <div class="card-body">
-                            <p>lang::quickstart_home_traditional_desc</p>
+                            <p>{{#str}}quickstart_home_traditional_desc,theme_boost_training{{/str}}</p>
 
                             <a href="{{config.wwwroot}}/admin/settings.php?section=frontpagesettings"
                                class="btn btn-info"
@@ -70,10 +71,13 @@
                     </div>
 
                     <div id="editor" class="content-box card mt-4 {{#homemode}}show{{/homemode}}">
-                        <div class="card-header"><h4>lang::quickstart_home_pagebuilder:</h4></div>
+                        <div class="card-header"><h4>{{#str}}
+                            quickstart_home_pagebuilder,theme_boost_training{{/str}}:</h4></div>
                         <div class="card-body">
-                            <p>lang::quickstart_home_pagebuilder_desc</p>
-                            <h5>lang::quickstart_home_selectsections</h5>
+                            <h5>{{#str}}quickstart_home_selectsections,theme_boost_training{{/str}}</h5>
+                            <p>{{#str}}quickstart_home_pagebuilder_desc,theme_boost_training{{/str}}</p>
+                            <div class="alert alert-warning" id="home-warning"
+                                 style="position:absolute;opacity:0;height:0;font-size:0;overflow:hidden;transition:all .3s;"></div>
                             <div class="container check-img">
                                 <div>
 
@@ -82,7 +86,8 @@
                                         {{$checked}}
                                             {{#templates.banner-eadflix-op1}}checked{{/templates.banner-eadflix-op1}}
                                         {{/checked}}
-                                        {{$label}}{{#str}} editor_model_banner_video, theme_boost_training {{/str}}{{/label}}
+                                        {{$label}}{{#str}}
+                                            editor_model_banner_video, theme_boost_training {{/str}}{{/label}}
                                     {{/ theme_boost_training/quickstart/homemode-banners}}
 
                                     {{< theme_boost_training/quickstart/homemode-banners}}
@@ -90,7 +95,8 @@
                                         {{$checked}}
                                             {{#templates.banner-eadflix-op2}}checked{{/templates.banner-eadflix-op2}}
                                         {{/checked}}
-                                        {{$label}}{{#str}} editor_model_banner_no_video, theme_boost_training {{/str}}{{/label}}
+                                        {{$label}}{{#str}}
+                                            editor_model_banner_no_video, theme_boost_training {{/str}}{{/label}}
                                     {{/ theme_boost_training/quickstart/homemode-banners}}
                                 </div>
 
@@ -110,7 +116,8 @@
                                         {{$checked}}
                                             {{#templates.popular-default}}checked{{/templates.popular-default}}
                                         {{/checked}}
-                                        {{$label}}{{#str}} editor_model_top_courses, theme_boost_training {{/str}}{{/label}}
+                                        {{$label}}{{#str}}
+                                            editor_model_top_courses, theme_boost_training {{/str}}{{/label}}
                                     {{/ theme_boost_training/quickstart/homemode-banners}}
 
                                     {{< theme_boost_training/quickstart/homemode-banners}}
@@ -118,15 +125,18 @@
                                         {{$checked}}
                                             {{#templates.popular-eadflix}}checked{{/templates.popular-eadflix}}
                                         {{/checked}}
-                                        {{$label}}{{#str}} editor_model_top_courses_eadflix, theme_boost_training {{/str}}{{/label}}
+                                        {{$label}}{{#str}}
+                                            editor_model_top_courses_eadflix, theme_boost_training {{/str}}{{/label}}
                                     {{/ theme_boost_training/quickstart/homemode-banners}}
 
                                     {{< theme_boost_training/quickstart/homemode-banners}}
                                         {{$model}}popular-number-eadflix{{/model}}
                                         {{$checked}}
-                                            {{#templates.popular-number-eadflix}}checked{{/templates.popular-number-eadflix}}
+                                            {{#templates.popular-number-eadflix}}
+                                                checked{{/templates.popular-number-eadflix}}
                                         {{/checked}}
-                                        {{$label}}{{#str}} editor_model_top_courses_number_eadflix, theme_boost_training {{/str}}{{/label}}
+                                        {{$label}}{{#str}}editor_model_top_courses_number_eadflix,
+                                            theme_boost_training {{/str}}{{/label}}
                                     {{/ theme_boost_training/quickstart/homemode-banners}}
                                 </div>
 
@@ -136,7 +146,8 @@
                                         {{$checked}}
                                             {{#templates.pricing-3}}checked{{/templates.pricing-3}}
                                         {{/checked}}
-                                        {{$label}}{{#str}} editor_model_prices_3, theme_boost_training {{/str}}{{/label}}
+                                        {{$label}}{{#str}}
+                                            editor_model_prices_3, theme_boost_training {{/str}}{{/label}}
                                     {{/ theme_boost_training/quickstart/homemode-banners}}
 
                                     {{< theme_boost_training/quickstart/homemode-banners}}
@@ -144,7 +155,8 @@
                                         {{$checked}}
                                             {{#templates.pricing-4}}checked{{/templates.pricing-4}}
                                         {{/checked}}
-                                        {{$label}}{{#str}} editor_model_prices_3, theme_boost_training {{/str}}{{/label}}
+                                        {{$label}}{{#str}}
+                                            editor_model_prices_3, theme_boost_training {{/str}}{{/label}}
                                     {{/ theme_boost_training/quickstart/homemode-banners}}
                                 </div>
 
@@ -154,28 +166,32 @@
                                         {{$checked}}
                                             {{#templates.featured-3}}checked{{/templates.featured-3}}
                                         {{/checked}}
-                                        {{$label}}{{#str}} editor_model_features_3, theme_boost_training {{/str}}{{/label}}
+                                        {{$label}}{{#str}}
+                                            editor_model_features_3, theme_boost_training {{/str}}{{/label}}
                                     {{/ theme_boost_training/quickstart/homemode-banners}}
                                     {{< theme_boost_training/quickstart/homemode-banners}}
                                         {{$model}}featured-4{{/model}}
                                         {{$checked}}
                                             {{#templates.featured-4}}checked{{/templates.featured-4}}
                                         {{/checked}}
-                                        {{$label}}{{#str}} editor_model_features_4, theme_boost_training {{/str}}{{/label}}
+                                        {{$label}}{{#str}}
+                                            editor_model_features_4, theme_boost_training {{/str}}{{/label}}
                                     {{/ theme_boost_training/quickstart/homemode-banners}}
                                     {{< theme_boost_training/quickstart/homemode-banners}}
                                         {{$model}}featured-6{{/model}}
                                         {{$checked}}
                                             {{#templates.featured-6}}checked{{/templates.featured-6}}
                                         {{/checked}}
-                                        {{$label}}{{#str}} editor_model_features_6, theme_boost_training {{/str}}{{/label}}
+                                        {{$label}}{{#str}}
+                                            editor_model_features_6, theme_boost_training {{/str}}{{/label}}
                                     {{/ theme_boost_training/quickstart/homemode-banners}}
                                     {{< theme_boost_training/quickstart/homemode-banners}}
                                         {{$model}}featured-8{{/model}}
                                         {{$checked}}
                                             {{#templates.featured-8}}checked{{/templates.featured-8}}
                                         {{/checked}}
-                                        {{$label}}{{#str}} editor_model_features_8, theme_boost_training {{/str}}{{/label}}
+                                        {{$label}}{{#str}}
+                                            editor_model_features_8, theme_boost_training {{/str}}{{/label}}
                                     {{/ theme_boost_training/quickstart/homemode-banners}}
                                 </div>
 
@@ -185,28 +201,32 @@
                                         {{$checked}}
                                             {{#templates.differentials-3}}checked{{/templates.differentials-3}}
                                         {{/checked}}
-                                        {{$label}}{{#str}} editor_model_differentials_3, theme_boost_training {{/str}}{{/label}}
+                                        {{$label}}{{#str}}
+                                            editor_model_differentials_3, theme_boost_training {{/str}}{{/label}}
                                     {{/ theme_boost_training/quickstart/homemode-banners}}
                                     {{< theme_boost_training/quickstart/homemode-banners}}
                                         {{$model}}differentials-4{{/model}}
                                         {{$checked}}
                                             {{#templates.differentials-4}}checked{{/templates.differentials-4}}
                                         {{/checked}}
-                                        {{$label}}{{#str}} editor_model_differentials_4, theme_boost_training {{/str}}{{/label}}
+                                        {{$label}}{{#str}}
+                                            editor_model_differentials_4, theme_boost_training {{/str}}{{/label}}
                                     {{/ theme_boost_training/quickstart/homemode-banners}}
                                     {{< theme_boost_training/quickstart/homemode-banners}}
                                         {{$model}}differentials-6{{/model}}
                                         {{$checked}}
                                             {{#templates.differentials-6}}checked{{/templates.differentials-6}}
                                         {{/checked}}
-                                        {{$label}}{{#str}} editor_model_differentials_6, theme_boost_training {{/str}}{{/label}}
+                                        {{$label}}{{#str}}
+                                            editor_model_differentials_6, theme_boost_training {{/str}}{{/label}}
                                     {{/ theme_boost_training/quickstart/homemode-banners}}
                                     {{< theme_boost_training/quickstart/homemode-banners}}
                                         {{$model}}differentials-8{{/model}}
                                         {{$checked}}
                                             {{#templates.differentials-8}}checked{{/templates.differentials-8}}
                                         {{/checked}}
-                                        {{$label}}{{#str}} editor_model_differentials_8, theme_boost_training {{/str}}{{/label}}
+                                        {{$label}}{{#str}}
+                                            editor_model_differentials_8, theme_boost_training {{/str}}{{/label}}
                                     {{/ theme_boost_training/quickstart/homemode-banners}}
                                 </div>
                             </div>
@@ -221,40 +241,54 @@
 </div>
 
 <script>
-    document.addEventListener('DOMContentLoaded', function () {
+    document.addEventListener("DOMContentLoaded", function () {
 
         // Radios
-        const labels = document.querySelectorAll('#settings-content-home .radio-img');
-        const contents = document.querySelectorAll('#settings-content-home .content-box');
+        const labels = document.querySelectorAll("#settings-content-home .radio-img");
+        const contents = document.querySelectorAll("#settings-content-home .content-box");
 
         labels.forEach(label => {
-            label.addEventListener('click', () => {
+            label.addEventListener("click", () => {
                 // Remove previous selection.
-                labels.forEach(l => l.classList.remove('selected'));
-                contents.forEach(c => c.classList.remove('show'));
+                labels.forEach(l => l.classList.remove("selected"));
+                contents.forEach(c => c.classList.remove("show"));
 
                 // Mark the radio and highlight the image.
-                label.classList.add('selected');
-                label.querySelector('input[type="radio"]').checked = true;
+                label.classList.add("selected");
+                label.querySelector(`input[type="radio"]`).checked = true;
 
                 // Show related content.
-                const targetId = label.getAttribute('data-target');
-                document.getElementById(targetId).classList.add('show');
+                const targetId = label.getAttribute("data-target");
+                document.getElementById(targetId).classList.add("show");
             });
         });
 
         // Uniques.
-        const groupPrefixes = ['banner-', 'pricing-', 'featured-', 'differentials-'];
-        document.querySelectorAll('#settings-content-home input[type="checkbox"][name="homemode_banners[]"]').forEach(input => {
-            input.addEventListener('change', function () {
+        const groupPrefixes = ["banner", "popular", "pricing", "featured", "differentials"];
+        document.querySelectorAll(`[name="homemode_banners[]"]`).forEach(input => {
+            input.addEventListener("change", function () {
                 if (this.checked) {
-                    // Checks if the value starts with any of the defined prefixes.
                     const group = groupPrefixes.find(prefix => this.value.startsWith(prefix));
                     if (group) {
+                        if (group === "banner") { // Specific rules for "banner".
+                            // Check if there is already another banner selected with the "not-editing" class.
+                            const conflict = Array.from(document.querySelectorAll(`[name="homemode_banners[]"]`))
+                                    .find(other =>
+                                            other !== this &&
+                                            other.value.startsWith("banner-") &&
+                                            other.classList.contains("not-editing")
+                                    );
+                            if (conflict) {
+                                home_show_alert(`{{#str}}quickstart_alert_notadd, theme_boost_training, {{{config.wwwroot}}} {{/str}}`);
+                                this.checked = false; // undo the current check.
+                                return;
+                            }
+                        }
+
                         // Uncheck the other checkboxes in the same group.
-                        document.querySelectorAll(`input[type="checkbox"][name="homemode_banners[]"]`).forEach(other => {
-                            if (other !== this && other.value.startsWith(group)) {
-                                other.checked = false;
+                        document.querySelectorAll(`[name="homemode_banners[]"]`).forEach(inputinput => {
+                            if (inputinput !== this && inputinput.value.startsWith(group) && !inputinput.classList.contains('not-editing')) {
+                                inputinput.checked = false;
                             }
                         });
                     }
@@ -262,4 +296,26 @@
             });
         });
     });
+
+    let homeWarningTimeout = -1;
+
+    function home_show_alert(message) {
+        const warningDiv = document.getElementById("home-warning");
+
+        // Add text and animate the display.
+        warningDiv.innerHTML = message;
+        warningDiv.style.position = "relative";
+        warningDiv.style.opacity = "1";
+        warningDiv.style.fontSize = "1rem";
+        warningDiv.style.height = "initial";
+
+        clearTimeout(homeWarningTimeout);
+        // After 2 seconds, hide with animation.
+        homeWarningTimeout = setTimeout(() => {
+            warningDiv.style.opacity = "0";
+            warningDiv.style.height = "0";
+            warningDiv.style.fontSize = "0";
+            warningDiv.style.position = "absolute";
+        }, 5000);
+    }
 </script>
