@@ -25,11 +25,18 @@
 defined('MOODLE_INTERNAL') || die;
 
 // Course settings.
-$page = new admin_settingpage("theme_boost_training_course", get_string("coursesettings", "theme_boost_training"));
+$page = new admin_settingpage("theme_boost_training_course",
+    get_string("coursesettings", "theme_boost_training"));
 
-$setting = new admin_setting_configcheckbox("theme_boost_training/course_summary",
+$options = [
+    0 => get_string("course_summary_none", "theme_boost_training"),
+    1 => get_string("course_summary_simple", "theme_boost_training"),
+    2 => get_string("course_summary_banner", "theme_boost_training"),
+];
+$setting = new admin_setting_configselect("theme_boost_training/course_summary",
     get_string("course_summary", "theme_boost_training"),
-    get_string("course_summary_desc", "theme_boost_training"), 0);
+    get_string("course_summary_desc", "theme_boost_training"),
+    0, $options);
 $page->add($setting);
 
 $setting = new admin_setting_configcheckbox("theme_boost_training/svg_animate",

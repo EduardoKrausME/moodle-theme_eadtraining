@@ -18,7 +18,8 @@
  * A drawer based layout for the boost theme.
  *
  * @package   theme_boost_training
- * @copyright 2021 Bas Brands
+ * @copyright 2025 Eduardo Kraus {@link https://eduardokraus.com}
+ * @copyright based on work by 2021 Bas Brands
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 

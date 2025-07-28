@@ -21,7 +21,7 @@
  * Moodle"s new Boost theme engine
  *
  * @package   theme_boost_training
- * @copyright 2025 Eduardo kraus (http://eduardokraus.com)
+ * @copyright 2025 Eduardo Kraus {@link https://eduardokraus.com}
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -29,6 +29,7 @@ namespace theme_boost_training\output\core;
 
 use context_course;
 use context_system;
+use core_course\external\course_summary_exporter;
 use html_writer;
 use moodle_url;
 use core_course_category;
@@ -40,7 +41,7 @@ use core_course_list_element;
  * This class has function for core course renderer
  *
  * @package   theme_boost_training
- * @copyright 2025 Eduardo kraus (http://eduardokraus.com)
+ * @copyright 2025 Eduardo Kraus {@link https://eduardokraus.com}
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class course_renderer extends \core_course_renderer {
@@ -244,7 +245,7 @@ class course_renderer extends \core_course_renderer {
 
         $icons = $this->course_enrolment_list_icons($course);
 
-        $courseimage = \core_course\external\course_summary_exporter::get_course_image($course);
+        $courseimage = course_summary_exporter::get_course_image($course);
         if (!$courseimage) {
             $courseimage = $this->output->get_default_image_for_courseid($course->id);
         }

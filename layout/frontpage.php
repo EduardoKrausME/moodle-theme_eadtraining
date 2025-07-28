@@ -18,7 +18,7 @@
  * A frontpage based layout for the boost theme.
  *
  * @package   theme_boost_training
- * @copyright 2025 Eduardo Kraus
+ * @copyright 2025 Eduardo Kraus {@link http://eduardokraus.com}
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 

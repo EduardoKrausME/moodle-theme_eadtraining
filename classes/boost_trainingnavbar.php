@@ -25,9 +25,10 @@ use lang_string;
 /**
  * Creates a navbar for boost that allows easy control of the navbar items.
  *
- * @package    theme_boost_training
- * @copyright  2021 Adrian Greeve <adrian@moodle.com>
- * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * @package   theme_boost_training
+ * @copyright 2025 Eduardo Kraus {@link https://eduardokraus.com}
+ * @copyright based on work by 2021 Adrian Greeve <adrian@moodle.com>
+ * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class boost_trainingnavbar implements \renderable {
 

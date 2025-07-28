@@ -18,11 +18,12 @@
  * Language file.
  *
  * @package   theme_boost_training
- * @copyright 2016 Frédéric Massart
+ * @copyright 2025 Eduardo Kraus {@link https://eduardokraus.com}
+ * @copyright based on work by 2016 Frédéric Massart
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die();
+defined('MOODLE_INTERNAL') || die;
 
 $string['access_course'] = 'Access the course';
 $string['acctoolbar_access_declaration'] = 'Accessibility statement';

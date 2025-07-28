@@ -29,9 +29,10 @@ use user_picture;
 /**
  * Renderers to align Moodle's HTML with that expected by Bootstrap
  *
- * @package    theme_boost_training
- * @copyright  2012 Bas Brands, www.basbrands.nl
- * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * @package   theme_boost_training
+ * @copyright 2025 Eduardo Kraus {@link https://eduardokraus.com}
+ * @copyright based on work by 2012 Bas Brands, www.basbrands.nl
+ * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class core_renderer extends \core_renderer {
 
@@ -303,139 +304,145 @@ class core_renderer extends \core_renderer {
         $header->hasnavbarcourse = false;
         $hasuri = strpos($_SERVER["REQUEST_URI"], "course/view.php") || strpos($_SERVER["REQUEST_URI"], "course/section.php");
         $showcoursesummary = get_config("theme_boost_training", "course_summary");
+        $header->hasnosumary = true;
         if ($hasuri && $showcoursesummary) {
             global $DB, $CFG;
 
-            $header->hasnavbarcourse = true;
-            $header->categoryname = $DB->get_field("course_categories", "name", ["id" => $this->page->course->category]);
+            if ($showcoursesummary == 1) {
+                $header->hasnavbarcourse = true;
+                $header->categoryname = $DB->get_field("course_categories", "name", ["id" => $this->page->course->category]);
 
-            // Imagem do curso.
-            $sql = "
-                SELECT *
-                  FROM {files}
-                 WHERE contextid   = :contextid
-                   AND component   = 'course'
-                   AND filearea    = 'overviewfiles'
-                   AND mimetype LIKE 'image%'
-                LIMIT 1";
-            $coursefile = $DB->get_record_sql($sql, ["contextid" => $this->page->context->id]);
-            if ($coursefile) {
-                $header->overviewfiles =
-                    "{$CFG->wwwroot}/pluginfile.php/{$coursefile->contextid}/course/overviewfiles/{$coursefile->filename}";
-            }
+                // Imagem do curso.
+                $sql = "
+                    SELECT *
+                      FROM {files}
+                     WHERE contextid   = :contextid
+                       AND component   = 'course'
+                       AND filearea    = 'overviewfiles'
+                       AND mimetype LIKE 'image%'
+                    LIMIT 1";
+                $coursefile = $DB->get_record_sql($sql, ["contextid" => $this->page->context->id]);
+                if ($coursefile) {
+                    $header->overviewfiles = "{$CFG->wwwroot}/pluginfile.php/{$coursefile->contextid}/course/overviewfiles/{$coursefile->filename}";
+                }
 
-            if (has_capability("moodle/category:manage", $this->page->context)) {
-                $cache = \cache::make("theme_boost_training", "course_cache");
-                $cachekey = "header_details_{$this->page->course->id}";
-                if ($cache->has($cachekey)) {
-                    $header->details = json_decode($cache->get($cachekey));
-                } else {
-                    $decsep = get_string("decsep", "langconfig");
-                    $thousandssep = get_string("thousandssep", "langconfig");
-                    $header->details = [];
+                if (has_capability("moodle/category:manage", $this->page->context)) {
+                    $cache = \cache::make("theme_boost_training", "course_cache");
+                    $cachekey = "header_details_{$this->page->course->id}";
+                    if ($cache->has($cachekey)) {
+                        $header->details = json_decode($cache->get($cachekey));
+                    } else {
+                        $decsep = get_string("decsep", "langconfig");
+                        $thousandssep = get_string("thousandssep", "langconfig");
+                        $header->details = [];
 
-                    // Students.
-                    $sql = "
-                        SELECT COUNT(DISTINCT userid)
-                          FROM {role_assignments}
-                         WHERE roleid    = 5
-                           AND contextid = :contextid";
-                    $total = $DB->get_field_sql($sql, ["contextid" => $this->page->context->id]);
-                    $header->details[] = [
-                        "id" => "users",
-                        "icon" => "fa-users fa-fw",
-                        "link" => false,
-                        "number" => number_format($total, 0, $decsep, $thousandssep),
-                        "text" => get_string("details-users", "theme_boost_training"),
-                    ];
-
-                    // Teachers.
-                    $sql = "
-                        SELECT u.id, u.picture, u.firstname, u.lastname, u.firstnamephonetic, u.lastnamephonetic,
-                               u.middlename, u.alternatename, u.imagealt, u.email
-                          FROM {role_assignments} ra
-                          JOIN {user}              u ON u.id = ra.userid
-                         WHERE ra.roleid    IN(3,4)
-                           AND ra.contextid = :contextid";
-                    $teachers = $DB->get_records_sql($sql, ["contextid" => $this->page->context->id]);
-                    if (count($teachers)) {
-                        $teachershtml = "";
-                        foreach ($teachers as $teacher) {
-                            // URL da imagem de perfil.
-                            $userpicture = new user_picture($teacher);
-                            $userpicture->size = 1; // 1 = small, 0 = large.
-                            $imgurl = $userpicture->get_url($this->page)->out(false);
-
-                            $name = fullname($teacher);
-                            $teachershtml .= "<div><img class='teacher-icon' src='{$imgurl}' alt='{$name}'></div>";
-                        }
+                        // Students.
+                        $sql = "
+                            SELECT COUNT(DISTINCT userid)
+                              FROM {role_assignments}
+                             WHERE roleid    = 5
+                               AND contextid = :contextid";
+                        $total = $DB->get_field_sql($sql, ["contextid" => $this->page->context->id]);
                         $header->details[] = [
-                            "id" => "teachers",
-                            "icon" => "fa fa-graduation-cap fa-fw",
+                            "id" => "users",
+                            "icon" => "fa-users fa-fw",
                             "link" => false,
-                            "number" => "<div class='d-flex'>{$teachershtml}</div>",
-                            "text" => get_string("details-teachers", "theme_boost_training"),
+                            "number" => number_format($total, 0, $decsep, $thousandssep),
+                            "text" => get_string("details-users", "theme_boost_training"),
                         ];
-                    }
 
-                    // Completo e em progresso.
-                    $sql = "
-                        SELECT DISTINCT ra.userid, cc.timecompleted
-                          FROM {role_assignments}    ra
-                     LEFT JOIN {course_completions} cc ON cc.userid = ra.userid
-                                                      AND cc.course = :courseid
-                         WHERE ra.contextid = :contextid";
-                    $users = $DB->get_records_sql($sql, [
-                        "contextid" => $this->page->context->id,
-                        "courseid" => $this->page->course->id,
-                    ]);
+                        // Teachers.
+                        $sql = "
+                            SELECT u.id, u.picture, u.firstname, u.lastname, u.firstnamephonetic, u.lastnamephonetic,
+                                   u.middlename, u.alternatename, u.imagealt, u.email
+                              FROM {role_assignments} ra
+                              JOIN {user}              u ON u.id = ra.userid
+                             WHERE ra.roleid    IN(3,4)
+                               AND ra.contextid = :contextid";
+                        $teachers = $DB->get_records_sql($sql, ["contextid" => $this->page->context->id]);
+                        if (count($teachers)) {
+                            $teachershtml = "";
+                            foreach ($teachers as $teacher) {
+                                // URL da imagem de perfil.
+                                $userpicture = new user_picture($teacher);
+                                $userpicture->size = 1; // 1 = small, 0 = large.
+                                $imgurl = $userpicture->get_url($this->page)->out(false);
 
-                    // Separa por status.
-                    $completaram = 0;
-                    $emprogresso = 0;
-
-                    foreach ($users as $user) {
-                        if (!empty($user->timecompleted)) {
-                            $completaram++;
-                        } else {
-                            $emprogresso++;
+                                $name = fullname($teacher);
+                                $teachershtml .= "<div><img class='teacher-icon' src='{$imgurl}' alt='{$name}'></div>";
+                            }
+                            $header->details[] = [
+                                "id" => "teachers",
+                                "icon" => "fa fa-graduation-cap fa-fw",
+                                "link" => false,
+                                "number" => "<div class='d-flex'>{$teachershtml}</div>",
+                                "text" => get_string("details-teachers", "theme_boost_training"),
+                            ];
                         }
+
+                        // Completo e em progresso.
+                        $sql = "
+                            SELECT DISTINCT ra.userid, cc.timecompleted
+                              FROM {role_assignments}   ra
+                         LEFT JOIN {course_completions} cc ON cc.userid = ra.userid
+                                                          AND cc.course = :courseid
+                             WHERE ra.contextid = :contextid";
+                        $users = $DB->get_records_sql($sql, [
+                            "contextid" => $this->page->context->id,
+                            "courseid" => $this->page->course->id,
+                        ]);
+
+                        // Separa por status.
+                        $completaram = 0;
+                        $emprogresso = 0;
+
+                        foreach ($users as $user) {
+                            if (!empty($user->timecompleted)) {
+                                $completaram++;
+                            } else {
+                                $emprogresso++;
+                            }
+                        }
+
+                        $header->details[] = [
+                            "id" => "emprogresso",
+                            "icon" => "fa fa-spinner fa-fw",
+                            "link" => false,
+                            "number" => number_format($emprogresso, 0, $decsep, $thousandssep),
+                            "text" => get_string("details-emprogresso", "theme_boost_training"),
+                        ];
+                        $header->details[] = [
+                            "id" => "completaram",
+                            "icon" => "fa fa-user-slash fa-fw",
+                            "link" => false,
+                            "number" => number_format($completaram, 0, $decsep, $thousandssep),
+                            "text" => get_string("details-completaram", "theme_boost_training"),
+                        ];
+
+                        // Usuários que nunca acessaram.
+                        $sql = "
+                            SELECT COUNT(DISTINCT ra.userid) AS total
+                              FROM {role_assignments} ra
+                         LEFT JOIN {user_lastaccess}  la ON la.userid = ra.userid
+                             WHERE ra.contextid = :contextid
+                               AND la.timeaccess IS NULL";
+                        $total = $DB->get_field_sql($sql, ["contextid" => $this->page->context->id]);
+                        $header->details[] = [
+                            "id" => "not-access",
+                            "icon" => "fa fa-user-slash fa-fw",
+                            "link" => false,
+                            "number" => number_format($total, 0, $decsep, $thousandssep),
+                            "text" => get_string("details-not-access", "theme_boost_training"),
+                        ];
+                        $cache->set($cachekey, json_encode($header->details));
                     }
-
-                    $header->details[] = [
-                        "id" => "emprogresso",
-                        "icon" => "fa fa-spinner fa-fw",
-                        "link" => false,
-                        "number" => number_format($emprogresso, 0, $decsep, $thousandssep),
-                        "text" => get_string("details-emprogresso", "theme_boost_training"),
-                    ];
-                    $header->details[] = [
-                        "id" => "completaram",
-                        "icon" => "fa fa-user-slash fa-fw",
-                        "link" => false,
-                        "number" => number_format($completaram, 0, $decsep, $thousandssep),
-                        "text" => get_string("details-completaram", "theme_boost_training"),
-                    ];
-
-                    // Usuários que nunca acessaram.
-                    $sql = "
-                        SELECT COUNT(DISTINCT ra.userid) AS total
-                          FROM {role_assignments}  ra
-                     LEFT JOIN {user_lastaccess}   la ON la.userid = ra.userid
-                         WHERE ra.contextid = :contextid
-                           AND la.timeaccess IS NULL";
-                    $total = $DB->get_field_sql($sql, ["contextid" => $this->page->context->id]);
-                    $header->details[] = [
-                        "id" => "not-access",
-                        "icon" => "fa fa-user-slash fa-fw",
-                        "link" => false,
-                        "number" => number_format($total, 0, $decsep, $thousandssep),
-                        "text" => get_string("details-not-access", "theme_boost_training"),
-                    ];
-
-                    $cache->set($cachekey, json_encode($header->details));
                 }
             }
+            if ($showcoursesummary == 2) {
+                $header->hasbannercourse = true;
+            }
+
+            $header->hasnosumary = false;
         }
 
         return $this->render_from_template("theme_boost_training/core/full_header", $header);

@@ -21,9 +21,10 @@
  * theme Boost Training when working with Bootstrap 4 alpha. We do not recommend
  * that this tool is shared, nor used outside of this theme.
  *
- * @package    theme_boost_training
- * @copyright  2016 Frédéric Massart - FMCorz.net
- * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * @package   theme_boost_training
+ * @copyright 2025 Eduardo Kraus {@link https://eduardokraus.com}
+ * @copyright based on work by 2016 Frédéric Massart - FMCorz.net
+ * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 namespace theme_boost_training;
@@ -42,9 +43,10 @@ use Sabberworm\CSS\Value\CSSFunction;
  *
  * Very basic implementation covering simple needs for Bootstrap 4.
  *
- * @package    theme_boost_training
- * @copyright  2016 Frédéric Massart - FMCorz.net
- * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * @package   theme_boost_training
+ * @copyright 2025 Eduardo Kraus {@link https://eduardokraus.com}
+ * @copyright based on work by 2016 Frédéric Massart - FMCorz.net
+ * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class autoprefixer {
 
