@@ -12,14 +12,14 @@ define(["jquery", "core/modal", "core/notification"], function ($, Modal, Notifi
                     if (!modal.root) {
                         modal.root = modal._root;
                     }
-
                     modal.modal.addClass('modal-dialog-centered');
-                    frontpage.add_block_modal_init(modal);
+
+                    frontpage.add_block_modal_init(lang);
                 }).catch(Notification.exception);
             });
         },
 
-        add_block_modal_init: function (modal) {
+        add_block_modal_init: function (lang) {
             async function loadFiles() {
                 const response = await fetch(`${M.cfg.wwwroot}/theme/boost_training/_editor/model/?lang=${lang}`);
 
