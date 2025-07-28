@@ -209,9 +209,9 @@ function load_info_json($filepath) {
 function replace_lang_strings(&$data) {
     foreach ($data as $key => &$value) {
         if (is_array($value)) {
-            replace_lang_strings($value); // Chamada recursiva
+            replace_lang_strings($value); // Recursive call.
         } elseif (is_string($value) && str_starts_with($value, 'lang::')) {
-            $langkey = substr($value, 6); // remove 'lang::'
+            $langkey = substr($value, 6); // Remove 'lang::'.
             $value = get_string($langkey, 'theme_boost_training');
         }
     }
