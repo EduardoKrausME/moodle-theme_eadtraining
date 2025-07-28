@@ -135,7 +135,7 @@ if (isset($config->homemode) && $config->homemode) {
         }
     }
     $PAGE->requires->strings_for_js(["preview"], "theme_boost_training");
-    $PAGE->requires->js_call_amd("theme_boost_training/frontpage", "init", [$lang]);
+    $PAGE->requires->js_call_amd("theme_boost_training/frontpage", "add_block", [$lang]);
 }
 
 echo $OUTPUT->render_from_template("theme_boost_training/frontpage", $templatecontext);
