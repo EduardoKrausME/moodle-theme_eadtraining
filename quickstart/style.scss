@@ -99,6 +99,9 @@
         border: 4px solid var(--bs-primary);
         background: #f0f0f0;
     }
+    .not-editing input:checked + .marked-area {
+        background: #c9d2ff;
+    }
     .check-img {
         label,
         div.label{

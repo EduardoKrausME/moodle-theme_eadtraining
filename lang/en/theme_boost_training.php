@@ -141,6 +141,8 @@ $string['privacy:metadata'] = 'The Boost Training theme does not store any perso
 $string['privacy:metadata:preference:draweropenblock'] = 'The user\'s preference for hiding or showing the drawer with blocks.';
 $string['privacy:metadata:preference:draweropenindex'] = 'The user\'s preference for hiding or showing the drawer with course index.';
 $string['privacy:metadata:preference:draweropennav'] = 'The user\'s preference for hiding or showing the drawer menu navigation.';
+$string['quickstart_alert_notadd'] = 'It is not possible to change the homepage banner after it has been added. To modify it, you need to go to the <a href="{$a}/">homepage</a> and delete the existing banner.';
+$string['quickstart_alert_notdelete'] = 'It is not possible to remove blocks added here. To delete them, go to the <a href="{$a}/">homepage</a> and remove the blocks you no longer want.';
 $string['quickstart_banner-backpack'] = 'Backpack';
 $string['quickstart_banner-blue'] = 'Blue';
 $string['quickstart_banner-footer_block_count'] = 'Number of footer blocks';

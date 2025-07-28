@@ -100,6 +100,9 @@
   border: 4px solid var(--bs-primary);
   background: #f0f0f0;
 }
+.quickstart-content .not-editing input:checked + .marked-area {
+  background: #c9d2ff;
+}
 .quickstart-content .check-img label,
 .quickstart-content .check-img div.label {
   width: 24%;
