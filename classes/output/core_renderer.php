@@ -323,7 +323,8 @@ class core_renderer extends \core_renderer {
                     LIMIT 1";
                 $coursefile = $DB->get_record_sql($sql, ["contextid" => $this->page->context->id]);
                 if ($coursefile) {
-                    $header->overviewfiles = "{$CFG->wwwroot}/pluginfile.php/{$coursefile->contextid}/course/overviewfiles/{$coursefile->filename}";
+                    $url = "{$CFG->wwwroot}/pluginfile.php/{$coursefile->contextid}/course/overviewfiles/{$coursefile->filename}";
+                    $header->overviewfiles = $url;
                 }
 
                 if (has_capability("moodle/category:manage", $this->page->context)) {
