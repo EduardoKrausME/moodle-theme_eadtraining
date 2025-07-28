@@ -76,7 +76,7 @@
                         <div id="course_summary_3" class="card p-3" {{^course_summary_2}}style="display:none" {{/course_summary_2}}>
                             <div class="card">
                                 <div class="card-header">
-                                    <h5>lang::quickstart_course_upload_or_choose</h5></div>
+                                    <h5>{{#str}}quickstart_course_upload_or_choose,theme_boost_training{{/str}}</h5></div>
                                 <div class="card-body">
                                     <div class="mb-3 card">
                                         <input class="form-control" type="file" name="banner_file"
@@ -89,7 +89,7 @@
                             </div>
                             <div class="card mt-3">
                                 <div class="card-header">
-                                    <h5>lang::quickstart_course_choose_below</h5></div>
+                                    <h5>{{#str}}quickstart_course_choose_below,theme_boost_training{{/str}}</h5></div>
                                 <div class="card-body">
 
                                     {{#banners}}
@@ -157,7 +157,7 @@
                                 <input class="form-check-input" type="radio" name="svg_animate" value="1"
                                        {{#svg_animate}}checked{{/svg_animate}} style="display: none;">
                                 <div class="marked-area">
-                                    <h5>lang::quickstart_course_with_animation</h5>
+                                    <h5>{{#str}}quickstart_course_with_animation,theme_boost_training{{/str}}</h5>
                                     <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' id='svg-courseid-111'></svg>"
                                          style="width:300px;height:150px;">
                                 </div>
@@ -167,7 +167,7 @@
                                 <input class="form-check-input" type="radio" name="svg_animate" value="0"
                                        {{^svg_animate}}checked{{/svg_animate}} style="display: none;">
                                 <div class="marked-area">
-                                    <h5>lang::quickstart_course_without_animation</h5>
+                                    <h5>{{#str}}quickstart_course_without_animation,theme_boost_training{{/str}}</h5>
                                     <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' id='svg-courseid-222'></svg>"
                                     style="width:300px;height:150px;">
                                 </div>
