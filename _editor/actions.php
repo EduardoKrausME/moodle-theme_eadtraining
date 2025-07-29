@@ -56,24 +56,6 @@ if ($action == "langedit") {
     $homemode = optional_param("homemode", 0, PARAM_INT);
     set_config("homemode", $homemode, "theme_boost_training");
 
-    if ($homemode) {
-        $frontpageloggedin = $CFG->frontpageloggedin;
-        $frontpage = $CFG->frontpage;
-
-        set_config("frontpage_old", $frontpage);
-        set_config("frontpageloggedin_old", $frontpageloggedin);
-        set_config("frontpage", "");
-        set_config("frontpageloggedin", "");
-    } else {
-        $frontpageloggedin = $CFG->frontpageloggedin_old;
-        $frontpage = $CFG->frontpage_old;
-
-        set_config("frontpage", $frontpage);
-        set_config("frontpageloggedin", $frontpageloggedin);
-        unset_config("frontpage_old");
-        unset_config("frontpageloggedin_old");
-    }
-
     redirect(new moodle_url("/", ["redirect" => 0]));
 } elseif ($action == "loaddata") {
     $datakey = required_param("datakey", PARAM_TEXT);

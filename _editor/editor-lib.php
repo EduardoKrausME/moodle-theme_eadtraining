@@ -76,14 +76,12 @@ function editor_create_page($template, $lang, $local) {
  * compile_pages
  *
  * @param $pages
- * @return array
+ * @return object
  * @throws Exception
  * @throws coding_exception
  */
 function compile_pages($pages) {
-    global $PAGE;
-
-    $returnpages = [];
+    $return = (object)["pages" => [], "css" => [], "js" => []];
 
     $previewdataid = optional_param("dataid", false, PARAM_INT);
 
@@ -123,39 +121,45 @@ function compile_pages($pages) {
                 }
             }
 
+            // The file name is added to CSS and JS to ensure no duplication.
+            // Faster in PHP and less code than isset().
             if (isset($info->form->scripts)) {
                 foreach ($info->form->scripts as $script) {
                     if ($script == "jquery") {
-                        $PAGE->requires->jquery();
+                        $return->js["jquery"] = "jquery";
                     } elseif ($script == "jqueryui") {
-                        $PAGE->requires->jquery_plugin("ui");
-                        $PAGE->requires->jquery_plugin("ui-css");
+                        $return->js["jqueryui"] = "jqueryui";
                     } elseif (strpos($script, "http") === 0) {
-                        $PAGE->requires->js_init_code("require(['jquery'],function($){ $.getScript('{$script}')})");
+                        $js = "require(['jquery'],function($){ $.getScript('{$script}')})";
+                        $return->js[$script] = $js;
                     } else {
                         if (file_exists(__DIR__ . "/model/{$page->template}/{$script}")) {
-                            $PAGE->requires->js("/theme/boost_training/_editor/model/{$page->template}/{$script}");
+                            $file = "/theme/boost_training/_editor/model/{$page->template}/{$script}";
+                            $return->js["{$page->template}/{$script}"] = $file;
                         }
                     }
                 }
             }
             if (isset($info->form->styles)) {
-                $PAGE->requires->css("/theme/boost_training/_editor/model/{$page->template}/style.css");
+                $file = "/theme/boost_training/_editor/model/{$page->template}/style.css";
+                $return->css["{$page->template}/style.css"] = $file;
                 foreach ($info->form->styles as $style) {
-                    if ($style == "bootstrap") {
-                        // Theme already has bootstrap.
-                    } else {
+                    if ($style != "bootstrap") {
                         if (file_exists(__DIR__ . "/model/{$page->template}/{$style}")) {
-                            $PAGE->requires->css("/theme/boost_training/_editor/model/{$page->template}/{$style}");
+                            $file = "/theme/boost_training/_editor/model/{$page->template}/{$style}";
+                            $return->css["{$page->template}/{$style}"] = $file;
                         };
                     }
                 }
             }
         }
-        $returnpages[] = $page;
+        $return->js = array_values($return->js);
+        $return->css = array_values($return->css);
+
+        $return->pages[] = $page;
     }
 
-    return $returnpages;
+    return $return;
 }
 
 /**

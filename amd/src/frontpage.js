@@ -77,6 +77,72 @@ define(["jquery", "core/modal", "core/notification"], function ($, Modal, Notifi
 
             loadFiles();
         },
+
+        editingswitch: function () {
+            $(".editmode-block-form")
+                .show(300, function () {
+                    $(this).css({"display": "flex"})
+                });
+            $("#homemode-editingswitch").click(function () {
+                $("#homemode-editingswitch-form").submit();
+            });
+        },
+
+        block_order: function () {
+            // Butons move page.
+            $(".homemode-pages .btn-move-up").click(function () {
+                let $item = $(this).closest('.editmode-page-item');
+                let $prev = $item.prev('.editmode-page-item');
+                if ($prev.length) {
+                    frontpage.block_order_move_item($item, $prev, true);
+                }
+            });
+            $(".homemode-pages .btn-move-down").click(function () {
+                let $item = $(this).closest('.editmode-page-item');
+                let $next = $item.next('.editmode-page-item');
+                if ($next.length) {
+                    frontpage.block_order_move_item($item, $next, false);
+                }
+            });
+        },
+
+        // Move pages.
+        block_order_move_item: function ($item, $target, isUp) {
+            $item.slideUp(400, function () {
+                if (isUp) {
+                    $target.before($item);
+                } else {
+                    $target.after($item);
+                }
+                $item.slideDown(400, function () {
+                    frontpage.block_order_save_order(); // <-- save after animation.
+                });
+            });
+        },
+
+        // Save order pages.
+        block_order_save_order: function () {
+            let order = [];
+
+            $('.editmode-page-item').each(function () {
+                order.push($(this).data('pageid'));
+            });
+
+            $.ajax({
+                url: `${M.cfg.wwwroot}/theme/boost_training/_editor/actions.php?action=page-order&local=home`,
+                type: 'POST',
+                data: {
+                    order: order,
+                    sesskey: M.cfg.sesskey,
+                },
+                success: function (response) {
+                    console.log('Success', response);
+                },
+                error: function (error) {
+                    console.error('error', error);
+                }
+            });
+        }
     };
 
     return frontpage;
