@@ -209,6 +209,14 @@ foreach (theme_boost_training_colors() as $color) {
             "color" => $color,
         ]);
 }
+$numblocks = 0;
+for ($i = 1; $i <= 4; $i++) {
+    $footertitle = get_config("theme_boost_training", "footer_title_{$i}");
+    $footerhtml = get_config("theme_boost_training", "footer_html_{$i}");
+    if (isset($footertitle[3]) && isset($footerhtml[20])) {
+        $numblocks++;
+    }
+}
 $footermustache = [
     "footer_background_color" => get_config("theme_boost_training", "footer_background_color"),
     "htmlselect" => $htmlselect,
@@ -235,6 +243,7 @@ $footermustache = [
             "footer_html" => get_config("theme_boost_training", "footer_html_4"),
         ],
     ],
+    "num_blocks" => $numblocks,
     "tyni_editor_config" => $editor->tyni_editor_config(),
     "return" => "accessibility",
 ];
