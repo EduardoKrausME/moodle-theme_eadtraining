@@ -67,8 +67,6 @@
     {{/unauthenticateduser}}
 </div>
 {{#js}}
-    /*
-    <script>*/
     require(["jquery", "core/modal", "core/notification"], function ($, Modal, Notification) {
 
         $("#user-menu-toggle").click(function (event) {
@@ -99,7 +97,7 @@
         });
 
         function usermodal_init(modal) {
-            modal.root.find(".modal-dialog").addClass("usermenu-modal-userlinks");
+            modal.root.find(".modal-dialog").addClass("usermenu-modal-userlinks modal-xl");
             modal.root.find(".modal-header").append(`
                 <div class="user-action d-flex">
                     <div class="languages dropdown">
