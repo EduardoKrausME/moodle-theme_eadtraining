@@ -9,6 +9,7 @@ $navbar-color: #b5bcc7;
     align-items: stretch;
     height: $navbar-height + 1px;
     box-shadow: 0 0.563rem 1.125rem rgba(92, 107, 121, .1);
+    background: #ffffff;
     .navbar-brand {
         margin-right: $spacer !important;
         .logo {
