@@ -122,3 +122,11 @@
 [data-basename=boost_training] .popular-section .owl-courses-content .top-courses-item .top-courses-inner.top-courses-number .eadflix-nunber {
   -webkit-text-stroke: 2px #707888;
 }
+
+[data-basename=eadflix] .block-home-popular-number-eadflix .container {
+  max-width: initial;
+  padding-right: 0;
+  padding-left: 0;
+  margin-right: 0;
+  margin-left: 0;
+}
