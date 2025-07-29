@@ -1,11 +1,12 @@
 @import "../banner-eadflix-op1/banner";
 .block-home-banner-eadflix-op2 {
     order: -1;
-    margin-top: -48px;
-    margin-left: -17px;
-    width: calc(100% + 30px);
 }
-[data-basename=boost_training] .block-home-banner-eadflix-op2 {
+[data-basename=eadflix] .block-home-banner-eadflix-op2:not(.editmode-page-item) {
+    margin-top: 0;
+    margin-left: 0;
+}
+[data-basename=boost_training] .block-home-banner-eadflix-op2:not(.editmode-page-item) {
     @media (min-width: 1071px) {
         width: calc(100% + 68px + 68px);
         margin-top: -48px;
