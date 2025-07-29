@@ -24,7 +24,7 @@
 
 namespace theme_boost_training;
 
-use core\exception\moodle_exception;
+use Exception;
 
 /**
  * Class core_hook_output
@@ -36,7 +36,7 @@ class core_hook_output {
     /**
      * Function before_footer_html_generation
      *
-     * @throws \Exception
+     * @throws Exception
      */
     public static function before_footer_html_generation() {
         global $CFG, $DB, $COURSE, $SITE;
@@ -149,7 +149,7 @@ class core_hook_output {
      * Background profile image
      *
      * @return void
-     * @throws \dml_exception
+     * @throws Exception
      */
     private static function background_profile_image() {
         $cache = \cache::make("theme_boost_training", "css_cache");
@@ -173,7 +173,7 @@ class core_hook_output {
      * ACCtoolbar
      *
      * @return void
-     * @throws \dml_exception
+     * @throws Exception
      */
     private static function acctoolbar() {
         if (get_config("theme_boost_training", "enable_accessibility")) {
@@ -186,8 +186,7 @@ class core_hook_output {
      * VLibras only Brasiliam
      *
      * @return void
-     * @throws moodle_exception
-     * @throws \dml_exception
+     * @throws Exception
      */
     private static function vlibras() {
         global $CFG, $OUTPUT;
