@@ -134,7 +134,7 @@ if (optional_param("embed-frame-top", 0, PARAM_INT)) {
         $footertitle = get_config("theme_boost_training", "footer_title_{$i}");
         $footerhtml = get_config("theme_boost_training", "footer_html_{$i}");
 
-        if (isset($footerhtml[20])) {
+        if (isset($footertitle[3]) && isset($footerhtml[20])) {
             $templatecontext["footercount"]++;
             $templatecontext["footercontents"][] = [
                 "footertitle" => $footertitle,
