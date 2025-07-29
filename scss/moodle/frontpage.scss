@@ -10,6 +10,8 @@
     }
 }
 .homemode-pages {
+    display: flex;
+    flex-direction: column;
     .editmode-page-item {
         padding: 10px;
         border: 1px dashed #dee2e6;
