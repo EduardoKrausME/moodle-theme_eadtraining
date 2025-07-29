@@ -48,20 +48,6 @@
         padding: 1.5rem 0.5rem;
         margin: 0.5rem auto 3rem;
         flex: 1 0 auto;
-        [role="main"] {
-            &{
-                padding: 0 !important;
-                margin: 0 !important;
-                background: transparent !important;
-            }
-            #user-notifications,
-            #maincontent,
-            > .course-content,
-            > br,
-            > .buttons {
-                display: none;
-            }
-        }
     }
 
     .activity-header {

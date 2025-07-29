@@ -39,3 +39,22 @@
         border-radius: 9px;
     }
 }
+
+#page.drawers {
+    .main-inner {
+        &.homemode_editor [role="main"] {
+            & {
+                padding: 0 !important;
+                margin: 0 !important;
+                background: transparent !important;
+            }
+            #user-notifications,
+            #maincontent,
+            > .course-content,
+            > br,
+            > .buttons {
+                display: none;
+            }
+        }
+    }
+}
