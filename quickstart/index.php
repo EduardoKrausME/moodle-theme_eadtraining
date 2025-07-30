@@ -148,7 +148,7 @@ if (optional_param("POST", false, PARAM_INT)) {
     \cache::make("theme_boost_training", "css_cache")->purge();
     \cache::make("theme_boost_training", "frontpage_cache")->purge();
 
-    redirect("/", get_string("quickstart_banner-saved", "theme_boost_training"));
+    redirect(new moodle_url("/"), get_string("quickstart_banner-saved", "theme_boost_training"));
 }
 
 $PAGE->set_context(context_system::instance());
