@@ -27,9 +27,15 @@ defined('MOODLE_INTERNAL') || die;
 global $CFG, $OUTPUT, $PAGE;
 require_once("{$CFG->dirroot}/theme/boost_training/lib.php");
 
-$page = new admin_settingpage("theme_boost_training_general", get_string("generalsettings", "theme_boost_training"));
-$htmlselect = "<link rel=\"stylesheet\" href=\"{$CFG->wwwroot}/theme/boost_training/scss/colors.css\" />";
+$page = new admin_settingpage("theme_boost_training_general",
+    get_string("generalsettings", "theme_boost_training"));
 
+$url = "{$CFG->wwwroot}/theme/boost_training/quickstart/#brandcolor";
+$setting = new admin_setting_heading("theme_boost_training_quickstart_brandcolor", "",
+    get_string("quickstart_settings_link", "theme_boost_training", $url));
+$page->add($setting);
+
+$htmlselect = "<link rel=\"stylesheet\" href=\"{$CFG->wwwroot}/theme/boost_training/scss/colors.css\" />";
 $config = get_config("theme_boost_training");
 if (!isset($config->startcolor[2])) {
     foreach (theme_boost_training_colors() as $color) {
@@ -58,7 +64,7 @@ if (!isset($config->startcolor[2])) {
 
     // We use an empty default value because the default colour should come from the preset.
     $setting = new admin_setting_configtext("theme_boost/brandcolor",
-        get_string('brandcolor', 'theme_boost'),
+        get_string('brandcolor', 'theme_boost_training'),
         get_string('brandcolor_desc', 'theme_boost_training') . "<div class='mb-3'>{$htmlselect}</div>",
         '#1a2a6c');
     $setting->set_updatedcallback("theme_boost_training_change_color");

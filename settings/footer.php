@@ -31,6 +31,11 @@ require_once("{$CFG->dirroot}/theme/boost_training/lib.php");
 $page = new admin_settingpage("theme_boost_training_footer",
     get_string("footersettings", "theme_boost_training"));
 
+$url = "{$CFG->wwwroot}/theme/boost_training/quickstart/#footer";
+$setting = new admin_setting_heading("theme_boost_training_quickstart_footer", "",
+    get_string("quickstart_settings_link", "theme_boost_training", $url));
+$page->add($setting);
+
 $htmlselect = "<link rel=\"stylesheet\" href=\"{$CFG->wwwroot}/theme/boost_training/scss/colors.css\" />";
 foreach (theme_boost_training_colors() as $color) {
     $htmlselect .= "\n\n" . $OUTPUT->render_from_template("theme_boost_training/settings/color", [

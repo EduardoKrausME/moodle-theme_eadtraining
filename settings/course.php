@@ -28,6 +28,11 @@ defined('MOODLE_INTERNAL') || die;
 $page = new admin_settingpage("theme_boost_training_course",
     get_string("coursesettings", "theme_boost_training"));
 
+$url = "{$CFG->wwwroot}/theme/boost_training/quickstart/#courses";
+$setting = new admin_setting_heading("theme_boost_training_quickstart_courses", "",
+    get_string("quickstart_settings_link", "theme_boost_training", $url));
+$page->add($setting);
+
 $options = [
     0 => get_string("course_summary_none", "theme_boost_training"),
     1 => get_string("course_summary_simple", "theme_boost_training"),
@@ -36,6 +41,16 @@ $options = [
 $setting = new admin_setting_configselect("theme_boost_training/course_summary",
     get_string("course_summary", "theme_boost_training"),
     get_string("course_summary_desc", "theme_boost_training"),
+    0, $options);
+$page->add($setting);
+
+$options = [
+    0 => get_string("course_summary_banner_down", "theme_boost_training"),
+    1 => get_string("course_summary_banner_under", "theme_boost_training"),
+];
+$setting = new admin_setting_configselect("theme_boost_training/course_summary_banner_position",
+    get_string("course_summary_banner_default", "theme_boost_training"),
+    get_string("course_summary_banner_default_desc", "theme_boost_training"),
     0, $options);
 $page->add($setting);
 
