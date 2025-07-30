@@ -892,7 +892,7 @@ $divider-hover-color: $primary !default;
 #page-header,
 #page-header-size {
     &.hasnavbarcourse,
-    &.hasbannercourse{
+    &.hasbannercourse {
         position: relative;
         // min-height: 336px;
         border-radius: 8px;
@@ -1037,8 +1037,7 @@ $divider-hover-color: $primary !default;
             }
         }
         h1,
-        .header-action button,
-        .header-action a {
+        .header-action button {
             text-shadow: 1px 1px 3px rgba(255, 255, 255, .6), 1px 1px 5px rgba(255, 255, 255, .3), 1px 1px 7px rgba(255, 255, 255, .1);;
             color: var(--bs-heading-color) !important;
         }
