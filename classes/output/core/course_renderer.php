@@ -27,9 +27,10 @@
 
 namespace theme_boost_training\output\core;
 
-use context_course;
+use cache;
 use context_system;
 use core_course\external\course_summary_exporter;
+use Exception;
 use html_writer;
 use moodle_url;
 use core_course_category;
@@ -59,11 +60,67 @@ class course_renderer extends \core_course_renderer {
      * Outputs contents for frontpage as configured in $CFG->frontpage or $CFG->frontpageloggedin
      *
      * @return string
-     * @throws \Exception
+     * @throws Exception
      */
     public function frontpage() {
         global $CFG, $SITE;
 
+        // Home with block editor.
+        if (get_config("theme_boost_training", "homemode")) {
+            global $OUTPUT, $PAGE, $DB;
+
+            require_once("{$CFG->dirroot}/theme/boost_training/_editor/editor-lib.php");
+
+            $editing = $this->page->user_is_editing();
+            $lang = $USER->lang ?? $CFG->lang;
+
+            $previewdataid = optional_param("dataid", false, PARAM_INT);
+            $cache = cache::make("theme_boost_training", "frontpage_cache");
+            $cachekey = "homemode_pages_v2";
+            if (!$editing && $cache->has($cachekey) && !$previewdataid) {
+                $compiledpages = json_decode($cache->get($cachekey));
+            } else {
+                $where = "local='home' AND lang IN(:lang, 'all')";
+                $pages = $DB->get_records_select("theme_boost_training_pages", $where, ['lang' => $lang], "sort ASC");
+                $compiledpages = compile_pages($pages);
+
+                if (!$editing && !$previewdataid) {
+                    $cache->set($cachekey, json_encode($compiledpages));
+                }
+            }
+
+            $csslink = "";
+            foreach ($compiledpages->css as $cssfile) {
+                $csslink .= "<link rel=\"stylesheet\" href=\"{$CFG->wwwroot}{$cssfile}\">";
+            }
+            foreach ($compiledpages->js as $jsfile) {
+                // JQuery already loaded.
+                // JQueryui already loaded.
+                if (strpos($jsfile, "require") === 0) {
+                    $PAGE->requires->js_init_code($jsfile);
+                } else if (strpos($jsfile, "/") === 0) {
+                    $PAGE->requires->js($jsfile);
+                }
+            }
+
+            $templatecontext["homemode_pages"] = $compiledpages->pages;
+
+            if ($editing) {
+                $templatecontext["editing"] = true;
+
+                if (count($compiledpages->pages) == 0 && has_capability("moodle/site:config", context_system::instance())) {
+                    $templatecontext["homemode_page_warningnopages"] = true;
+                }
+
+                $PAGE->requires->strings_for_js(["preview"], "theme_boost_training");
+                $PAGE->requires->js_call_amd("theme_boost_training/frontpage", "add_block", [$lang]);
+            }
+
+
+            return $csslink . $OUTPUT->render_from_template("theme_boost_training/frontpage_editor", $templatecontext);
+        }
+
+        // Traditional home.
         $output = "";
 
         if (isloggedin() && !isguestuser() && isset($CFG->frontpageloggedin)) {

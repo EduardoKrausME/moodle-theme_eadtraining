@@ -16,14 +16,14 @@
 
 namespace theme_boost_training\output;
 
-use context;
 use context_system;
-use core\context\course as context_course;
+use core_course\external\course_summary_exporter;
 use core_message\api;
 use core_message\helper;
 use Exception;
 use moodle_url;
 use html_writer;
+use theme_boost_training\boost_trainingnavbar;
 use user_picture;
 
 /**
@@ -41,9 +41,7 @@ class core_renderer extends \core_renderer {
      *
      * @param moodle_url $url The URL + params to send through when clicking the button
      * @param string $method
-     *
      * @return string HTML the button
-     *
      * @throws Exception
      */
     public function edit_button(moodle_url $url, string $method = "post") {
@@ -66,9 +64,10 @@ class core_renderer extends \core_renderer {
      * Renders the "breadcrumb" for all pages in boost.
      *
      * @return string the HTML for the navbar.
+     * @throws Exception
      */
     public function navbar(): string {
-        $newnav = new \theme_boost_training\boost_trainingnavbar($this->page);
+        $newnav = new boost_trainingnavbar($this->page);
         return $this->render_from_template("core/navbar", $newnav);
     }
 
@@ -264,6 +263,8 @@ class core_renderer extends \core_renderer {
      * @throws Exception
      */
     public function full_header() {
+        global $DB, $CFG;
+
         $pagetype = $this->page->pagetype;
         $homepage = get_home_page();
 
@@ -301,152 +302,204 @@ class core_renderer extends \core_renderer {
             $header->welcomemessage = \core_user::welcome_message();
         }
 
+        $courseid = $this->page->course->id;
+
         $header->hasnavbarcourse = false;
+        $header->hasbannercourse = false;
         $hasuri = strpos($_SERVER["REQUEST_URI"], "course/view.php") || strpos($_SERVER["REQUEST_URI"], "course/section.php");
-        $showcoursesummary = get_config("theme_boost_training", "course_summary");
-        $header->hasnosumary = true;
-        if ($hasuri && $showcoursesummary) {
-            global $DB, $CFG;
+        if($hasuri) {
+            $showcoursesummary = get_config("theme_boost_training", "course_summary");
+            $showcoursesummarycourse = get_config("theme_boost_training", "course_summary_{$courseid}");
+            if ($showcoursesummarycourse !== false) {
+                $showcoursesummary = $showcoursesummarycourse;
+            }
 
-            if ($showcoursesummary == 1) {
-                $header->hasnavbarcourse = true;
-                $header->categoryname = $DB->get_field("course_categories", "name", ["id" => $this->page->course->category]);
+            if ($showcoursesummary) {
+                if ($showcoursesummary == 1) {
+                    $header->hasnavbarcourse = true;
+                    $header->categoryname = $DB->get_field("course_categories", "name", ["id" => $this->page->course->category]);
+                    $header->overviewfiles = $this->get_course_image();
 
-                // Imagem do curso.
-                $sql = "
-                    SELECT *
-                      FROM {files}
-                     WHERE contextid   = :contextid
-                       AND component   = 'course'
-                       AND filearea    = 'overviewfiles'
-                       AND mimetype LIKE 'image%'
-                    LIMIT 1";
-                $coursefile = $DB->get_record_sql($sql, ["contextid" => $this->page->context->id]);
-                if ($coursefile) {
-                    $url = "{$CFG->wwwroot}/pluginfile.php/{$coursefile->contextid}/course/overviewfiles/{$coursefile->filename}";
-                    $header->overviewfiles = $url;
+                    if (has_capability("moodle/category:manage", $this->page->context)) {
+                        $cache = \cache::make("theme_boost_training", "course_cache");
+                        $cachekey = "header_details_{$this->page->course->id}";
+                        if ($cache->has($cachekey)) {
+                            $header->details = json_decode($cache->get($cachekey));
+                        } else {
+                            $header->details = $this->get_details();
+                            $cache->set($cachekey, json_encode($header->details));
+                        }
+                    }
                 }
+                if ($showcoursesummary == 2) {
+                    $bannerfileurl = $this->get_course_image();
+                    if ($bannerfileurl) {
+                        $header->categoryname = $DB->get_field("course_categories", "name", ["id" => $this->page->course->category]);
+                        $header->hasbannercourse = true;
+                        $header->banner_course_file_url = $bannerfileurl;
 
-                if (has_capability("moodle/category:manage", $this->page->context)) {
-                    $cache = \cache::make("theme_boost_training", "course_cache");
-                    $cachekey = "header_details_{$this->page->course->id}";
-                    if ($cache->has($cachekey)) {
-                        $header->details = json_decode($cache->get($cachekey));
-                    } else {
-                        $decsep = get_string("decsep", "langconfig");
-                        $thousandssep = get_string("thousandssep", "langconfig");
-                        $header->details = [];
-
-                        // Students.
-                        $sql = "
-                            SELECT COUNT(DISTINCT userid)
-                              FROM {role_assignments}
-                             WHERE roleid    = 5
-                               AND contextid = :contextid";
-                        $total = $DB->get_field_sql($sql, ["contextid" => $this->page->context->id]);
-                        $header->details[] = [
-                            "id" => "users",
-                            "icon" => "fa-users fa-fw",
-                            "link" => false,
-                            "number" => number_format($total, 0, $decsep, $thousandssep),
-                            "text" => get_string("details-users", "theme_boost_training"),
-                        ];
-
-                        // Teachers.
-                        $sql = "
-                            SELECT u.id, u.picture, u.firstname, u.lastname, u.firstnamephonetic, u.lastnamephonetic,
-                                   u.middlename, u.alternatename, u.imagealt, u.email
-                              FROM {role_assignments} ra
-                              JOIN {user}              u ON u.id = ra.userid
-                             WHERE ra.roleid    IN(3,4)
-                               AND ra.contextid = :contextid";
-                        $teachers = $DB->get_records_sql($sql, ["contextid" => $this->page->context->id]);
-                        if (count($teachers)) {
-                            $teachershtml = "";
-                            foreach ($teachers as $teacher) {
-                                // URL da imagem de perfil.
-                                $userpicture = new user_picture($teacher);
-                                $userpicture->size = 1; // 1 = small, 0 = large.
-                                $imgurl = $userpicture->get_url($this->page)->out(false);
-
-                                $name = fullname($teacher);
-                                $teachershtml .= "<div><img class='teacher-icon' src='{$imgurl}' alt='{$name}'></div>";
-                            }
-                            $header->details[] = [
-                                "id" => "teachers",
-                                "icon" => "fa fa-graduation-cap fa-fw",
-                                "link" => false,
-                                "number" => "<div class='d-flex'>{$teachershtml}</div>",
-                                "text" => get_string("details-teachers", "theme_boost_training"),
-                            ];
+                        $header->hasbannercourse_position = get_config("theme_boost_training", "course_summary_banner_position");
+                        $hasbannercoursepositioncourse = get_config("theme_boost_training", "course_summary_banner_position_{$courseid}");
+                        if ($hasbannercoursepositioncourse !== false) {
+                            $header->hasbannercourse_position = $hasbannercoursepositioncourse;
                         }
-
-                        // Completo e em progresso.
-                        $sql = "
-                            SELECT DISTINCT ra.userid, cc.timecompleted
-                              FROM {role_assignments}   ra
-                         LEFT JOIN {course_completions} cc ON cc.userid = ra.userid
-                                                          AND cc.course = :courseid
-                             WHERE ra.contextid = :contextid";
-                        $users = $DB->get_records_sql($sql, [
-                            "contextid" => $this->page->context->id,
-                            "courseid" => $this->page->course->id,
-                        ]);
-
-                        // Separa por status.
-                        $completaram = 0;
-                        $emprogresso = 0;
-
-                        foreach ($users as $user) {
-                            if (!empty($user->timecompleted)) {
-                                $completaram++;
-                            } else {
-                                $emprogresso++;
-                            }
-                        }
-
-                        $header->details[] = [
-                            "id" => "emprogresso",
-                            "icon" => "fa fa-spinner fa-fw",
-                            "link" => false,
-                            "number" => number_format($emprogresso, 0, $decsep, $thousandssep),
-                            "text" => get_string("details-emprogresso", "theme_boost_training"),
-                        ];
-                        $header->details[] = [
-                            "id" => "completaram",
-                            "icon" => "fa fa-user-slash fa-fw",
-                            "link" => false,
-                            "number" => number_format($completaram, 0, $decsep, $thousandssep),
-                            "text" => get_string("details-completaram", "theme_boost_training"),
-                        ];
-
-                        // Usuários que nunca acessaram.
-                        $sql = "
-                            SELECT COUNT(DISTINCT ra.userid) AS total
-                              FROM {role_assignments} ra
-                         LEFT JOIN {user_lastaccess}  la ON la.userid = ra.userid
-                             WHERE ra.contextid = :contextid
-                               AND la.timeaccess IS NULL";
-                        $total = $DB->get_field_sql($sql, ["contextid" => $this->page->context->id]);
-                        $header->details[] = [
-                            "id" => "not-access",
-                            "icon" => "fa fa-user-slash fa-fw",
-                            "link" => false,
-                            "number" => number_format($total, 0, $decsep, $thousandssep),
-                            "text" => get_string("details-not-access", "theme_boost_training"),
-                        ];
-                        $cache->set($cachekey, json_encode($header->details));
                     }
                 }
             }
-            if ($showcoursesummary == 2) {
-                $header->hasbannercourse = true;
-            }
 
-            $header->hasnosumary = false;
+            $header->hasnosumary = !$header->hasbannercourse && !$header->hasnavbarcourse;
+
+            if (has_capability("moodle/site:config", $this->page->context)) {
+                $url = "{$CFG->wwwroot}/theme/boost_training/quickstart/course-banner.php?courseid={$courseid}";
+                $header->headeractions_banner_course_edithref = $url;
+                $header->headeractions_banner_courseid = $courseid;
+                $header->headeractions_banner_course_edit = true;
+            }
         }
 
         return $this->render_from_template("theme_boost_training/core/full_header", $header);
+    }
+
+    /**
+     * get_details
+     * @return array
+     * @throws Exception
+     */
+    private function get_details() {
+        global $DB;
+
+        $decsep = get_string("decsep", "langconfig");
+        $thousandssep = get_string("thousandssep", "langconfig");
+        $details = [];
+
+        // Students.
+        $sql = "
+            SELECT COUNT(DISTINCT userid)
+              FROM {role_assignments}
+             WHERE roleid    = 5
+               AND contextid = :contextid";
+        $total = $DB->get_field_sql($sql, ["contextid" => $this->page->context->id]);
+        $details[] = [
+            "id" => "users",
+            "icon" => "fa-users fa-fw",
+            "link" => false,
+            "number" => number_format($total, 0, $decsep, $thousandssep),
+            "text" => get_string("details-users", "theme_boost_training"),
+        ];
+
+        // Teachers.
+        $sql = "
+            SELECT u.id, u.picture, u.firstname, u.lastname, u.firstnamephonetic, u.lastnamephonetic,
+                   u.middlename, u.alternatename, u.imagealt, u.email
+              FROM {role_assignments} ra
+              JOIN {user}              u ON u.id = ra.userid
+             WHERE ra.roleid    IN(3,4)
+               AND ra.contextid = :contextid";
+        $teachers = $DB->get_records_sql($sql, ["contextid" => $this->page->context->id]);
+        if (count($teachers)) {
+            $teachershtml = "";
+            foreach ($teachers as $teacher) {
+                // URL da imagem de perfil.
+                $userpicture = new user_picture($teacher);
+                $userpicture->size = 1; // 1 = small, 0 = large.
+                $imgurl = $userpicture->get_url($this->page)->out(false);
+
+                $name = fullname($teacher);
+                $teachershtml .= "<div><img class='teacher-icon' src='{$imgurl}' alt='{$name}'></div>";
+            }
+            $details[] = [
+                "id" => "teachers",
+                "icon" => "fa fa-graduation-cap fa-fw",
+                "link" => false,
+                "number" => "<div class='d-flex'>{$teachershtml}</div>",
+                "text" => get_string("details-teachers", "theme_boost_training"),
+            ];
+        }
+
+        // Completo e em progresso.
+        $sql = "
+            SELECT DISTINCT ra.userid, cc.timecompleted
+              FROM {role_assignments}   ra
+         LEFT JOIN {course_completions} cc ON cc.userid = ra.userid
+                                          AND cc.course = :courseid
+             WHERE ra.contextid = :contextid";
+        $users = $DB->get_records_sql($sql, [
+            "contextid" => $this->page->context->id,
+            "courseid" => $this->page->course->id,
+        ]);
+
+        // Separa por status.
+        $completaram = 0;
+        $emprogresso = 0;
+
+        foreach ($users as $user) {
+            if (!empty($user->timecompleted)) {
+                $completaram++;
+            } else {
+                $emprogresso++;
+            }
+        }
+
+        $details[] = [
+            "id" => "emprogresso",
+            "icon" => "fa fa-spinner fa-fw",
+            "link" => false,
+            "number" => number_format($emprogresso, 0, $decsep, $thousandssep),
+            "text" => get_string("details-emprogresso", "theme_boost_training"),
+        ];
+        $details[] = [
+            "id" => "completaram",
+            "icon" => "fa fa-user-slash fa-fw",
+            "link" => false,
+            "number" => number_format($completaram, 0, $decsep, $thousandssep),
+            "text" => get_string("details-completaram", "theme_boost_training"),
+        ];
+
+        // Usuários que nunca acessaram.
+        $sql = "
+            SELECT COUNT(DISTINCT ra.userid) AS total
+              FROM {role_assignments} ra
+         LEFT JOIN {user_lastaccess}  la ON la.userid = ra.userid
+             WHERE ra.contextid = :contextid
+               AND la.timeaccess IS NULL";
+        $total = $DB->get_field_sql($sql, ["contextid" => $this->page->context->id]);
+        $details[] = [
+            "id" => "not-access",
+            "icon" => "fa fa-user-slash fa-fw",
+            "link" => false,
+            "number" => number_format($total, 0, $decsep, $thousandssep),
+            "text" => get_string("details-not-access", "theme_boost_training"),
+        ];
+
+        return $details;
+    }
+
+    /**
+     * get_course_image
+     *
+     * @return false|string
+     * @throws Exception
+     */
+    public function get_course_image() {
+        $course = ($this->page->context->contextlevel == CONTEXT_COURSE) ? $this->page->course : null;
+        if (!$course) {
+            return false;
+        }
+        $bannerfileurl = theme_boost_training_setting_file_url("banner_course_file_{$course->id}");
+        if ($bannerfileurl) {
+            return $bannerfileurl->out();
+        }
+        $bannerfileurl = theme_boost_training_setting_file_url("banner_course_file");
+
+        if ($bannerfileurl) {
+            return $bannerfileurl->out();
+        }
+
+        if ($course) {
+            return course_summary_exporter::get_course_image($course);
+        }
+
+        return false;
     }
 
     /**
@@ -513,6 +566,7 @@ class core_renderer extends \core_renderer {
      *
      * @param int $courseid course id
      * @return string URL of the course pattern image in SVG format
+     * @throws Exception
      */
     public function get_default_image_for_courseid($courseid): string {
         $animate = get_config("theme_boost_training", "svg_animate");
@@ -525,7 +579,6 @@ class core_renderer extends \core_renderer {
 
     /**
      * Brandcolor background menu class
-     *
      * @return string
      * @throws Exception
      */

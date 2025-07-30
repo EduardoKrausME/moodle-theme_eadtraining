@@ -889,17 +889,18 @@ $divider-hover-color: $primary !default;
     }
 }
 
-#page-header {
-    &.hasnavbarcourse {
+#page-header,
+#page-header-size {
+    &.hasnavbarcourse,
+    &.hasbannercourse{
         position: relative;
         // min-height: 336px;
-        background-size: cover;
-        background-position: center;
         border-radius: 8px;
         display: flex;
         flex-direction: column;
         justify-content: flex-end;
         padding: 60px 32px 32px;
+        overflow: hidden;
 
         .breadcrumb {
             margin-bottom: 40px;
@@ -908,17 +909,25 @@ $divider-hover-color: $primary !default;
                 &::before {
                     color: #fff;
                 }
-
                 a {
                     color: #fff;
                 }
-
                 span {
                     color: #cacaca;
                 }
             }
         }
 
+        .hasnavbarcourse-gradient-image{
+            background-size: cover;
+            // background-position: center;
+            background-position: center 0;
+            left: 0;
+            bottom: 0;
+            opacity: 1;
+            border-radius: inherit;
+            // filter: blur(8px) brightness(.5);
+        }
         .hasnavbarcourse-gradient {
             background: linear-gradient(180deg, rgba(0, 0, 0, 0.0)  -24.52%, #000 97.67%);
             left: 0;
@@ -926,7 +935,6 @@ $divider-hover-color: $primary !default;
             opacity: 1;
             border-radius: inherit;
         }
-
         .course-intro-category-name {
             display: inline-block;
             padding: 1px 10px;
@@ -989,7 +997,7 @@ $divider-hover-color: $primary !default;
             line-height: 32px;
         }
 
-        .btn[data-for="enableBulk"] {
+        .header-action button {
             text-decoration: underline;
             color: #fff !important;
         }
@@ -1009,6 +1017,34 @@ $divider-hover-color: $primary !default;
             top: 20px;
             right: 10px;
         }
+    }
+
+    --hasbannercourse-size: 230px;
+    --hasbannercourse-top: 60px;
+    &.hasbannercourse {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        border-radius: 0;
+        height: var(--hasbannercourse-size);
+        &.hasbannercourse-top {
+            top: calc(-1 * var(--hasbannercourse-top));
+            padding-top: calc(var(--hasbannercourse-top) + var(--hasbannercourse-top));
+            height: calc(var(--hasbannercourse-size) + var(--hasbannercourse-top));
+            .header-actions-container {
+                top: calc(var(--hasbannercourse-top) + 20);
+            }
+        }
+        h1,
+        .header-action button,
+        .header-action a {
+            text-shadow: 1px 1px 3px rgba(255, 255, 255, .6), 1px 1px 5px rgba(255, 255, 255, .3), 1px 1px 7px rgba(255, 255, 255, .1);;
+            color: var(--bs-heading-color) !important;
+        }
+    }
+    &.hasbannercourse-size {
+        height: calc(var(--hasbannercourse-size) - 48px);
     }
 }
 
