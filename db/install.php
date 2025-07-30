@@ -52,7 +52,9 @@ function xmldb_theme_boost_training_install() {
     set_config("scsspre", "", "theme_boost_training");
     set_config("scss", "", "theme_boost_training");
 
-    set_config("course_summary", "0", "theme_boost_training");
+    set_config("course_summary", 0, "theme_boost_training");
+    set_config("course_summary_banner_position", 0, "theme_boost_training");
+    set_config("svg_animate", 1, "theme_boost_training");
 
     set_config("footer_background_color", "", "theme_boost_training");
     set_config("footer_title_1", "", "theme_boost_training");
@@ -64,5 +66,5 @@ function xmldb_theme_boost_training_install() {
     set_config("footer_title_4", "", "theme_boost_training");
     set_config("footer_html_4", "", "theme_boost_training");
 
-    set_config("footer_show_copywriter", "1", "theme_boost_training");
+    set_config("footer_show_copywriter", 1, "theme_boost_training");
 }
