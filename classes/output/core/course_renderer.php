@@ -63,12 +63,10 @@ class course_renderer extends \core_course_renderer {
      * @throws Exception
      */
     public function frontpage() {
-        global $CFG, $SITE;
+        global $DB, $CFG, $SITE;
 
         // Home with block editor.
         if (get_config("theme_boost_training", "homemode")) {
-            global $OUTPUT, $PAGE, $DB;
-
             require_once("{$CFG->dirroot}/theme/boost_training/_editor/editor-lib.php");
 
             $editing = $this->page->user_is_editing();
@@ -97,9 +95,9 @@ class course_renderer extends \core_course_renderer {
                 // JQuery already loaded.
                 // JQueryui already loaded.
                 if (strpos($jsfile, "require") === 0) {
-                    $PAGE->requires->js_init_code($jsfile);
+                    $this->page->requires->js_init_code($jsfile);
                 } else if (strpos($jsfile, "/") === 0) {
-                    $PAGE->requires->js($jsfile);
+                    $this->page->requires->js($jsfile);
                 }
             }
 
@@ -112,12 +110,11 @@ class course_renderer extends \core_course_renderer {
                     $templatecontext["homemode_page_warningnopages"] = true;
                 }
 
-                $PAGE->requires->strings_for_js(["preview"], "theme_boost_training");
-                $PAGE->requires->js_call_amd("theme_boost_training/frontpage", "add_block", [$lang]);
+                $this->page->requires->strings_for_js(["preview"], "theme_boost_training");
+                $this->page->requires->js_call_amd("theme_boost_training/frontpage", "add_block", [$lang]);
             }
 
-
-            return $csslink . $OUTPUT->render_from_template("theme_boost_training/frontpage_editor", $templatecontext);
+            return $csslink . $this->output->render_from_template("theme_boost_training/frontpage_editor", $templatecontext);
         }
 
         // Traditional home.

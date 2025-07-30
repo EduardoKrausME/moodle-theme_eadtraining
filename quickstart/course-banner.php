@@ -132,9 +132,9 @@ if (!$bannerfileurl) {
     }
 }
 
-echo '<form action="' . $CFG->wwwroot . '/theme/boost_training/quickstart/course-banner.php" 
+echo '<form action="' . $CFG->wwwroot . '/theme/boost_training/quickstart/course-banner.php"
             enctype="multipart/form-data" method="post"
-            class="quickstart-content" 
+            class="quickstart-content"
             style="display: block;">';
 echo '<input type="hidden" name="POST" value="1" />';
 echo '<input type="hidden" name="sesskey" value="' . sesskey() . '" />';

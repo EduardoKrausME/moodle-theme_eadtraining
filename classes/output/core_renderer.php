@@ -307,7 +307,7 @@ class core_renderer extends \core_renderer {
         $header->hasnavbarcourse = false;
         $header->hasbannercourse = false;
         $hasuri = strpos($_SERVER["REQUEST_URI"], "course/view.php") || strpos($_SERVER["REQUEST_URI"], "course/section.php");
-        if($hasuri) {
+        if ($hasuri) {
             $showcoursesummary = get_config("theme_boost_training", "course_summary");
             $showcoursesummarycourse = get_config("theme_boost_training", "course_summary_{$courseid}");
             if ($showcoursesummarycourse !== false) {
@@ -334,12 +334,15 @@ class core_renderer extends \core_renderer {
                 if ($showcoursesummary == 2) {
                     $bannerfileurl = $this->get_course_image();
                     if ($bannerfileurl) {
-                        $header->categoryname = $DB->get_field("course_categories", "name", ["id" => $this->page->course->category]);
+                        $header->categoryname =
+                            $DB->get_field("course_categories", "name", ["id" => $this->page->course->category]);
                         $header->hasbannercourse = true;
                         $header->banner_course_file_url = $bannerfileurl;
 
-                        $header->hasbannercourse_position = get_config("theme_boost_training", "course_summary_banner_position");
-                        $hasbannercoursepositioncourse = get_config("theme_boost_training", "course_summary_banner_position_{$courseid}");
+                        $header->hasbannercourse_position =
+                            get_config("theme_boost_training", "course_summary_banner_position");
+                        $hasbannercoursepositioncourse =
+                            get_config("theme_boost_training", "course_summary_banner_position_{$courseid}");
                         if ($hasbannercoursepositioncourse !== false) {
                             $header->hasbannercourse_position = $hasbannercoursepositioncourse;
                         }
