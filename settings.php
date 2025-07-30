@@ -25,10 +25,13 @@
 defined('MOODLE_INTERNAL') || die();
 
 if (is_siteadmin()) {
-    $settings = new theme_boost_admin_settingspage_tabs('themesettingboost_training',
-        get_string('configtitle', 'theme_boost_training'));
+    $title = get_string("pluginname", "theme_boost_training") . " - ";
+    $title .= get_string("quickstart_title", "theme_boost_training");
+    $url = new core\url("/theme/boost_training/quickstart/");
+    $ADMIN->add("themes", new admin_externalpage("theme_boost_training_link", $title, $url));
 
-    $ADMIN->add('themes', new admin_category('theme_boost_training', get_string('pluginname', 'theme_boost_training')));
+    $settings = new theme_boost_admin_settingspage_tabs("themesettingboost_training",
+        get_string("configtitle", "theme_boost_training"));
 
     require_once("settings/general.php");
     require_once("settings/advanced.php");
