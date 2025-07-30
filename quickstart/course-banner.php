@@ -94,7 +94,7 @@ if (optional_param("POST", false, PARAM_INT)) {
                 $fs->create_file_from_pathname($filerecord, $_FILES[$fieldname]["tmp_name"]);
             }
 
-            set_config($fieldname, $filename, $component);
+            set_config($filearea, $filename, $component);
         }
     }
 
@@ -132,10 +132,10 @@ if (!$bannerfileurl) {
     }
 }
 
-echo '<form action="' . $CFG->wwwroot . '/theme/boost_training/quickstart/course-banner.php"
+$action = "{$CFG->wwwroot}/theme/boost_training/quickstart/course-banner.php?courseid={$courseid}";
+echo '<form action="' . $action . '" style="display:block;"
             enctype="multipart/form-data" method="post"
-            class="quickstart-content"
-            style="display: block;">';
+            class="quickstart-content">';
 echo '<input type="hidden" name="POST" value="1" />';
 echo '<input type="hidden" name="sesskey" value="' . sesskey() . '" />';
 
