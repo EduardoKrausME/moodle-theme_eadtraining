@@ -53,12 +53,9 @@ $string['acctoolbar_toolbar'] = 'Accessibility toolbar';
 $string['acctoolbar_zoom_block_header'] = 'Zoom in';
 $string['add_block'] = '+ Add new block';
 $string['advancedsettings'] = 'Advanced settings';
-$string['background_course_image'] = 'Course background image';
-$string['background_course_image_desc'] = 'Sets a background image for the header of all courses. This image will be displayed at the top of the course page and can be individually replaced in the course settings.';
 $string['background_profile_image'] = 'Default course background image';
 $string['background_profile_image_desc'] = 'Sets a default background image for the header of all courses. This image will be displayed at the top of the course page and can be individually replaced in the course settings.';
-$string['backgroundimage'] = 'Background image';
-$string['backgroundimage_desc'] = 'The image to display as a background of the site. The background image you upload here will override the background image in your theme preset files.';
+$string['brandcolor'] = 'Cor primária da interface';
 $string['brandcolor_background_menu'] = 'Apply brand color to menu background';
 $string['brandcolor_background_menu_desc'] = 'This setting defines whether the color set in "Brand color" will be applied to the menu items or to the menu background.<br>If applied to the background, the menu text will be displayed in white to ensure proper contrast.';
 $string['brandcolor_desc'] = 'Set the highlight color using the selection above or by choosing from the palette below.';
@@ -69,6 +66,11 @@ $string['choosereadme'] = 'Boost Training is a modern highly-customisable theme.
 $string['configtitle'] = 'Boost Training';
 $string['course_summary'] = 'Show course summary before the Course';
 $string['course_summary_banner'] = 'Header with banner';
+$string['course_summary_banner_default'] = 'Choose the default banner for all courses';
+$string['course_summary_banner_default_desc'] = 'Within each course, you can set a different banner that will replace this default one.';
+$string['course_summary_banner_down'] = 'Banner stays below the top menu';
+$string['course_summary_banner_edit'] = 'Edit the banner image of this course';
+$string['course_summary_banner_under'] = 'Banner starts right after the top menu';
 $string['course_summary_desc'] = 'If enabled, the course summary will be displayed before the main course content on the course page.';
 $string['course_summary_none'] = 'No header';
 $string['course_summary_simple'] = 'Simple header with information';
@@ -175,6 +177,10 @@ $string['quickstart_home_selectsections'] = 'Select the desired sections:';
 $string['quickstart_home_selectstyle'] = 'Choose the Home style';
 $string['quickstart_home_traditional'] = 'Traditional Moodle Home';
 $string['quickstart_home_traditional_desc'] = 'Default Moodle homepage with blocks and courses. Click the button below to edit system settings.';
+$string['quickstart_settings_link'] = '<div class="card mb-5">
+<div class="card-header">Quick Start</div>
+<div class="card-body"><a href="{$a}">Access the Quick Start Guide</a> and use the intuitive configurator to customize these and other settings of the Boost Training theme.</div>
+</div>';
 $string['quickstart_title'] = 'Quick Start';
 $string['region-side-pre'] = 'Right';
 $string['settings_accessibility'] = 'Enable accessibility options';

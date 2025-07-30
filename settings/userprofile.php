@@ -28,6 +28,11 @@ defined('MOODLE_INTERNAL') || die;
 $page = new admin_settingpage("theme_boost_training_userprofile",
     get_string("userprofilesettings", "theme_boost_training"));
 
+$url = "{$CFG->wwwroot}/theme/boost_training/quickstart/#user-profile";
+$setting = new admin_setting_heading("theme_boost_training_quickstart_userprofile", "",
+    get_string("quickstart_settings_link", "theme_boost_training", $url));
+$page->add($setting);
+
 // Profile background image.
 $setting = new admin_setting_configstoredfile("theme_boost_training/background_profile_image",
     get_string("background_profile_image", "theme_boost_training"),
