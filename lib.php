@@ -59,7 +59,7 @@ function theme_boost_training_get_extra_scss($theme) {
     $loginbackgroundimageurl = $theme->setting_file_url("loginbackgroundimage", "loginbackgroundimage");
     if (!empty($loginbackgroundimageurl)) {
         $content .= "
-            body.pagelayout-login #page {
+            body.pagelayout-login #page-wrapper {
                 background-image: url('$loginbackgroundimageurl'); background-size: cover;
             }";
     }
@@ -266,12 +266,11 @@ function theme_boost_training_setting_file_url($setting) {
     if (!$filepath) {
         return false;
     }
-    $itemid = theme_get_revision();
     $syscontext = context_system::instance();
 
     $url = moodle_url::make_file_url(
         "$CFG->wwwroot/pluginfile.php",
-        "/{$syscontext->id}/theme_boost_training/{$setting}/{$itemid}{$filepath}");
+        "/{$syscontext->id}/theme_boost_training/{$setting}/0/{$filepath}");
 
     return $url;
 }
