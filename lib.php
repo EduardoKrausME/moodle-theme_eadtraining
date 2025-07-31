@@ -255,7 +255,7 @@ function theme_boost_training_progress_content() {
  *
  * @param $setting
  *
- * @return bool|\core\url
+ * @return bool|moodle_url
  *
  * @throws dml_exception
  */
