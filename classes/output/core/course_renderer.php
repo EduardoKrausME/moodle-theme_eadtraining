@@ -28,6 +28,7 @@
 namespace theme_boost_training\output\core;
 
 use cache;
+use context_course;
 use context_system;
 use core_course\external\course_summary_exporter;
 use Exception;
