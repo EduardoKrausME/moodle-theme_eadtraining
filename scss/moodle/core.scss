@@ -2993,11 +2993,18 @@ body.dragging {
 .drawers {
     .block_myoverview {
         border: 0;
-
+        background: transparent;
+        & > .card-header {
+            background: transparent;
+            --bs-card-border-color: #00000000;
+        }
         & > .card-body {
             padding-top: 0 !important; /* stylelint-disable-line declaration-no-important */
             padding-left: 0 !important; /* stylelint-disable-line declaration-no-important */
             padding-right: 0 !important; /* stylelint-disable-line declaration-no-important */
+        }
+        & .block-cards hr {
+            display: none;
         }
     }
 }
