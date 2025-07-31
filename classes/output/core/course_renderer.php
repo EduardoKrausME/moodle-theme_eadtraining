@@ -301,7 +301,12 @@ class course_renderer extends \core_course_renderer {
 
         $courseimage = course_summary_exporter::get_course_image($course);
         if (!$courseimage) {
-            $courseimage = $this->output->get_default_image_for_courseid($course->id);
+            if (method_exists($this->output, "get_default_image_for_courseid")) {
+                $courseimage = $this->output->get_default_image_for_courseid($course->id);
+            } else {
+                $context = context_course::instance($course->id);
+                $courseimage = $this->output->get_generated_url_for_course($context);
+            }
         }
 
         $cardhomemustache = [
