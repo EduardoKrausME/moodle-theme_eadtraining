@@ -202,8 +202,6 @@
                                 let isChecked2 = false;
 
                                 inputs.forEach(function (input) {
-                                    console.log(input);
-                                    console.log(input.value);
                                     if (input.checked) {
                                         if (input.value === "1") isChecked1 = true;
                                         if (input.value === "2") isChecked2 = true;
@@ -216,6 +214,7 @@
                             updateSummaries();
 
                             function checkedAnimation(element, show) {
+                                element.style.display = "block";
                                 element.style.transition = "all .3s ease";
                                 element.style.overflow = "hidden";
                                 element.style.opacity = show ? 1 : 0;
