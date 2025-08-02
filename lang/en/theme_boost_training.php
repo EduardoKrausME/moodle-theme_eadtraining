@@ -26,6 +26,7 @@
 defined('MOODLE_INTERNAL') || die;
 
 $string['access_course'] = 'Access the course';
+$string['access_course_buy'] = 'Course details';
 $string['acctoolbar_access_declaration'] = 'Accessibility statement';
 $string['acctoolbar_btn_bright'] = 'Bright contrast';
 $string['acctoolbar_btn_cursor_black'] = 'Big black cursor';
