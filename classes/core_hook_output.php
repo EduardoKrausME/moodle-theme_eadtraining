@@ -24,6 +24,7 @@
 
 namespace theme_boost_training;
 
+use core\hook\output\before_html_attributes;
 use Exception;
 
 /**
@@ -32,6 +33,26 @@ use Exception;
  * @package theme_boost_training
  */
 class core_hook_output {
+
+    /**
+     * Function before_html_attributes
+     *
+     * @throws Exception
+     */
+    public static function before_html_attributes(before_html_attributes $hook): void {
+        global $CFG;
+
+        $theme = $CFG->theme;
+        if (isset($_SESSION["SESSION"]->theme)) {
+            $theme = $_SESSION["SESSION"]->theme;
+        }
+        if ($theme != "boost_training") {
+            return ;
+        }
+
+        $hook->add_attribute("data-themename", "boost_training");
+        $hook->add_attribute("data-background-color", get_config("theme_boost", "brandcolor"));
+    }
 
     /**
      * Function before_footer_html_generation
