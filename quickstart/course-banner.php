@@ -28,9 +28,15 @@ use theme_boost_training\images\git;
 require_once("../../../config.php");
 require_once("../lib.php");
 global $CFG, $PAGE, $OUTPUT, $DB, $USER;
-require_admin();
 
 $courseid = required_param("courseid", PARAM_INT);
+$modal = optional_param("modal", false, PARAM_INT);
+
+if (!isloggedin() && $modal) {
+    $PAGE->set_url(new moodle_url("/course/view.php", ["id" => $courseid]));
+}
+
+require_admin();
 
 if (optional_param("POST", false, PARAM_INT)) {
     require_sesskey();
@@ -68,8 +74,10 @@ if (optional_param("POST", false, PARAM_INT)) {
             } else {
                 continue;
             }
+            $filename = pathinfo($hasupload, PATHINFO_BASENAME);
         } else {
             $hasupload = !empty($_FILES[$fieldname]) && is_uploaded_file($_FILES[$fieldname]["tmp_name"]);
+            $filename = clean_param($_FILES[$fieldname]["name"], PARAM_FILE);
             $filestring = false;
         }
         if ($hasupload) {
@@ -77,7 +85,6 @@ if (optional_param("POST", false, PARAM_INT)) {
 
             // Delete old files (if you want to keep a single file).
             $fs->delete_area_files($syscontext->id, $component, $filearea, 0);
-            $filename = clean_param($_FILES[$fieldname]["name"], PARAM_FILE);
             $filerecord = [
                 "contextid" => $syscontext->id,
                 "component" => $component,
@@ -111,7 +118,7 @@ $PAGE->set_title(get_string("quickstart_title", "theme_boost_training"));
 $PAGE->set_heading(get_string("quickstart_title", "theme_boost_training"));
 
 $PAGE->requires->css("/theme/boost_training/quickstart/style.css");
-if (optional_param("modal", false, PARAM_INT)) {
+if ($modal) {
     echo "<link rel=\"stylesheet\" href=\"{$CFG->wwwroot}/theme/boost_training/quickstart/style.css\"/>";
 } else {
     echo $OUTPUT->header();
