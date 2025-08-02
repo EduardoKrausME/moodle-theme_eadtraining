@@ -131,6 +131,7 @@
         &:before {
             font: var(--fa-font-solid);
             content: fa-content($fa-var-check);
+            margin-left: -5px;
         }
     }
 }
