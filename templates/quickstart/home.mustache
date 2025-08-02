@@ -287,7 +287,7 @@
 
                         // Uncheck the other checkboxes in the same group.
                         document.querySelectorAll(`[name="homemode_banners[]"]`).forEach(inputinput => {
-                            if (inputinput !== this && inputinput.value.startsWith(group) && !inputinput.classList.contains('not-editing')) {
+                            if (inputinput !== this && inputinput.value.startsWith(group) && !inputinput.classList.contains("not-editing")) {
                                 inputinput.checked = false;
                             }
                         });

@@ -121,8 +121,7 @@
                                 data-target="theme_boost_training-drawers-blocks"
                                 data-toggle="tooltip"
                                 data-placement="right"
-                                title="{{#str}}opendrawerblocks, core{{/str}}"
-                        >
+                                title="{{#str}}opendrawerblocks, core{{/str}}">
                             <span class="sr-only">{{#str}}opendrawerblocks, core{{/str}}</span>
                             <span class="dir-rtl-hide">{{#pix}}t/blocks_drawer, core{{/pix}}</span>
                             <span class="dir-ltr-hide">{{#pix}}t/blocks_drawer_rtl, core{{/pix}}</span>
@@ -162,7 +161,6 @@
                             </div>
                         {{/overflow}}
 
-                        <!--
                         {{#course_summary}}
                             <div class="course-section">
                                 <div class="section-item">
@@ -170,7 +168,6 @@
                                 </div>
                             </div>
                         {{/course_summary}}
-                        -->
 
                         {{{ output.main_content }}}
                         {{{ output.activity_navigation }}}
@@ -188,9 +185,9 @@
 </body>
 </html>
 {{#js}}
-    M.util.js_pending('theme_boost/loader');
-    require(['theme_boost/loader', 'theme_boost/drawer'], function(Loader, Drawer) {
+    M.util.js_pending("theme_boost/loader");
+    require(["theme_boost/loader", "theme_boost/drawer"], function(Loader, Drawer) {
         Drawer.init();
-        M.util.js_complete('theme_boost/loader');
+        M.util.js_complete("theme_boost/loader");
     });
 {{/js}}

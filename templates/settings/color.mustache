@@ -29,13 +29,13 @@
      id="{{{uniqid}}}">
     <div class="preview" style="background:{{{background}}}"
          {{#startcolor}}
-             onclick="document.querySelector('[id^=\'id_s_theme_\'][id$=\'_startcolor\']').value='{{{background}}}'"
+             onclick="document.querySelector(`[id^='id_s_theme_'][id$='_startcolor']`).value='{{{background}}}'"
          {{/startcolor}}
         {{#brandcolor}}
-            onclick="document.querySelector('[id^=\'id_s_theme_\'][id$=\'_brandcolor\']').value='{{{background}}}'"
+            onclick="document.querySelector(`[id^='id_s_theme_'][id$='_brandcolor']`).value='{{{background}}}'"
         {{/brandcolor}}
         {{#footercolor}}
-            onclick="document.querySelector('[id^=\'id_s_theme_\'][id$=\'_footer_background_color\']').value='{{{background}}}'"
+            onclick="document.querySelector(`[id^='id_s_theme_'][id$='_footer_background_color']`).value='{{{background}}}'"
         {{/footercolor}}>
         {{#color}}
             <span>{{{color}}}</span>
@@ -47,17 +47,17 @@
     require(["jquery"], function($) {
         $("#{{{uniqid}}}").click(function() {
             {{#startcolor}}
-                $("[id^='id_s_theme_'][id$='_startcolor']")
+                $(`[id^="id_s_theme_"][id$="_startcolor"]`)
                         .val("{{{background}}}")
                         .minicolors("settings", {value: "{{{background}}}"});
             {{/startcolor}}
             {{#brandcolor}}
-                $("[id^='id_s_theme_'][id$='_brandcolor']")
+                $(`[id^="id_s_theme_"][id$="_brandcolor"]`)
                         .val("{{{background}}}")
                         .minicolors("settings", {value: "{{{background}}}"});
             {{/brandcolor}}
             {{#footercolor}}
-                $("[id^='id_s_theme_'][id$='_footer_background_color']")
+                $(`[id^="id_s_theme_"][id$="_footer_background_color"]`)
                         .val("{{{background}}}")
                         .minicolors("settings", {value: "{{{background}}}"});
             {{/footercolor}}

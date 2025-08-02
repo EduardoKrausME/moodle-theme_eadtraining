@@ -130,21 +130,21 @@
 
                 <!-- JavaScript to control visibility -->
                 <script>
-                    document.addEventListener('DOMContentLoaded', function () {
-                        const select = document.getElementById('footer_block_count');
-                        select.value = select.getAttribute('data-num-selected');
+                    document.addEventListener("DOMContentLoaded", function () {
+                        const select = document.getElementById("footer_block_count");
+                        select.value = select.getAttribute("data-num-selected");
 
-                        const blockElements = document.querySelectorAll('[data-block]');
+                        const blockElements = document.querySelectorAll("[data-block]");
 
                         function updateVisibility() {
                             const count = parseInt(select.value, 10);
                             blockElements.forEach(el => {
-                                const num = parseInt(el.getAttribute('data-block'), 10);
-                                el.style.display = num <= count ? '' : 'none';
+                                const num = parseInt(el.getAttribute("data-block"), 10);
+                                el.style.display = num <= count ? "" : "none";
                             });
                         }
 
-                        select.addEventListener('change', updateVisibility);
+                        select.addEventListener("change", updateVisibility);
                         updateVisibility();
                     });
                 </script>
