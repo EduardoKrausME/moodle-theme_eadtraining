@@ -47,7 +47,7 @@ class core_hook_output {
             $theme = $_SESSION["SESSION"]->theme;
         }
         if ($theme != "boost_training") {
-            return ;
+            return;
         }
 
         $hook->add_attribute("data-themename", "boost_training");
