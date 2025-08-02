@@ -64,7 +64,7 @@ class course_renderer extends \core_course_renderer {
      * @throws Exception
      */
     public function frontpage() {
-        global $DB, $CFG, $SITE;
+        global $DB, $CFG, $SITE, $USER;
 
         // Home with block editor.
         if (get_config("theme_boost_training", "homemode")) {
@@ -72,10 +72,11 @@ class course_renderer extends \core_course_renderer {
 
             $editing = $this->page->user_is_editing();
             $lang = $USER->lang ?? $CFG->lang;
+            $userorlang = $USER->id ? $USER->id : $lang;
 
             $previewdataid = optional_param("dataid", false, PARAM_INT);
             $cache = cache::make("theme_boost_training", "frontpage_cache");
-            $cachekey = "homemode_pages_v2";
+            $cachekey = "homemode_pages_{$userorlang}";
             if (!$editing && $cache->has($cachekey) && !$previewdataid) {
                 $compiledpages = json_decode($cache->get($cachekey));
             } else {
