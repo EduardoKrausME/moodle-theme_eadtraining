@@ -23,10 +23,11 @@ function popular_default_createblocks($page) {
                 $context = context_course::instance($course->id, IGNORE_MISSING);
                 $summary = util::format_text($course->summary, $course->summaryformat, $context, "course", "summary", 0);
 
+                $courseinfo = get_editor_course_link($course);
                 $blocks .= "
                     <div class=\"top-courses-item overflow-hidden\">
                         <div class=\"top-courses-inner\">
-                            <a href=\"{$CFG->wwwroot}/course/view.php?id={$course->id}\"
+                            <a href=\"{$courseinfo->link}\"
                                style=\"
                                     background:          url('{$courseimage}');
                                     display:             block;
@@ -37,7 +38,7 @@ function popular_default_createblocks($page) {
                             </a>
                             <div class=\"content-back\">
                                 <h6 class=\"course-title\">
-                                    <a href=\"{$CFG->wwwroot}/course/view.php?id={$course->id}\">{$course->fullname}</a>
+                                    <a href=\"{$courseinfo->link}\">{$course->fullname}</a>
                                 </h6>
                                 <div class=\"video-description\">{$summary[0]}</div>
                             </div>

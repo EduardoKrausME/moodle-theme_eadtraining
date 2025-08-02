@@ -25,10 +25,11 @@ function popular_eadflix_createblocks($page) {
                     $course->summary, $course->summaryformat
                     ) = util::format_text($course->summary, $course->summaryformat, $context, "course", "summary", 0);
 
+                $courseinfo = get_editor_course_link($course);
                 $blocks .= "
                     <div class=\"top-courses-item slider-item overflow-hidden\">
                         <div class=\"top-courses-inner\">
-                            <a href=\"{$CFG->wwwroot}/course/view.php?id={$course->id}\"
+                            <a href=\"{$courseinfo->link}\"
                                style=\"
                                     background:          url('{$courseimage}');
                                     display:             block;
@@ -39,11 +40,11 @@ function popular_eadflix_createblocks($page) {
                             </a>
                             <div class=\"content-back\">
                                 <h6 class=\"course-title\">
-                                    <a href=\"{$CFG->wwwroot}/course/view.php?id={$course->id}\">Título</a>
+                                    <a href=\"{$courseinfo->link}\">Título</a>
                                 </h6>
                                 <div class=\"video-description\">{$course->summary}</div>
-                                <a href=\"{$CFG->wwwroot}/course/view.php?id={$course->id}\">
-                                    <span>" . get_string("access_course", "theme_boost_training") . "</span>
+                                <a href=\"{$courseinfo->link}\">
+                                    <span>{$courseinfo->access}</span>
                                 </a>
                             </div>
                         </div>

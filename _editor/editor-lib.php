@@ -78,7 +78,6 @@ function editor_create_page($template, $lang, $local) {
  * @param $pages
  * @return object
  * @throws Exception
- * @throws coding_exception
  */
 function compile_pages($pages) {
     $return = (object)["pages" => [], "css" => [], "js" => []];
@@ -219,4 +218,38 @@ function replace_lang_strings(&$data) {
             $value = get_string($langkey, 'theme_boost_training');
         }
     }
+}
+
+/**
+ * @param object $course
+ * @return object
+ * @throws Exception
+ */
+function get_editor_course_link($course) {
+    global $CFG, $USER;
+
+    $title = $course->fullname;
+    $link = "{$CFG->wwwroot}/course/view.php?id={$course->id}";
+    $access = get_string("access_course", "theme_boost_training");
+
+    if (file_exists("{$CFG->dirroot}/local/kopere_pay/lib.php")) {
+        $coursecontext = context_course::instance($course->id);
+        if (!has_capability("moodle/course:view", $coursecontext, $USER)) {
+            $enable = get_config("local_kopere_dashboard", "builder_enable_{$course->id}");
+
+            $access = get_string("access_course_buy", "theme_boost_training");
+            if ($enable) {
+                $link = "{$CFG->wwwroot}/local/kopere_pay/view.php?id={$course->id}";
+                $title = get_config("local_kopere_dashboard", "builder_titulo_{$course->id}");
+            } else {
+                $link = "{$CFG->wwwroot}/local/kopere_pay/?id={$course->id}";
+            }
+        }
+    }
+
+    return (object)[
+        "link" => $link,
+        "title" => $title,
+        "access" => $access,
+    ];
 }

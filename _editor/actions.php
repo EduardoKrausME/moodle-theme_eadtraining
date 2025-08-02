@@ -94,10 +94,12 @@ if ($action == "langedit") {
     }
 
 
-    $savedata = boost_training_clear_params_array($_POST["save"], PARAM_RAW);
-    $info = json_decode($page->info);
-    $info->savedata = array_values($savedata);
-    $page->info = json_encode($info);
+    if (isset($_POST["save"])) {
+        $savedata = boost_training_clear_params_array($_POST["save"], PARAM_RAW);
+        $info = json_decode($page->info);
+        $info->savedata = array_values($savedata);
+        $page->info = json_encode($info);
+    }
 
     $DB->update_record("theme_boost_training_pages", $page);
 

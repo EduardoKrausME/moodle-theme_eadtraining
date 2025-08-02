@@ -4,9 +4,8 @@ use core_course\external\course_summary_exporter;
 use core_external\util;
 
 function banner_eadflix_op1_createblocks($page) {
-    global $DB, $OUTPUT, $CFG;
+    global $DB, $OUTPUT;
 
-    $accesscourse = get_string("access_course", "theme_boost_training");
     $page->info = json_decode($page->info);
 
     $blocks = "";
@@ -21,6 +20,7 @@ function banner_eadflix_op1_createblocks($page) {
                     $courseimage = $OUTPUT->get_default_image_for_courseid($course->id);
                 }
 
+                $courseinfo = get_editor_course_link($course);
                 $blocks .= "
                     <div class=\"course-banner-item\">
                         <div class=\"course-bg-banner\">
@@ -33,12 +33,12 @@ function banner_eadflix_op1_createblocks($page) {
                         </div>
                         <div class=\"course-banner-content\">
                             <h3 class=\"course-title\">
-                                <a href=\"{$CFG->wwwroot}/course/view.php?id={$course->id}\">{$course->fullname}</a>
+                                <a href=\"{$courseinfo->link}\">{$course->fullname}</a>
                             </h3>
                             <div class=\"course-text-description\">
                                 {$data->description}
                             </div>
-                            <a class=\"btn btn-access\" href=\"{$CFG->wwwroot}/course/view.php?id={$course->id}\">{$accesscourse}</a>
+                            <a class=\"btn btn-access\" href=\"{$courseinfo->link}\">{$courseinfo->access}</a>
                         </div>
                     </div>\n";
             }
