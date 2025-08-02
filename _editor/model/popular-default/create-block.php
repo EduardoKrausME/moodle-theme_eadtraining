@@ -34,7 +34,8 @@ function popular_default_createblocks($page) {
                                     width:               200px;
                                     height:              320px;
                                     background-size:     cover;
-                                    background-position: center;\">
+                                    background-position: center;
+                                    background-repeat:   no-repeat;\">
                             </a>
                             <div class=\"content-back\">
                                 <h6 class=\"course-title\">
