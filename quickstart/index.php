@@ -172,6 +172,17 @@ echo '<form class="quickstart-content" method="post" enctype="multipart/form-dat
 echo '<input type="hidden" name="POST" value="1" />';
 echo '<input type="hidden" name="sesskey" value="' . sesskey() . '" />';
 
+$savetheme = optional_param("savetheme", "boost_training", PARAM_TEXT);
+
+if ($savetheme == "boost_training") {
+    $themecolors = theme_boost_training_colors();
+} else if ($savetheme == "eadflix") {
+    require_once("{$CFG->dirroot}/theme/eadflix/lib.php");
+    $themecolors = theme_eadflix_colors();
+} else {
+    $themecolors = [];
+}
+
 // Home.
 $pages = $DB->get_records("theme_boost_training_pages", ["local" => "home"]);
 $templates = [];
@@ -217,18 +228,13 @@ $logosmustache = [
 echo $OUTPUT->render_from_template("theme_boost_training/quickstart/logos", $logosmustache);
 
 // Brandcolor.
-$htmlselect = "";
-foreach (theme_boost_training_colors() as $color) {
-    $htmlselect .= "\n\n" . $OUTPUT->render_from_template("theme_boost_training/settings/color", [
-            "background" => $color,
-            "brandcolor" => true,
-            "color" => $color,
-        ]);
-}
 $brandcolormustache = [
     "brandcolor" => get_config("theme_boost", "brandcolor"),
     "brandcolor_background_menu" => get_config("theme_boost_training", "brandcolor_background_menu"),
-    "htmlselect" => $htmlselect,
+    "htmlselect" => $OUTPUT->render_from_template("theme_boost_training/settings/colors", [
+        "brandcolor" => true,
+        "colors" => $themecolors,
+    ]),
     "return" => "logos",
     "next" => "user-profile",
 ];
@@ -256,14 +262,6 @@ $accessibilitymustache = [
 echo $OUTPUT->render_from_template("theme_boost_training/quickstart/accessibility", $accessibilitymustache);
 
 // Footer.
-$htmlselect = "";
-foreach (theme_boost_training_colors() as $color) {
-    $htmlselect .= "\n\n" . $OUTPUT->render_from_template("theme_boost_training/settings/color", [
-            "background" => $color,
-            "footercolor" => true,
-            "color" => $color,
-        ]);
-}
 $numblocks = 0;
 for ($i = 1; $i <= 4; $i++) {
     $footertitle = get_config("theme_boost_training", "footer_title_{$i}");
@@ -274,7 +272,10 @@ for ($i = 1; $i <= 4; $i++) {
 }
 $footermustache = [
     "footer_background_color" => get_config("theme_boost_training", "footer_background_color"),
-    "htmlselect" => $htmlselect,
+    "htmlselect" => $OUTPUT->render_from_template("theme_boost_training/settings/colors", [
+        "footercolor" => true,
+        "colors" => $themecolors,
+    ]),
     "blocks" => [
         [
             "num" => 1,
