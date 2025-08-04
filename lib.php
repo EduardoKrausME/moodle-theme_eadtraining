@@ -413,7 +413,8 @@ function theme_boost_training_coursemodule_edit_post_actions($data, $course) {
  * @return array
  */
 function theme_boost_training_colors() {
-    return ["#000428", // Azul Escuro.
+    return [
+        "#000428", // Azul Escuro.
         "#070000", // Preto.
         "#1a2a6c", // Azul Escuro.
         "#314755", // Cinza Escuro.
