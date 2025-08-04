@@ -2494,7 +2494,7 @@ textarea.form-control-lg {
 }
 
 .form-select,
-:not(.form-select) > select {
+:not(.form-select) > select:not([multiple]) {
   --bs-form-select-bg-img: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23343a40' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e");
   display: block;
   padding: 0.375rem 2.25rem 0.375rem 0.75rem;
@@ -2513,13 +2513,13 @@ textarea.form-control-lg {
   transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
 .form-select select,
-:not(.form-select) > select select {
+:not(.form-select) > select:not([multiple]) select {
   border: none;
   outline: none;
 }
 
 :not(.form-select) > select {
-  min-width: 100px;
+  min-width: 200px;
 }
 
 @media (prefers-reduced-motion: reduce) {
