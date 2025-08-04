@@ -15,7 +15,7 @@
     along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 }}
 {{!
-    @template theme_boost_training/settings/color
+    @template theme_boost_training/settings/colors
 
     Example context (json):
     {
@@ -25,41 +25,36 @@
         "footercolor": false
     }
 }}
-<div class="boost_training-theme-select-item"
-     id="{{{uniqid}}}">
-    <div class="preview" style="background:{{{background}}}"
-         {{#startcolor}}
-             onclick="document.querySelector(`[id^='id_s_theme_'][id$='_startcolor']`).value='{{{background}}}'"
-         {{/startcolor}}
-        {{#brandcolor}}
-            onclick="document.querySelector(`[id^='id_s_theme_'][id$='_brandcolor']`).value='{{{background}}}'"
-        {{/brandcolor}}
-        {{#footercolor}}
-            onclick="document.querySelector(`[id^='id_s_theme_'][id$='_footer_background_color']`).value='{{{background}}}'"
-        {{/footercolor}}>
-        {{#color}}
-            <span>{{{color}}}</span>
-        {{/color}}
-    </div>
+<div id="{{{uniqid}}}">
+    {{#colors}}
+        <div class="boost_training-theme-select-item">
+            <div class="preview" style="background:{{{.}}}"
+                 data-color="{{{.}}}">
+                <span>{{{.}}}</span>
+            </div>
+        </div>
+    {{/colors}}
 </div>
 
 {{#js}}
+    /*<script>*/
     require(["jquery"], function($) {
-        $("#{{{uniqid}}}").click(function() {
+        $("#{{{uniqid}}} .preview").click(function() {
+            let color = $(this).attr("data-color");
             {{#startcolor}}
                 $(`[id^="id_s_theme_"][id$="_startcolor"]`)
-                        .val("{{{background}}}")
-                        .minicolors("settings", {value: "{{{background}}}"});
+                        .val(color)
+                        .minicolors("settings", {value: color});
             {{/startcolor}}
             {{#brandcolor}}
                 $(`[id^="id_s_theme_"][id$="_brandcolor"]`)
-                        .val("{{{background}}}")
-                        .minicolors("settings", {value: "{{{background}}}"});
+                        .val(color)
+                        .minicolors("settings", {value: color});
             {{/brandcolor}}
             {{#footercolor}}
                 $(`[id^="id_s_theme_"][id$="_footer_background_color"]`)
-                        .val("{{{background}}}")
-                        .minicolors("settings", {value: "{{{background}}}"});
+                        .val(color)
+                        .minicolors("settings", {value: color});
             {{/footercolor}}
         });
     });

@@ -37,14 +37,10 @@ $setting = new admin_setting_heading("theme_boost_training_quickstart_footer", "
 $page->add($setting);
 
 $htmlselect = "<link rel=\"stylesheet\" href=\"{$CFG->wwwroot}/theme/boost_training/scss/colors.css\" />";
-foreach (theme_boost_training_colors() as $color) {
-    $htmlselect .= "\n\n" . $OUTPUT->render_from_template("theme_boost_training/settings/color", [
-            "background" => $color,
-            "footercolor" => true,
-            "color" => $color,
-        ]);
-}
-
+$htmlselect .= "\n\n" . $OUTPUT->render_from_template("theme_boost_training/settings/colors", [
+        "footercolor" => true,
+        "colors" => theme_boost_training_colors(),
+    ]);
 $setting = new admin_setting_configtext("theme_boost_training/footer_background_color",
     get_string("footer_background_color", "theme_boost_training"),
     get_string("footer_background_color_desc", "theme_boost_training") . $htmlselect,

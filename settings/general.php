@@ -38,13 +38,10 @@ $page->add($setting);
 $htmlselect = "<link rel=\"stylesheet\" href=\"{$CFG->wwwroot}/theme/boost_training/scss/colors.css\" />";
 $config = get_config("theme_boost_training");
 if (!isset($config->startcolor[2])) {
-    foreach (theme_boost_training_colors() as $color) {
-        $htmlselect .= "\n\n" . $OUTPUT->render_from_template("theme_boost_training/settings/color", [
-                "background" => $color,
-                "startcolor" => true,
-                "color" => $color,
-            ]);
-    }
+    $htmlselect .= "\n\n" . $OUTPUT->render_from_template("theme_boost_training/settings/colors", [
+            "startcolor" => true,
+            "colors" => theme_boost_training_colors(),
+        ]);
 
     $setting = new admin_setting_configtext("theme_boost_training/startcolor",
         get_string('brandcolor', 'theme_boost'),
@@ -54,13 +51,10 @@ if (!isset($config->startcolor[2])) {
     $setting->set_updatedcallback("theme_boost_training_change_color");
     $page->add($setting);
 } else {
-    foreach (theme_boost_training_colors() as $color) {
-        $htmlselect .= "\n\n" . $OUTPUT->render_from_template("theme_boost_training/settings/color", [
-                "background" => $color,
-                "brandcolor" => true,
-                "color" => $color,
-            ]);
-    }
+    $htmlselect .= "\n\n" . $OUTPUT->render_from_template("theme_boost_training/settings/colors", [
+            "brandcolor" => true,
+            "colors" => theme_boost_training_colors(),
+        ]);
 
     // We use an empty default value because the default colour should come from the preset.
     $setting = new admin_setting_configtext("theme_boost/brandcolor",
