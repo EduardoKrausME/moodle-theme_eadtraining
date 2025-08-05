@@ -30,6 +30,11 @@ if (is_siteadmin()) {
     $url = new moodle_url("/theme/boost_training/quickstart/");
     $ADMIN->add("themes", new admin_externalpage("theme_boost_training_link", $title, $url));
 
+    $ADMIN->add("themes", new admin_category("theme_boost_training",
+        get_string("pluginname", "theme_boost_training")));
+}
+
+if ($ADMIN->fulltree) {
     $settings = new theme_boost_admin_settingspage_tabs("themesettingboost_training",
         get_string("configtitle", "theme_boost_training"));
 
