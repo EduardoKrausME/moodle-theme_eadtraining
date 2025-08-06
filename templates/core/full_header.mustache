@@ -141,53 +141,54 @@
     </header>
 {{/hasbannercourse}}
 
-{{#hasnosumary}}
-    <header id="page-header" class="header-maxwidth d-print-none">
-        <div class="w-100">
-            <div class="d-flex flex-wrap">
-                {{#hasnavbar}}
-                    <div id="page-navbar">
-                        {{{navbar}}}
+{{^hasnavbarcourse}}
+    {{^hasbannercourse}}
+        <header id="page-header" class="header-maxwidth d-print-none">
+            <div class="w-100">
+                <div class="d-flex flex-wrap">
+                    {{#hasnavbar}}
+                        <div id="page-navbar">
+                            {{{navbar}}}
+                        </div>
+                    {{/hasnavbar}}
+                    <div class="ms-auto d-flex">
+                        {{{pageheadingbutton}}}
                     </div>
-                {{/hasnavbar}}
-                <div class="ms-auto d-flex">
-                    {{{pageheadingbutton}}}
+                    <div id="course-header">
+                        {{{courseheader}}}
+                    </div>
                 </div>
-                <div id="course-header">
-                    {{{courseheader}}}
-                </div>
-            </div>
-            <div class="d-flex align-items-center">
-                {{^welcomemessage}}
-                    {{#contextheader}}
-                        <div class="me-auto">
-                            {{{contextheader}}}
-                        </div>
-                    {{/contextheader}}
-                {{/welcomemessage}}
-                {{> core/welcome }}
-                <div class="header-actions-container ms-auto" data-region="header-actions-container">
-                    {{#headeractions}}
-                        <div class="header-action ms-2">{{{.}}}</div>
-                    {{/headeractions}}
-                    {{#headeractions_banner_course_edit}}
-                        <div class="header-action ms-2">
-                            <a id="headeractions-banner-{{{headeractions_banner_courseid}}}"
-                               class="btn btn-primary text-nowrap"
-                               href="{{{headeractions_banner_course_edithref}}}">
-                                {{#str}}course_summary_banner_edit, theme_boost_training{{/str}}
-                            </a>
-                        </div>
-                    {{/headeractions_banner_course_edit}}
+                <div class="d-flex align-items-center">
+                    {{^welcomemessage}}
+                        {{#contextheader}}
+                            <div class="me-auto">
+                                {{{contextheader}}}
+                            </div>
+                        {{/contextheader}}
+                    {{/welcomemessage}}
+                    {{> core/welcome }}
+                    <div class="header-actions-container ms-auto" data-region="header-actions-container">
+                        {{#headeractions}}
+                            <div class="header-action ms-2">{{{.}}}</div>
+                        {{/headeractions}}
+                        {{#headeractions_banner_course_edit}}
+                            <div class="header-action ms-2">
+                                <a id="headeractions-banner-{{{headeractions_banner_courseid}}}"
+                                   class="btn btn-primary text-nowrap"
+                                   href="{{{headeractions_banner_course_edithref}}}">
+                                    {{#str}}course_summary_banner_edit, theme_boost_training{{/str}}
+                                </a>
+                            </div>
+                        {{/headeractions_banner_course_edit}}
+                    </div>
                 </div>
             </div>
-        </div>
-    </header>
-{{/hasnosumary}}
+        </header>
+    {{/hasbannercourse}}
+{{/hasnavbarcourse}}
 
 {{#js}}
-    /*
-    <script>*/
+    /*<script>*/
     require(["jquery", "core/modal", "core/notification"], function ($, Modal, Notification) {
         $(`#headeractions-banner-{{{headeractions_banner_courseid}}}`).click(function (){
             event.preventDefault();
