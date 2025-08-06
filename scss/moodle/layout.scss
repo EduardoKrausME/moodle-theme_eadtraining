@@ -34,11 +34,12 @@
     }
 }
 
+body{
+    background: mix(white, $primary, 95%);
+}
 #page.drawers {
     margin-top: $navbar-height;
     @include thin-scrolls($gray-100);
-
-    background: mix(white, $primary, 95%);;
 
     .main-inner {
         // max-width: 100%;
