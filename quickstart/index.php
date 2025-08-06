@@ -175,6 +175,7 @@ echo '<input type="hidden" name="sesskey" value="' . sesskey() . '" />';
 $savetheme = optional_param("savetheme", "boost_training", PARAM_TEXT);
 
 if ($savetheme == "boost_training") {
+    require_once("{$CFG->dirroot}/theme/boost_training/lib.php");
     $themecolors = theme_boost_training_colors();
 } else if ($savetheme == "eadflix") {
     require_once("{$CFG->dirroot}/theme/eadflix/lib.php");
