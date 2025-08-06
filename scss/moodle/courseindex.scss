@@ -36,7 +36,21 @@ $courseindex-item-current: $primary !default;
             cursor: move;
         }
 
-        &.pageitem,
+        &.pageitem{
+            background-color: darken($courseindex-item-page-bg, 7.5%);
+            color: darken($courseindex-link-color-selected, 10%);
+            .activity-icon {
+                background: #ffffff;
+            }
+            .courseindex-link,
+            .courseindex-chevron {
+                color: darken($courseindex-link-color-selected, 10%);
+
+                a {
+                    color: darken($courseindex-link-color-selected, 10%);
+                }
+            }
+        }
         .pageitem {
             background-color: darken($courseindex-item-page-bg, 7.5%);
             color: darken($courseindex-link-color-selected, 10%);
@@ -61,6 +75,11 @@ $courseindex-item-current: $primary !default;
 }
 
 .courseindex {
+    // General icons size.
+    .icon {
+        font-size: 10px;
+    }
+
     // Both activity and section items.
     .courseindex-item {
         padding: $courseindex-item-padding-y $courseindex-item-padding-x;
@@ -68,22 +87,22 @@ $courseindex-item-current: $primary !default;
         @include border-radius($courseindex-item-radius);
 
         &.courseindex-section-title {
-            padding: 10px 1px 10px 9px;
+            padding: 19px 1px 19px 14px;
             color: $primary;
-            //background-color: #0051f919;
-            background: rgba($primary, .1);
-            border-radius: 0;
+            //border: 1px solid mix(white, $primary, 70%);
+            border-radius: 12px;
             text-decoration: none;
-            flex-direction: row-reverse;
-            justify-content: space-between;
             a {
                 font-size: 18px;
                 font-weight: 700;
+                .icon {
+                    font-size: 16px;
+                }
             }
         }
 
         .icons-collapse-expand {
-            padding-right: 4px;
+            padding-right: 12px;
         }
 
         .courseindex-link,
@@ -94,6 +113,23 @@ $courseindex-item-current: $primary !default;
             &:focus {
                 color: $courseindex-link-hover-color;
                 text-decoration: none;
+            }
+
+            display: flex;
+            align-items: center;
+            .activity-icon {
+                background-color: mix(white, $primary, 90%);
+                border-radius: 100%;
+                min-width: 33px;
+                min-height: 33px;
+                margin-right: 5px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                img {
+                    width: 18px;
+                    height: 18px;
+                }
             }
         }
 
@@ -168,11 +204,10 @@ $courseindex-item-current: $primary !default;
     .courseindex-section {
         @include courseindex-item-dragging();
         box-shadow: unset;
-        border-radius: 8px;
-        // border-left: solid 3px transparent;
-        border: 1px solid rgba($primary, .3);
+        border-radius: 14px;
+        border: 1px solid mix(white, $primary, 70%);
         &:not(:last-child) {
-            margin-bottom: 3px;
+            margin-bottom: 21px;
         }
 
         .current-badge {
@@ -195,23 +230,20 @@ $courseindex-item-current: $primary !default;
 
         &.dropready .courseindex-item-content {
             /* Extra dropzone space */
-            padding-bottom: 1em;
+            // padding-bottom: 1em;
         }
 
         .courseindex-sectioncontent {
+            background: #fff;
+            border-radius: 0 0 14px 14px;
             .courseindex-item {
-                padding-left: $courseindex-item-padding-x;
+                padding: 11px 11px 11px $courseindex-item-padding-x;
             }
         }
 
         &.delegated-section {
             width: 100%;
         }
-    }
-
-    // General icons size.
-    .icon {
-        font-size: 10px;
     }
 
     // Element visible only on editing mode.

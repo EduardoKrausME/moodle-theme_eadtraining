@@ -1,7 +1,7 @@
 /* Anchor link offset fix. This makes hash links scroll 60px down to account for the fixed header. */
 $fixed-header-y: $navbar-height;
-$drawer-width: 285px !default;
-$drawer-left-width: 285px !default;
+$drawer-width: 380px !default;
+$drawer-left-width: 380px !default;
 $drawer-right-width: 315px !default;
 $drawer-padding-x: 20px !default;
 $drawer-padding-y: 20px !default;
@@ -161,7 +161,7 @@ $right-drawer-width: 320px;
 }
 
 @mixin drawer() {
-    background-color: $drawer-bg-color;
+    //background-color: $drawer-bg-color;
     // Drawers has a z-index higher than the page content,
     // lower than the top navbar and the sticky footer,
     // and lower to the message drawer.
@@ -237,7 +237,6 @@ $right-drawer-width: 320px;
 .drawer {
     @include drawer();
     @include drawertypes();
-    background-color: #fff;
 }
 
 @include media-breakpoint-up(lg) {
