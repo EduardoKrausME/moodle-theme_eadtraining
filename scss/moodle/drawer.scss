@@ -208,6 +208,7 @@ $right-drawer-width: 320px;
         &.show {
             left: 0;
             visibility: visible;
+            background: mix(white, $primary, 95%);
         }
 
         .drawertoggle {
