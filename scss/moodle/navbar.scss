@@ -375,8 +375,15 @@ $navbar-color: #b5bcc7;
 #page {
     margin-top: $navbar-height;
 }
-.pagelayout-embedded #page {
-    margin-top: 0;
+.pagelayout-maintenance,
+.pagelayout-embedded {
+    #page {
+        margin-top: 0;
+        background: #ffffff;
+        #page-content {
+            padding: 0 20px;
+        }
+    }
 }
 .navbar-bootswatch {
     .navbar-brand {
