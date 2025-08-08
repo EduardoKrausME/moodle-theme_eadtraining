@@ -35,7 +35,7 @@ if (is_siteadmin()) {
 }
 
 if ($ADMIN->fulltree) {
-    $settings = new theme_boost_admin_settingspage_tabs("themesettingtraining",
+    $settings = new theme_boost_admin_settingspage_tabs("themesettingeadtraining",
         get_string("configtitle", "theme_eadtraining"));
 
     require_once("settings/general.php");
