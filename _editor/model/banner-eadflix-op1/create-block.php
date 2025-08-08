@@ -1,7 +1,6 @@
 <?php
 
 use core_course\external\course_summary_exporter;
-use core_external\util;
 
 function banner_eadflix_op1_createblocks($page) {
     global $DB, $OUTPUT;
