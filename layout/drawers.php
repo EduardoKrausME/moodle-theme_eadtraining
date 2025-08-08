@@ -59,8 +59,7 @@ if (!$courseindex) {
 }
 
 $bodyattributes = $OUTPUT->body_attributes($extraclasses);
-//$forceblockdraweropen = $OUTPUT->firstview_fakeblocks();
-$forceblockdraweropen = true;
+$forceblockdraweropen = $OUTPUT->firstview_fakeblocks();
 
 $secondarynavigation = false;
 $overflow = "";
@@ -126,7 +125,7 @@ if (optional_param("embed-frame-top", 0, PARAM_INT)) {
     }
 
     if ($courseindex || $hasblocks) {
-        // $templatecontext += theme_eadtraining_progress_content();
+        $templatecontext += theme_eadtraining_progress_content();
     }
 
     $templatecontext["footercount"] = 0;
