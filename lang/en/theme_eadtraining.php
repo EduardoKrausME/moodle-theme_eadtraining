@@ -64,6 +64,7 @@ $string['brandcolor_background_menu_desc'] = 'This setting defines whether the c
 $string['brandcolor_desc'] = 'Set the highlight color using the selection above or by choosing from the palette below.';
 $string['cachedef_course_cache'] = 'Course data cache';
 $string['cachedef_course_module_cache'] = 'Course modules cache';
+$string['cachedef_frontpage_cache'] = 'Frontpage cache';
 $string['cachedef_css_cache'] = 'CSS stylesheets cache';
 $string['choosereadme'] = 'Ead Training is a modern highly-customisable theme. This theme is intended to be used directly, or as a parent theme when creating new themes utilising Bootstrap 4.';
 $string['configtitle'] = 'Ead Training';
