@@ -53,6 +53,7 @@ function xmldb_theme_eadtraining_install() {
     set_config("scss", "", "theme_eadtraining");
 
     set_config("course_summary", 0, "theme_eadtraining");
+    set_config("course_summary_banner", 0, "theme_eadtraining");
     set_config("course_summary_banner_position", 0, "theme_eadtraining");
     set_config("svg_animate", 1, "theme_eadtraining");
 
@@ -70,10 +71,4 @@ function xmldb_theme_eadtraining_install() {
     set_config("footer_html_4", "", "theme_eadtraining");
 
     set_config("footer_show_copywriter", 1, "theme_eadtraining");
-
-//    $sql = "UPDATE {config_plugins} SET plugin = 'theme_eadtraining' WHERE plugin LIKE 'theme_boost_eadtraining'";
-//    $DB->execute($sql);
-//
-//    $sql = "UPDATE {files} SET component = 'theme_eadtraining' WHERE component LIKE 'theme_boost_eadtraining'";
-//    $DB->execute($sql);
 }

@@ -38,7 +38,7 @@ if (optional_param("POST", false, PARAM_INT)) {
         "homemode" => PARAM_INT,
 
         // Course.
-        "course_summary" => PARAM_INT,
+        "course_summary_banner" => PARAM_INT,
         "course_summary_banner_position" => PARAM_INT,
         "svg_animate" => PARAM_INT,
 
@@ -203,9 +203,9 @@ echo $OUTPUT->render_from_template("theme_eadtraining/quickstart/home", $homemus
 $bannerfile = theme_eadtraining_setting_file_url("banner_course_file");
 $coursesmustache = [
     "svg_animate" => get_config("theme_eadtraining", "svg_animate"),
-    "course_summary_0" => get_config("theme_eadtraining", "course_summary") == 0,
-    "course_summary_1" => get_config("theme_eadtraining", "course_summary") == 1,
-    "course_summary_2" => get_config("theme_eadtraining", "course_summary") == 2,
+    "course_summary_banner_0" => get_config("theme_eadtraining", "course_summary_banner") == 0,
+    "course_summary_banner_1" => get_config("theme_eadtraining", "course_summary_banner") == 1,
+    "course_summary_banner_2" => get_config("theme_eadtraining", "course_summary_banner") == 2,
     "banners" => git::list_all("banner", ""),
     "course_summary_banner_position" => get_config("theme_eadtraining", "course_summary_banner_position"),
     "banner_course_file_url" => $bannerfile ? $bannerfile->out() : false,

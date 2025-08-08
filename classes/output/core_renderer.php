@@ -308,8 +308,8 @@ class core_renderer extends \core_renderer {
         $header->hasbannercourse = false;
         $hasuri = strpos($_SERVER["REQUEST_URI"], "course/view.php") || strpos($_SERVER["REQUEST_URI"], "course/section.php");
         if ($hasuri) {
-            $showcoursesummary = get_config("theme_eadtraining", "course_summary");
-            $showcoursesummarycourse = get_config("theme_eadtraining", "course_summary_{$courseid}");
+            $showcoursesummary = get_config("theme_eadtraining", "course_summary_banner");
+            $showcoursesummarycourse = get_config("theme_eadtraining", "course_summary_banner_{$courseid}");
             if ($showcoursesummarycourse !== false) {
                 $showcoursesummary = $showcoursesummarycourse;
             }

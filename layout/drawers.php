@@ -85,41 +85,42 @@ $header = $PAGE->activityheader;
 $headercontent = $header->export_for_template($renderer);
 
 $templatecontext = [
-    'sitename' => format_string($SITE->shortname, true, ['context' => context_course::instance(SITEID), "escape" => false]),
-    'output' => $OUTPUT,
-    'sidepreblocks' => $blockshtml,
-    'hasblocks' => $hasblocks,
-    'bodyattributes' => $bodyattributes,
-    'courseindexopen' => $courseindexopen,
-    'blockdraweropen' => $blockdraweropen,
-    'courseindex' => $courseindex,
-    'primarymoremenu' => $primarymenu['moremenu'],
-    'secondarymoremenu' => $secondarynavigation ?: false,
-    'mobileprimarynav' => $primarymenu['mobileprimarynav'],
-    'usermenu' => $primarymenu['user'],
-    'langmenu' => $primarymenu['lang'],
-    'forceblockdraweropen' => $forceblockdraweropen,
-    'regionmainsettingsmenu' => $regionmainsettingsmenu,
-    'hasregionmainsettingsmenu' => !empty($regionmainsettingsmenu),
-    'overflow' => $overflow,
-    'headercontent' => $headercontent,
-    'addblockbutton' => $addblockbutton,
+    "sitename" => format_string($SITE->shortname, true, ["context" => context_course::instance(SITEID), "escape" => false]),
+    "output" => $OUTPUT,
+    "sidepreblocks" => $blockshtml,
+    "hasblocks" => $hasblocks,
+    "bodyattributes" => $bodyattributes,
+    "courseindexopen" => $courseindexopen,
+    "blockdraweropen" => $blockdraweropen,
+    "courseindex" => $courseindex,
+    "primarymoremenu" => $primarymenu["moremenu"],
+    "secondarymoremenu" => $secondarynavigation ?: false,
+    "mobileprimarynav" => $primarymenu["mobileprimarynav"],
+    "usermenu" => $primarymenu["user"],
+    "langmenu" => $primarymenu["lang"],
+    "forceblockdraweropen" => $forceblockdraweropen,
+    "regionmainsettingsmenu" => $regionmainsettingsmenu,
+    "hasregionmainsettingsmenu" => !empty($regionmainsettingsmenu),
+    "overflow" => $overflow,
+    "headercontent" => $headercontent,
+    "addblockbutton" => $addblockbutton,
+    "course_summary" => get_config("theme_eadtraining", "course_summary"),
 ];
 
 if (optional_param("embed-frame-top", 0, PARAM_INT)) {
-    echo $OUTPUT->render_from_template('theme_eadtraining/drawers_embed', $templatecontext);
+    echo $OUTPUT->render_from_template("theme_eadtraining/drawers_embed", $templatecontext);
 } else {
     if (strpos($_SERVER["REQUEST_URI"], "course/view.php") || strpos($_SERVER["REQUEST_URI"], "course/section.php")) {
         $templatecontext["hasnavbarcourse"] = true;
 
         if (strpos($_SERVER["REQUEST_URI"], "course/view.php")) {
-            $templatecontext["course_summary"] = get_config("theme_eadtraining", "course_summary");
-            if ($templatecontext["course_summary"]) {
-                $options = ['context' => $this->page->context];
+            $templatecontext["course_summary_banner"] = get_config("theme_eadtraining", "course_summary_banner");
+            if ($templatecontext["course_summary_banner"]) {
+                $options = ["context" => $this->page->context];
                 $summary = file_rewrite_pluginfile_urls(
-                    $this->page->course->summary, 'pluginfile.php', $this->page->context->id, 'course', 'summary', null);
+                    $this->page->course->summary, "pluginfile.php", $this->page->context->id, "course", "summary", null);
                 $summary = format_text($summary, $this->page->course->summaryformat, $options);
-                $templatecontext["course_summary"] = $summary;
+                $templatecontext["course_summary_banner"] = $summary;
             }
         }
     }
@@ -149,5 +150,5 @@ if (optional_param("embed-frame-top", 0, PARAM_INT)) {
 
     $templatecontext["footer_show_copywriter"] = get_config("theme_eadtraining", "footer_show_copywriter");
 
-    echo $OUTPUT->render_from_template('theme_eadtraining/drawers', $templatecontext);
+    echo $OUTPUT->render_from_template("theme_eadtraining/drawers", $templatecontext);
 }

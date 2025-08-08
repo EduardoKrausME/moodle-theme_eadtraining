@@ -93,7 +93,3 @@ $string['settings_icons_upload_image_desc'] = 'Se uma imagem for enviada, o tema
 
 $string['footer_background_color'] = 'Cor de fundo do rodapé';
 $string['footer_background_color_desc'] = 'Selecione a cor de fundo que será aplicada à seção do rodapé do site.';
-
-$string['coursesettings'] = 'Curso';
-$string['course_summary'] = 'Mostrar sumario do curso antes do Curso';
-$string['course_summary_desc'] = 'Se ativado, o sumário do curso será exibido antes do conteúdo principal na página do curso.';

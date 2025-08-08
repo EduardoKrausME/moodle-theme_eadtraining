@@ -43,7 +43,7 @@ if (optional_param("POST", false, PARAM_INT)) {
 
     // Save configs.
     $configkeys = [
-        "course_summary" => PARAM_INT,
+        "course_summary_banner" => PARAM_INT,
         "course_summary_banner_position" => PARAM_INT,
     ];
     foreach ($configkeys as $name => $type) {
@@ -146,8 +146,8 @@ echo '<form action="' . $action . '" style="display:block;"
 echo '<input type="hidden" name="POST" value="1" />';
 echo '<input type="hidden" name="sesskey" value="' . sesskey() . '" />';
 
-$coursesummary = get_config("theme_eadtraining", "course_summary");
-$coursesummarycourse = get_config("theme_eadtraining", "course_summary_{$courseid}");
+$coursesummary = get_config("theme_eadtraining", "course_summary_banner");
+$coursesummarycourse = get_config("theme_eadtraining", "course_summary_banner_{$courseid}");
 if ( $coursesummarycourse !== false) {
     $coursesummary = $coursesummarycourse;
 }
@@ -160,9 +160,9 @@ if ($positioncourse !== false) {
 
 $coursesmustache = [
     "no_accordion" => true, // For when calling out of the accordion.
-    "course_summary_0" => $coursesummary == 0,
-    "course_summary_1" => $coursesummary == 1,
-    "course_summary_2" => $coursesummary == 2,
+    "course_summary_banner_0" => $coursesummary == 0,
+    "course_summary_banner_1" => $coursesummary == 1,
+    "course_summary_banner_2" => $coursesummary == 2,
     "course_summary_banner_position" => $position,
     "banners" => git::list_all("banner", ""),
     "banner_course_file_url" => $bannerfileurl,
