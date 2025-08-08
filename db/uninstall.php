@@ -23,7 +23,7 @@
  */
 
 /**
- * Theme_training uninstall function.
+ * Theme_eadtraining uninstall function.
  *
  * @return void
  * @throws Exception

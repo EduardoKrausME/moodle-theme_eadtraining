@@ -27,7 +27,7 @@ defined('MOODLE_INTERNAL') || die();
 if (is_siteadmin()) {
     $title = get_string("pluginname", "theme_eadtraining") . " - ";
     $title .= get_string("quickstart_title", "theme_eadtraining");
-    $url = new moodle_url("/theme/training/quickstart/");
+    $url = new moodle_url("/theme/eadtraining/quickstart/");
     $ADMIN->add("themes", new admin_externalpage("theme_eadtraining_link", $title, $url));
 
     $ADMIN->add("themes", new admin_category("theme_eadtraining",

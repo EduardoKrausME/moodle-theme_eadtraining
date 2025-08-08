@@ -78,7 +78,7 @@ training_AccessTool.prototype.initialApp = function () {
     if (iframe) {
         const cssLink = iframe.contentDocument.createElement("link");
         cssLink.rel = "stylesheet";
-        cssLink.href = `${M.cfg.wwwroot}/theme/training/style/style-h5p.css`;
+        cssLink.href = `${M.cfg.wwwroot}/theme/eadtraining/style/style-h5p.css`;
         cssLink.type = "text/css";
         iframe.contentDocument.head.appendChild(cssLink);
 

@@ -27,7 +27,7 @@ defined('MOODLE_INTERNAL') || die();
 
 require_once(__DIR__ . "/lib.php");
 
-$THEME->name = "training";
+$THEME->name = "eadtraining";
 $THEME->sheets = [];
 $THEME->editor_sheets = [];
 $THEME->editor_scss = ["editor"];

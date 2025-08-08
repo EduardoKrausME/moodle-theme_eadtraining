@@ -28,7 +28,7 @@ defined('MOODLE_INTERNAL') || die;
 $page = new admin_settingpage("theme_eadtraining_userprofile",
     get_string("userprofilesettings", "theme_eadtraining"));
 
-$url = "{$CFG->wwwroot}/theme/training/quickstart/#user-profile";
+$url = "{$CFG->wwwroot}/theme/eadtraining/quickstart/#user-profile";
 $setting = new admin_setting_heading("theme_eadtraining_quickstart_userprofile", "",
     get_string("quickstart_settings_link", "theme_eadtraining", $url));
 $page->add($setting);

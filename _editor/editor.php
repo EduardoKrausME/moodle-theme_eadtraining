@@ -30,7 +30,7 @@ global $CFG, $DB, $PAGE, $OUTPUT;
 require_admin();
 
 $PAGE->set_context(\context_system::instance());
-$PAGE->set_url(new moodle_url("/theme/training/_editor/editor.php", $_GET));
+$PAGE->set_url(new moodle_url("/theme/eadtraining/_editor/editor.php", $_GET));
 
 if (optional_param("delete", false, PARAM_INT)) {
     $dataid = required_param("dataid", PARAM_INT);
@@ -51,7 +51,7 @@ if (optional_param("delete", false, PARAM_INT)) {
             <p>" . get_string("delete_block_confirm", "theme_eadtraining") . "</p>
             <div class=\"d-flex\">
                 <a class=\"btn btn-danger me-3\"
-                   href=\"{$CFG->wwwroot}/theme/training/_editor/editor.php?dataid={$dataid}&delete=1&confirm={$confirm}\">
+                   href=\"{$CFG->wwwroot}/theme/eadtraining/_editor/editor.php?dataid={$dataid}&delete=1&confirm={$confirm}\">
                    " . get_string("yes") . "</a>
                 <a class=\"btn btn-info me-3\"
                    href=\"{$CFG->wwwroot}/\">
@@ -67,7 +67,7 @@ if (required_param("dataid", PARAM_TEXT) == "create") {
     $lang = required_param("lang", PARAM_TEXT);
     $local = required_param("local", PARAM_TEXT);
     $page = editor_create_page($template, $lang, $local);
-    redirect("{$CFG->wwwroot}/theme/training/_editor/editor.php?dataid={$page->id}");
+    redirect("{$CFG->wwwroot}/theme/eadtraining/_editor/editor.php?dataid={$page->id}");
     die;
 }
 

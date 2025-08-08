@@ -27,7 +27,7 @@ defined('MOODLE_INTERNAL') || die;
 $page = new admin_settingpage("theme_eadtraining_accessibility",
     get_string("settings_accessibility_heading", "theme_eadtraining"));
 
-$url = "{$CFG->wwwroot}/theme/training/quickstart/#accessibility";
+$url = "{$CFG->wwwroot}/theme/eadtraining/quickstart/#accessibility";
 $setting = new admin_setting_heading("theme_eadtraining_quickstart_accessibility", "",
     get_string("quickstart_settings_link", "theme_eadtraining", $url));
 $page->add($setting);

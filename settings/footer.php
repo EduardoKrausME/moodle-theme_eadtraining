@@ -25,18 +25,18 @@
 defined('MOODLE_INTERNAL') || die;
 
 global $PAGE, $CFG, $OUTPUT;
-require_once("{$CFG->dirroot}/theme/training/lib.php");
+require_once("{$CFG->dirroot}/theme/eadtraining/lib.php");
 
 // Footer section.
 $page = new admin_settingpage("theme_eadtraining_footer",
     get_string("footersettings", "theme_eadtraining"));
 
-$url = "{$CFG->wwwroot}/theme/training/quickstart/#footer";
+$url = "{$CFG->wwwroot}/theme/eadtraining/quickstart/#footer";
 $setting = new admin_setting_heading("theme_eadtraining_quickstart_footer", "",
     get_string("quickstart_settings_link", "theme_eadtraining", $url));
 $page->add($setting);
 
-$htmlselect = "<link rel=\"stylesheet\" href=\"{$CFG->wwwroot}/theme/training/scss/colors.css\" />";
+$htmlselect = "<link rel=\"stylesheet\" href=\"{$CFG->wwwroot}/theme/eadtraining/scss/colors.css\" />";
 $htmlselect .= "\n\n" . $OUTPUT->render_from_template("theme_eadtraining/settings/colors", [
         "footercolor" => true,
         "colors" => theme_eadtraining_colors(),

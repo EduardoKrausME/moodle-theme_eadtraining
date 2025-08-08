@@ -91,7 +91,7 @@ function theme_eadtraining_pluginfile($course, $cm, $context, $filearea, $args, 
                 return send_stored_file($file, 0, 0, false, $options);
             }
         } else {
-            $theme = theme_config::load("training");
+            $theme = theme_config::load("eadtraining");
             // By default, theme files must be cache-able by both browsers and proxies.
             if (!array_key_exists("cacheability", $options)) {
                 $options["cacheability"] = "public";
@@ -141,7 +141,7 @@ function theme_eadtraining_user_preferences(): array {
  */
 function theme_eadtraining_get_main_scss_content($theme) {
     global $CFG;
-    return file_get_contents("{$CFG->dirroot}/theme/training/scss/style.scss");
+    return file_get_contents("{$CFG->dirroot}/theme/eadtraining/scss/style.scss");
 }
 
 /**
@@ -151,7 +151,7 @@ function theme_eadtraining_get_main_scss_content($theme) {
  */
 function theme_eadtraining_get_precompiled_css() {
     global $CFG;
-    return file_get_contents("{$CFG->dirroot}/theme/training/scss/style.css");
+    return file_get_contents("{$CFG->dirroot}/theme/eadtraining/scss/style.css");
 }
 
 /**
@@ -298,7 +298,7 @@ function theme_eadtraining_coursemodule_standard_elements(&$formwrapper, $mform)
     }
 
     global $CFG, $PAGE;
-    if ($CFG->theme == "training" || $CFG->theme == "eadflix") {
+    if ($CFG->theme == "eadtraining" || $CFG->theme == "eadflix") {
 
         // Icones.
         $mform->addElement("header", "theme_eadtraining_icons",

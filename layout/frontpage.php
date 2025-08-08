@@ -113,7 +113,7 @@ if (isset($config->homemode) && $config->homemode) {
 }
 if ($editing) {
     $templatecontext["editing"] = true;
-    $url = "{$CFG->wwwroot}/theme/training/_editor/actions.php?action=homemode&local=editing&sesskey=" . sesskey();
+    $url = "{$CFG->wwwroot}/theme/eadtraining/_editor/actions.php?action=homemode&local=editing&sesskey=" . sesskey();
     $templatecontext["homemode_form_action"] = $url;
 }
 

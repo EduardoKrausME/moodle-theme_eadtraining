@@ -113,13 +113,13 @@ if (optional_param("POST", false, PARAM_INT)) {
 }
 
 $PAGE->set_context(context_system::instance());
-$PAGE->set_url("/theme/training/quickstart/index.php#home");
+$PAGE->set_url("/theme/eadtraining/quickstart/index.php#home");
 $PAGE->set_title(get_string("quickstart_title", "theme_eadtraining"));
 $PAGE->set_heading(get_string("quickstart_title", "theme_eadtraining"));
 
-$PAGE->requires->css("/theme/training/quickstart/style.css");
+$PAGE->requires->css("/theme/eadtraining/quickstart/style.css");
 if ($modal) {
-    echo "<link rel=\"stylesheet\" href=\"{$CFG->wwwroot}/theme/training/quickstart/style.css\"/>";
+    echo "<link rel=\"stylesheet\" href=\"{$CFG->wwwroot}/theme/eadtraining/quickstart/style.css\"/>";
 } else {
     echo $OUTPUT->header();
 }
@@ -139,7 +139,7 @@ if (!$bannerfileurl) {
     }
 }
 
-$action = "{$CFG->wwwroot}/theme/training/quickstart/course-banner.php?courseid={$courseid}";
+$action = "{$CFG->wwwroot}/theme/eadtraining/quickstart/course-banner.php?courseid={$courseid}";
 echo '<form action="' . $action . '" style="display:block;"
             enctype="multipart/form-data" method="post"
             class="quickstart-content">';

@@ -21,7 +21,7 @@ define(["jquery", "core/modal", "core/notification"], function ($, Modal, Notifi
 
         add_block_modal_init: function (lang) {
             async function loadFiles() {
-                const response = await fetch(`${M.cfg.wwwroot}/theme/training/_editor/model/?lang=${lang}`);
+                const response = await fetch(`${M.cfg.wwwroot}/theme/eadtraining/_editor/model/?lang=${lang}`);
 
                 if (!response.ok) {
                     throw new Error("Error loading files: " + response.status);
@@ -69,7 +69,7 @@ define(["jquery", "core/modal", "core/notification"], function ($, Modal, Notifi
                             event.stopImmediatePropagation();
                         })
                         block.click(function () {
-                            location.href = `${M.cfg.wwwroot}/theme/training/_editor/editor.php?lang=${lang}&local=home&dataid=create&template=${item.id}`;
+                            location.href = `${M.cfg.wwwroot}/theme/eadtraining/_editor/editor.php?lang=${lang}&local=home&dataid=create&template=${item.id}`;
                         });
                     });
                 });
@@ -129,7 +129,7 @@ define(["jquery", "core/modal", "core/notification"], function ($, Modal, Notifi
             });
 
             $.ajax({
-                url: `${M.cfg.wwwroot}/theme/training/_editor/actions.php?action=page-order&local=home`,
+                url: `${M.cfg.wwwroot}/theme/eadtraining/_editor/actions.php?action=page-order&local=home`,
                 type: 'POST',
                 data: {
                     order: order,

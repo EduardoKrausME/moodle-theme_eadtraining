@@ -23,7 +23,7 @@
  */
 
 /**
- * Theme_training install function.
+ * Theme_eadtraining install function.
  *
  * @return void
  * @throws Exception
@@ -42,7 +42,7 @@ function xmldb_theme_eadtraining_install() {
         "itemid" => 0,
         "filename" => "user-modal-background.jpg",
     ];
-    $fs->create_file_from_pathname($filerecord, "{$CFG->dirroot}/theme/training/pix/user-modal-background.jpg");
+    $fs->create_file_from_pathname($filerecord, "{$CFG->dirroot}/theme/eadtraining/pix/user-modal-background.jpg");
     set_config("background_profile_image", "/user-modal-background.jpg", "theme_eadtraining");
     set_config("brandcolor_background_menu", 0, "theme_eadtraining");
 
@@ -70,4 +70,10 @@ function xmldb_theme_eadtraining_install() {
     set_config("footer_html_4", "", "theme_eadtraining");
 
     set_config("footer_show_copywriter", 1, "theme_eadtraining");
+
+//    $sql = "UPDATE {config_plugins} SET plugin = 'theme_eadtraining' WHERE plugin LIKE 'theme_boost_eadtraining'";
+//    $DB->execute($sql);
+//
+//    $sql = "UPDATE {files} SET component = 'theme_eadtraining' WHERE component LIKE 'theme_boost_eadtraining'";
+//    $DB->execute($sql);
 }

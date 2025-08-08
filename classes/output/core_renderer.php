@@ -23,7 +23,7 @@ use core_message\helper;
 use Exception;
 use moodle_url;
 use html_writer;
-use theme_eadtraining\trainingnavbar;
+use theme_eadtraining\eadtrainingnavbar;
 use user_picture;
 
 /**
@@ -67,7 +67,7 @@ class core_renderer extends \core_renderer {
      * @throws Exception
      */
     public function navbar(): string {
-        $newnav = new trainingnavbar($this->page);
+        $newnav = new eadtrainingnavbar($this->page);
         return $this->render_from_template("core/navbar", $newnav);
     }
 
@@ -353,7 +353,7 @@ class core_renderer extends \core_renderer {
             $header->hasnosumary = !$header->hasbannercourse && !$header->hasnavbarcourse;
 
             if (has_capability("moodle/site:config", $this->page->context)) {
-                $url = "{$CFG->wwwroot}/theme/training/quickstart/course-banner.php?courseid={$courseid}";
+                $url = "{$CFG->wwwroot}/theme/eadtraining/quickstart/course-banner.php?courseid={$courseid}";
                 $header->headeractions_banner_course_edithref = $url;
                 $header->headeractions_banner_courseid = $courseid;
                 $header->headeractions_banner_course_edit = true;

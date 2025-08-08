@@ -65,8 +65,8 @@ $string['brandcolor_desc'] = 'Set the highlight color using the selection above 
 $string['cachedef_course_cache'] = 'Course data cache';
 $string['cachedef_course_module_cache'] = 'Course modules cache';
 $string['cachedef_css_cache'] = 'CSS stylesheets cache';
-$string['choosereadme'] = 'Training is a modern highly-customisable theme. This theme is intended to be used directly, or as a parent theme when creating new themes utilising Bootstrap 4.';
-$string['configtitle'] = 'Training';
+$string['choosereadme'] = 'Ead Training is a modern highly-customisable theme. This theme is intended to be used directly, or as a parent theme when creating new themes utilising Bootstrap 4.';
+$string['configtitle'] = 'Ead Training';
 $string['course_summary'] = 'Show course summary before the Course';
 $string['course_summary_banner'] = 'Header with banner';
 $string['course_summary_banner_default'] = 'Choose the default banner for all courses';
@@ -140,13 +140,13 @@ $string['imageacceptedtypes'] = 'Only image files of type {$a} are allowed';
 $string['language_all'] = 'All available languages';
 $string['loginbackgroundimage'] = 'Login page background image';
 $string['loginbackgroundimage_desc'] = 'The image to display as a background for the login page.';
-$string['pluginname'] = 'Training';
+$string['pluginname'] = 'Ead Training';
 $string['preview'] = 'Block preview';
 $string['privacy:drawerblockclosed'] = 'The current preference for the block drawer is closed.';
 $string['privacy:drawerblockopen'] = 'The current preference for the block drawer is open.';
 $string['privacy:drawerindexclosed'] = 'The current preference for the index drawer is closed.';
 $string['privacy:drawerindexopen'] = 'The current preference for the index drawer is open.';
-$string['privacy:metadata'] = 'The Training theme does not store any personal data about any user.';
+$string['privacy:metadata'] = 'The Ead Training theme does not store any personal data about any user.';
 $string['privacy:metadata:preference:draweropenblock'] = 'The user\'s preference for hiding or showing the drawer with blocks.';
 $string['privacy:metadata:preference:draweropenindex'] = 'The user\'s preference for hiding or showing the drawer with course index.';
 $string['privacy:metadata:preference:draweropennav'] = 'The user\'s preference for hiding or showing the drawer menu navigation.';
@@ -182,7 +182,7 @@ $string['quickstart_home_traditional'] = 'Traditional Moodle Home';
 $string['quickstart_home_traditional_desc'] = 'Default Moodle homepage with blocks and courses. Click the button below to edit system settings.';
 $string['quickstart_settings_link'] = '<div class="card mb-5">
 <div class="card-header">Quick Start</div>
-<div class="card-body"><a href="{$a}">Access the Quick Start Guide</a> and use the intuitive configurator to customize these and other settings of the Training theme.</div>
+<div class="card-body"><a href="{$a}">Access the Quick Start Guide</a> and use the intuitive configurator to customize these and other settings of the Ead Training theme.</div>
 </div>';
 $string['quickstart_title'] = 'Quick Start';
 $string['region-side-pre'] = 'Right';

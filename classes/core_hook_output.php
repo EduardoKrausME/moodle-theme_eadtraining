@@ -46,11 +46,11 @@ class core_hook_output {
         if (isset($_SESSION["SESSION"]->theme)) {
             $theme = $_SESSION["SESSION"]->theme;
         }
-        if ($theme != "training") {
+        if ($theme != "eadtraining") {
             return;
         }
 
-        $hook->add_attribute("data-themename", "training");
+        $hook->add_attribute("data-themename", "eadtraining");
         $hook->add_attribute("data-background-color", get_config("theme_boost", "brandcolor"));
     }
 
@@ -72,7 +72,7 @@ class core_hook_output {
         if (isset($_SESSION["SESSION"]->theme)) {
             $theme = $_SESSION["SESSION"]->theme;
         }
-        if ($theme != "training" && $theme != "eadflix") {
+        if ($theme != "eadtraining" && $theme != "eadflix") {
             return;
         }
 

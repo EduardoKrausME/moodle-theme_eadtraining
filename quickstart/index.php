@@ -152,13 +152,13 @@ if (optional_param("POST", false, PARAM_INT)) {
 }
 
 $PAGE->set_context(context_system::instance());
-$PAGE->set_url("/theme/training/quickstart/index.php#home");
+$PAGE->set_url("/theme/eadtraining/quickstart/index.php#home");
 $PAGE->set_title(get_string("quickstart_title", "theme_eadtraining"));
 $PAGE->set_heading(get_string("quickstart_title", "theme_eadtraining"));
 
-$PAGE->requires->css("/theme/training/quickstart/style.css");
-$PAGE->requires->css("/theme/training/scss/colors.css");
-$PAGE->requires->js("/theme/training/quickstart/script.js");
+$PAGE->requires->css("/theme/eadtraining/quickstart/style.css");
+$PAGE->requires->css("/theme/eadtraining/scss/colors.css");
+$PAGE->requires->js("/theme/eadtraining/quickstart/script.js");
 $PAGE->requires->jquery();
 $PAGE->requires->jquery_plugin("ui");
 
@@ -172,10 +172,10 @@ echo '<form class="quickstart-content" method="post" enctype="multipart/form-dat
 echo '<input type="hidden" name="POST" value="1" />';
 echo '<input type="hidden" name="sesskey" value="' . sesskey() . '" />';
 
-$savetheme = optional_param("savetheme", "training", PARAM_TEXT);
+$savetheme = optional_param("savetheme", "eadtraining", PARAM_TEXT);
 
-if ($savetheme == "training") {
-    require_once("{$CFG->dirroot}/theme/training/lib.php");
+if ($savetheme == "eadtraining") {
+    require_once("{$CFG->dirroot}/theme/eadtraining/lib.php");
     $themecolors = theme_eadtraining_colors();
 } else if ($savetheme == "eadflix") {
     require_once("{$CFG->dirroot}/theme/eadflix/lib.php");

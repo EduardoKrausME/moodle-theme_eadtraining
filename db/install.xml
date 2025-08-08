@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<XMLDB PATH="theme/training/db" VERSION="20200525" COMMENT="XMLDB file for Moodle theme/training"
+<XMLDB PATH="theme/eadtraining/db" VERSION="20200525" COMMENT="XMLDB file for Moodle theme/eadtraining"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:noNamespaceSchemaLocation="../../../lib/xmldb/xmldb.xsd">
   <TABLES>

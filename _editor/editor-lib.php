@@ -51,8 +51,8 @@ function editor_create_page($template, $lang, $local) {
         $htmlfile = __DIR__ . "/model/{$template}/editor.html";
         $html = file_get_contents($htmlfile);
 
-        $html = str_replace("src=\"../", "src=\"{$CFG->wwwroot}/theme/training/_editor/model/{$template}/../", $html);
-        $html = str_replace("url(\"../", "url(\"{$CFG->wwwroot}/theme/training/_editor/model/{$template}/../", $html);
+        $html = str_replace("src=\"../", "src=\"{$CFG->wwwroot}/theme/eadtraining/_editor/model/{$template}/../", $html);
+        $html = str_replace("url(\"../", "url(\"{$CFG->wwwroot}/theme/eadtraining/_editor/model/{$template}/../", $html);
     } else {
         throw new Exception("File template not found");
     }
@@ -133,19 +133,19 @@ function compile_pages($pages) {
                         $return->js[$script] = $js;
                     } else {
                         if (file_exists(__DIR__ . "/model/{$page->template}/{$script}")) {
-                            $file = "/theme/training/_editor/model/{$page->template}/{$script}";
+                            $file = "/theme/eadtraining/_editor/model/{$page->template}/{$script}";
                             $return->js["{$page->template}/{$script}"] = $file;
                         }
                     }
                 }
             }
             if (isset($info->form->styles)) {
-                $file = "/theme/training/_editor/model/{$page->template}/style.css";
+                $file = "/theme/eadtraining/_editor/model/{$page->template}/style.css";
                 $return->css["{$page->template}/style.css"] = $file;
                 foreach ($info->form->styles as $style) {
                     if ($style != "bootstrap") {
                         if (file_exists(__DIR__ . "/model/{$page->template}/{$style}")) {
-                            $file = "/theme/training/_editor/model/{$page->template}/{$style}";
+                            $file = "/theme/eadtraining/_editor/model/{$page->template}/{$style}";
                             $return->css["{$page->template}/{$style}"] = $file;
                         };
                     }

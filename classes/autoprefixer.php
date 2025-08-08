@@ -98,7 +98,7 @@ class autoprefixer {
      */
     public function __construct(Document $tree) {
         debugging('theme_eadtraining\autoprefixer() is deprecated. Required prefixes for Bootstrap ' .
-            'are now in theme/training/scss/moodle/prefixes.scss', DEBUG_DEVELOPER);
+            'are now in theme/eadtraining/scss/moodle/prefixes.scss', DEBUG_DEVELOPER);
         $this->tree = $tree;
 
         $pseudos = array_map(function ($pseudo) {

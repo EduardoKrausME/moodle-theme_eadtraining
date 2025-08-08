@@ -30,7 +30,7 @@ use lang_string;
  * @copyright based on work by 2021 Adrian Greeve <adrian@moodle.com>
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class trainingnavbar implements \renderable {
+class eadtrainingnavbar implements \renderable {
 
     /** @var array The individual items of the navbar. */
     protected $items = [];

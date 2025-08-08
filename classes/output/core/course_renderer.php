@@ -68,7 +68,7 @@ class course_renderer extends \core_course_renderer {
 
         // Home with block editor.
         if (get_config("theme_eadtraining", "homemode")) {
-            require_once("{$CFG->dirroot}/theme/training/_editor/editor-lib.php");
+            require_once("{$CFG->dirroot}/theme/eadtraining/_editor/editor-lib.php");
 
             $editing = $this->page->user_is_editing();
             $lang = $USER->lang ?? $CFG->lang;

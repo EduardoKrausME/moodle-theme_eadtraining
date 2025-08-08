@@ -25,17 +25,17 @@
 defined('MOODLE_INTERNAL') || die;
 
 global $CFG, $OUTPUT, $PAGE;
-require_once("{$CFG->dirroot}/theme/training/lib.php");
+require_once("{$CFG->dirroot}/theme/eadtraining/lib.php");
 
 $page = new admin_settingpage("theme_eadtraining_general",
     get_string("generalsettings", "theme_eadtraining"));
 
-$url = "{$CFG->wwwroot}/theme/training/quickstart/#brandcolor";
+$url = "{$CFG->wwwroot}/theme/eadtraining/quickstart/#brandcolor";
 $setting = new admin_setting_heading("theme_eadtraining_quickstart_brandcolor", "",
     get_string("quickstart_settings_link", "theme_eadtraining", $url));
 $page->add($setting);
 
-$htmlselect = "<link rel=\"stylesheet\" href=\"{$CFG->wwwroot}/theme/training/scss/colors.css\" />";
+$htmlselect = "<link rel=\"stylesheet\" href=\"{$CFG->wwwroot}/theme/eadtraining/scss/colors.css\" />";
 $config = get_config("theme_eadtraining");
 if (!isset($config->startcolor[2])) {
     $htmlselect .= "\n\n" . $OUTPUT->render_from_template("theme_eadtraining/settings/colors", [
