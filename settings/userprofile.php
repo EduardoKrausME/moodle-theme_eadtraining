@@ -17,7 +17,7 @@
 /**
  * User profile file
  *
- * @package   theme_boost_training
+ * @package   theme_training
  * @copyright 2025 Eduardo Kraus {@link http://eduardokraus.com}
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -25,18 +25,18 @@
 defined('MOODLE_INTERNAL') || die;
 
 // User profile section.
-$page = new admin_settingpage("theme_boost_training_userprofile",
-    get_string("userprofilesettings", "theme_boost_training"));
+$page = new admin_settingpage("theme_training_userprofile",
+    get_string("userprofilesettings", "theme_training"));
 
-$url = "{$CFG->wwwroot}/theme/boost_training/quickstart/#user-profile";
-$setting = new admin_setting_heading("theme_boost_training_quickstart_userprofile", "",
-    get_string("quickstart_settings_link", "theme_boost_training", $url));
+$url = "{$CFG->wwwroot}/theme/training/quickstart/#user-profile";
+$setting = new admin_setting_heading("theme_training_quickstart_userprofile", "",
+    get_string("quickstart_settings_link", "theme_training", $url));
 $page->add($setting);
 
 // Profile background image.
-$setting = new admin_setting_configstoredfile("theme_boost_training/background_profile_image",
-    get_string("background_profile_image", "theme_boost_training"),
-    get_string("background_profile_image_desc", "theme_boost_training"),
+$setting = new admin_setting_configstoredfile("theme_training/background_profile_image",
+    get_string("background_profile_image", "theme_training"),
+    get_string("background_profile_image_desc", "theme_training"),
     "background_profile_image", 0,
     ["maxfiles" => 1, "accepted_types" => [".jpg", ".jpeg", ".svg", ".png"]]);
 $setting->set_updatedcallback("theme_reset_all_caches");

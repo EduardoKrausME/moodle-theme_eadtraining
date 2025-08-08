@@ -17,7 +17,7 @@
 /**
  * Hooks
  *
- * @package   theme_boost_training
+ * @package   theme_training
  * @copyright 2025 Eduardo Kraus {@link http://eduardokraus.com}
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -30,10 +30,10 @@ defined('MOODLE_INTERNAL') || die;
 $callbacks = [
     [
         "hook" => before_html_attributes::class,
-        "callback" => '\theme_boost_training\core_hook_output::before_html_attributes',
+        "callback" => '\theme_training\core_hook_output::before_html_attributes',
     ],
     [
         "hook" => before_footer_html_generation::class,
-        "callback" => 'theme_boost_training\core_hook_output::before_footer_html_generation',
+        "callback" => 'theme_training\core_hook_output::before_footer_html_generation',
     ],
 ];

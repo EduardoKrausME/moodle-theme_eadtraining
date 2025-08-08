@@ -17,13 +17,13 @@
 /**
  * view file
  *
- * @package   theme_boost_training
+ * @package   theme_training
  * @copyright 2025 Eduardo Kraus {@link https://eduardokraus.com}
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-use theme_boost_training\editor\editor_tiny;
-use theme_boost_training\images\git;
+use theme_training\editor\editor_tiny;
+use theme_training\images\git;
 
 require_once("../../../config.php");
 global $CFG, $PAGE, $OUTPUT, $DB, $USER;
@@ -64,13 +64,13 @@ if (optional_param("POST", false, PARAM_INT)) {
     foreach ($configkeys as $name => $type) {
         $value = optional_param($name, false, $type);
         if ($value !== false) {
-            set_config($name, $value, "theme_boost_training");
+            set_config($name, $value, "theme_training");
         }
     }
 
     // Save banners home.
     require_once("../_editor/editor-lib.php");
-    $pages = $DB->get_records("theme_boost_training_pages", ["local" => "home"]);
+    $pages = $DB->get_records("theme_training_pages", ["local" => "home"]);
     $homemodebanners = optional_param_array("homemode_banners", false, PARAM_TEXT);
     foreach ($homemodebanners as $template) {
         $located = false;
@@ -93,9 +93,9 @@ if (optional_param("POST", false, PARAM_INT)) {
     $filefields = [
         "logocompact" => "core",
         "favicon" => "core",
-        "banner_course_url" => "theme_boost_training",
-        "banner_course_file" => "theme_boost_training",
-        "background_profile_image" => "theme_boost_training",
+        "banner_course_url" => "theme_training",
+        "banner_course_file" => "theme_training",
+        "background_profile_image" => "theme_training",
     ];
 
     $fs = get_file_storage();
@@ -144,21 +144,21 @@ if (optional_param("POST", false, PARAM_INT)) {
         $USER->editing = true;
     }
 
-    \cache::make("theme_boost_training", "course_cache")->purge();
-    \cache::make("theme_boost_training", "css_cache")->purge();
-    \cache::make("theme_boost_training", "frontpage_cache")->purge();
+    \cache::make("theme_training", "course_cache")->purge();
+    \cache::make("theme_training", "css_cache")->purge();
+    \cache::make("theme_training", "frontpage_cache")->purge();
 
-    redirect(new moodle_url("/"), get_string("quickstart_banner-saved", "theme_boost_training"));
+    redirect(new moodle_url("/"), get_string("quickstart_banner-saved", "theme_training"));
 }
 
 $PAGE->set_context(context_system::instance());
-$PAGE->set_url("/theme/boost_training/quickstart/index.php#home");
-$PAGE->set_title(get_string("quickstart_title", "theme_boost_training"));
-$PAGE->set_heading(get_string("quickstart_title", "theme_boost_training"));
+$PAGE->set_url("/theme/training/quickstart/index.php#home");
+$PAGE->set_title(get_string("quickstart_title", "theme_training"));
+$PAGE->set_heading(get_string("quickstart_title", "theme_training"));
 
-$PAGE->requires->css("/theme/boost_training/quickstart/style.css");
-$PAGE->requires->css("/theme/boost_training/scss/colors.css");
-$PAGE->requires->js("/theme/boost_training/quickstart/script.js");
+$PAGE->requires->css("/theme/training/quickstart/style.css");
+$PAGE->requires->css("/theme/training/scss/colors.css");
+$PAGE->requires->js("/theme/training/quickstart/script.js");
 $PAGE->requires->jquery();
 $PAGE->requires->jquery_plugin("ui");
 
@@ -172,11 +172,11 @@ echo '<form class="quickstart-content" method="post" enctype="multipart/form-dat
 echo '<input type="hidden" name="POST" value="1" />';
 echo '<input type="hidden" name="sesskey" value="' . sesskey() . '" />';
 
-$savetheme = optional_param("savetheme", "boost_training", PARAM_TEXT);
+$savetheme = optional_param("savetheme", "training", PARAM_TEXT);
 
-if ($savetheme == "boost_training") {
-    require_once("{$CFG->dirroot}/theme/boost_training/lib.php");
-    $themecolors = theme_boost_training_colors();
+if ($savetheme == "training") {
+    require_once("{$CFG->dirroot}/theme/training/lib.php");
+    $themecolors = theme_training_colors();
 } else if ($savetheme == "eadflix") {
     require_once("{$CFG->dirroot}/theme/eadflix/lib.php");
     $themecolors = theme_eadflix_colors();
@@ -185,7 +185,7 @@ if ($savetheme == "boost_training") {
 }
 
 // Home.
-$pages = $DB->get_records("theme_boost_training_pages", ["local" => "home"]);
+$pages = $DB->get_records("theme_training_pages", ["local" => "home"]);
 $templates = [];
 foreach ($pages as $page) {
     if (isset($page->template[3])) {
@@ -193,29 +193,29 @@ foreach ($pages as $page) {
     }
 }
 $homemustache = [
-    "homemode" => get_config("theme_boost_training", "homemode"),
+    "homemode" => get_config("theme_training", "homemode"),
     "templates" => $templates,
     "next" => "courses",
 ];
-echo $OUTPUT->render_from_template("theme_boost_training/quickstart/home", $homemustache);
+echo $OUTPUT->render_from_template("theme_training/quickstart/home", $homemustache);
 
 // Course.
-$bannerfile = theme_boost_training_setting_file_url("banner_course_file");
+$bannerfile = theme_training_setting_file_url("banner_course_file");
 $coursesmustache = [
-    "svg_animate" => get_config("theme_boost_training", "svg_animate"),
-    "course_summary_0" => get_config("theme_boost_training", "course_summary") == 0,
-    "course_summary_1" => get_config("theme_boost_training", "course_summary") == 1,
-    "course_summary_2" => get_config("theme_boost_training", "course_summary") == 2,
+    "svg_animate" => get_config("theme_training", "svg_animate"),
+    "course_summary_0" => get_config("theme_training", "course_summary") == 0,
+    "course_summary_1" => get_config("theme_training", "course_summary") == 1,
+    "course_summary_2" => get_config("theme_training", "course_summary") == 2,
     "banners" => git::list_all("banner", ""),
-    "course_summary_banner_position" => get_config("theme_boost_training", "course_summary_banner_position"),
+    "course_summary_banner_position" => get_config("theme_training", "course_summary_banner_position"),
     "banner_course_file_url" => $bannerfile ? $bannerfile->out() : false,
     "banner_course_file_extensions" => "PNG, JPG",
     "return" => "home",
     "next" => "logos",
 ];
-echo $OUTPUT->render_from_template("theme_boost_training/quickstart/courses", $coursesmustache);
-$PAGE->requires->js_call_amd("theme_boost_training/default_image", "generateimage", ["svg-courseid-111", 111, true]);
-$PAGE->requires->js_call_amd("theme_boost_training/default_image", "generateimage", ["svg-courseid-222", 222, false]);
+echo $OUTPUT->render_from_template("theme_training/quickstart/courses", $coursesmustache);
+$PAGE->requires->js_call_amd("theme_training/default_image", "generateimage", ["svg-courseid-111", 111, true]);
+$PAGE->requires->js_call_amd("theme_training/default_image", "generateimage", ["svg-courseid-222", 222, false]);
 
 // Logos.
 $logosmustache = [
@@ -226,54 +226,54 @@ $logosmustache = [
     "return" => "courses",
     "next" => "brandcolor",
 ];
-echo $OUTPUT->render_from_template("theme_boost_training/quickstart/logos", $logosmustache);
+echo $OUTPUT->render_from_template("theme_training/quickstart/logos", $logosmustache);
 
 // Brandcolor.
 $brandcolormustache = [
     "brandcolor" => get_config("theme_boost", "brandcolor"),
-    "brandcolor_background_menu" => get_config("theme_boost_training", "brandcolor_background_menu"),
-    "htmlselect" => $OUTPUT->render_from_template("theme_boost_training/settings/colors", [
+    "brandcolor_background_menu" => get_config("theme_training", "brandcolor_background_menu"),
+    "htmlselect" => $OUTPUT->render_from_template("theme_training/settings/colors", [
         "brandcolor" => true,
         "colors" => $themecolors,
     ]),
     "return" => "logos",
     "next" => "user-profile",
 ];
-echo $OUTPUT->render_from_template("theme_boost_training/quickstart/brandcolor", $brandcolormustache);
-$PAGE->requires->js_call_amd("theme_boost_training/settings", "minicolors", ["id_s_theme_boost_brandcolor"]);
+echo $OUTPUT->render_from_template("theme_training/quickstart/brandcolor", $brandcolormustache);
+$PAGE->requires->js_call_amd("theme_training/settings", "minicolors", ["id_s_theme_boost_brandcolor"]);
 
 // User profile.
-$backgroundprofileimage = theme_boost_training_setting_file_url("background_profile_image");
+$backgroundprofileimage = theme_training_setting_file_url("background_profile_image");
 $usermustache = [
     "background_profile_image_url" => $backgroundprofileimage ? $backgroundprofileimage->out() : false,
     "background_profile_image_extensions" => "PNG, JPG",
     "return" => "logos",
     "next" => "accessibility",
 ];
-echo $OUTPUT->render_from_template("theme_boost_training/quickstart/user-profile", $usermustache);
+echo $OUTPUT->render_from_template("theme_training/quickstart/user-profile", $usermustache);
 
 // Accessibility.
 $accessibilitymustache = [
-    "enable_accessibility" => get_config("theme_boost_training", "enable_accessibility"),
+    "enable_accessibility" => get_config("theme_training", "enable_accessibility"),
     "lang_has_ptbr" => $CFG->lang == "pt_br",
-    "enable_vlibras" => get_config("theme_boost_training", "enable_vlibras"),
+    "enable_vlibras" => get_config("theme_training", "enable_vlibras"),
     "return" => "user-profile",
     "next" => "footer",
 ];
-echo $OUTPUT->render_from_template("theme_boost_training/quickstart/accessibility", $accessibilitymustache);
+echo $OUTPUT->render_from_template("theme_training/quickstart/accessibility", $accessibilitymustache);
 
 // Footer.
 $numblocks = 0;
 for ($i = 1; $i <= 4; $i++) {
-    $footertitle = get_config("theme_boost_training", "footer_title_{$i}");
-    $footerhtml = get_config("theme_boost_training", "footer_html_{$i}");
+    $footertitle = get_config("theme_training", "footer_title_{$i}");
+    $footerhtml = get_config("theme_training", "footer_html_{$i}");
     if (isset($footertitle[3]) && isset($footerhtml[20])) {
         $numblocks++;
     }
 }
 $footermustache = [
-    "footer_background_color" => get_config("theme_boost_training", "footer_background_color"),
-    "htmlselect" => $OUTPUT->render_from_template("theme_boost_training/settings/colors", [
+    "footer_background_color" => get_config("theme_training", "footer_background_color"),
+    "htmlselect" => $OUTPUT->render_from_template("theme_training/settings/colors", [
         "footercolor" => true,
         "colors" => $themecolors,
     ]),
@@ -281,31 +281,31 @@ $footermustache = [
         [
             "num" => 1,
             "active" => true,
-            "footer_title" => get_config("theme_boost_training", "footer_title_1"),
-            "footer_html" => get_config("theme_boost_training", "footer_html_1"),
+            "footer_title" => get_config("theme_training", "footer_title_1"),
+            "footer_html" => get_config("theme_training", "footer_html_1"),
         ],
         [
             "num" => 2,
-            "footer_title" => get_config("theme_boost_training", "footer_title_2"),
-            "footer_html" => get_config("theme_boost_training", "footer_html_2"),
+            "footer_title" => get_config("theme_training", "footer_title_2"),
+            "footer_html" => get_config("theme_training", "footer_html_2"),
         ],
         [
             "num" => 3,
-            "footer_title" => get_config("theme_boost_training", "footer_title_3"),
-            "footer_html" => get_config("theme_boost_training", "footer_html_3"),
+            "footer_title" => get_config("theme_training", "footer_title_3"),
+            "footer_html" => get_config("theme_training", "footer_html_3"),
         ],
         [
             "num" => 4,
-            "footer_title" => get_config("theme_boost_training", "footer_title_4"),
-            "footer_html" => get_config("theme_boost_training", "footer_html_4"),
+            "footer_title" => get_config("theme_training", "footer_title_4"),
+            "footer_html" => get_config("theme_training", "footer_html_4"),
         ],
     ],
     "num_blocks" => $numblocks,
     "tyni_editor_config" => $editor->tyni_editor_config(),
     "return" => "accessibility",
 ];
-echo $OUTPUT->render_from_template("theme_boost_training/quickstart/footer", $footermustache);
-$PAGE->requires->js_call_amd("theme_boost_training/settings", "minicolors", ["id_footer_background_color"]);
+echo $OUTPUT->render_from_template("theme_training/quickstart/footer", $footermustache);
+$PAGE->requires->js_call_amd("theme_training/settings", "minicolors", ["id_footer_background_color"]);
 
 echo "</form>";
 

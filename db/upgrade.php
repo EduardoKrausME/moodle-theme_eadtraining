@@ -17,7 +17,7 @@
 /**
  * Upgrade file
  *
- * @package   theme_boost_training
+ * @package   theme_training
  * @copyright 2025 Eduardo Kraus {@link http://eduardokraus.com}
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -29,16 +29,16 @@
  * @return bool
  * @throws Exception
  */
-function xmldb_theme_boost_training_upgrade($oldversion) {
+function xmldb_theme_training_upgrade($oldversion) {
     global $DB;
 
     $dbman = $DB->get_manager(); // Loads ddl manager and xmldb classes.
 
     if ($oldversion < 2025062800) {
-        // Define table theme_boost_training_pages to be created.
-        $table = new xmldb_table("theme_boost_training_pages");
+        // Define table theme_training_pages to be created.
+        $table = new xmldb_table("theme_training_pages");
 
-        // Adding fields to table theme_boost_training_pages.
+        // Adding fields to table theme_training_pages.
         $table->add_field("id", XMLDB_TYPE_INTEGER, "10", null, XMLDB_NOTNULL, XMLDB_SEQUENCE);
         $table->add_field("local", XMLDB_TYPE_CHAR, "30", null, XMLDB_NOTNULL);
         $table->add_field("type", XMLDB_TYPE_CHAR, "30", null, XMLDB_NOTNULL);
@@ -48,23 +48,23 @@ function xmldb_theme_boost_training_upgrade($oldversion) {
         $table->add_field("lang", XMLDB_TYPE_CHAR, "6");
         $table->add_field("sort", XMLDB_TYPE_INTEGER, "10");
 
-        // Adding keys to table theme_boost_training_pages.
+        // Adding keys to table theme_training_pages.
         $table->add_key("primary", XMLDB_KEY_PRIMARY, ["id"]);
 
-        // Conditionally launch create table for theme_boost_training_pages.
+        // Conditionally launch create table for theme_training_pages.
         if (!$dbman->table_exists($table)) {
             $dbman->create_table($table);
         }
 
-        // Boost Training savepoint reached.
-        upgrade_plugin_savepoint(true, 2025062800, "theme", "boost_training");
+        // Training savepoint reached.
+        upgrade_plugin_savepoint(true, 2025062800, "theme", "training");
     }
 
     if ($oldversion < 2025072700) {
-        // Define table theme_boost_training_pages to be created.
-        $table = new xmldb_table("theme_boost_training_pages");
+        // Define table theme_training_pages to be created.
+        $table = new xmldb_table("theme_training_pages");
 
-        // Define field template to be added to theme_boost_training_pages.
+        // Define field template to be added to theme_training_pages.
         $template = new xmldb_field('template', XMLDB_TYPE_CHAR, '30', null, null, null, null, 'info');
 
         // Conditionally launch add field template.
@@ -72,17 +72,17 @@ function xmldb_theme_boost_training_upgrade($oldversion) {
             $dbman->add_field($table, $template);
         }
 
-        $pages = $DB->get_records("theme_boost_training_pages");
+        $pages = $DB->get_records("theme_training_pages");
         foreach ($pages as $page) {
             $info = json_decode($page->info);
             if (isset($info->template)) {
                 $page->template = $info->template;
-                $DB->update_record("theme_boost_training_pages", $page);
+                $DB->update_record("theme_training_pages", $page);
             }
         }
 
-        // Boost Training savepoint reached.
-        upgrade_plugin_savepoint(true, 2025072700, "theme", "boost_training");
+        // Training savepoint reached.
+        upgrade_plugin_savepoint(true, 2025072700, "theme", "training");
     }
 
     return true;

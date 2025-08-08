@@ -18,16 +18,16 @@
  * Autoprefixer.
  *
  * This autoprefixer has been developed to satisfy the basic needs of the
- * theme Boost Training when working with Bootstrap 4 alpha. We do not recommend
+ * theme Training when working with Bootstrap 4 alpha. We do not recommend
  * that this tool is shared, nor used outside of this theme.
  *
- * @package   theme_boost_training
+ * @package   theme_training
  * @copyright 2025 Eduardo Kraus {@link https://eduardokraus.com}
  * @copyright based on work by 2016 Frédéric Massart - FMCorz.net
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-namespace theme_boost_training;
+namespace theme_training;
 
 use Sabberworm\CSS\CSSList\CSSList;
 use Sabberworm\CSS\CSSList\Document;
@@ -43,7 +43,7 @@ use Sabberworm\CSS\Value\CSSFunction;
  *
  * Very basic implementation covering simple needs for Bootstrap 4.
  *
- * @package   theme_boost_training
+ * @package   theme_training
  * @copyright 2025 Eduardo Kraus {@link https://eduardokraus.com}
  * @copyright based on work by 2016 Frédéric Massart - FMCorz.net
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
@@ -97,8 +97,8 @@ class autoprefixer {
      * @param Document $tree The CSS tree.
      */
     public function __construct(Document $tree) {
-        debugging('theme_boost_training\autoprefixer() is deprecated. Required prefixes for Bootstrap ' .
-            'are now in theme/boost_training/scss/moodle/prefixes.scss', DEBUG_DEVELOPER);
+        debugging('theme_training\autoprefixer() is deprecated. Required prefixes for Bootstrap ' .
+            'are now in theme/training/scss/moodle/prefixes.scss', DEBUG_DEVELOPER);
         $this->tree = $tree;
 
         $pseudos = array_map(function ($pseudo) {

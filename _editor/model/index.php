@@ -17,8 +17,8 @@ foreach ($files as $file) {
                 "id" => $file,
                 "location" => $file,
                 "title" => $data->title,
-                "image" => "{$CFG->wwwroot}/theme/boost_training/_editor/model/{$file}/print.png",
-                "preview" => "{$CFG->wwwroot}/theme/boost_training/_editor/model/{$file}/preview.html",
+                "image" => "{$CFG->wwwroot}/theme/training/_editor/model/{$file}/print.png",
+                "preview" => "{$CFG->wwwroot}/theme/training/_editor/model/{$file}/preview.html",
             ];
         }
     }

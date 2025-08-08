@@ -1,5 +1,5 @@
 <?php
-// This file is part of the theme_boost_training plugin for Moodle - http://moodle.org/
+// This file is part of the theme_training plugin for Moodle - http://moodle.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -17,12 +17,12 @@
 /**
  * Event observers
  *
- * @package   theme_boost_training
+ * @package   theme_training
  * @copyright 2025 Eduardo Kraus {@link https://eduardokraus.com}
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-namespace theme_boost_training\events;
+namespace theme_training\events;
 
 use cache;
 use core\event\base;
@@ -49,9 +49,9 @@ class event_observers {
             case '\core\event\course_updated':
             case '\core\event\course_created':
             case '\core\event\config_log_created':
-                cache::make("theme_boost_training", "course_cache")->purge();
-                cache::make("theme_boost_training", "css_cache")->purge();
-                cache::make("theme_boost_training", "frontpage_cache")->purge();
+                cache::make("theme_training", "course_cache")->purge();
+                cache::make("theme_training", "css_cache")->purge();
+                cache::make("theme_training", "frontpage_cache")->purge();
                 break;
         }
     }
@@ -74,8 +74,8 @@ class event_observers {
         $sql = "
             SELECT *
               FROM {files}
-             WHERE component   = 'theme_boost_training'
-               AND filearea    = 'theme_boost_training_customicon'
+             WHERE component   = 'theme_training'
+               AND filearea    = 'theme_training_customicon'
                AND itemid      = :coursemodule
                AND filename LIKE '__%'";
         $files = $DB->get_records_sql($sql, ["coursemodule" => $coursemodule]);
@@ -95,7 +95,7 @@ class event_observers {
      * @return void
      */
     public static function enrolment(base $event) {
-        $cache = cache::make("theme_boost_training", "frontpage_cache");
+        $cache = cache::make("theme_training", "frontpage_cache");
         $cachekey = "homemode_pages_{$event->relateduserid}";
         $cache->delete($cachekey);
     }

@@ -14,7 +14,7 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
-namespace theme_boost_training;
+namespace theme_training;
 
 use core\navigation\views\view;
 use navigation_node;
@@ -25,12 +25,12 @@ use lang_string;
 /**
  * Creates a navbar for boost that allows easy control of the navbar items.
  *
- * @package   theme_boost_training
+ * @package   theme_training
  * @copyright 2025 Eduardo Kraus {@link https://eduardokraus.com}
  * @copyright based on work by 2021 Adrian Greeve <adrian@moodle.com>
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class boost_trainingnavbar implements \renderable {
+class trainingnavbar implements \renderable {
 
     /** @var array The individual items of the navbar. */
     protected $items = [];
@@ -159,7 +159,7 @@ class boost_trainingnavbar implements \renderable {
     /**
      * Get all the boostnavbaritem elements.
      *
-     * @return boostnavbaritem[] Boost Training navbar items.
+     * @return boostnavbaritem[] Training navbar items.
      */
     public function get_items(): array {
         return $this->items;

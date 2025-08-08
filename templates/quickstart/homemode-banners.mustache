@@ -15,7 +15,7 @@
     along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 }}
 {{!
-    @template theme_boost_training/quickstart/homemode-banners
+    @template theme_training/quickstart/homemode-banners
 
     Example context (json): {}
 }}
@@ -26,7 +26,7 @@
            {{$checked}}{{/checked}}
            style="display: none;">
     <div class="marked-area">
-        <img src="{{{config.wwwroot}}}/theme/boost_training/_editor/model/{{$model}}{{/model}}/print.png"
+        <img src="{{{config.wwwroot}}}/theme/training/_editor/model/{{$model}}{{/model}}/print.png"
              alt="{{$label}}{{/label}}">
         <div class="label-caption">{{$label}}{{/label}}</div>
     </div>
@@ -46,7 +46,7 @@
                 event.preventDefault();
                 event.stopImmediatePropagation();
 
-                home_show_alert(`{{#str}}quickstart_alert_notdelete, theme_boost_training, {{{config.wwwroot}}} {{/str}}`);
+                home_show_alert(`{{#str}}quickstart_alert_notdelete, theme_training, {{{config.wwwroot}}} {{/str}}`);
                 checkbox.checked = true;
             });
         }

@@ -21,7 +21,7 @@ define(["jquery", "core/modal", "core/notification"], function ($, Modal, Notifi
 
         add_block_modal_init: function (lang) {
             async function loadFiles() {
-                const response = await fetch(`${M.cfg.wwwroot}/theme/boost_training/_editor/model/?lang=${lang}`);
+                const response = await fetch(`${M.cfg.wwwroot}/theme/training/_editor/model/?lang=${lang}`);
 
                 if (!response.ok) {
                     throw new Error("Error loading files: " + response.status);
@@ -61,7 +61,7 @@ define(["jquery", "core/modal", "core/notification"], function ($, Modal, Notifi
                                          class="img-fluid mb-2" style="width:100%;border:1px solid #ccc;border-radius:8px;">
                                     <h5 style="font-size: 1rem;">${item.title}</h5>
                                     <a href="${item.preview}" 
-                                       target="_blank">${M.util.get_string('preview', "theme_boost_training")}</a>
+                                       target="_blank">${M.util.get_string('preview', "theme_training")}</a>
                                 </div>
                             </div>`);
                         $list.append(block);
@@ -69,7 +69,7 @@ define(["jquery", "core/modal", "core/notification"], function ($, Modal, Notifi
                             event.stopImmediatePropagation();
                         })
                         block.click(function () {
-                            location.href = `${M.cfg.wwwroot}/theme/boost_training/_editor/editor.php?lang=${lang}&local=home&dataid=create&template=${item.id}`;
+                            location.href = `${M.cfg.wwwroot}/theme/training/_editor/editor.php?lang=${lang}&local=home&dataid=create&template=${item.id}`;
                         });
                     });
                 });
@@ -129,7 +129,7 @@ define(["jquery", "core/modal", "core/notification"], function ($, Modal, Notifi
             });
 
             $.ajax({
-                url: `${M.cfg.wwwroot}/theme/boost_training/_editor/actions.php?action=page-order&local=home`,
+                url: `${M.cfg.wwwroot}/theme/training/_editor/actions.php?action=page-order&local=home`,
                 type: 'POST',
                 data: {
                     order: order,

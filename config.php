@@ -15,9 +15,9 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Boost Training config.
+ * Training config.
  *
- * @package   theme_boost_training
+ * @package   theme_training
  * @copyright 2025 Eduardo Kraus {@link https://eduardokraus.com}
  * @copyright based on work by 2016 Frédéric Massart
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
@@ -27,15 +27,15 @@ defined('MOODLE_INTERNAL') || die();
 
 require_once(__DIR__ . "/lib.php");
 
-$THEME->name = "boost_training";
+$THEME->name = "training";
 $THEME->sheets = [];
 $THEME->editor_sheets = [];
 $THEME->editor_scss = ["editor"];
 $THEME->usefallback = true;
-$THEME->extrascsscallback = "theme_boost_training_get_extra_scss";
-$THEME->prescsscallback = "theme_boost_training_get_pre_scss";
+$THEME->extrascsscallback = "theme_training_get_extra_scss";
+$THEME->prescsscallback = "theme_training_get_pre_scss";
 $THEME->scss = function ($theme) {
-    return theme_boost_training_get_main_scss_content($theme);
+    return theme_training_get_main_scss_content($theme);
 };
 
 $THEME->layouts = [

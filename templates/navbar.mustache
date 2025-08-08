@@ -16,7 +16,7 @@
 }}
 {{!
 
-    @template theme_boost_training/navbar
+    @template theme_training/navbar
 
     This template renders the top navbar.
 
@@ -58,7 +58,7 @@
 <nav class="navbar fixed-top navbar-light navbar-expand {{{output.brandcolor_background_menu_class}}}" aria-label="{{#str}}sitemenubar, admin{{/str}}">
     <div class="container-fluid">
         <button class="navbar-toggler aabtn d-block d-md-none px-1 my-1 border-0" data-toggler="drawers"
-                data-action="toggle" data-target="theme_boost_training-drawers-primary">
+                data-action="toggle" data-target="theme_training-drawers-primary">
             <span class="navbar-toggler-icon"></span>
             <span class="sr-only">{{#str}}sidepanel, core{{/str}}</span>
         </button>
@@ -90,7 +90,7 @@
                 <div class="divider border-start h-75 align-self-center mx-1"></div>
             {{/output.search_box}}
             {{#langmenu}}
-                {{> theme_boost_training/language_menu }}
+                {{> theme_training/language_menu }}
                 <div class="divider border-start h-75 align-self-center mx-1"></div>
             {{/langmenu}}
             {{{ output.navbar_plugin_output }}}
@@ -104,4 +104,4 @@
     </div>
 </nav>
 
-{{> theme_boost_training/primary-drawer-mobile }}
+{{> theme_training/primary-drawer-mobile }}

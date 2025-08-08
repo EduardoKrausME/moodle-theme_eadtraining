@@ -17,7 +17,7 @@
 /**
  * Theme functions.
  *
- * @package   theme_boost_training
+ * @package   theme_training
  * @copyright 2025 Eduardo Kraus {@link https://eduardokraus.com}
  * @copyright based on work by 2016 Frédéric Massart - FMCorz.net
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
@@ -29,8 +29,8 @@
  * @param string $tree The CSS tree.
  * @param theme_config $theme The theme config object.
  */
-function theme_boost_training_css_tree_post_processor($tree, $theme) {
-    $prefixer = new theme_boost_training\autoprefixer($tree);
+function theme_training_css_tree_post_processor($tree, $theme) {
+    $prefixer = new theme_training\autoprefixer($tree);
     $prefixer->prefix();
 }
 
@@ -41,7 +41,7 @@ function theme_boost_training_css_tree_post_processor($tree, $theme) {
  *
  * @return string
  */
-function theme_boost_training_get_extra_scss($theme) {
+function theme_training_get_extra_scss($theme) {
     $content = "";
     $imageurl = $theme->setting_file_url("backgroundimage", "backgroundimage");
 
@@ -82,16 +82,16 @@ function theme_boost_training_get_extra_scss($theme) {
  * @return bool
  * @throws moodle_exception
  */
-function theme_boost_training_pluginfile($course, $cm, $context, $filearea, $args, $forcedownload, array $options = []) {
+function theme_training_pluginfile($course, $cm, $context, $filearea, $args, $forcedownload, array $options = []) {
     if ($context->contextlevel == CONTEXT_SYSTEM) {
         if (strpos($filearea, "editor_") === 0) {
-            $fullpath = sha1("/{$context->id}/theme_boost_training/{$filearea}/{$args[0]}/{$args[1]}");
+            $fullpath = sha1("/{$context->id}/theme_training/{$filearea}/{$args[0]}/{$args[1]}");
             $fs = get_file_storage();
             if ($file = $fs->get_file_by_hash($fullpath)) {
                 return send_stored_file($file, 0, 0, false, $options);
             }
         } else {
-            $theme = theme_config::load("boost_training");
+            $theme = theme_config::load("training");
             // By default, theme files must be cache-able by both browsers and proxies.
             if (!array_key_exists("cacheability", $options)) {
                 $options["cacheability"] = "public";
@@ -100,7 +100,7 @@ function theme_boost_training_pluginfile($course, $cm, $context, $filearea, $arg
         }
         send_file_not_found();
     } else if ($context->contextlevel == CONTEXT_MODULE) {
-        $fullpath = sha1("/{$context->id}/theme_boost_training/{$filearea}/{$args[0]}/{$args[1]}");
+        $fullpath = sha1("/{$context->id}/theme_training/{$filearea}/{$args[0]}/{$args[1]}");
         $fs = get_file_storage();
         if ($file = $fs->get_file_by_hash($fullpath)) {
             return send_stored_file($file, 0, 0, false, $options);
@@ -115,7 +115,7 @@ function theme_boost_training_pluginfile($course, $cm, $context, $filearea, $arg
  *
  * @return array[]
  */
-function theme_boost_training_user_preferences(): array {
+function theme_training_user_preferences(): array {
     return [
         "drawer-open-block" => [
             "type" => PARAM_BOOL,
@@ -139,9 +139,9 @@ function theme_boost_training_user_preferences(): array {
  *
  * @return string
  */
-function theme_boost_training_get_main_scss_content($theme) {
+function theme_training_get_main_scss_content($theme) {
     global $CFG;
-    return file_get_contents("{$CFG->dirroot}/theme/boost_training/scss/style.scss");
+    return file_get_contents("{$CFG->dirroot}/theme/training/scss/style.scss");
 }
 
 /**
@@ -149,9 +149,9 @@ function theme_boost_training_get_main_scss_content($theme) {
  *
  * @return string compiled css
  */
-function theme_boost_training_get_precompiled_css() {
+function theme_training_get_precompiled_css() {
     global $CFG;
-    return file_get_contents("{$CFG->dirroot}/theme/boost_training/scss/style.css");
+    return file_get_contents("{$CFG->dirroot}/theme/training/scss/style.css");
 }
 
 /**
@@ -161,7 +161,7 @@ function theme_boost_training_get_precompiled_css() {
  *
  * @return string
  */
-function theme_boost_training_get_pre_scss($theme) {
+function theme_training_get_pre_scss($theme) {
     $scss = "";
     $configurable = [
         // Config key => [variableName, ...].
@@ -180,7 +180,7 @@ function theme_boost_training_get_pre_scss($theme) {
         }, (array)$targets);
     }
 
-    $callbacks = get_plugins_with_function("theme_boost_training_get_pre_scss");
+    $callbacks = get_plugins_with_function("theme_training_get_pre_scss");
     foreach ($callbacks as $plugintype => $plugins) {
         foreach ($plugins as $plugin => $callback) {
             if ($newscss = $callback($configurable)) {
@@ -198,11 +198,11 @@ function theme_boost_training_get_pre_scss($theme) {
 }
 
 /**
- * Function theme_boost_training_progress_content
+ * Function theme_training_progress_content
  *
  * @return array
  */
-function theme_boost_training_progress_content() {
+function theme_training_progress_content() {
     global $USER, $COURSE;
 
     $completion = new \completion_info($COURSE);
@@ -251,7 +251,7 @@ function theme_boost_training_progress_content() {
 }
 
 /**
- * Function theme_boost_training_setting_file_url
+ * Function theme_training_setting_file_url
  *
  * @param $setting
  *
@@ -259,10 +259,10 @@ function theme_boost_training_progress_content() {
  *
  * @throws dml_exception
  */
-function theme_boost_training_setting_file_url($setting) {
+function theme_training_setting_file_url($setting) {
     global $CFG;
 
-    $filepath = get_config("theme_boost_training", $setting);
+    $filepath = get_config("theme_training", $setting);
     if (!$filepath) {
         return false;
     }
@@ -270,20 +270,20 @@ function theme_boost_training_setting_file_url($setting) {
 
     $url = moodle_url::make_file_url(
         "$CFG->wwwroot/pluginfile.php",
-        "/{$syscontext->id}/theme_boost_training/{$setting}/0/{$filepath}");
+        "/{$syscontext->id}/theme_training/{$setting}/0/{$filepath}");
 
     return $url;
 }
 
 /**
- * theme_boost_training_coursemodule_standard_elements
+ * theme_training_coursemodule_standard_elements
  *
  * @param moodleform_mod $formwrapper The moodle quickforms wrapper object.
  * @param MoodleQuickForm $mform The actual form object (required to modify the form).
  *
  * @throws coding_exception
  */
-function theme_boost_training_coursemodule_standard_elements(&$formwrapper, $mform) {
+function theme_training_coursemodule_standard_elements(&$formwrapper, $mform) {
     static $executed = false;
     if ($executed) {
         return;
@@ -298,11 +298,11 @@ function theme_boost_training_coursemodule_standard_elements(&$formwrapper, $mfo
     }
 
     global $CFG, $PAGE;
-    if ($CFG->theme == "boost_training" || $CFG->theme == "eadflix") {
+    if ($CFG->theme == "training" || $CFG->theme == "eadflix") {
 
         // Icones.
-        $mform->addElement("header", "theme_boost_training_icons",
-            get_string("settings_icons_change_icons", "theme_boost_training"));
+        $mform->addElement("header", "theme_training_icons",
+            get_string("settings_icons_change_icons", "theme_training"));
 
         $filemanageroptions = [
             "accepted_types" => [".svg", ".png", ".jpg", ".jpeg"],
@@ -314,51 +314,51 @@ function theme_boost_training_coursemodule_standard_elements(&$formwrapper, $mfo
         if (isset($formwrapper->get_current()->coursemodule) && $formwrapper->get_current()->coursemodule) {
             $context = context_module::instance($formwrapper->get_current()->coursemodule);
 
-            $draftitemid = file_get_submitted_draft_itemid("theme_boost_training_customimage");
+            $draftitemid = file_get_submitted_draft_itemid("theme_training_customimage");
             file_prepare_draft_area(
                 $draftitemid,
                 $context->id,
-                "theme_boost_training", "theme_boost_training_customimage", $formwrapper->get_current()->coursemodule);
+                "theme_training", "theme_training_customimage", $formwrapper->get_current()->coursemodule);
 
             $formwrapper->set_data([
-                "theme_boost_training_customimage" => $draftitemid,
+                "theme_training_customimage" => $draftitemid,
             ]);
         }
-        $mform->addElement("filemanager", "theme_boost_training_customimage",
-            get_string("settings_icons_upload_image", "theme_boost_training"),
+        $mform->addElement("filemanager", "theme_training_customimage",
+            get_string("settings_icons_upload_image", "theme_training"),
             null, $filemanageroptions);
 
-        $mform->addElement("static", "theme_boost_training_custom", "",
-            get_string("settings_icons_upload_image_desc", "theme_boost_training"));
+        $mform->addElement("static", "theme_training_custom", "",
+            get_string("settings_icons_upload_image_desc", "theme_training"));
 
         // Icon.
         if (isset($formwrapper->get_current()->coursemodule) && $formwrapper->get_current()->coursemodule) {
             $context = context_module::instance($formwrapper->get_current()->coursemodule);
 
-            $draftitemid = file_get_submitted_draft_itemid("theme_boost_training_customicon");
+            $draftitemid = file_get_submitted_draft_itemid("theme_training_customicon");
             file_prepare_draft_area(
                 $draftitemid,
                 $context->id,
-                "theme_boost_training", "theme_boost_training_customicon", $formwrapper->get_current()->coursemodule);
+                "theme_training", "theme_training_customicon", $formwrapper->get_current()->coursemodule);
 
             $formwrapper->set_data([
-                "theme_boost_training_customicon" => $draftitemid,
+                "theme_training_customicon" => $draftitemid,
             ]);
         }
         $filemanageroptions["accepted_types"] = [".svg", ".png"];
-        $mform->addElement("filemanager", "theme_boost_training_customicon",
-            get_string("settings_icons_upload_icon", "theme_boost_training"),
+        $mform->addElement("filemanager", "theme_training_customicon",
+            get_string("settings_icons_upload_icon", "theme_training"),
             null, $filemanageroptions);
 
         // Color.
-        $mform->addElement("text", "theme_boost_training_customcolor",
-            get_string("settings_icons_color_icon", "theme_boost_training"), []);
-        $mform->setType("theme_boost_training_customcolor", PARAM_TEXT);
-        $PAGE->requires->js_call_amd("theme_boost_training/settings", "minicolors",
-            ["id_theme_boost_training_customcolor"]);
+        $mform->addElement("text", "theme_training_customcolor",
+            get_string("settings_icons_color_icon", "theme_training"), []);
+        $mform->setType("theme_training_customcolor", PARAM_TEXT);
+        $PAGE->requires->js_call_amd("theme_training/settings", "minicolors",
+            ["id_theme_training_customcolor"]);
 
-        $mform->addElement("static", "theme_boost_training_custom", "",
-            get_string("settings_icons_color_icon_desc", "theme_boost_training"));
+        $mform->addElement("static", "theme_training_custom", "",
+            get_string("settings_icons_color_icon_desc", "theme_training"));
     }
 }
 
@@ -372,36 +372,36 @@ function theme_boost_training_coursemodule_standard_elements(&$formwrapper, $mfo
  *
  * @throws coding_exception
  */
-function theme_boost_training_coursemodule_edit_post_actions($data, $course) {
+function theme_training_coursemodule_edit_post_actions($data, $course) {
     $context = context_module::instance($data->coursemodule);
 
-    if (isset($data->theme_boost_training_customimage)) {
+    if (isset($data->theme_training_customimage)) {
         $options = ["subdirs" => true, "embed" => true];
-        $filesave = file_save_draft_area_files($data->theme_boost_training_customimage, $context->id,
-            "theme_boost_training", "theme_boost_training_customimage", $data->coursemodule, $options);
+        $filesave = file_save_draft_area_files($data->theme_training_customimage, $context->id,
+            "theme_training", "theme_training_customimage", $data->coursemodule, $options);
 
-        $name = "theme_boost_training_customimage_{$data->coursemodule}";
-        set_config($name, $filesave, "theme_boost_training");
+        $name = "theme_training_customimage_{$data->coursemodule}";
+        set_config($name, $filesave, "theme_training");
 
-        \cache::make("theme_boost_training", "css_cache")->purge();
+        \cache::make("theme_training", "css_cache")->purge();
     }
 
-    if (isset($data->theme_boost_training_customicon)) {
+    if (isset($data->theme_training_customicon)) {
         $options = ["subdirs" => true, "embed" => true];
-        $filesave = file_save_draft_area_files($data->theme_boost_training_customicon, $context->id,
-            "theme_boost_training", "theme_boost_training_customicon", $data->coursemodule, $options);
+        $filesave = file_save_draft_area_files($data->theme_training_customicon, $context->id,
+            "theme_training", "theme_training_customicon", $data->coursemodule, $options);
 
-        $name = "theme_boost_training_customicon_{$data->coursemodule}";
-        set_config($name, $filesave, "theme_boost_training");
+        $name = "theme_training_customicon_{$data->coursemodule}";
+        set_config($name, $filesave, "theme_training");
 
-        \cache::make("theme_boost_training", "css_cache")->purge();
+        \cache::make("theme_training", "css_cache")->purge();
     }
 
-    if (isset($data->theme_boost_training_customcolor)) {
-        $name = "theme_boost_training_customcolor_{$data->coursemodule}";
-        set_config($name, $data->theme_boost_training_customcolor, "theme_boost_training");
+    if (isset($data->theme_training_customcolor)) {
+        $name = "theme_training_customcolor_{$data->coursemodule}";
+        set_config($name, $data->theme_training_customcolor, "theme_training");
 
-        \cache::make("theme_boost_training", "css_cache")->purge();
+        \cache::make("theme_training", "css_cache")->purge();
     }
 
     return $data;
@@ -412,7 +412,7 @@ function theme_boost_training_coursemodule_edit_post_actions($data, $course) {
  *
  * @return array
  */
-function theme_boost_training_colors() {
+function theme_training_colors() {
     return [
         "#000428", // Azul Escuro.
         "#070000", // Preto.
@@ -449,8 +449,8 @@ function theme_boost_training_colors() {
  *
  * @throws dml_exception
  */
-function theme_boost_training_change_color() {
-    $config = get_config("theme_boost_training");
+function theme_training_change_color() {
+    $config = get_config("theme_training");
     $configboost = get_config("theme_boost");
 
     if (isset($config->startcolor[5])) {
@@ -459,8 +459,8 @@ function theme_boost_training_change_color() {
         $brandcolor = $configboost->brandcolor;
     }
 
-    set_config("startcolor", "#000", "theme_boost_training");
-    set_config("footer_background_color", $brandcolor, "theme_boost_training");
+    set_config("startcolor", "#000", "theme_training");
+    set_config("footer_background_color", $brandcolor, "theme_training");
 
     theme_reset_all_caches();
 }

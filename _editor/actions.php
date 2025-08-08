@@ -17,7 +17,7 @@
 /**
  * Editor.
  *
- * @package   theme_boost_training
+ * @package   theme_training
  * @copyright 2025 Eduardo Kraus {@link https://eduardokraus.com}
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -38,23 +38,23 @@ require_sesskey();
 $local = required_param('local', PARAM_TEXT);
 $action = required_param('action', PARAM_TEXT);
 
-$component = 'theme_boost_training';
+$component = 'theme_training';
 $filearea = "editor_{$local}";
 
 if ($action == "langedit") {
     $dataid = required_param("dataid", PARAM_INT);
 
-    $page = $DB->get_record("theme_boost_training_pages", ["id" => $dataid], "*", MUST_EXIST);
+    $page = $DB->get_record("theme_training_pages", ["id" => $dataid], "*", MUST_EXIST);
     $page->lang = required_param("lang", PARAM_TEXT);
 
-    $DB->update_record("theme_boost_training_pages", $page);
+    $DB->update_record("theme_training_pages", $page);
 
     header("Content-Type: application/json");
     echo json_encode(["status" => "ok"]);
     die;
 } elseif ($action == "homemode") {
     $homemode = optional_param("homemode", 0, PARAM_INT);
-    set_config("homemode", $homemode, "theme_boost_training");
+    set_config("homemode", $homemode, "theme_training");
 
     redirect(new moodle_url("/", ["redirect" => 0]));
 } elseif ($action == "loaddata") {
@@ -74,7 +74,7 @@ if ($action == "langedit") {
     }
 } elseif ($action == "page-save") {
     $dataid = required_param("dataid", PARAM_INT);
-    $page = $DB->get_record("theme_boost_training_pages", ["id" => $dataid], "*", MUST_EXIST);
+    $page = $DB->get_record("theme_training_pages", ["id" => $dataid], "*", MUST_EXIST);
 
     switch ($page->type) {
         case "html":
@@ -95,21 +95,21 @@ if ($action == "langedit") {
 
 
     if (isset($_POST["save"])) {
-        $savedata = boost_training_clear_params_array($_POST["save"], PARAM_RAW);
+        $savedata = training_clear_params_array($_POST["save"], PARAM_RAW);
         $info = json_decode($page->info);
         $info->savedata = array_values($savedata);
         $page->info = json_encode($info);
     }
 
-    $DB->update_record("theme_boost_training_pages", $page);
+    $DB->update_record("theme_training_pages", $page);
 
-    \cache::make("theme_boost_training", "frontpage_cache")->purge();
+    \cache::make("theme_training", "frontpage_cache")->purge();
     if ($page->local == "home") {
         redirect(new moodle_url("/", ["redirect" => 0]));
     }
     die;
 } elseif ($action == "page-order") {
-    $orders = boost_training_clear_params_array($_POST["order"], PARAM_INT);
+    $orders = training_clear_params_array($_POST["order"], PARAM_INT);
 
     $pageorder = 0;
     foreach ($orders as $pageid) {
@@ -119,14 +119,14 @@ if ($action == "langedit") {
                 "sort" => $pageorder++,
             ];
             try {
-                $DB->update_record("theme_boost_training_pages", $page);
+                $DB->update_record("theme_training_pages", $page);
             } catch (dml_exception $e) {
                 error_log($e->getMessage());
             }
         }
     }
 
-    \cache::make("theme_boost_training", "frontpage_cache")->purge();
+    \cache::make("theme_training", "frontpage_cache")->purge();
     die("OK");
 } elseif ($action == "file-upload") {
     if (isset($_FILES['files']['name'])) {
@@ -140,7 +140,7 @@ if ($action == "langedit") {
 
             $url = moodle_url::make_file_url(
                 "$CFG->wwwroot/pluginfile.php",
-                "/{$context->id}/theme_boost_training/{$filerecord->filearea}/{$filerecord->itemid}{$filerecord->filepath}{$filerecord->filename}"
+                "/{$context->id}/theme_training/{$filerecord->filearea}/{$filerecord->itemid}{$filerecord->filepath}{$filerecord->filename}"
             );
 
             echo json_encode([(object)["name" => $_FILES['files']['name'], "type" => "image", "src" => $url->out(false), "size" => filesize($_FILES['files']['tmp_name']),]]);
@@ -170,7 +170,7 @@ if ($action == "langedit") {
     foreach ($files as $file) {
         $url = moodle_url::make_file_url(
             "{$CFG->wwwroot}/pluginfile.php",
-            "/{$context->id}/theme_boost_training/{$file->get_filearea()}/{$file->get_itemid()}{$file->get_filepath()}{$file->get_filename()}"
+            "/{$context->id}/theme_training/{$file->get_filearea()}/{$file->get_itemid()}{$file->get_filepath()}{$file->get_filename()}"
         );
         $items[] = [
             "id" => $file->get_id(),

@@ -1,4 +1,4 @@
-define(["jquery", "theme_boost_training/minicolors"], function($, minicolors) {
+define(["jquery", "theme_training/minicolors"], function($, minicolors) {
     return {
         minicolors: function(elementid) {
             window.$ = $;

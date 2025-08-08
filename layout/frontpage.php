@@ -17,7 +17,7 @@
 /**
  * A frontpage based layout for the boost theme.
  *
- * @package   theme_boost_training
+ * @package   theme_training
  * @copyright 2025 Eduardo Kraus {@link http://eduardokraus.com}
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -79,7 +79,7 @@ $templatecontext = [
     "addblockbutton" => $addblockbutton,
 ];
 
-$config = get_config("theme_boost_training");
+$config = get_config("theme_training");
 
 $templatecontext["footercount"] = 0;
 $templatecontext["footercontents"] = [];
@@ -107,14 +107,14 @@ if (isset($config->homemode) && $config->homemode) {
     $PAGE->requires->jquery_plugin("ui-css");
 
     if ($editing) {
-        $PAGE->requires->js_call_amd("theme_boost_training/frontpage", "editingswitch", []);
-        $PAGE->requires->js_call_amd("theme_boost_training/frontpage", "block_order", []);
+        $PAGE->requires->js_call_amd("theme_training/frontpage", "editingswitch", []);
+        $PAGE->requires->js_call_amd("theme_training/frontpage", "block_order", []);
     }
 }
 if ($editing) {
     $templatecontext["editing"] = true;
-    $url = "{$CFG->wwwroot}/theme/boost_training/_editor/actions.php?action=homemode&local=editing&sesskey=" . sesskey();
+    $url = "{$CFG->wwwroot}/theme/training/_editor/actions.php?action=homemode&local=editing&sesskey=" . sesskey();
     $templatecontext["homemode_form_action"] = $url;
 }
 
-echo $OUTPUT->render_from_template("theme_boost_training/frontpage", $templatecontext);
+echo $OUTPUT->render_from_template("theme_training/frontpage", $templatecontext);

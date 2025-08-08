@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<XMLDB PATH="theme/boost_training/db" VERSION="20200525" COMMENT="XMLDB file for Moodle theme/boost_training"
+<XMLDB PATH="theme/training/db" VERSION="20200525" COMMENT="XMLDB file for Moodle theme/training"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:noNamespaceSchemaLocation="../../../lib/xmldb/xmldb.xsd">
   <TABLES>
-    <TABLE NAME="theme_boost_training_pages" COMMENT="Theme pages">
+    <TABLE NAME="theme_training_pages" COMMENT="Theme pages">
       <FIELDS>
         <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
         <FIELD NAME="local" TYPE="char" LENGTH="30" NOTNULL="true" SEQUENCE="false"/>

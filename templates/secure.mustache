@@ -15,9 +15,9 @@
     along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 }}
 {{!
-    @template theme_boost_training/secure
+    @template theme_training/secure
 
-    Boost Training secure layout template.
+    Training secure layout template.
 
     Context variables required for this template:
     * sitename - The name of the site
@@ -34,7 +34,7 @@
          }
     }
 }}
-{{> theme_boost_training/head }}
+{{> theme_training/head }}
 
 <body {{{ bodyattributes }}}>
 {{> core/local/toast/wrapper}}
@@ -43,7 +43,7 @@
 
     {{{ output.standard_top_of_body_html }}}
 
-    {{>theme_boost_training/navbar-secure}}
+    {{>theme_training/navbar-secure}}
 
     <div id="page" class="container-fluid">
         {{! Secured full header }}

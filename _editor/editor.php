@@ -17,7 +17,7 @@
 /**
  * Editor.
  *
- * @package   theme_boost_training
+ * @package   theme_training
  * @copyright 2025 Eduardo Kraus {@link https://eduardokraus.com}
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -30,28 +30,28 @@ global $CFG, $DB, $PAGE, $OUTPUT;
 require_admin();
 
 $PAGE->set_context(\context_system::instance());
-$PAGE->set_url(new moodle_url("/theme/boost_training/_editor/editor.php", $_GET));
+$PAGE->set_url(new moodle_url("/theme/training/_editor/editor.php", $_GET));
 
 if (optional_param("delete", false, PARAM_INT)) {
     $dataid = required_param("dataid", PARAM_INT);
 
     $PAGE->set_pagelayout("standard");
-    $PAGE->set_title(get_string("delete_block_title", "theme_boost_training"));
-    $PAGE->set_heading(get_string("delete_block_title", "theme_boost_training"));
+    $PAGE->set_title(get_string("delete_block_title", "theme_training"));
+    $PAGE->set_heading(get_string("delete_block_title", "theme_training"));
 
     echo $OUTPUT->header();
     $confirm = md5($dataid . $CFG->wwwroot);
     if (optional_param("confirm", false, PARAM_TEXT) == $confirm) {
-        $DB->delete_records("theme_boost_training_pages", ["id" => $dataid]);
+        $DB->delete_records("theme_training_pages", ["id" => $dataid]);
 
-        \cache::make("theme_boost_training", "frontpage_cache")->purge();
-        redirect($CFG->wwwroot, get_string("delete_block_success", "theme_boost_training"));
+        \cache::make("theme_training", "frontpage_cache")->purge();
+        redirect($CFG->wwwroot, get_string("delete_block_success", "theme_training"));
     } else {
         echo "
-            <p>" . get_string("delete_block_confirm", "theme_boost_training") . "</p>
+            <p>" . get_string("delete_block_confirm", "theme_training") . "</p>
             <div class=\"d-flex\">
                 <a class=\"btn btn-danger me-3\"
-                   href=\"{$CFG->wwwroot}/theme/boost_training/_editor/editor.php?dataid={$dataid}&delete=1&confirm={$confirm}\">
+                   href=\"{$CFG->wwwroot}/theme/training/_editor/editor.php?dataid={$dataid}&delete=1&confirm={$confirm}\">
                    " . get_string("yes") . "</a>
                 <a class=\"btn btn-info me-3\"
                    href=\"{$CFG->wwwroot}/\">
@@ -67,12 +67,12 @@ if (required_param("dataid", PARAM_TEXT) == "create") {
     $lang = required_param("lang", PARAM_TEXT);
     $local = required_param("local", PARAM_TEXT);
     $page = editor_create_page($template, $lang, $local);
-    redirect("{$CFG->wwwroot}/theme/boost_training/_editor/editor.php?dataid={$page->id}");
+    redirect("{$CFG->wwwroot}/theme/training/_editor/editor.php?dataid={$page->id}");
     die;
 }
 
 $dataid = required_param("dataid", PARAM_INT);
-$page = $DB->get_record("theme_boost_training_pages", ["id" => $dataid], "*", MUST_EXIST);
+$page = $DB->get_record("theme_training_pages", ["id" => $dataid], "*", MUST_EXIST);
 
 $formitens = false;
 switch ($page->type) {
@@ -148,7 +148,7 @@ $languages = get_string_manager()->get_list_of_translations();
                 <label for="change-lang"><?php echo get_string("language") ?>:</label>
                 <select class="form-control" id="change-lang" style="width: auto;">
                     <?php
-                    echo "<option value=\"all\">" . get_string("language_all", "theme_boost_training") . "</option>\n";
+                    echo "<option value=\"all\">" . get_string("language_all", "theme_training") . "</option>\n";
                     foreach ($languages as $langcode => $label) {
                         $selected = $page->lang == $langcode ? "selected" : "";
                         echo "<option {$selected} value=\"{$langcode}\">{$label}</option>\n";
@@ -163,7 +163,7 @@ $languages = get_string_manager()->get_list_of_translations();
                        id="btn-editor-preview"
                        value="<?php echo get_string("preview") ?>">
                 <button id="btn-add-block" type="button" class="btn btn-secondary me-3" style="display:none">
-                    <?php echo get_string("add_block", "theme_boost_training") ?></button>
+                    <?php echo get_string("add_block", "theme_training") ?></button>
             </div>
         </div>
         <link rel="stylesheet" href="css/bootstrap.css"/>

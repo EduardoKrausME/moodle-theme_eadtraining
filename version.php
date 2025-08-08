@@ -15,9 +15,9 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Boost Training.
+ * Training.
  *
- * @package   theme_boost_training
+ * @package   theme_training
  * @copyright 2025 Eduardo Kraus {@link https://eduardokraus.com}
  * @copyright based on work by 2016 Frédéric Massart
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
@@ -29,7 +29,7 @@ $plugin->version = 2025080400;
 $plugin->requires = 2022010100;
 $plugin->release = "9.0.1";
 $plugin->maturity = MATURITY_STABLE;
-$plugin->component = 'theme_boost_training';
+$plugin->component = 'theme_training';
 $plugin->dependencies = [
     "customfield_picture" => 2024100800,
     "theme_boost" => 2022000000,

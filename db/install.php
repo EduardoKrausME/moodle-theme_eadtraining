@@ -17,24 +17,24 @@
 /**
  * Theme custom Installation.
  *
- * @package   theme_boost_training
+ * @package   theme_training
  * @copyright 2025 Eduardo Kraus {@link http://eduardokraus.com}
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 /**
- * Theme_boost_training install function.
+ * Theme_training install function.
  *
  * @return void
  * @throws Exception
  */
-function xmldb_theme_boost_training_install() {
+function xmldb_theme_training_install() {
     global $CFG;
 
     // Profile background image.
     $fs = get_file_storage();
     $filerecord = [
-        "component" => "theme_boost_training",
+        "component" => "theme_training",
         "contextid" => context_system::instance()->id,
         "userid" => get_admin()->id,
         "filearea" => "background_profile_image",
@@ -42,32 +42,32 @@ function xmldb_theme_boost_training_install() {
         "itemid" => 0,
         "filename" => "user-modal-background.jpg",
     ];
-    $fs->create_file_from_pathname($filerecord, "{$CFG->dirroot}/theme/boost_training/pix/user-modal-background.jpg");
-    set_config("background_profile_image", "/user-modal-background.jpg", "theme_boost_training");
-    set_config("brandcolor_background_menu", 0, "theme_boost_training");
+    $fs->create_file_from_pathname($filerecord, "{$CFG->dirroot}/theme/training/pix/user-modal-background.jpg");
+    set_config("background_profile_image", "/user-modal-background.jpg", "theme_training");
+    set_config("brandcolor_background_menu", 0, "theme_training");
 
-    set_config("backgroundimage", "", "theme_boost_training");
-    set_config("loginbackgroundimage", "", "theme_boost_training");
+    set_config("backgroundimage", "", "theme_training");
+    set_config("loginbackgroundimage", "", "theme_training");
 
-    set_config("scsspre", "", "theme_boost_training");
-    set_config("scss", "", "theme_boost_training");
+    set_config("scsspre", "", "theme_training");
+    set_config("scss", "", "theme_training");
 
-    set_config("course_summary", 0, "theme_boost_training");
-    set_config("course_summary_banner_position", 0, "theme_boost_training");
-    set_config("svg_animate", 1, "theme_boost_training");
+    set_config("course_summary", 0, "theme_training");
+    set_config("course_summary_banner_position", 0, "theme_training");
+    set_config("svg_animate", 1, "theme_training");
 
-    set_config("enable_accessibility", 0, "theme_boost_training");
-    set_config("enable_vlibras", 0, "theme_boost_training");
+    set_config("enable_accessibility", 0, "theme_training");
+    set_config("enable_vlibras", 0, "theme_training");
 
-    set_config("footer_background_color", "", "theme_boost_training");
-    set_config("footer_title_1", "", "theme_boost_training");
-    set_config("footer_html_1", "", "theme_boost_training");
-    set_config("footer_title_2", "", "theme_boost_training");
-    set_config("footer_html_2", "", "theme_boost_training");
-    set_config("footer_title_3", "", "theme_boost_training");
-    set_config("footer_html_3", "", "theme_boost_training");
-    set_config("footer_title_4", "", "theme_boost_training");
-    set_config("footer_html_4", "", "theme_boost_training");
+    set_config("footer_background_color", "", "theme_training");
+    set_config("footer_title_1", "", "theme_training");
+    set_config("footer_html_1", "", "theme_training");
+    set_config("footer_title_2", "", "theme_training");
+    set_config("footer_html_2", "", "theme_training");
+    set_config("footer_title_3", "", "theme_training");
+    set_config("footer_html_3", "", "theme_training");
+    set_config("footer_title_4", "", "theme_training");
+    set_config("footer_html_4", "", "theme_training");
 
-    set_config("footer_show_copywriter", 1, "theme_boost_training");
+    set_config("footer_show_copywriter", 1, "theme_training");
 }

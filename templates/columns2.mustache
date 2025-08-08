@@ -15,11 +15,11 @@
     along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 }}
 {{!
-    @template theme_boost_training/columns2
+    @template theme_training/columns2
 
     Admin time setting template.
 
-    Boost Training 2 column layout template.
+    Training 2 column layout template.
 
     Context variables required for this template:
     * sitename - The name of the site
@@ -48,7 +48,7 @@
         "hasregionmainsettingsmenu": false
     }
 }}
-{{> theme_boost_training/head }}
+{{> theme_training/head }}
 
 <body {{{ bodyattributes }}}>
 {{> core/local/toast/wrapper}}
@@ -57,7 +57,7 @@
 
     {{{ output.standard_top_of_body_html }}}
 
-    {{> theme_boost_training/navbar }}
+    {{> theme_training/navbar }}
 
     <div id="page" class="container-fluid d-print-block">
         {{{ output.full_header }}}
@@ -101,7 +101,7 @@
         </div>
     </div>
     {{{ output.standard_after_main_region_html }}}
-    {{> theme_boost_training/footer }}
+    {{> theme_training/footer }}
 </div>
 
 </body>

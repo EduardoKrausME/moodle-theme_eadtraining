@@ -1,7 +1,7 @@
-.boost_training-theme-select-item {
+.training-theme-select-item {
   float: left;
 }
-.boost_training-theme-select-item .preview {
+.training-theme-select-item .preview {
   padding: 13px;
   font-family: monospace;
   font-weight: bold;
@@ -10,7 +10,7 @@
   cursor: pointer;
   transition: 0.3s ease-out;
 }
-.boost_training-theme-select-item .preview span {
+.training-theme-select-item .preview span {
   color: #ffffff;
 }
 

@@ -15,9 +15,9 @@
     along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 }}
 {{!
-    @template theme_boost_training/drawers
+    @template theme_training/drawers
 
-    Boost Training drawer template.
+    Training drawer template.
 
     Context variables required for this template:
     * sitename - The name of the site
@@ -49,7 +49,7 @@
         "addblockbutton": ""
     }
 }}
-{{> theme_boost_training/head }}
+{{> theme_training/head }}
 
 <body {{{ bodyattributes }}}>
 {{> core/local/toast/wrapper}}
@@ -57,12 +57,12 @@
 
 {{{ output.standard_top_of_body_html }}}
 
-{{> theme_boost_training/navbar }}
+{{> theme_training/navbar }}
 {{#courseindex}}
-    {{< theme_boost_training/drawer }}
-        {{$id}}theme_boost_training-drawers-courseindex{{/id}}
+    {{< theme_training/drawer }}
+        {{$id}}theme_training-drawers-courseindex{{/id}}
         {{$drawerheadercontent}}
-        {{> theme_boost_training/courseindexdrawercontrols}}
+        {{> theme_training/courseindexdrawercontrols}}
         {{/drawerheadercontent}}
         {{$drawerclasses}}drawer drawer-left {{#courseindexopen}}show{{/courseindexopen}}{{/drawerclasses}}
         {{$drawercontent}}
@@ -72,11 +72,11 @@
         {{$drawerstate}}show-drawer-left{{/drawerstate}}
         {{$tooltipplacement}}right{{/tooltipplacement}}
         {{$closebuttontext}}{{#str}}closecourseindex, core{{/str}}{{/closebuttontext}}
-    {{/ theme_boost_training/drawer}}
+    {{/ theme_training/drawer}}
 {{/courseindex}}
 {{#hasblocks}}
-    {{< theme_boost_training/drawer }}
-        {{$id}}theme_boost_training-drawers-blocks{{/id}}
+    {{< theme_training/drawer }}
+        {{$id}}theme_training-drawers-blocks{{/id}}
         {{$drawerclasses}}drawer drawer-right{{#blockdraweropen}} show{{/blockdraweropen}}{{/drawerclasses}}
         {{$drawercontent}}
             <section class="d-print-none" aria-label="{{#str}}blocks{{/str}}">
@@ -90,7 +90,7 @@
         {{$tooltipplacement}}left{{/tooltipplacement}}
         {{$drawercloseonresize}}1{{/drawercloseonresize}}
         {{$closebuttontext}}{{#str}}closeblockdrawer, core{{/str}}{{/closebuttontext}}
-    {{/ theme_boost_training/drawer}}
+    {{/ theme_training/drawer}}
 {{/hasblocks}}
     <div id="page" data-region="mainpage" data-usertour="scroller"
          class="drawers {{#courseindexopen}}show-drawer-left{{/courseindexopen}} {{#blockdraweropen}}show-drawer-right{{/blockdraweropen}} drag-container">
@@ -102,7 +102,7 @@
                                 class="btn icon-no-margin"
                                 data-toggler="drawers"
                                 data-action="toggle"
-                                data-target="theme_boost_training-drawers-courseindex"
+                                data-target="theme_training-drawers-courseindex"
                                 data-toggle="tooltip"
                                 data-placement="right"
                                 title="{{#str}}opendrawerindex, core{{/str}}"
@@ -118,7 +118,7 @@
                                 class="btn icon-no-margin"
                                 data-toggler="drawers"
                                 data-action="toggle"
-                                data-target="theme_boost_training-drawers-blocks"
+                                data-target="theme_training-drawers-blocks"
                                 data-toggle="tooltip"
                                 data-placement="right"
                                 title="{{#str}}opendrawerblocks, core{{/str}}">
@@ -178,7 +178,7 @@
             </div>
         </div>
     </div>
-{{> theme_boost_training/footer }}
+{{> theme_training/footer }}
 {{{ output.standard_after_main_region_html }}}
 </div>
 

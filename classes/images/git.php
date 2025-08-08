@@ -17,13 +17,13 @@
 /**
  * Git Class
  *
- * @package   theme_boost_training
+ * @package   theme_training
  * @copyright 2025 Eduardo Kraus {@link https://eduardokraus.com}
  * @copyright based on work by 2016 Frédéric Massart - FMCorz.net
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-namespace theme_boost_training\images;
+namespace theme_training\images;
 
 use Exception;
 
@@ -41,7 +41,7 @@ class git {
      */
     public static function list_all($prefix, $filenamechecked) {
         // URL to the raw JSON file hosted on GitHub.
-        $url = "https://raw.githubusercontent.com/EduardoKrausME/moodle-theme_boost_training--images/master/images.json";
+        $url = "https://raw.githubusercontent.com/EduardoKrausME/moodle-theme_training--images/master/images.json";
 
         // Load the JSON content from the URL.
         $json = file_get_contents($url);
@@ -63,13 +63,13 @@ class git {
         foreach ($data as $folder) {
             if (strpos($folder, $prefix) === 0) {
                 $folders = explode("/", $folder);
-                $banners[$folders[1]]["title"] = get_string("quickstart_banner-{$folders[1]}", "theme_boost_training");
+                $banners[$folders[1]]["title"] = get_string("quickstart_banner-{$folders[1]}", "theme_training");
 
                 $filename = pathinfo($folders[2], PATHINFO_FILENAME);
-                $imageurl = "https://raw.githubusercontent.com/EduardoKrausME/moodle-theme_boost_training--images/master/{$folder}";
+                $imageurl = "https://raw.githubusercontent.com/EduardoKrausME/moodle-theme_training--images/master/{$folder}";
                 $banners[$folders[1]]["files"][] = [
                     "image" => $imageurl,
-                    "title" => get_string("quickstart_banner-{$filename}", "theme_boost_training"),
+                    "title" => get_string("quickstart_banner-{$filename}", "theme_training"),
                     "filename" => $filename,
                     "checked" => $filenamechecked == $filename,
                 ];

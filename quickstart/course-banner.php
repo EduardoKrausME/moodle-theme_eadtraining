@@ -17,13 +17,13 @@
 /**
  * view file
  *
- * @package   theme_boost_training
+ * @package   theme_training
  * @copyright 2025 Eduardo Kraus {@link https://eduardokraus.com}
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 use core_course\external\course_summary_exporter;
-use theme_boost_training\images\git;
+use theme_training\images\git;
 
 require_once("../../../config.php");
 require_once("../lib.php");
@@ -49,15 +49,15 @@ if (optional_param("POST", false, PARAM_INT)) {
     foreach ($configkeys as $name => $type) {
         $value = optional_param($name, false, $type);
         if ($value !== false) {
-            set_config("{$name}_{$courseid}", $value, "theme_boost_training");
+            set_config("{$name}_{$courseid}", $value, "theme_training");
         }
     }
 
     // Upload files.
     require_once("{$CFG->libdir}/filelib.php");
     $filefields = [
-        "banner_course_url" => "theme_boost_training",
-        "banner_course_file" => "theme_boost_training",
+        "banner_course_url" => "theme_training",
+        "banner_course_file" => "theme_training",
     ];
 
     $fs = get_file_storage();
@@ -105,29 +105,29 @@ if (optional_param("POST", false, PARAM_INT)) {
         }
     }
 
-    \cache::make("theme_boost_training", "course_cache")->purge();
-    \cache::make("theme_boost_training", "css_cache")->purge();
-    \cache::make("theme_boost_training", "frontpage_cache")->purge();
+    \cache::make("theme_training", "course_cache")->purge();
+    \cache::make("theme_training", "css_cache")->purge();
+    \cache::make("theme_training", "frontpage_cache")->purge();
 
-    redirect(new moodle_url("/course/view.php?id={$courseid}"), get_string("quickstart_banner-saved", "theme_boost_training"));
+    redirect(new moodle_url("/course/view.php?id={$courseid}"), get_string("quickstart_banner-saved", "theme_training"));
 }
 
 $PAGE->set_context(context_system::instance());
-$PAGE->set_url("/theme/boost_training/quickstart/index.php#home");
-$PAGE->set_title(get_string("quickstart_title", "theme_boost_training"));
-$PAGE->set_heading(get_string("quickstart_title", "theme_boost_training"));
+$PAGE->set_url("/theme/training/quickstart/index.php#home");
+$PAGE->set_title(get_string("quickstart_title", "theme_training"));
+$PAGE->set_heading(get_string("quickstart_title", "theme_training"));
 
-$PAGE->requires->css("/theme/boost_training/quickstart/style.css");
+$PAGE->requires->css("/theme/training/quickstart/style.css");
 if ($modal) {
-    echo "<link rel=\"stylesheet\" href=\"{$CFG->wwwroot}/theme/boost_training/quickstart/style.css\"/>";
+    echo "<link rel=\"stylesheet\" href=\"{$CFG->wwwroot}/theme/training/quickstart/style.css\"/>";
 } else {
     echo $OUTPUT->header();
 }
 
 // Course.
-$bannerfileurl = theme_boost_training_setting_file_url("banner_course_file_{$courseid}");
+$bannerfileurl = theme_training_setting_file_url("banner_course_file_{$courseid}");
 if (!$bannerfileurl) {
-    $bannerfileurl = theme_boost_training_setting_file_url("banner_course_file");
+    $bannerfileurl = theme_training_setting_file_url("banner_course_file");
 }
 $bannerfileurl = $bannerfileurl ? $bannerfileurl->out() : false;
 if (!$bannerfileurl) {
@@ -139,21 +139,21 @@ if (!$bannerfileurl) {
     }
 }
 
-$action = "{$CFG->wwwroot}/theme/boost_training/quickstart/course-banner.php?courseid={$courseid}";
+$action = "{$CFG->wwwroot}/theme/training/quickstart/course-banner.php?courseid={$courseid}";
 echo '<form action="' . $action . '" style="display:block;"
             enctype="multipart/form-data" method="post"
             class="quickstart-content">';
 echo '<input type="hidden" name="POST" value="1" />';
 echo '<input type="hidden" name="sesskey" value="' . sesskey() . '" />';
 
-$coursesummary = get_config("theme_boost_training", "course_summary");
-$coursesummarycourse = get_config("theme_boost_training", "course_summary_{$courseid}");
+$coursesummary = get_config("theme_training", "course_summary");
+$coursesummarycourse = get_config("theme_training", "course_summary_{$courseid}");
 if ( $coursesummarycourse !== false) {
     $coursesummary = $coursesummarycourse;
 }
 
-$position = get_config("theme_boost_training", "course_summary_banner_position");
-$positioncourse = get_config("theme_boost_training", "course_summary_banner_position_{$courseid}");
+$position = get_config("theme_training", "course_summary_banner_position");
+$positioncourse = get_config("theme_training", "course_summary_banner_position_{$courseid}");
 if ($positioncourse !== false) {
     $position = $positioncourse;
 }
@@ -168,7 +168,7 @@ $coursesmustache = [
     "banner_course_file_url" => $bannerfileurl,
     "banner_course_file_extensions" => "PNG, JPG",
 ];
-echo $OUTPUT->render_from_template("theme_boost_training/quickstart/courses", $coursesmustache);
+echo $OUTPUT->render_from_template("theme_training/quickstart/courses", $coursesmustache);
 
 echo "</form>";
 

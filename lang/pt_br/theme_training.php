@@ -19,7 +19,7 @@
  *
  * Language file.
  *
- * @package   theme_boost_training
+ * @package   theme_training
  * @copyright 2025 Eduardo Kraus {@link https://eduardokraus.com}
  * @copyright based on work by 2016 Frédéric Massart
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
@@ -55,8 +55,8 @@ $string['acctoolbar_zoom_block_header'] = 'Ampliar';
 $string['advancedsettings'] = 'Configurações avançadas';
 $string['background_profile_image'] = 'Imagem de fundo padrão do perfil';
 $string['background_profile_image_desc'] = 'Define uma imagem de fundo padrão para o cabeçalho de todos os cursos. Esta imagem será exibida no topo da página do curso e pode ser substituída individualmente nas configurações do curso.';
-$string['choosereadme'] = 'Boost Training é um tema moderno e altamente personalizável. Este tema pode ser usado diretamente ou como tema pai ao criar novos temas utilizando Bootstrap 4.';
-$string['configtitle'] = 'Boost Training';
+$string['choosereadme'] = 'Training é um tema moderno e altamente personalizável. Este tema pode ser usado diretamente ou como tema pai ao criar novos temas utilizando Bootstrap 4.';
+$string['configtitle'] = 'Training';
 $string['details-completaram'] = 'Completaram o curso';
 $string['details-emprogresso'] = 'Em progresso';
 $string['details-not-access'] = 'Nunca acessaram';
@@ -69,8 +69,8 @@ $string['footer_title_desc'] = 'Defina o título que aparecerá acima do conteú
 $string['generalsettings'] = 'Configurações gerais';
 $string['loginbackgroundimage'] = 'Imagem de fundo da página de login';
 $string['loginbackgroundimage_desc'] = 'Imagem exibida como fundo na página de login.';
-$string['pluginname'] = 'Boost Training';
-$string['privacy:metadata'] = 'O tema Boost Training não armazena nenhum dado pessoal de nenhum usuário.';
+$string['pluginname'] = 'Training';
+$string['privacy:metadata'] = 'O tema Training não armazena nenhum dado pessoal de nenhum usuário.';
 $string['region-side-pre'] = 'Direita';
 $string['showfooter'] = 'Exibir rodapé';
 $string['userprofilesettings'] = 'Perfil do usuário';

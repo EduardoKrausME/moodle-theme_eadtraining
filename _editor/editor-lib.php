@@ -17,7 +17,7 @@
 /**
  * Functions.
  *
- * @package   theme_boost_training
+ * @package   theme_training
  * @copyright 2025 Eduardo Kraus {@link https://eduardokraus.com}
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -51,8 +51,8 @@ function editor_create_page($template, $lang, $local) {
         $htmlfile = __DIR__ . "/model/{$template}/editor.html";
         $html = file_get_contents($htmlfile);
 
-        $html = str_replace("src=\"../", "src=\"{$CFG->wwwroot}/theme/boost_training/_editor/model/{$template}/../", $html);
-        $html = str_replace("url(\"../", "url(\"{$CFG->wwwroot}/theme/boost_training/_editor/model/{$template}/../", $html);
+        $html = str_replace("src=\"../", "src=\"{$CFG->wwwroot}/theme/training/_editor/model/{$template}/../", $html);
+        $html = str_replace("url(\"../", "url(\"{$CFG->wwwroot}/theme/training/_editor/model/{$template}/../", $html);
     } else {
         throw new Exception("File template not found");
     }
@@ -67,7 +67,7 @@ function editor_create_page($template, $lang, $local) {
         "lang" => $lang,
         "sort" => time(),
     ];
-    $page->id = $DB->insert_record("theme_boost_training_pages", $page);
+    $page->id = $DB->insert_record("theme_training_pages", $page);
 
     return $page;
 }
@@ -93,7 +93,7 @@ function compile_pages($pages) {
                 $page->html = "<div class='alert alert-warning page-editor-preview'>{$html}<style>{$css}</style></div>";
             }
 
-            $savedata = boost_training_clear_params_array($_POST["save"], PARAM_RAW);
+            $savedata = training_clear_params_array($_POST["save"], PARAM_RAW);
             $info = json_decode($page->info);
             $info->savedata = array_values($savedata);
             $page->info = json_encode($info);
@@ -133,19 +133,19 @@ function compile_pages($pages) {
                         $return->js[$script] = $js;
                     } else {
                         if (file_exists(__DIR__ . "/model/{$page->template}/{$script}")) {
-                            $file = "/theme/boost_training/_editor/model/{$page->template}/{$script}";
+                            $file = "/theme/training/_editor/model/{$page->template}/{$script}";
                             $return->js["{$page->template}/{$script}"] = $file;
                         }
                     }
                 }
             }
             if (isset($info->form->styles)) {
-                $file = "/theme/boost_training/_editor/model/{$page->template}/style.css";
+                $file = "/theme/training/_editor/model/{$page->template}/style.css";
                 $return->css["{$page->template}/style.css"] = $file;
                 foreach ($info->form->styles as $style) {
                     if ($style != "bootstrap") {
                         if (file_exists(__DIR__ . "/model/{$page->template}/{$style}")) {
-                            $file = "/theme/boost_training/_editor/model/{$page->template}/{$style}";
+                            $file = "/theme/training/_editor/model/{$page->template}/{$style}";
                             $return->css["{$page->template}/{$style}"] = $file;
                         };
                     }
@@ -168,11 +168,11 @@ function compile_pages($pages) {
  * @param $type
  * @return array|mixed
  */
-function boost_training_clear_params_array($in, $type) {
+function training_clear_params_array($in, $type) {
     $out = [];
     if (is_array($in)) {
         foreach ($in as $key => $value) {
-            $out[$key] = boost_training_clear_params_array($value, $type);
+            $out[$key] = training_clear_params_array($value, $type);
         }
     } elseif (is_string($in)) {
         try {
@@ -215,7 +215,7 @@ function replace_lang_strings(&$data) {
             replace_lang_strings($value); // Recursive call.
         } elseif (is_string($value) && str_starts_with($value, 'lang::')) {
             $langkey = substr($value, 6); // Remove 'lang::'.
-            $value = get_string($langkey, 'theme_boost_training');
+            $value = get_string($langkey, 'theme_training');
         }
     }
 }
@@ -230,14 +230,14 @@ function get_editor_course_link($course) {
 
     $title = $course->fullname;
     $link = "{$CFG->wwwroot}/course/view.php?id={$course->id}";
-    $access = get_string("access_course", "theme_boost_training");
+    $access = get_string("access_course", "theme_training");
 
     if (file_exists("{$CFG->dirroot}/local/kopere_pay/lib.php")) {
         $coursecontext = context_course::instance($course->id);
         if (!has_capability("moodle/course:view", $coursecontext, $USER)) {
             $enable = get_config("local_kopere_dashboard", "builder_enable_{$course->id}");
 
-            $access = get_string("access_course_buy", "theme_boost_training");
+            $access = get_string("access_course_buy", "theme_training");
             if ($enable) {
                 $link = "{$CFG->wwwroot}/local/kopere_pay/view.php?id={$course->id}";
                 $title = get_config("local_kopere_dashboard", "builder_titulo_{$course->id}");
