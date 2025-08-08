@@ -43,11 +43,11 @@ $courseindex-item-current: $primary !default;
                 background: #ffffff;
             }
             .courseindex-link,
-            .courseindex-chevron {
-                color: darken($courseindex-link-color-selected, 10%);
-
+            .courseindex-chevron,
+            .completioninfo:not(.completion_complete) {
+                color: #ffffff;
                 a {
-                    color: darken($courseindex-link-color-selected, 10%);
+                    color: #ffffff;
                 }
             }
         }
@@ -185,13 +185,14 @@ $courseindex-item-current: $primary !default;
         // Completion.
         .completioninfo {
             min-width: 24px;
-
             &.completion_complete {
                 color: $success;
             }
-
             &.completion_fail {
                 color: $danger;
+            }
+            &:empty {
+                display: none;
             }
         }
 
@@ -275,16 +276,6 @@ $courseindex-item-current: $primary !default;
     .courseindex-link {
         display: flex;
         align-items: center;
-        &::before {
-            content: '';
-            display: block;
-            height: 20px;
-            width: 20px;
-            min-width: 20px;
-            background-size: contain;
-            background-repeat: no-repeat;
-            margin-right: 5px;
-        }
     }
     &.pageitem {
         .courseindex-link::before {

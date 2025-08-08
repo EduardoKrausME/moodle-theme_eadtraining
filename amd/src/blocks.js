@@ -19,13 +19,11 @@ define(["jquery"], function ($) {
             $("<style>")
                 .prop("type", "text/css")
                 .html(`
+                    #course-index-cm-${cmid} .activity-icon img,
                     #module-${cmid} .courseicon img,
                     .cmid-${cmid} #page-header .activityiconcontainer img {
                         content : url('${thumb}');
                         filter  : none;
-                    }
-                    #course-index-cm-${cmid} .courseindex-link::before {
-                        background-image : url('${thumb}');
                     }`)
                 .appendTo("head");
         },
