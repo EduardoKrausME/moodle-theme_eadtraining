@@ -77,6 +77,9 @@ $divider-hover-color: $primary !default;
 }
 
 /* Sections */
+.topics {
+    padding: 0 17px;
+}
 .course-section {
     list-style: none;
     margin-top: map-get($spacers, 3);
