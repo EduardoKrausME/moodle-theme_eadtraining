@@ -39,4 +39,12 @@
             <copyright>2023 Fonticons, Inc</copyright>
         </copyrights>
     </library>
+    <library>
+        <location>theme/eadtraining/amd/src/minicolors.js</location>
+        <name>jQuery MiniColors</name>
+        <description>A tiny color picker built on jQuery</description>
+        <version>2.3.6</version>
+        <license>(MIT)</license>
+        <repository>https://github.com/claviska/jquery-minicolors</repository>
+    </library>
 </libraries>
