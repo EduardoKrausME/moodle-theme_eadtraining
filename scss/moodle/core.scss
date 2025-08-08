@@ -10,7 +10,8 @@ $thin-scroll-bg-hover: $gray-700 !default;
 $font-size-xs: ($font-size-base * .75) !default;
 #region-main {
     overflow-y: visible;
-    // background-color: $body-bg;
+    background-color: #ffffff;
+    border-radius: 10px;
 }
 
 @include media-breakpoint-up(sm) {
