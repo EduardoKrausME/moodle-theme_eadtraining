@@ -42,7 +42,8 @@ function xmldb_theme_eadtraining_install() {
             unset($file->id);
             $file->component = "theme_eadtraining";
             $file->filearea = str_replace("boost_training", "eadtraining", $file->filearea);
-            $file->pathnamehash = sha1("/{$file->contextid}/{$file->component}/{$file->filearea}/{$file->itemid}{$file->filepath}{$file->filename}");
+            $file->pathnamehash =
+                sha1("/{$file->contextid}/{$file->component}/{$file->filearea}/{$file->itemid}{$file->filepath}{$file->filename}");
             $DB->insert_record("files", $file);
         }
     } else {
