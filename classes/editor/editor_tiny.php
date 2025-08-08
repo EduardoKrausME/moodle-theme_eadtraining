@@ -17,12 +17,12 @@
 /**
  * Class editor_tiny
  *
- * @package   theme_training
+ * @package   theme_eadtraining
  * @copyright 2025 Eduardo Kraus {@link http://eduardokraus.com}
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-namespace theme_training\editor;
+namespace theme_eadtraining\editor;
 
 use editor_tiny\editor;
 use Exception;

@@ -17,7 +17,7 @@
 /**
  * Language file.
  *
- * @package   theme_training
+ * @package   theme_eadtraining
  * @copyright 2025 Eduardo Kraus {@link https://eduardokraus.com}
  * @copyright based on work by 2016 Frédéric Massart
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later

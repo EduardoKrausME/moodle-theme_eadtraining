@@ -17,7 +17,7 @@
 /**
  * A drawer based layout for the boost theme.
  *
- * @package   theme_training
+ * @package   theme_eadtraining
  * @copyright 2025 Eduardo Kraus {@link https://eduardokraus.com}
  * @copyright based on work by 2021 Bas Brands
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
@@ -106,13 +106,13 @@ $templatecontext = [
 ];
 
 if (optional_param("embed-frame-top", 0, PARAM_INT)) {
-    echo $OUTPUT->render_from_template('theme_training/drawers_embed', $templatecontext);
+    echo $OUTPUT->render_from_template('theme_eadtraining/drawers_embed', $templatecontext);
 } else {
     if (strpos($_SERVER["REQUEST_URI"], "course/view.php") || strpos($_SERVER["REQUEST_URI"], "course/section.php")) {
         $templatecontext["hasnavbarcourse"] = true;
 
         if (strpos($_SERVER["REQUEST_URI"], "course/view.php")) {
-            $templatecontext["course_summary"] = get_config("theme_training", "course_summary");
+            $templatecontext["course_summary"] = get_config("theme_eadtraining", "course_summary");
             if ($templatecontext["course_summary"]) {
                 $options = ['context' => $this->page->context];
                 $summary = file_rewrite_pluginfile_urls(
@@ -124,18 +124,18 @@ if (optional_param("embed-frame-top", 0, PARAM_INT)) {
     }
 
     if ($courseindex || $hasblocks) {
-        $templatecontext += theme_training_progress_content();
+        $templatecontext += theme_eadtraining_progress_content();
     }
 
     $templatecontext["footercount"] = 0;
     $templatecontext["footercontents"] = [];
-    $templatecontext["footer_background_color"] = get_config("theme_training", "footer_background_color");
+    $templatecontext["footer_background_color"] = get_config("theme_eadtraining", "footer_background_color");
     if (!isset($templatecontext["footer_background_color"][3])) {
         $templatecontext["footer_background_color"] = get_config("theme_boost", "brandcolor");
     }
     for ($i = 1; $i <= 4; $i++) {
-        $footertitle = get_config("theme_training", "footer_title_{$i}");
-        $footerhtml = get_config("theme_training", "footer_html_{$i}");
+        $footertitle = get_config("theme_eadtraining", "footer_title_{$i}");
+        $footerhtml = get_config("theme_eadtraining", "footer_html_{$i}");
 
         if (isset($footertitle[3]) && isset($footerhtml[20])) {
             $templatecontext["footercount"]++;
@@ -146,7 +146,7 @@ if (optional_param("embed-frame-top", 0, PARAM_INT)) {
         }
     }
 
-    $templatecontext["footer_show_copywriter"] = get_config("theme_training", "footer_show_copywriter");
+    $templatecontext["footer_show_copywriter"] = get_config("theme_eadtraining", "footer_show_copywriter");
 
-    echo $OUTPUT->render_from_template('theme_training/drawers', $templatecontext);
+    echo $OUTPUT->render_from_template('theme_eadtraining/drawers', $templatecontext);
 }

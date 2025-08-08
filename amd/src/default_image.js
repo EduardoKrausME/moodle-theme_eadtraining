@@ -1,4 +1,4 @@
-define(["jquery", "theme_training/trianglify"], function ($, trianglify) {
+define(["jquery", "theme_eadtraining/trianglify"], function ($, trianglify) {
     return {
         generateimage: function (imageid, courseid, animate) {
             courseid = Math.pow((courseid + 10000), 2);

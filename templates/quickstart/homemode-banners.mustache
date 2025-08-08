@@ -15,7 +15,7 @@
     along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 }}
 {{!
-    @template theme_training/quickstart/homemode-banners
+    @template theme_eadtraining/quickstart/homemode-banners
 
     Example context (json): {}
 }}
@@ -46,7 +46,7 @@
                 event.preventDefault();
                 event.stopImmediatePropagation();
 
-                home_show_alert(`{{#str}}quickstart_alert_notdelete, theme_training, {{{config.wwwroot}}} {{/str}}`);
+                home_show_alert(`{{#str}}quickstart_alert_notdelete, theme_eadtraining, {{{config.wwwroot}}} {{/str}}`);
                 checkbox.checked = true;
             });
         }

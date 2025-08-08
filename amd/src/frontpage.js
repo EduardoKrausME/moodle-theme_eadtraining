@@ -61,7 +61,7 @@ define(["jquery", "core/modal", "core/notification"], function ($, Modal, Notifi
                                          class="img-fluid mb-2" style="width:100%;border:1px solid #ccc;border-radius:8px;">
                                     <h5 style="font-size: 1rem;">${item.title}</h5>
                                     <a href="${item.preview}" 
-                                       target="_blank">${M.util.get_string('preview', "theme_training")}</a>
+                                       target="_blank">${M.util.get_string('preview', "theme_eadtraining")}</a>
                                 </div>
                             </div>`);
                         $list.append(block);

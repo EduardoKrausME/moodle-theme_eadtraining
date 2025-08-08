@@ -3,7 +3,7 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:noNamespaceSchemaLocation="../../../lib/xmldb/xmldb.xsd">
   <TABLES>
-    <TABLE NAME="theme_training_pages" COMMENT="Theme pages">
+    <TABLE NAME="theme_eadtraining_pages" COMMENT="Theme pages">
       <FIELDS>
         <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
         <FIELD NAME="local" TYPE="char" LENGTH="30" NOTNULL="true" SEQUENCE="false"/>

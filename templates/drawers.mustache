@@ -15,7 +15,7 @@
     along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 }}
 {{!
-    @template theme_training/drawers
+    @template theme_eadtraining/drawers
 
     Training drawer template.
 
@@ -49,7 +49,7 @@
         "addblockbutton": ""
     }
 }}
-{{> theme_training/head }}
+{{> theme_eadtraining/head }}
 
 <body {{{ bodyattributes }}}>
 {{> core/local/toast/wrapper}}
@@ -57,12 +57,12 @@
 
 {{{ output.standard_top_of_body_html }}}
 
-{{> theme_training/navbar }}
+{{> theme_eadtraining/navbar }}
 {{#courseindex}}
-    {{< theme_training/drawer }}
-        {{$id}}theme_training-drawers-courseindex{{/id}}
+    {{< theme_eadtraining/drawer }}
+        {{$id}}theme_eadtraining-drawers-courseindex{{/id}}
         {{$drawerheadercontent}}
-        {{> theme_training/courseindexdrawercontrols}}
+        {{> theme_eadtraining/courseindexdrawercontrols}}
         {{/drawerheadercontent}}
         {{$drawerclasses}}drawer drawer-left {{#courseindexopen}}show{{/courseindexopen}}{{/drawerclasses}}
         {{$drawercontent}}
@@ -72,11 +72,11 @@
         {{$drawerstate}}show-drawer-left{{/drawerstate}}
         {{$tooltipplacement}}right{{/tooltipplacement}}
         {{$closebuttontext}}{{#str}}closecourseindex, core{{/str}}{{/closebuttontext}}
-    {{/ theme_training/drawer}}
+    {{/ theme_eadtraining/drawer}}
 {{/courseindex}}
 {{#hasblocks}}
-    {{< theme_training/drawer }}
-        {{$id}}theme_training-drawers-blocks{{/id}}
+    {{< theme_eadtraining/drawer }}
+        {{$id}}theme_eadtraining-drawers-blocks{{/id}}
         {{$drawerclasses}}drawer drawer-right{{#blockdraweropen}} show{{/blockdraweropen}}{{/drawerclasses}}
         {{$drawercontent}}
             <section class="d-print-none" aria-label="{{#str}}blocks{{/str}}">
@@ -90,7 +90,7 @@
         {{$tooltipplacement}}left{{/tooltipplacement}}
         {{$drawercloseonresize}}1{{/drawercloseonresize}}
         {{$closebuttontext}}{{#str}}closeblockdrawer, core{{/str}}{{/closebuttontext}}
-    {{/ theme_training/drawer}}
+    {{/ theme_eadtraining/drawer}}
 {{/hasblocks}}
     <div id="page" data-region="mainpage" data-usertour="scroller"
          class="drawers {{#courseindexopen}}show-drawer-left{{/courseindexopen}} {{#blockdraweropen}}show-drawer-right{{/blockdraweropen}} drag-container">
@@ -102,7 +102,7 @@
                                 class="btn icon-no-margin"
                                 data-toggler="drawers"
                                 data-action="toggle"
-                                data-target="theme_training-drawers-courseindex"
+                                data-target="theme_eadtraining-drawers-courseindex"
                                 data-toggle="tooltip"
                                 data-placement="right"
                                 title="{{#str}}opendrawerindex, core{{/str}}"
@@ -118,7 +118,7 @@
                                 class="btn icon-no-margin"
                                 data-toggler="drawers"
                                 data-action="toggle"
-                                data-target="theme_training-drawers-blocks"
+                                data-target="theme_eadtraining-drawers-blocks"
                                 data-toggle="tooltip"
                                 data-placement="right"
                                 title="{{#str}}opendrawerblocks, core{{/str}}">
@@ -178,7 +178,7 @@
             </div>
         </div>
     </div>
-{{> theme_training/footer }}
+{{> theme_eadtraining/footer }}
 {{{ output.standard_after_main_region_html }}}
 </div>
 

@@ -4,7 +4,7 @@
 define(["core/templates"], function (Templates) {
     return {
         init: function () {
-            Templates.render('theme_training/settings/acctoolbar', {})
+            Templates.render('theme_eadtraining/settings/acctoolbar', {})
                 .then(function (html, js) {
                     window.micAccessTool = new training_AccessTool(html);
                 })

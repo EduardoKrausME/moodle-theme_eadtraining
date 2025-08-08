@@ -17,7 +17,7 @@
 /**
  * Theme custom uninstall.
  *
- * @package   theme_training
+ * @package   theme_eadtraining
  * @copyright 2025 Eduardo Kraus {@link http://eduardokraus.com}
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -28,30 +28,30 @@
  * @return void
  * @throws Exception
  */
-function xmldb_theme_training_uninstall() {
-    unset_config("startcolor", "theme_training");
+function xmldb_theme_eadtraining_uninstall() {
+    unset_config("startcolor", "theme_eadtraining");
 
-    unset_config("background_profile_image", "theme_training");
+    unset_config("background_profile_image", "theme_eadtraining");
 
-    unset_config("backgroundimage", "theme_training");
-    unset_config("loginbackgroundimage", "theme_training");
+    unset_config("backgroundimage", "theme_eadtraining");
+    unset_config("loginbackgroundimage", "theme_eadtraining");
 
-    unset_config("scsspre", "theme_training");
-    unset_config("scss", "theme_training");
+    unset_config("scsspre", "theme_eadtraining");
+    unset_config("scss", "theme_eadtraining");
 
-    unset_config("enable_accessibility", "theme_training");
-    unset_config("enable_vlibras", "theme_training");
-    unset_config("course_summary", "theme_training");
+    unset_config("enable_accessibility", "theme_eadtraining");
+    unset_config("enable_vlibras", "theme_eadtraining");
+    unset_config("course_summary", "theme_eadtraining");
 
-    unset_config("footer_background_color", "theme_training");
-    unset_config("footer_title_1", "theme_training");
-    unset_config("footer_html_1", "theme_training");
-    unset_config("footer_title_2", "theme_training");
-    unset_config("footer_html_2", "theme_training");
-    unset_config("footer_title_3", "theme_training");
-    unset_config("footer_html_3", "theme_training");
-    unset_config("footer_title_4", "theme_training");
-    unset_config("footer_html_4", "theme_training");
+    unset_config("footer_background_color", "theme_eadtraining");
+    unset_config("footer_title_1", "theme_eadtraining");
+    unset_config("footer_html_1", "theme_eadtraining");
+    unset_config("footer_title_2", "theme_eadtraining");
+    unset_config("footer_html_2", "theme_eadtraining");
+    unset_config("footer_title_3", "theme_eadtraining");
+    unset_config("footer_html_3", "theme_eadtraining");
+    unset_config("footer_title_4", "theme_eadtraining");
+    unset_config("footer_html_4", "theme_eadtraining");
 
-    unset_config("footer_show_copywriter", "theme_training");
+    unset_config("footer_show_copywriter", "theme_eadtraining");
 }

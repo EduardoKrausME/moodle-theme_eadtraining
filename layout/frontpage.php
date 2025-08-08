@@ -17,7 +17,7 @@
 /**
  * A frontpage based layout for the boost theme.
  *
- * @package   theme_training
+ * @package   theme_eadtraining
  * @copyright 2025 Eduardo Kraus {@link http://eduardokraus.com}
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -79,7 +79,7 @@ $templatecontext = [
     "addblockbutton" => $addblockbutton,
 ];
 
-$config = get_config("theme_training");
+$config = get_config("theme_eadtraining");
 
 $templatecontext["footercount"] = 0;
 $templatecontext["footercontents"] = [];
@@ -107,8 +107,8 @@ if (isset($config->homemode) && $config->homemode) {
     $PAGE->requires->jquery_plugin("ui-css");
 
     if ($editing) {
-        $PAGE->requires->js_call_amd("theme_training/frontpage", "editingswitch", []);
-        $PAGE->requires->js_call_amd("theme_training/frontpage", "block_order", []);
+        $PAGE->requires->js_call_amd("theme_eadtraining/frontpage", "editingswitch", []);
+        $PAGE->requires->js_call_amd("theme_eadtraining/frontpage", "block_order", []);
     }
 }
 if ($editing) {
@@ -117,4 +117,4 @@ if ($editing) {
     $templatecontext["homemode_form_action"] = $url;
 }
 
-echo $OUTPUT->render_from_template("theme_training/frontpage", $templatecontext);
+echo $OUTPUT->render_from_template("theme_eadtraining/frontpage", $templatecontext);

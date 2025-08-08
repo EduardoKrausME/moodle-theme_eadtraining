@@ -1,4 +1,4 @@
-define(["jquery", "theme_training/minicolors"], function($, minicolors) {
+define(["jquery", "theme_eadtraining/minicolors"], function($, minicolors) {
     return {
         minicolors: function(elementid) {
             window.$ = $;

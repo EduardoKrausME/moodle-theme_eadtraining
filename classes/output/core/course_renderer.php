@@ -20,12 +20,12 @@
  * This is built using the boost template to allow for new theme"s using
  * Moodle"s new Boost theme engine
  *
- * @package   theme_training
+ * @package   theme_eadtraining
  * @copyright 2025 Eduardo Kraus {@link https://eduardokraus.com}
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-namespace theme_training\output\core;
+namespace theme_eadtraining\output\core;
 
 use cache;
 use context_course;
@@ -42,7 +42,7 @@ use core_course_list_element;
 /**
  * This class has function for core course renderer
  *
- * @package   theme_training
+ * @package   theme_eadtraining
  * @copyright 2025 Eduardo Kraus {@link https://eduardokraus.com}
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -67,7 +67,7 @@ class course_renderer extends \core_course_renderer {
         global $DB, $CFG, $SITE, $USER;
 
         // Home with block editor.
-        if (get_config("theme_training", "homemode")) {
+        if (get_config("theme_eadtraining", "homemode")) {
             require_once("{$CFG->dirroot}/theme/training/_editor/editor-lib.php");
 
             $editing = $this->page->user_is_editing();
@@ -75,13 +75,13 @@ class course_renderer extends \core_course_renderer {
             $userorlang = $USER->id ? $USER->id : $lang;
 
             $previewdataid = optional_param("dataid", false, PARAM_INT);
-            $cache = cache::make("theme_training", "frontpage_cache");
+            $cache = cache::make("theme_eadtraining", "frontpage_cache");
             $cachekey = "homemode_pages_{$userorlang}";
             if (!$editing && $cache->has($cachekey) && !$previewdataid) {
                 $compiledpages = json_decode($cache->get($cachekey));
             } else {
                 $where = "local='home' AND lang IN(:lang, 'all')";
-                $pages = $DB->get_records_select("theme_training_pages", $where, ['lang' => $lang], "sort ASC");
+                $pages = $DB->get_records_select("theme_eadtraining_pages", $where, ['lang' => $lang], "sort ASC");
                 $compiledpages = compile_pages($pages);
 
                 if (!$editing && !$previewdataid) {
@@ -112,11 +112,11 @@ class course_renderer extends \core_course_renderer {
                     $templatecontext["homemode_page_warningnopages"] = true;
                 }
 
-                $this->page->requires->strings_for_js(["preview"], "theme_training");
-                $this->page->requires->js_call_amd("theme_training/frontpage", "add_block", [$lang]);
+                $this->page->requires->strings_for_js(["preview"], "theme_eadtraining");
+                $this->page->requires->js_call_amd("theme_eadtraining/frontpage", "add_block", [$lang]);
             }
 
-            return $csslink . $this->output->render_from_template("theme_training/frontpage_editor", $templatecontext);
+            return $csslink . $this->output->render_from_template("theme_eadtraining/frontpage_editor", $templatecontext);
         }
 
         // Traditional home.
@@ -321,7 +321,7 @@ class course_renderer extends \core_course_renderer {
             "enrolment_icons" => $icons,
         ];
 
-        return $this->output->render_from_template("theme_training/core_course/cardhome", $cardhomemustache);
+        return $this->output->render_from_template("theme_eadtraining/core_course/cardhome", $cardhomemustache);
     }
 
     /**

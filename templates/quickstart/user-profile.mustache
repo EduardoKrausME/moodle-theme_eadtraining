@@ -15,7 +15,7 @@
     along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 }}
 {{!
-    @template theme_training/quickstart/user-profile
+    @template theme_eadtraining/quickstart/user-profile
 
     Example context (json):
     {
@@ -29,7 +29,7 @@
 <div class="quickstart-collapse" id="user-profile">
     <a href="#user-profile" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
         <span class="material-icons">person</span>
-        <span>{{#str}}userprofilesettings,theme_training{{/str}}</span>
+        <span>{{#str}}userprofilesettings,theme_eadtraining{{/str}}</span>
     </a>
     <div class="content">
         <div class="inner-content">
@@ -37,7 +37,7 @@
 
                 <div class="card">
                     <div class="card-header">
-                        <h5>{{#str}}background_profile_image, theme_training{{/str}}</h5></div>
+                        <h5>{{#str}}background_profile_image, theme_eadtraining{{/str}}</h5></div>
                     <div class="card-body">
                         {{#background_profile_image_url}}
                             <div class="mb-3 text-center">
@@ -48,8 +48,8 @@
                             <input class="form-control" type="file" name="background_profile_image"
                                    accept=".png,.jpg,.jpeg">
                             <div class="form-text text-muted">
-                                {{#str}}background_profile_image_desc, theme_training{{/str}} <br><br>
-                                {{#str}}imageacceptedtypes, theme_training, {{{background_profile_image_extensions}}}{{/str}}
+                                {{#str}}background_profile_image_desc, theme_eadtraining{{/str}} <br><br>
+                                {{#str}}imageacceptedtypes, theme_eadtraining, {{{background_profile_image_extensions}}}{{/str}}
                             </div>
                         </div>
                     </div>
@@ -59,7 +59,7 @@
 
             </div>
 
-            {{> theme_training/quickstart/btn-next-back }}
+            {{> theme_eadtraining/quickstart/btn-next-back }}
         </div>
     </div>
 </div>

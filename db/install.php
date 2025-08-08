@@ -17,7 +17,7 @@
 /**
  * Theme custom Installation.
  *
- * @package   theme_training
+ * @package   theme_eadtraining
  * @copyright 2025 Eduardo Kraus {@link http://eduardokraus.com}
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -28,13 +28,13 @@
  * @return void
  * @throws Exception
  */
-function xmldb_theme_training_install() {
+function xmldb_theme_eadtraining_install() {
     global $CFG;
 
     // Profile background image.
     $fs = get_file_storage();
     $filerecord = [
-        "component" => "theme_training",
+        "component" => "theme_eadtraining",
         "contextid" => context_system::instance()->id,
         "userid" => get_admin()->id,
         "filearea" => "background_profile_image",
@@ -43,31 +43,31 @@ function xmldb_theme_training_install() {
         "filename" => "user-modal-background.jpg",
     ];
     $fs->create_file_from_pathname($filerecord, "{$CFG->dirroot}/theme/training/pix/user-modal-background.jpg");
-    set_config("background_profile_image", "/user-modal-background.jpg", "theme_training");
-    set_config("brandcolor_background_menu", 0, "theme_training");
+    set_config("background_profile_image", "/user-modal-background.jpg", "theme_eadtraining");
+    set_config("brandcolor_background_menu", 0, "theme_eadtraining");
 
-    set_config("backgroundimage", "", "theme_training");
-    set_config("loginbackgroundimage", "", "theme_training");
+    set_config("backgroundimage", "", "theme_eadtraining");
+    set_config("loginbackgroundimage", "", "theme_eadtraining");
 
-    set_config("scsspre", "", "theme_training");
-    set_config("scss", "", "theme_training");
+    set_config("scsspre", "", "theme_eadtraining");
+    set_config("scss", "", "theme_eadtraining");
 
-    set_config("course_summary", 0, "theme_training");
-    set_config("course_summary_banner_position", 0, "theme_training");
-    set_config("svg_animate", 1, "theme_training");
+    set_config("course_summary", 0, "theme_eadtraining");
+    set_config("course_summary_banner_position", 0, "theme_eadtraining");
+    set_config("svg_animate", 1, "theme_eadtraining");
 
-    set_config("enable_accessibility", 0, "theme_training");
-    set_config("enable_vlibras", 0, "theme_training");
+    set_config("enable_accessibility", 0, "theme_eadtraining");
+    set_config("enable_vlibras", 0, "theme_eadtraining");
 
-    set_config("footer_background_color", "", "theme_training");
-    set_config("footer_title_1", "", "theme_training");
-    set_config("footer_html_1", "", "theme_training");
-    set_config("footer_title_2", "", "theme_training");
-    set_config("footer_html_2", "", "theme_training");
-    set_config("footer_title_3", "", "theme_training");
-    set_config("footer_html_3", "", "theme_training");
-    set_config("footer_title_4", "", "theme_training");
-    set_config("footer_html_4", "", "theme_training");
+    set_config("footer_background_color", "", "theme_eadtraining");
+    set_config("footer_title_1", "", "theme_eadtraining");
+    set_config("footer_html_1", "", "theme_eadtraining");
+    set_config("footer_title_2", "", "theme_eadtraining");
+    set_config("footer_html_2", "", "theme_eadtraining");
+    set_config("footer_title_3", "", "theme_eadtraining");
+    set_config("footer_html_3", "", "theme_eadtraining");
+    set_config("footer_title_4", "", "theme_eadtraining");
+    set_config("footer_html_4", "", "theme_eadtraining");
 
-    set_config("footer_show_copywriter", 1, "theme_training");
+    set_config("footer_show_copywriter", 1, "theme_eadtraining");
 }

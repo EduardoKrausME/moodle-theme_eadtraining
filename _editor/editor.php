@@ -17,7 +17,7 @@
 /**
  * Editor.
  *
- * @package   theme_training
+ * @package   theme_eadtraining
  * @copyright 2025 Eduardo Kraus {@link https://eduardokraus.com}
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -36,19 +36,19 @@ if (optional_param("delete", false, PARAM_INT)) {
     $dataid = required_param("dataid", PARAM_INT);
 
     $PAGE->set_pagelayout("standard");
-    $PAGE->set_title(get_string("delete_block_title", "theme_training"));
-    $PAGE->set_heading(get_string("delete_block_title", "theme_training"));
+    $PAGE->set_title(get_string("delete_block_title", "theme_eadtraining"));
+    $PAGE->set_heading(get_string("delete_block_title", "theme_eadtraining"));
 
     echo $OUTPUT->header();
     $confirm = md5($dataid . $CFG->wwwroot);
     if (optional_param("confirm", false, PARAM_TEXT) == $confirm) {
-        $DB->delete_records("theme_training_pages", ["id" => $dataid]);
+        $DB->delete_records("theme_eadtraining_pages", ["id" => $dataid]);
 
-        \cache::make("theme_training", "frontpage_cache")->purge();
-        redirect($CFG->wwwroot, get_string("delete_block_success", "theme_training"));
+        \cache::make("theme_eadtraining", "frontpage_cache")->purge();
+        redirect($CFG->wwwroot, get_string("delete_block_success", "theme_eadtraining"));
     } else {
         echo "
-            <p>" . get_string("delete_block_confirm", "theme_training") . "</p>
+            <p>" . get_string("delete_block_confirm", "theme_eadtraining") . "</p>
             <div class=\"d-flex\">
                 <a class=\"btn btn-danger me-3\"
                    href=\"{$CFG->wwwroot}/theme/training/_editor/editor.php?dataid={$dataid}&delete=1&confirm={$confirm}\">
@@ -72,7 +72,7 @@ if (required_param("dataid", PARAM_TEXT) == "create") {
 }
 
 $dataid = required_param("dataid", PARAM_INT);
-$page = $DB->get_record("theme_training_pages", ["id" => $dataid], "*", MUST_EXIST);
+$page = $DB->get_record("theme_eadtraining_pages", ["id" => $dataid], "*", MUST_EXIST);
 
 $formitens = false;
 switch ($page->type) {
@@ -148,7 +148,7 @@ $languages = get_string_manager()->get_list_of_translations();
                 <label for="change-lang"><?php echo get_string("language") ?>:</label>
                 <select class="form-control" id="change-lang" style="width: auto;">
                     <?php
-                    echo "<option value=\"all\">" . get_string("language_all", "theme_training") . "</option>\n";
+                    echo "<option value=\"all\">" . get_string("language_all", "theme_eadtraining") . "</option>\n";
                     foreach ($languages as $langcode => $label) {
                         $selected = $page->lang == $langcode ? "selected" : "";
                         echo "<option {$selected} value=\"{$langcode}\">{$label}</option>\n";
@@ -163,7 +163,7 @@ $languages = get_string_manager()->get_list_of_translations();
                        id="btn-editor-preview"
                        value="<?php echo get_string("preview") ?>">
                 <button id="btn-add-block" type="button" class="btn btn-secondary me-3" style="display:none">
-                    <?php echo get_string("add_block", "theme_training") ?></button>
+                    <?php echo get_string("add_block", "theme_eadtraining") ?></button>
             </div>
         </div>
         <link rel="stylesheet" href="css/bootstrap.css"/>

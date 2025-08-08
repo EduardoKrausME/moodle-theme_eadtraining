@@ -17,7 +17,7 @@
 /**
  * Advanced file
  *
- * @package   theme_training
+ * @package   theme_eadtraining
  * @copyright 2025 Eduardo Kraus {@link http://eduardokraus.com}
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -25,16 +25,16 @@
 defined('MOODLE_INTERNAL') || die;
 
 // Advanced settings.
-$page = new admin_settingpage("theme_training_advanced", get_string("advancedsettings", "theme_training"));
+$page = new admin_settingpage("theme_eadtraining_advanced", get_string("advancedsettings", "theme_eadtraining"));
 
 // Raw SCSS to include before the content.
-$setting = new admin_setting_scsscode('theme_training/scsspre',
+$setting = new admin_setting_scsscode('theme_eadtraining/scsspre',
     get_string('rawscsspre', 'theme_boost'), get_string('rawscsspre_desc', 'theme_boost'), '', PARAM_RAW);
 $setting->set_updatedcallback('theme_reset_all_caches');
 $page->add($setting);
 
 // Raw SCSS to include after the content.
-$setting = new admin_setting_scsscode('theme_training/scss', get_string('rawscss', 'theme_boost'),
+$setting = new admin_setting_scsscode('theme_eadtraining/scss', get_string('rawscss', 'theme_boost'),
     get_string('rawscss_desc', 'theme_boost'), '', PARAM_RAW);
 $setting->set_updatedcallback('theme_reset_all_caches');
 $page->add($setting);

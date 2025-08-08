@@ -17,7 +17,7 @@
 /**
  * Settings file
  *
- * @package   theme_training
+ * @package   theme_eadtraining
  * @copyright 2025 Eduardo Kraus {@link http://eduardokraus.com}
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -25,18 +25,18 @@
 defined('MOODLE_INTERNAL') || die();
 
 if (is_siteadmin()) {
-    $title = get_string("pluginname", "theme_training") . " - ";
-    $title .= get_string("quickstart_title", "theme_training");
+    $title = get_string("pluginname", "theme_eadtraining") . " - ";
+    $title .= get_string("quickstart_title", "theme_eadtraining");
     $url = new moodle_url("/theme/training/quickstart/");
-    $ADMIN->add("themes", new admin_externalpage("theme_training_link", $title, $url));
+    $ADMIN->add("themes", new admin_externalpage("theme_eadtraining_link", $title, $url));
 
-    $ADMIN->add("themes", new admin_category("theme_training",
-        get_string("pluginname", "theme_training")));
+    $ADMIN->add("themes", new admin_category("theme_eadtraining",
+        get_string("pluginname", "theme_eadtraining")));
 }
 
 if ($ADMIN->fulltree) {
     $settings = new theme_boost_admin_settingspage_tabs("themesettingtraining",
-        get_string("configtitle", "theme_training"));
+        get_string("configtitle", "theme_eadtraining"));
 
     require_once("settings/general.php");
     require_once("settings/advanced.php");

@@ -15,7 +15,7 @@
     along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 }}
 {{!
-    @template theme_training/quickstart/footer
+    @template theme_eadtraining/quickstart/footer
 
     Example context (json):
     {
@@ -29,15 +29,15 @@
                 "footer_html":  "<div footer..."
             }, {
                 "num":  2,
-                "footer_title":  get_config("theme_training", "footer_title_2"),
+                "footer_title":  get_config("theme_eadtraining", "footer_title_2"),
                 "footer_html":  "<div footer..."
             }, {
                 "num":  3,
-                "footer_title":  get_config("theme_training", "footer_title_3"),
+                "footer_title":  get_config("theme_eadtraining", "footer_title_3"),
                 "footer_html":  "<div footer..."
             }, {
                 "num":  4,
-                "footer_title":  get_config("theme_training", "footer_title_4"),
+                "footer_title":  get_config("theme_eadtraining", "footer_title_4"),
                 "footer_html":  "<div footer..."
             },
         ],
@@ -49,7 +49,7 @@
 <div class="quickstart-collapse" id="footer">
     <a href="#footer" style="background: linear-gradient(135deg, #232526 0%, #414345 100%);">
         <span class="material-icons">web_asset</span>
-        <span>{{#str}}footersettings,theme_training{{/str}}</span>
+        <span>{{#str}}footersettings,theme_eadtraining{{/str}}</span>
     </a>
 
     <div class="content">
@@ -58,25 +58,25 @@
 
                 <div class="card mb-3">
                     <div class="card-header">
-                        <h5>{{#str}}footer_background_color, theme_training{{/str}}</h5>
+                        <h5>{{#str}}footer_background_color, theme_eadtraining{{/str}}</h5>
                     </div>
                     <div class="card-body">
                         <input type="text" class="form-control" id="id_footer_background_color"
                                name="footer_background_color" value="{{{footer_background_color}}}">
                         <div class="form-text text-muted">
-                            {{#str}}footer_background_color_desc, theme_training{{/str}}
+                            {{#str}}footer_background_color_desc, theme_eadtraining{{/str}}
                             <div>{{{htmlselect}}}</div>
                         </div>
                     </div>
                 </div>
 
-                <h5>{{#str}}footer_heading_description_title, theme_training{{/str}}</h5>
-                <p>{{#str}}footer_heading_description_desc, theme_training{{/str}}</p>
+                <h5>{{#str}}footer_heading_description_title, theme_eadtraining{{/str}}</h5>
+                <p>{{#str}}footer_heading_description_desc, theme_eadtraining{{/str}}</p>
 
                 <!-- Seletor de blocos -->
                 <div class="mb-3">
                     <label for="footer_block_count" class="form-label fw-bold">
-                        <h5>{{#str}}quickstart_banner-footer_block_count, theme_training{{/str}}</h5>
+                        <h5>{{#str}}quickstart_banner-footer_block_count, theme_eadtraining{{/str}}</h5>
                     </label>
                     <select id="footer_block_count" class="form-select" name="footer_block_count"
                             data-num-selected="{{{num_blocks}}}">
@@ -96,7 +96,7 @@
                                     id="footer-tab-{{num}}" data-bs-toggle="tab"
                                     data-bs-target="#footer{{num}}" type="button" role="tab" aria-controls="footer{{num}}"
                                     aria-selected="{{#active}}true{{/active}}{{^active}}false{{/active}}">
-                                {{#str}}footer_heading, theme_training, {{num}}{{/str}}
+                                {{#str}}footer_heading, theme_eadtraining, {{num}}{{/str}}
                             </button>
                         </li>
                     {{/blocks}}
@@ -109,18 +109,18 @@
                              role="tabpanel" data-block="{{num}}" aria-labelledby="footer-tab-{{num}}">
                             <div class="card">
                                 <div class="card-body">
-                                    <h5>{{#str}}footer_title, theme_training, {{{num}}} {{/str}}</h5>
+                                    <h5>{{#str}}footer_title, theme_eadtraining, {{{num}}} {{/str}}</h5>
                                     <input type="text" class="form-control" id="footer_title_{{num}}"
                                            name="footer_title_{{num}}" value="{{{footer_title}}}">
                                     <div class="form-text text-muted">
-                                        {{#str}}footer_title_desc, theme_training{{/str}}
+                                        {{#str}}footer_title_desc, theme_eadtraining{{/str}}
                                     </div>
 
-                                    <h5 class="mt-2">{{#str}}footer_html, theme_training, {{{num}}} {{/str}}</h5>
+                                    <h5 class="mt-2">{{#str}}footer_html, theme_eadtraining, {{{num}}} {{/str}}</h5>
                                     <textarea class="form-control" id="footer_html_{{num}}" style="height:300px"
                                               name="footer_html_{{num}}">{{footer_html}}</textarea>
                                     <div class="form-text text-muted">
-                                        {{#str}}footer_html_desc, theme_training{{/str}}
+                                        {{#str}}footer_html_desc, theme_eadtraining{{/str}}
                                     </div>
                                 </div>
                             </div>
@@ -151,7 +151,7 @@
 
             </div>
 
-            {{> theme_training/quickstart/btn-next-back }}
+            {{> theme_eadtraining/quickstart/btn-next-back }}
         </div>
     </div>
 </div>

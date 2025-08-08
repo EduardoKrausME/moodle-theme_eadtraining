@@ -14,7 +14,7 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
-namespace theme_training\output;
+namespace theme_eadtraining\output;
 
 use context_system;
 use core_course\external\course_summary_exporter;
@@ -23,13 +23,13 @@ use core_message\helper;
 use Exception;
 use moodle_url;
 use html_writer;
-use theme_training\trainingnavbar;
+use theme_eadtraining\trainingnavbar;
 use user_picture;
 
 /**
  * Renderers to align Moodle's HTML with that expected by Bootstrap
  *
- * @package   theme_training
+ * @package   theme_eadtraining
  * @copyright 2025 Eduardo Kraus {@link https://eduardokraus.com}
  * @copyright based on work by 2012 Bas Brands, www.basbrands.nl
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
@@ -308,8 +308,8 @@ class core_renderer extends \core_renderer {
         $header->hasbannercourse = false;
         $hasuri = strpos($_SERVER["REQUEST_URI"], "course/view.php") || strpos($_SERVER["REQUEST_URI"], "course/section.php");
         if ($hasuri) {
-            $showcoursesummary = get_config("theme_training", "course_summary");
-            $showcoursesummarycourse = get_config("theme_training", "course_summary_{$courseid}");
+            $showcoursesummary = get_config("theme_eadtraining", "course_summary");
+            $showcoursesummarycourse = get_config("theme_eadtraining", "course_summary_{$courseid}");
             if ($showcoursesummarycourse !== false) {
                 $showcoursesummary = $showcoursesummarycourse;
             }
@@ -321,7 +321,7 @@ class core_renderer extends \core_renderer {
                     $header->overviewfiles = $this->get_course_image();
 
                     if (has_capability("moodle/category:manage", $this->page->context)) {
-                        $cache = \cache::make("theme_training", "course_cache");
+                        $cache = \cache::make("theme_eadtraining", "course_cache");
                         $cachekey = "header_details_{$this->page->course->id}";
                         if ($cache->has($cachekey)) {
                             $header->details = json_decode($cache->get($cachekey));
@@ -340,9 +340,9 @@ class core_renderer extends \core_renderer {
                         $header->banner_course_file_url = $bannerfileurl;
 
                         $header->hasbannercourse_position =
-                            get_config("theme_training", "course_summary_banner_position");
+                            get_config("theme_eadtraining", "course_summary_banner_position");
                         $hasbannercoursepositioncourse =
-                            get_config("theme_training", "course_summary_banner_position_{$courseid}");
+                            get_config("theme_eadtraining", "course_summary_banner_position_{$courseid}");
                         if ($hasbannercoursepositioncourse !== false) {
                             $header->hasbannercourse_position = $hasbannercoursepositioncourse;
                         }
@@ -360,7 +360,7 @@ class core_renderer extends \core_renderer {
             }
         }
 
-        return $this->render_from_template("theme_training/core/full_header", $header);
+        return $this->render_from_template("theme_eadtraining/core/full_header", $header);
     }
 
     /**
@@ -387,7 +387,7 @@ class core_renderer extends \core_renderer {
             "icon" => "fa-users fa-fw",
             "link" => false,
             "number" => number_format($total, 0, $decsep, $thousandssep),
-            "text" => get_string("details-users", "theme_training"),
+            "text" => get_string("details-users", "theme_eadtraining"),
         ];
 
         // Teachers.
@@ -415,7 +415,7 @@ class core_renderer extends \core_renderer {
                 "icon" => "fa fa-graduation-cap fa-fw",
                 "link" => false,
                 "number" => "<div class='d-flex'>{$teachershtml}</div>",
-                "text" => get_string("details-teachers", "theme_training"),
+                "text" => get_string("details-teachers", "theme_eadtraining"),
             ];
         }
 
@@ -448,14 +448,14 @@ class core_renderer extends \core_renderer {
             "icon" => "fa fa-spinner fa-fw",
             "link" => false,
             "number" => number_format($emprogresso, 0, $decsep, $thousandssep),
-            "text" => get_string("details-emprogresso", "theme_training"),
+            "text" => get_string("details-emprogresso", "theme_eadtraining"),
         ];
         $details[] = [
             "id" => "completaram",
             "icon" => "fa fa-user-slash fa-fw",
             "link" => false,
             "number" => number_format($completaram, 0, $decsep, $thousandssep),
-            "text" => get_string("details-completaram", "theme_training"),
+            "text" => get_string("details-completaram", "theme_eadtraining"),
         ];
 
         // Usuários que nunca acessaram.
@@ -471,7 +471,7 @@ class core_renderer extends \core_renderer {
             "icon" => "fa fa-user-slash fa-fw",
             "link" => false,
             "number" => number_format($total, 0, $decsep, $thousandssep),
-            "text" => get_string("details-not-access", "theme_training"),
+            "text" => get_string("details-not-access", "theme_eadtraining"),
         ];
 
         return $details;
@@ -488,11 +488,11 @@ class core_renderer extends \core_renderer {
         if (!$course) {
             return false;
         }
-        $bannerfileurl = theme_training_setting_file_url("banner_course_file_{$course->id}");
+        $bannerfileurl = theme_eadtraining_setting_file_url("banner_course_file_{$course->id}");
         if ($bannerfileurl) {
             return $bannerfileurl->out();
         }
-        $bannerfileurl = theme_training_setting_file_url("banner_course_file");
+        $bannerfileurl = theme_eadtraining_setting_file_url("banner_course_file");
 
         if ($bannerfileurl) {
             return $bannerfileurl->out();
@@ -534,7 +534,7 @@ class core_renderer extends \core_renderer {
             return $return;
         }
 
-        $callbacks = get_plugins_with_function("theme_training_get_logo");
+        $callbacks = get_plugins_with_function("theme_eadtraining_get_logo");
         foreach ($callbacks as $plugintype => $plugins) {
             foreach ($plugins as $plugin => $callback) {
                 $urllogo = $callback();
@@ -572,9 +572,9 @@ class core_renderer extends \core_renderer {
      * @throws Exception
      */
     public function get_default_image_for_courseid($courseid): string {
-        $animate = get_config("theme_training", "svg_animate");
+        $animate = get_config("theme_eadtraining", "svg_animate");
         $imageid = "svg-courseid-{$courseid}-" . uniqid();
-        $this->page->requires->js_call_amd("theme_training/default_image", "generateimage", [$imageid, $courseid, $animate]);
+        $this->page->requires->js_call_amd("theme_eadtraining/default_image", "generateimage", [$imageid, $courseid, $animate]);
 
         $imagesvg = "<svg xmlns='http://www.w3.org/2000/svg' id={$imageid}></svg>";
         return "data:image/svg+xml;utf8,{$imagesvg}";
@@ -586,7 +586,7 @@ class core_renderer extends \core_renderer {
      * @throws Exception
      */
     public function brandcolor_background_menu_class() {
-        $background = get_config("theme_training", "brandcolor_background_menu");
+        $background = get_config("theme_eadtraining", "brandcolor_background_menu");
         return $background ? "brandcolor-background" : "";
     }
 }

@@ -15,7 +15,7 @@
     along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 }}
 {{!
-    @template theme_training/quickstart/brandcolor
+    @template theme_eadtraining/quickstart/brandcolor
 
     Example context (json):
     {
@@ -27,7 +27,7 @@
 <div class="quickstart-collapse" id="brandcolor">
     <a href="#brandcolor" style="background: linear-gradient(135deg, #232526 0%, #414345 100%);">
         <span class="material-icons">palette</span>
-        <span>{{#str}}brandcolor, theme_training{{/str}}</span>
+        <span>{{#str}}brandcolor, theme_eadtraining{{/str}}</span>
     </a>
 
     <div class="content">
@@ -39,7 +39,7 @@
                         <input type="text" class="form-control" id="id_s_theme_boost_brandcolor"
                                name="brandcolor" value="{{{brandcolor}}}">
                         <div class="form-text text-muted">
-                            {{#str}}brandcolor_desc, theme_training{{/str}}
+                            {{#str}}brandcolor_desc, theme_eadtraining{{/str}}
                             <div>{{{htmlselect}}}</div>
                         </div>
                     </div>
@@ -47,7 +47,7 @@
 
                 <div class="card mb-3">
                     <div class="card-header">
-                        <h5>{{#str}}brandcolor_background_menu, theme_training{{/str}}</h5>
+                        <h5>{{#str}}brandcolor_background_menu, theme_eadtraining{{/str}}</h5>
                     </div>
                     <div class="card-body">
                         <div class="radio-wrapper">
@@ -55,27 +55,27 @@
                                 <input class="form-check-input" type="radio" name="brandcolor_background_menu" value="0"
                                        {{^brandcolor_background_menu}}checked{{/brandcolor_background_menu}} style="display: none;">
                                 <div class="marked-area">
-                                    {{#pix}}quickstart/course-sumary-none, theme_training{{/pix}}
+                                    {{#pix}}quickstart/course-sumary-none, theme_eadtraining{{/pix}}
                                 </div>
                             </label>
                             <label class="radio-img">
                                 <input class="form-check-input" type="radio" name="brandcolor_background_menu" value="1"
                                        {{#brandcolor_background_menu}}checked{{/brandcolor_background_menu}} style="display: none;">
                                 <div class="marked-area">
-                                    {{#pix}}quickstart/brandcolor_background_menu, theme_training{{/pix}}
+                                    {{#pix}}quickstart/brandcolor_background_menu, theme_eadtraining{{/pix}}
                                 </div>
                             </label>
                         </div>
 
                         <div class="form-text ms-2 text-muted">
-                            {{#str}}brandcolor_background_menu_desc, theme_training{{/str}}
+                            {{#str}}brandcolor_background_menu_desc, theme_eadtraining{{/str}}
                         </div>
                     </div>
                 </div>
 
             </div>
 
-            {{> theme_training/quickstart/btn-next-back }}
+            {{> theme_eadtraining/quickstart/btn-next-back }}
         </div>
     </div>
 </div>

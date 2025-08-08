@@ -33,7 +33,7 @@ Training features a modern course page with an optional information banner, enab
 
 Activity block system: when an image is uploaded, the activity is transformed into a block. This works for both Topics and Weekly formats.
 
-![Course Page](https://eduardokraus.com/logos/theme_training/curso.png)
+![Course Page](https://eduardokraus.com/logos/theme_eadtraining/curso.png)
 
 ## 🧱 Changes to Moodle Structure
 
@@ -46,7 +46,7 @@ Activity block system: when an image is uploaded, the activity is transformed in
 - The order has been adjusted so the search field is now at the **end of the list**.
 - The search field starts small and **expands when focused**, saving space when not in use.
 
-![Admin Screenshot](https://eduardokraus.com/logos/theme_training/admin.png)
+![Admin Screenshot](https://eduardokraus.com/logos/theme_eadtraining/admin.png)
 
 ## 👤 Modern Popup Profile
 
@@ -61,7 +61,7 @@ Includes quick-access menus for:
 - Switch profiles
 - Log out
 
-![Profile Area](https://eduardokraus.com/logos/theme_training/perfil.png)
+![Profile Area](https://eduardokraus.com/logos/theme_eadtraining/perfil.png)
 
 ## 🔻 Footer Block
 
@@ -69,8 +69,8 @@ The footer supports 0 to 4 fully customizable blocks. Use your creativity to des
 
 Even better: the "Made by" text can be removed directly in the settings at no additional cost.
 
-![Footer Example 1](https://eduardokraus.com/logos/theme_training/rodape-1.png)  
-![Footer Example 2](https://eduardokraus.com/logos/theme_training/rodape-2.png)
+![Footer Example 1](https://eduardokraus.com/logos/theme_eadtraining/rodape-1.png)  
+![Footer Example 2](https://eduardokraus.com/logos/theme_eadtraining/rodape-2.png)
 
 ## 🙏 Acknowledgments and Sponsorship
 

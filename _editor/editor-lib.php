@@ -17,7 +17,7 @@
 /**
  * Functions.
  *
- * @package   theme_training
+ * @package   theme_eadtraining
  * @copyright 2025 Eduardo Kraus {@link https://eduardokraus.com}
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -67,7 +67,7 @@ function editor_create_page($template, $lang, $local) {
         "lang" => $lang,
         "sort" => time(),
     ];
-    $page->id = $DB->insert_record("theme_training_pages", $page);
+    $page->id = $DB->insert_record("theme_eadtraining_pages", $page);
 
     return $page;
 }
@@ -215,7 +215,7 @@ function replace_lang_strings(&$data) {
             replace_lang_strings($value); // Recursive call.
         } elseif (is_string($value) && str_starts_with($value, 'lang::')) {
             $langkey = substr($value, 6); // Remove 'lang::'.
-            $value = get_string($langkey, 'theme_training');
+            $value = get_string($langkey, 'theme_eadtraining');
         }
     }
 }
@@ -230,14 +230,14 @@ function get_editor_course_link($course) {
 
     $title = $course->fullname;
     $link = "{$CFG->wwwroot}/course/view.php?id={$course->id}";
-    $access = get_string("access_course", "theme_training");
+    $access = get_string("access_course", "theme_eadtraining");
 
     if (file_exists("{$CFG->dirroot}/local/kopere_pay/lib.php")) {
         $coursecontext = context_course::instance($course->id);
         if (!has_capability("moodle/course:view", $coursecontext, $USER)) {
             $enable = get_config("local_kopere_dashboard", "builder_enable_{$course->id}");
 
-            $access = get_string("access_course_buy", "theme_training");
+            $access = get_string("access_course_buy", "theme_eadtraining");
             if ($enable) {
                 $link = "{$CFG->wwwroot}/local/kopere_pay/view.php?id={$course->id}";
                 $title = get_config("local_kopere_dashboard", "builder_titulo_{$course->id}");

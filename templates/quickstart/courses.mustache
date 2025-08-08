@@ -15,7 +15,7 @@
     along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 }}
 {{!
-    @template theme_training/quickstart/courses
+    @template theme_eadtraining/quickstart/courses
 
     Example context (json):
     {
@@ -32,7 +32,7 @@
     {{^no_accordion}}
         <a href="#courses" style="background: linear-gradient(135deg, #f6d365 0%, #fda085 100%);">
             <span class="material-icons">menu_book</span>
-            <span>{{#str}}coursesettings,theme_training{{/str}}</span>
+            <span>{{#str}}coursesettings,theme_eadtraining{{/str}}</span>
         </a>
     {{/no_accordion}}
     <div class="{{^no_accordion}}content{{/no_accordion}}">
@@ -40,17 +40,17 @@
             <div class="settings-content">
 
                 <div class="card mb-4">
-                    <div class="card-header"><h5>{{#str}}course_summary, theme_training{{/str}}</h5></div>
+                    <div class="card-header"><h5>{{#str}}course_summary, theme_eadtraining{{/str}}</h5></div>
                     <div class="card-body">
-                        <p>{{#str}}course_summary_desc, theme_training{{/str}}</p>
+                        <p>{{#str}}course_summary_desc, theme_eadtraining{{/str}}</p>
                         <div class="radio-wrapper">
                             <label class="radio-img">
                                 <input class="form-check-input input-course_summary" type="radio" name="course_summary"
                                        value="0"
                                        {{#course_summary_0}}checked{{/course_summary_0}} style="display: none;">
                                 <div class="marked-area">
-                                    <h5>{{#str}}course_summary_none, theme_training{{/str}}</h5>
-                                    {{#pix}}quickstart/course-sumary-none, theme_training{{/pix}}
+                                    <h5>{{#str}}course_summary_none, theme_eadtraining{{/str}}</h5>
+                                    {{#pix}}quickstart/course-sumary-none, theme_eadtraining{{/pix}}
                                 </div>
                             </label>
 
@@ -59,8 +59,8 @@
                                        value="1"
                                        {{#course_summary_1}}checked{{/course_summary_1}} style="display: none;">
                                 <div class="marked-area">
-                                    <h5>{{#str}}course_summary_simple, theme_training{{/str}}</h5>
-                                    {{#pix}}quickstart/course-sumary-simple, theme_training{{/pix}}
+                                    <h5>{{#str}}course_summary_simple, theme_eadtraining{{/str}}</h5>
+                                    {{#pix}}quickstart/course-sumary-simple, theme_eadtraining{{/pix}}
                                 </div>
                             </label>
 
@@ -69,8 +69,8 @@
                                        value="2"
                                        {{#course_summary_2}}checked{{/course_summary_2}} style="display: none;">
                                 <div class="marked-area">
-                                    <h5>{{#str}}course_summary_banner, theme_training{{/str}}</h5>
-                                    {{#pix}}quickstart/course-sumary-banner, theme_training{{/pix}}
+                                    <h5>{{#str}}course_summary_banner, theme_eadtraining{{/str}}</h5>
+                                    {{#pix}}quickstart/course-sumary-banner, theme_eadtraining{{/pix}}
                                 </div>
                             </label>
                         </div>
@@ -78,10 +78,10 @@
                         <div id="course_summary_2">
                             <div class="card">
                                 <div class="card-header">
-                                    <h5>{{#str}}course_summary_banner_default, theme_training{{/str}}</h5>
+                                    <h5>{{#str}}course_summary_banner_default, theme_eadtraining{{/str}}</h5>
                                 </div>
                                 <div class="card-body">
-                                    <p>{{#str}}course_summary_banner_default_desc, theme_training{{/str}}</p>
+                                    <p>{{#str}}course_summary_banner_default_desc, theme_eadtraining{{/str}}</p>
                                     <div class="radio-wrapper">
                                         <label class="radio-img">
                                             <input class="form-check-input" type="radio"
@@ -90,8 +90,8 @@
                                                    style="display: none;">
                                             <div class="marked-area">
                                                 <h5>{{#str}}
-                                                    course_summary_banner_under, theme_training{{/str}}</h5>
-                                                {{#pix}}quickstart/course-sumary-banner, theme_training{{/pix}}
+                                                    course_summary_banner_under, theme_eadtraining{{/str}}</h5>
+                                                {{#pix}}quickstart/course-sumary-banner, theme_eadtraining{{/pix}}
                                             </div>
                                         </label>
                                         <label class="radio-img">
@@ -101,9 +101,9 @@
                                                    style="display: none;">
                                             <div class="marked-area">
                                                 <h5>{{#str}}
-                                                    course_summary_banner_down, theme_training{{/str}}</h5>
+                                                    course_summary_banner_down, theme_eadtraining{{/str}}</h5>
                                                 {{#pix}}
-                                                    quickstart/course-sumary-banner-down, theme_training{{/pix}}
+                                                    quickstart/course-sumary-banner-down, theme_eadtraining{{/pix}}
                                             </div>
                                         </label>
                                     </div>
@@ -121,7 +121,7 @@
                                             id="footer-tab-1" data-bs-toggle="tab"
                                             data-bs-target="#footer-1" type="button" role="tab"
                                             aria-controls="footer-1">
-                                        {{#str}}quickstart_course_upload_or_choose, theme_training{{/str}}
+                                        {{#str}}quickstart_course_upload_or_choose, theme_eadtraining{{/str}}
                                     </button>
                                 </li>
                                 <li class="nav-item">
@@ -129,7 +129,7 @@
                                             id="footer-tab-2" data-bs-toggle="tab"
                                             data-bs-target="#footer-2" type="button" role="tab"
                                             aria-controls="footer-2">
-                                        {{#str}}quickstart_course_choose_below, theme_training{{/str}}
+                                        {{#str}}quickstart_course_choose_below, theme_eadtraining{{/str}}
                                     </button>
                                 </li>
                             </ul>
@@ -151,7 +151,7 @@
                                                        accept=".png,.jpg,.jpeg">
                                                 <div class="form-text text-muted">
                                                     {{#str}}imageacceptedtypes,
-                                                        theme_training, {{{banner_course_file_extensions}}}{{/str}}
+                                                        theme_eadtraining, {{{banner_course_file_extensions}}}{{/str}}
                                                 </div>
                                             </div>
                                         </div>
@@ -232,15 +232,15 @@
 
                 {{^no_accordion}}
                     <div class="card mb-4">
-                        <div class="card-header"><h5>{{#str}}svg_animate, theme_training{{/str}}</h5></div>
+                        <div class="card-header"><h5>{{#str}}svg_animate, theme_eadtraining{{/str}}</h5></div>
                         <div class="card-body">
-                            <p>{{#str}}svg_animate_desc, theme_training{{/str}}</p>
+                            <p>{{#str}}svg_animate_desc, theme_eadtraining{{/str}}</p>
                             <div class="radio-wrapper">
                                 <label class="radio-img" >
                                     <input class="form-check-input" type="radio" name="svg_animate" value="1"
                                            {{#svg_animate}}checked{{/svg_animate}} style="display: none;">
                                     <div class="marked-area">
-                                        <h5>{{#str}}quickstart_course_with_animation,theme_training{{/str}}</h5>
+                                        <h5>{{#str}}quickstart_course_with_animation,theme_eadtraining{{/str}}</h5>
                                         <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' id='svg-courseid-111'></svg>"
                                              style="width:300px;height:150px;">
                                     </div>
@@ -250,7 +250,7 @@
                                     <input class="form-check-input" type="radio" name="svg_animate" value="0"
                                            {{^svg_animate}}checked{{/svg_animate}} style="display: none;">
                                     <div class="marked-area">
-                                        <h5>{{#str}}quickstart_course_without_animation,theme_training{{/str}}</h5>
+                                        <h5>{{#str}}quickstart_course_without_animation,theme_eadtraining{{/str}}</h5>
                                         <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' id='svg-courseid-222'></svg>"
                                              style="width:300px;height:150px;">
                                     </div>
@@ -262,7 +262,7 @@
             </div>
 
             {{^no_accordion}}
-                {{> theme_training/quickstart/btn-next-back }}
+                {{> theme_eadtraining/quickstart/btn-next-back }}
             {{/no_accordion}}
             {{#no_accordion}}
                 <input class="btn btn-primary ms-3" type="submit" value="{{#str}}savechanges, admin{{/str}}">

@@ -17,7 +17,7 @@
 /**
  * Logos file
  *
- * @package   theme_training
+ * @package   theme_eadtraining
  * @copyright 2025 Eduardo Kraus {@link http://eduardokraus.com}
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -25,12 +25,12 @@
 defined('MOODLE_INTERNAL') || die;
 
 // Logos section.
-$page = new admin_settingpage("theme_training_logos",
+$page = new admin_settingpage("theme_eadtraining_logos",
     get_string("logossettings", "admin"));
 
 $url = "{$CFG->wwwroot}/theme/training/quickstart/#logos";
-$setting = new admin_setting_heading("theme_training_quickstart_logos", "",
-    get_string("quickstart_settings_link", "theme_training", $url));
+$setting = new admin_setting_heading("theme_eadtraining_quickstart_logos", "",
+    get_string("quickstart_settings_link", "theme_eadtraining", $url));
 $page->add($setting);
 
 // Small logo file setting.

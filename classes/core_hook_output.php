@@ -17,12 +17,12 @@
 /**
  * Class core_hook_output
  *
- * @package   theme_training
+ * @package   theme_eadtraining
  * @copyright 2025 Eduardo Kraus {@link http://eduardokraus.com}
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-namespace theme_training;
+namespace theme_eadtraining;
 
 use core\hook\output\before_html_attributes;
 use Exception;
@@ -30,7 +30,7 @@ use Exception;
 /**
  * Class core_hook_output
  *
- * @package theme_training
+ * @package theme_eadtraining
  */
 class core_hook_output {
 
@@ -86,8 +86,8 @@ class core_hook_output {
 
         $images = ["blocks" => [], "icons" => [], "colors" => []];
 
-        $cache = \cache::make("theme_training", "css_cache");
-        $cachekey = "theme_training_customimages_{$COURSE->id}";
+        $cache = \cache::make("theme_eadtraining", "css_cache");
+        $cachekey = "theme_eadtraining_customimages_{$COURSE->id}";
         if ($cache->has($cachekey)) {
             $images = json_decode($cache->get($cachekey), true);
         } else {
@@ -95,8 +95,8 @@ class core_hook_output {
             $sql = "
                 SELECT itemid, contextid, filename
                   FROM {files}
-                 WHERE component LIKE 'theme_training'
-                   AND filearea  LIKE 'theme_training_customimage'
+                 WHERE component LIKE 'theme_eadtraining'
+                   AND filearea  LIKE 'theme_eadtraining_customimage'
                    AND filename  LIKE '__%'";
             $customimages = $DB->get_records_sql($sql);
             foreach ($customimages as $customimage) {
@@ -105,8 +105,8 @@ class core_hook_output {
                     implode("/", [
                         "",
                         $customimage->contextid,
-                        "theme_training",
-                        "theme_training_customimage",
+                        "theme_eadtraining",
+                        "theme_eadtraining_customimage",
                         $customimage->itemid,
                         $customimage->filename,
                     ])
@@ -118,8 +118,8 @@ class core_hook_output {
             $sql = "
                 SELECT itemid, contextid, filename
                   FROM {files}
-                 WHERE component LIKE 'theme_training'
-                   AND filearea  LIKE 'theme_training_customicon'
+                 WHERE component LIKE 'theme_eadtraining'
+                   AND filearea  LIKE 'theme_eadtraining_customicon'
                    AND filename  LIKE '__%'";
             $customicons = $DB->get_records_sql($sql);
             foreach ($customicons as $customicon) {
@@ -128,8 +128,8 @@ class core_hook_output {
                     implode("/", [
                         "",
                         $customicon->contextid,
-                        "theme_training",
-                        "theme_training_customicon",
+                        "theme_eadtraining",
+                        "theme_eadtraining_customicon",
                         $customicon->itemid,
                         $customicon->filename,
                     ])
@@ -142,11 +142,11 @@ class core_hook_output {
             $sql = "
                 SELECT *
                   FROM {config_plugins}
-                 WHERE plugin  = 'theme_training'
-                   AND name LIKE 'theme_training_customcolor_%'";
+                 WHERE plugin  = 'theme_eadtraining'
+                   AND name LIKE 'theme_eadtraining_customcolor_%'";
             $customcolors = $DB->get_records_sql($sql);
             foreach ($customcolors as $customcolor) {
-                $moduleid = str_replace("theme_training_customcolor_", "", $customcolor->name);
+                $moduleid = str_replace("theme_eadtraining_customcolor_", "", $customcolor->name);
 
                 $images["colors"][] = ["cmid" => $moduleid, "color" => $customcolor->value];
             }
@@ -156,13 +156,13 @@ class core_hook_output {
 
         global $PAGE;
         foreach ($images["blocks"] as $block) {
-            $PAGE->requires->js_call_amd("theme_training/blocks", "create", [$block["cmid"], $block["thumb"]]);
+            $PAGE->requires->js_call_amd("theme_eadtraining/blocks", "create", [$block["cmid"], $block["thumb"]]);
         }
         foreach ($images["icons"] as $icons) {
-            $PAGE->requires->js_call_amd("theme_training/blocks", "icons", [$icons["cmid"], $icons["thumb"]]);
+            $PAGE->requires->js_call_amd("theme_eadtraining/blocks", "icons", [$icons["cmid"], $icons["thumb"]]);
         }
         foreach ($images["colors"] as $color) {
-            $PAGE->requires->js_call_amd("theme_training/blocks", "color", [$color["cmid"], $color["color"]]);
+            $PAGE->requires->js_call_amd("theme_eadtraining/blocks", "color", [$color["cmid"], $color["color"]]);
         }
     }
 
@@ -173,13 +173,13 @@ class core_hook_output {
      * @throws Exception
      */
     private static function background_profile_image() {
-        $cache = \cache::make("theme_training", "css_cache");
+        $cache = \cache::make("theme_eadtraining", "css_cache");
         $cachekey = "background_profile_image";
         if ($cache->has($cachekey)) {
             $css = $cache->get($cachekey);
             echo "<style>{$css}</style>";
         } else {
-            $backgroundprofileurl = theme_training_setting_file_url("background_profile_image");
+            $backgroundprofileurl = theme_eadtraining_setting_file_url("background_profile_image");
             if ($backgroundprofileurl) {
                 $profileimagecss = ":root { --background_profile: url({$backgroundprofileurl}); }";
 
@@ -197,9 +197,9 @@ class core_hook_output {
      * @throws Exception
      */
     private static function acctoolbar() {
-        if (get_config("theme_training", "enable_accessibility")) {
+        if (get_config("theme_eadtraining", "enable_accessibility")) {
             global $PAGE;
-            $PAGE->requires->js_call_amd("theme_training/acctoolbar", "init");
+            $PAGE->requires->js_call_amd("theme_eadtraining/acctoolbar", "init");
         }
     }
 
@@ -212,9 +212,9 @@ class core_hook_output {
     private static function vlibras() {
         global $CFG, $OUTPUT;
 
-        $vlibras = get_config("theme_training", "enable_vlibras") && $CFG->lang == "pt_br";
+        $vlibras = get_config("theme_eadtraining", "enable_vlibras") && $CFG->lang == "pt_br";
         if ($vlibras) {
-            echo $OUTPUT->render_from_template("theme_training/settings/vlibras", []);
+            echo $OUTPUT->render_from_template("theme_eadtraining/settings/vlibras", []);
         }
     }
 }
