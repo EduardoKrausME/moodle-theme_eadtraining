@@ -41,11 +41,12 @@ if (!isset($config->startcolor[2])) {
     $htmlselect .= "\n\n" . $OUTPUT->render_from_template("theme_eadtraining/settings/colors", [
             "startcolor" => true,
             "colors" => theme_eadtraining_colors(),
+            "defaultcolor" => theme_eadtraining_default_color("startcolor", "#1a2a6c"),
         ]);
 
     $setting = new admin_setting_configtext("theme_eadtraining/startcolor",
         get_string('brandcolor', 'theme_boost'),
-        get_string('brandcolor_desc', 'theme_eadtraining') . "<div class='mb-3'>{$htmlselect}</div>",
+        get_string('brandcolor_desc', 'theme_eadtraining') . $htmlselect,
         "#1a2a6c");
     $PAGE->requires->js_call_amd("theme_eadtraining/settings", "minicolors", [$setting->get_id()]);
     $setting->set_updatedcallback("theme_eadtraining_change_color");
@@ -54,12 +55,13 @@ if (!isset($config->startcolor[2])) {
     $htmlselect .= "\n\n" . $OUTPUT->render_from_template("theme_eadtraining/settings/colors", [
             "brandcolor" => true,
             "colors" => theme_eadtraining_colors(),
+            "defaultcolor" => theme_eadtraining_default_color("brandcolor", "#1a2a6c", "theme_boost"),
         ]);
 
     // We use an empty default value because the default colour should come from the preset.
     $setting = new admin_setting_configtext("theme_boost/brandcolor",
         get_string('brandcolor', 'theme_eadtraining'),
-        get_string('brandcolor_desc', 'theme_eadtraining') . "<div class='mb-3'>{$htmlselect}</div>",
+        get_string('brandcolor_desc', 'theme_eadtraining') . $htmlselect,
         '#1a2a6c');
     $setting->set_updatedcallback("theme_eadtraining_change_color");
     $page->add($setting);

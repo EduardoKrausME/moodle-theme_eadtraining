@@ -24,7 +24,14 @@
     }
 }}
 
-<footer id="page-footer" style="background: {{{footer_background_color}}}">
+<footer id="page-footer" style="background: {{{footer_background_color}}};">
+    {{#footer_background_text_color}}
+        <style>
+            footer * {
+                color: {{{footer_background_text_color}}};
+            }
+        </style>
+    {{/footer_background_text_color}}
     {{#footercount}}
         <div class="footer-container footer-container-{{{footercount}}} container">
             {{#footercontents}}

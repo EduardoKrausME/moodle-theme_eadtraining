@@ -128,12 +128,13 @@ if (optional_param("embed-frame-top", 0, PARAM_INT)) {
         $templatecontext += theme_eadtraining_progress_content();
     }
 
+    $brandcolor = get_config("theme_boost", "brandcolor");
     $templatecontext["footercount"] = 0;
     $templatecontext["footercontents"] = [];
-    $templatecontext["footer_background_color"] = get_config("theme_eadtraining", "footer_background_color");
-    if (!isset($templatecontext["footer_background_color"][3])) {
-        $templatecontext["footer_background_color"] = get_config("theme_boost", "brandcolor");
-    }
+    $templatecontext["footer_background_color"] =
+        theme_eadtraining_default_color("footer_background_color", $brandcolor);
+    $templatecontext["footer_background_text_color"] =
+        theme_eadtraining_get_footer_color($templatecontext["footer_background_color"], "#333", false);
     for ($i = 1; $i <= 4; $i++) {
         $footertitle = get_config("theme_eadtraining", "footer_title_{$i}");
         $footerhtml = get_config("theme_eadtraining", "footer_html_{$i}");

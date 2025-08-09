@@ -81,9 +81,13 @@ $templatecontext = [
 
 $config = get_config("theme_eadtraining");
 
+$brandcolor = get_config("theme_boost", "brandcolor");
 $templatecontext["footercount"] = 0;
 $templatecontext["footercontents"] = [];
-$templatecontext["footer_background_color"] = $config->footer_background_color;
+$templatecontext["footer_background_color"] =
+    theme_eadtraining_default_color("footer_background_color", $brandcolor);
+$templatecontext["footer_background_text_color"] =
+    theme_eadtraining_get_footer_color($templatecontext["footer_background_color"], "#333", false);
 for ($i = 1; $i <= 4; $i++) {
     $footertitle = $config->{"footer_title_{$i}"};
     $footerhtml = $config->{"footer_html_{$i}"};

@@ -38,7 +38,6 @@ function theme_eadtraining_css_tree_post_processor($tree, $theme) {
  * Inject additional SCSS.
  *
  * @param theme_config $theme The theme config object.
- *
  * @return string
  */
 function theme_eadtraining_get_extra_scss($theme) {
@@ -78,9 +77,8 @@ function theme_eadtraining_get_extra_scss($theme) {
  * @param array $args
  * @param bool $forcedownload
  * @param array $options
- *
  * @return bool
- * @throws moodle_exception
+ * @throws Exception
  */
 function theme_eadtraining_pluginfile($course, $cm, $context, $filearea, $args, $forcedownload, array $options = []) {
     if ($context->contextlevel == CONTEXT_SYSTEM) {
@@ -108,6 +106,8 @@ function theme_eadtraining_pluginfile($course, $cm, $context, $filearea, $args, 
     } else {
         send_file_not_found();
     }
+
+    return false;
 }
 
 /**
@@ -136,7 +136,6 @@ function theme_eadtraining_user_preferences(): array {
  * Returns the main SCSS content.
  *
  * @param theme_config $theme The theme config object.
- *
  * @return string
  */
 function theme_eadtraining_get_main_scss_content($theme) {
@@ -158,8 +157,8 @@ function theme_eadtraining_get_precompiled_css() {
  * Get SCSS to prepend.
  *
  * @param theme_config $theme The theme config object.
- *
  * @return string
+ * @throws Exception
  */
 function theme_eadtraining_get_pre_scss($theme) {
     $scss = "";
@@ -205,7 +204,7 @@ function theme_eadtraining_get_pre_scss($theme) {
 function theme_eadtraining_progress_content() {
     global $USER, $COURSE;
 
-    $completion = new \completion_info($COURSE);
+    $completion = new completion_info($COURSE);
 
     // First, let's make sure completion is enabled.
     if (!$completion->is_enabled()) {
@@ -254,9 +253,7 @@ function theme_eadtraining_progress_content() {
  * Function theme_eadtraining_setting_file_url
  *
  * @param $setting
- *
  * @return bool|moodle_url
- *
  * @throws dml_exception
  */
 function theme_eadtraining_setting_file_url($setting) {
@@ -270,7 +267,8 @@ function theme_eadtraining_setting_file_url($setting) {
 
     $url = moodle_url::make_file_url(
         "$CFG->wwwroot/pluginfile.php",
-        "/{$syscontext->id}/theme_eadtraining/{$setting}/0/{$filepath}");
+        "/{$syscontext->id}/theme_eadtraining/{$setting}/0/{$filepath}"
+    );
 
     return $url;
 }
@@ -280,8 +278,7 @@ function theme_eadtraining_setting_file_url($setting) {
  *
  * @param moodleform_mod $formwrapper The moodle quickforms wrapper object.
  * @param MoodleQuickForm $mform The actual form object (required to modify the form).
- *
- * @throws coding_exception
+ * @throws Exception
  */
 function theme_eadtraining_coursemodule_standard_elements(&$formwrapper, $mform) {
     static $executed = false;
@@ -299,10 +296,12 @@ function theme_eadtraining_coursemodule_standard_elements(&$formwrapper, $mform)
 
     global $CFG, $PAGE;
     if ($CFG->theme == "eadtraining" || $CFG->theme == "eadflix") {
-
         // Icones.
-        $mform->addElement("header", "theme_eadtraining_icons",
-            get_string("settings_icons_change_icons", "theme_eadtraining"));
+        $mform->addElement(
+            "header",
+            "theme_eadtraining_icons",
+            get_string("settings_icons_change_icons", "theme_eadtraining")
+        );
 
         $filemanageroptions = [
             "accepted_types" => [".svg", ".png", ".jpg", ".jpeg"],
@@ -318,18 +317,29 @@ function theme_eadtraining_coursemodule_standard_elements(&$formwrapper, $mform)
             file_prepare_draft_area(
                 $draftitemid,
                 $context->id,
-                "theme_eadtraining", "theme_eadtraining_customimage", $formwrapper->get_current()->coursemodule);
+                "theme_eadtraining",
+                "theme_eadtraining_customimage",
+                $formwrapper->get_current()->coursemodule
+            );
 
             $formwrapper->set_data([
                 "theme_eadtraining_customimage" => $draftitemid,
             ]);
         }
-        $mform->addElement("filemanager", "theme_eadtraining_customimage",
+        $mform->addElement(
+            "filemanager",
+            "theme_eadtraining_customimage",
             get_string("settings_icons_upload_image", "theme_eadtraining"),
-            null, $filemanageroptions);
+            null,
+            $filemanageroptions
+        );
 
-        $mform->addElement("static", "theme_eadtraining_custom", "",
-            get_string("settings_icons_upload_image_desc", "theme_eadtraining"));
+        $mform->addElement(
+            "static",
+            "theme_eadtraining_custom",
+            "",
+            get_string("settings_icons_upload_image_desc", "theme_eadtraining")
+        );
 
         // Icon.
         if (isset($formwrapper->get_current()->coursemodule) && $formwrapper->get_current()->coursemodule) {
@@ -339,26 +349,44 @@ function theme_eadtraining_coursemodule_standard_elements(&$formwrapper, $mform)
             file_prepare_draft_area(
                 $draftitemid,
                 $context->id,
-                "theme_eadtraining", "theme_eadtraining_customicon", $formwrapper->get_current()->coursemodule);
+                "theme_eadtraining",
+                "theme_eadtraining_customicon",
+                $formwrapper->get_current()->coursemodule
+            );
 
             $formwrapper->set_data([
                 "theme_eadtraining_customicon" => $draftitemid,
             ]);
         }
         $filemanageroptions["accepted_types"] = [".svg", ".png"];
-        $mform->addElement("filemanager", "theme_eadtraining_customicon",
+        $mform->addElement(
+            "filemanager",
+            "theme_eadtraining_customicon",
             get_string("settings_icons_upload_icon", "theme_eadtraining"),
-            null, $filemanageroptions);
+            null,
+            $filemanageroptions
+        );
 
         // Color.
-        $mform->addElement("text", "theme_eadtraining_customcolor",
-            get_string("settings_icons_color_icon", "theme_eadtraining"), []);
+        $mform->addElement(
+            "text",
+            "theme_eadtraining_customcolor",
+            get_string("settings_icons_color_icon", "theme_eadtraining"),
+            []
+        );
         $mform->setType("theme_eadtraining_customcolor", PARAM_TEXT);
-        $PAGE->requires->js_call_amd("theme_eadtraining/settings", "minicolors",
-            ["id_theme_eadtraining_customcolor"]);
+        $PAGE->requires->js_call_amd(
+            "theme_eadtraining/settings",
+            "minicolors",
+            ["id_theme_eadtraining_customcolor"]
+        );
 
-        $mform->addElement("static", "theme_eadtraining_custom", "",
-            get_string("settings_icons_color_icon_desc", "theme_eadtraining"));
+        $mform->addElement(
+            "static",
+            "theme_eadtraining_custom",
+            "",
+            get_string("settings_icons_color_icon_desc", "theme_eadtraining")
+        );
     }
 }
 
@@ -367,41 +395,51 @@ function theme_eadtraining_coursemodule_standard_elements(&$formwrapper, $mform)
  *
  * @param moodleform $data Data from the form submission.
  * @param stdClass $course The course.
- *
  * @return moodleform
- *
- * @throws coding_exception
+ * @throws Exception
  */
 function theme_eadtraining_coursemodule_edit_post_actions($data, $course) {
     $context = context_module::instance($data->coursemodule);
 
     if (isset($data->theme_eadtraining_customimage)) {
         $options = ["subdirs" => true, "embed" => true];
-        $filesave = file_save_draft_area_files($data->theme_eadtraining_customimage, $context->id,
-            "theme_eadtraining", "theme_eadtraining_customimage", $data->coursemodule, $options);
+        $filesave = file_save_draft_area_files(
+            $data->theme_eadtraining_customimage,
+            $context->id,
+            "theme_eadtraining",
+            "theme_eadtraining_customimage",
+            $data->coursemodule,
+            $options
+        );
 
         $name = "theme_eadtraining_customimage_{$data->coursemodule}";
         set_config($name, $filesave, "theme_eadtraining");
 
-        \cache::make("theme_eadtraining", "css_cache")->purge();
+        cache::make("theme_eadtraining", "css_cache")->purge();
     }
 
     if (isset($data->theme_eadtraining_customicon)) {
         $options = ["subdirs" => true, "embed" => true];
-        $filesave = file_save_draft_area_files($data->theme_eadtraining_customicon, $context->id,
-            "theme_eadtraining", "theme_eadtraining_customicon", $data->coursemodule, $options);
+        $filesave = file_save_draft_area_files(
+            $data->theme_eadtraining_customicon,
+            $context->id,
+            "theme_eadtraining",
+            "theme_eadtraining_customicon",
+            $data->coursemodule,
+            $options
+        );
 
         $name = "theme_eadtraining_customicon_{$data->coursemodule}";
         set_config($name, $filesave, "theme_eadtraining");
 
-        \cache::make("theme_eadtraining", "css_cache")->purge();
+        cache::make("theme_eadtraining", "css_cache")->purge();
     }
 
     if (isset($data->theme_eadtraining_customcolor)) {
         $name = "theme_eadtraining_customcolor_{$data->coursemodule}";
         set_config($name, $data->theme_eadtraining_customcolor, "theme_eadtraining");
 
-        \cache::make("theme_eadtraining", "css_cache")->purge();
+        cache::make("theme_eadtraining", "css_cache")->purge();
     }
 
     return $data;
@@ -464,6 +502,49 @@ function theme_eadtraining_change_color() {
 
     theme_reset_all_caches();
 }
+
+
+/**
+ * @param string $configname
+ * @param string $defaultcolor
+ * @return string
+ * @throws Exception
+ */
+function theme_eadtraining_default_color($configname, $defaultcolor, $plugin = "theme_eadtraining") {
+    $color = get_config($plugin, $configname);
+
+    if (isset($color[4])) {
+        return $color;
+    }
+    return $defaultcolor;
+}
+
+/**
+ * theme_eadtraining_get_footer_color
+ *
+ * @param string $bgColor
+ * @param string $darkcolor
+ * @param string $lightcolor
+ * @return float|null
+ */
+function theme_eadtraining_get_footer_color($bgColor, $darkcolor, $lightcolor) {
+    // Remove o # e garante que tenha 6 caracteres.
+    $bgColor = ltrim($bgColor, '#');
+    if (strlen($bgColor) !== 6) {
+        return 1; // Cor inválida.
+    }
+
+    // Converte para números (base 16).
+    $r = hexdec(substr($bgColor, 0, 2));
+    $g = hexdec(substr($bgColor, 2, 2));
+    $b = hexdec(substr($bgColor, 4, 2));
+
+    // Calcula a luminância percebida (fórmula de acessibilidade W3C).
+    $luminance = (0.299 * $r + 0.587 * $g + 0.114 * $b) / 255;
+
+    return $luminance > 0.6 ? $darkcolor : $lightcolor;
+}
+
 
 if (!function_exists('str_starts_with')) {
     /**
