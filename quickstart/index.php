@@ -71,7 +71,7 @@ if (optional_param("POST", false, PARAM_INT)) {
     // Save banners home.
     require_once("../_editor/editor-lib.php");
     $pages = $DB->get_records("theme_eadtraining_pages", ["local" => "home"]);
-    $homemodebanners = optional_param_array("homemode_banners", false, PARAM_TEXT);
+    $homemodebanners = optional_param_array("homemode_banners", [], PARAM_TEXT);
     foreach ($homemodebanners as $template) {
         $located = false;
         foreach ($pages as $page) {
@@ -235,6 +235,7 @@ $brandcolormustache = [
     "htmlselect" => $OUTPUT->render_from_template("theme_eadtraining/settings/colors", [
         "brandcolor" => true,
         "colors" => $themecolors,
+        "defaultcolor" => theme_eadtraining_default_color("brandcolor", "#1a2a6c", "theme_boost"),
     ]),
     "return" => "logos",
     "next" => "user-profile",
@@ -276,6 +277,7 @@ $footermustache = [
     "htmlselect" => $OUTPUT->render_from_template("theme_eadtraining/settings/colors", [
         "footercolor" => true,
         "colors" => $themecolors,
+        "defaultcolor" => theme_eadtraining_default_color("brandcolor", "#1a2a6c"),
     ]),
     "blocks" => [
         [
