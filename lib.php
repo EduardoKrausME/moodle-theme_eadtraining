@@ -522,22 +522,22 @@ function theme_eadtraining_default_color($configname, $defaultcolor, $plugin = "
 /**
  * theme_eadtraining_get_footer_color
  *
- * @param string $bgColor
+ * @param string $bgcolor
  * @param string $darkcolor
  * @param string $lightcolor
  * @return float|null
  */
-function theme_eadtraining_get_footer_color($bgColor, $darkcolor, $lightcolor) {
+function theme_eadtraining_get_footer_color($bgcolor, $darkcolor, $lightcolor) {
     // Remove o # e garante que tenha 6 caracteres.
-    $bgColor = ltrim($bgColor, '#');
-    if (strlen($bgColor) !== 6) {
+    $bgcolor = ltrim($bgcolor, '#');
+    if (strlen($bgcolor) !== 6) {
         return 1; // Cor inválida.
     }
 
     // Converte para números (base 16).
-    $r = hexdec(substr($bgColor, 0, 2));
-    $g = hexdec(substr($bgColor, 2, 2));
-    $b = hexdec(substr($bgColor, 4, 2));
+    $r = hexdec(substr($bgcolor, 0, 2));
+    $g = hexdec(substr($bgcolor, 2, 2));
+    $b = hexdec(substr($bgcolor, 4, 2));
 
     // Calcula a luminância percebida (fórmula de acessibilidade W3C).
     $luminance = (0.299 * $r + 0.587 * $g + 0.114 * $b) / 255;
