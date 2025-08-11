@@ -505,6 +505,8 @@ function theme_eadtraining_change_color() {
 
 
 /**
+ * theme_eadtraining_default_color
+ *
  * @param string $configname
  * @param string $defaultcolor
  * @return string
