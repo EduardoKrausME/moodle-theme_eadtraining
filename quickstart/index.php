@@ -23,7 +23,6 @@
  */
 
 use theme_eadtraining\editor\editor_tiny;
-use theme_eadtraining\images\git;
 
 require_once("../../../config.php");
 global $CFG, $PAGE, $OUTPUT, $DB, $USER;
@@ -39,7 +38,6 @@ if (optional_param("POST", false, PARAM_INT)) {
 
         // Course.
         "course_summary_banner" => PARAM_INT,
-        "course_summary_banner_position" => PARAM_INT,
         "svg_animate" => PARAM_INT,
 
         // Brandcolor.
@@ -206,8 +204,6 @@ $coursesmustache = [
     "course_summary_banner_0" => get_config("theme_eadtraining", "course_summary_banner") == 0,
     "course_summary_banner_1" => get_config("theme_eadtraining", "course_summary_banner") == 1,
     "course_summary_banner_2" => get_config("theme_eadtraining", "course_summary_banner") == 2,
-    "banners" => git::list_all("banner", ""),
-    "course_summary_banner_position" => get_config("theme_eadtraining", "course_summary_banner_position"),
     "banner_course_file_url" => $bannerfile ? $bannerfile->out() : false,
     "banner_course_file_extensions" => "PNG, JPG",
     "return" => "home",

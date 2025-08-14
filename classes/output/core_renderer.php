@@ -338,14 +338,6 @@ class core_renderer extends \core_renderer {
                             $DB->get_field("course_categories", "name", ["id" => $this->page->course->category]);
                         $header->hasbannercourse = true;
                         $header->banner_course_file_url = $bannerfileurl;
-
-                        $header->hasbannercourse_position =
-                            get_config("theme_eadtraining", "course_summary_banner_position");
-                        $hasbannercoursepositioncourse =
-                            get_config("theme_eadtraining", "course_summary_banner_position_{$courseid}");
-                        if ($hasbannercoursepositioncourse !== false) {
-                            $header->hasbannercourse_position = $hasbannercoursepositioncourse;
-                        }
                     }
                 }
             }

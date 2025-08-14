@@ -70,7 +70,6 @@ function xmldb_theme_eadtraining_install() {
 
         set_config("course_summary", 0, "theme_eadtraining");
         set_config("course_summary_banner", 0, "theme_eadtraining");
-        set_config("course_summary_banner_position", 0, "theme_eadtraining");
         set_config("svg_animate", 1, "theme_eadtraining");
 
         set_config("enable_accessibility", 0, "theme_eadtraining");

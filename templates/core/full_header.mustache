@@ -32,8 +32,9 @@
 {{#hasnavbarcourse}}
     <header id="page-header" class="header-maxwidth d-print-none hasnavbarcourse">
         <div class="position-absolute hasnavbarcourse-gradient-image w-100 h-100"
-             style="background-image: url('{{{overviewfiles}}}');"></div>
-        <div class="position-absolute hasnavbarcourse-gradient w-100 h-100"></div>
+             style="background-image: url('{{{overviewfiles}}}');">
+            <div class="overlay-gradient-image"></div>
+        </div>
         <div class="w-100 header-wrapper" style="z-index:1;">
             <div class="header-actions-container ms-auto" data-region="header-actions-container">
                 {{#headeractions}}
@@ -85,30 +86,13 @@
 {{/hasnavbarcourse}}
 
 {{#hasbannercourse}}
-    {{#hasbannercourse_position}}
-        <style>
-            nav.navbar.fixed-top {
-                background-color: rgba(0, 0, 0, .22) !important;
-                background-image: url({{{banner_course_file_url}}});
-                background-size: cover;
-                background-position: center 0;
-                filter: brightness(.5);
-            }
-
-            .nav-link {
-                color: var(--bs-heading-color) !important;
-            }
-
-            .simplesearchform {
-                background: #ecf3fa63 !important;
-            }
-        </style>
-    {{/hasbannercourse_position}}
     <div id="page-header-size" class="hasbannercourse-size"></div>
     <header id="page-header"
-            class="header-maxwidth d-print-none hasbannercourse {{#hasbannercourse_position}}hasbannercourse-top{{/hasbannercourse_position}}">
+            class="header-maxwidth d-print-none hasbannercourse">
         <div class="position-absolute hasnavbarcourse-gradient-image w-100 h-100"
-             style="background-image: url('{{{banner_course_file_url}}}');"></div>
+             style="background-image: url('{{{banner_course_file_url}}}');">
+            <div class="overlay-gradient-image"></div>
+        </div>
         <div class="w-100 header-wrapper container" style="z-index:1;">
             <div class="header-actions-container ms-auto" data-region="header-actions-container">
                 {{#headeractions}}
@@ -188,7 +172,6 @@
 {{/hasnavbarcourse}}
 
 {{#js}}
-    /*<script>*/
     require(["jquery", "core/modal", "core/notification"], function ($, Modal, Notification) {
         $(`#headeractions-banner-{{{headeractions_banner_courseid}}}`).click(function (){
             event.preventDefault();

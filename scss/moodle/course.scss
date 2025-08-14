@@ -923,20 +923,20 @@ $divider-hover-color: $primary !default;
 
         .hasnavbarcourse-gradient-image{
             background-size: cover;
-            // background-position: center;
             background-position: center;
             left: 0;
             bottom: 0;
             opacity: 1;
             border-radius: inherit;
-            // filter: blur(8px) brightness(.5);
-        }
-        .hasnavbarcourse-gradient {
-            background: linear-gradient(180deg, rgba(0, 0, 0, 0.0)  -24.52%, #000 97.67%);
-            left: 0;
-            bottom: 0;
-            opacity: 1;
-            border-radius: inherit;
+            .overlay-gradient-image{
+                background: linear-gradient(270deg, rgba($primary, 0.0) 0%, $primary 90%);
+                z-index: 1;
+                position: absolute;
+                left: 0;
+                top: 0;
+                height: 100%;
+                width: 100%;
+            }
         }
         .course-intro-category-name {
             display: inline-block;
@@ -945,9 +945,8 @@ $divider-hover-color: $primary !default;
             background-color: darken($primary, 25%);
             color: #fff;
             text-transform: uppercase;
-            font-size: .75rem;
+            font-size: 15px;
             font-weight: 600;
-            letter-spacing: .5px;
             transition: all 0.2s;
         }
 
@@ -1023,7 +1022,6 @@ $divider-hover-color: $primary !default;
     }
 
     --hasbannercourse-size: 230px;
-    --hasbannercourse-top: 60px;
     &.hasbannercourse {
         position: absolute;
         top: 0;
@@ -1031,18 +1029,13 @@ $divider-hover-color: $primary !default;
         right: 0;
         border-radius: 0;
         height: var(--hasbannercourse-size);
-        &.hasbannercourse-top {
-            top: calc(-1 * var(--hasbannercourse-top));
-            padding-top: calc(var(--hasbannercourse-top) + var(--hasbannercourse-top));
-            height: calc(var(--hasbannercourse-size) + var(--hasbannercourse-top));
-            .header-actions-container {
-                top: calc(var(--hasbannercourse-top) + 20);
-            }
+        @media (max-width: 991px) {
+            top: 61px;
         }
         h1,
         .header-action button {
-            text-shadow: 1px 1px 3px rgba(255, 255, 255, .6), 1px 1px 5px rgba(255, 255, 255, .3), 1px 1px 7px rgba(255, 255, 255, .1);;
-            color: var(--bs-heading-color) !important;
+            color: #ffffff;
+            font-size: 33px;
         }
     }
     &.hasbannercourse-size {

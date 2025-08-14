@@ -23,7 +23,6 @@
  */
 
 use core_course\external\course_summary_exporter;
-use theme_eadtraining\images\git;
 
 require_once("../../../config.php");
 require_once("../lib.php");
@@ -44,7 +43,6 @@ if (optional_param("POST", false, PARAM_INT)) {
     // Save configs.
     $configkeys = [
         "course_summary_banner" => PARAM_INT,
-        "course_summary_banner_position" => PARAM_INT,
     ];
     foreach ($configkeys as $name => $type) {
         $value = optional_param($name, false, $type);
@@ -152,19 +150,11 @@ if ( $coursesummarycourse !== false) {
     $coursesummary = $coursesummarycourse;
 }
 
-$position = get_config("theme_eadtraining", "course_summary_banner_position");
-$positioncourse = get_config("theme_eadtraining", "course_summary_banner_position_{$courseid}");
-if ($positioncourse !== false) {
-    $position = $positioncourse;
-}
-
 $coursesmustache = [
     "no_accordion" => true, // For when calling out of the accordion.
     "course_summary_banner_0" => $coursesummary == 0,
     "course_summary_banner_1" => $coursesummary == 1,
     "course_summary_banner_2" => $coursesummary == 2,
-    "course_summary_banner_position" => $position,
-    "banners" => git::list_all("banner", ""),
     "banner_course_file_url" => $bannerfileurl,
     "banner_course_file_extensions" => "PNG, JPG",
 ];
