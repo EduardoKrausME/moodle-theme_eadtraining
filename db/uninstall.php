@@ -43,7 +43,6 @@ function xmldb_theme_eadtraining_uninstall() {
     unset_config("enable_vlibras", "theme_eadtraining");
     unset_config("course_summary", "theme_eadtraining");
     unset_config("course_summary_banner", "theme_eadtraining");
-    unset_config("course_summary_banner_position", "theme_eadtraining");
 
     unset_config("footer_background_color", "theme_eadtraining");
     unset_config("footer_title_1", "theme_eadtraining");
