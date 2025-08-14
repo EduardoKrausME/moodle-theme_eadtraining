@@ -371,6 +371,9 @@
   border-radius: 15px;
   /* Footer */
 }
+.colors-body, .colors-body * {
+  transition: all 0.3s ease-in-out;
+}
 .colors-body .card {
   width: 80%;
   background: var(--preview-card);
@@ -380,12 +383,16 @@
   margin: 29px auto;
 }
 .colors-body .card__header {
-  background: var(--preview-primary);
-  color: #ffffff;
+  color: var(--preview-primary);
+  background: #ffffff;
   padding: 26px 28px;
   font-weight: 800;
   font-size: 26px;
   line-height: 1;
+}
+.colors-body .card__header.card__header-dark {
+  background: var(--preview-primary);
+  color: #ffffff;
 }
 .colors-body .card__body {
   padding: 22px 22px 26px;
