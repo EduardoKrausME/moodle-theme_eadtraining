@@ -89,12 +89,13 @@ $courseindex-item-current: $primary !default;
         &.courseindex-section-title {
             padding: 19px 1px 19px 14px;
             color: $primary;
-            //border: 1px solid mix(white, $primary, 70%);
-            border-radius: 12px;
+            background: mix(#f9f9f9, $primary, 95%);
+            border-radius: 13px;
             text-decoration: none;
             a {
                 font-size: 18px;
                 font-weight: 700;
+                color: darken($primary, 4%);
                 .icon {
                     font-size: 16px;
                 }
@@ -107,7 +108,7 @@ $courseindex-item-current: $primary !default;
 
         .courseindex-link,
         .courseindex-chevron {
-            color: $courseindex-link-color;
+            color: darken($primary, 4%);
             text-decoration: none;
             &:hover,
             &:focus {
@@ -206,7 +207,8 @@ $courseindex-item-current: $primary !default;
         @include courseindex-item-dragging();
         box-shadow: unset;
         border-radius: 14px;
-        border: 1px solid mix(white, $primary, 70%);
+        border: 1px solid mix(#f9f9f9, $primary, 93%);
+        background: #ffffff;
         &:not(:last-child) {
             margin-bottom: 21px;
         }
