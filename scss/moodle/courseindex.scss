@@ -185,7 +185,11 @@ $courseindex-item-current: $primary !default;
 
         // Completion.
         .completioninfo {
-            min-width: 24px;
+            min-width: 16px;
+            margin-left: -7px;
+            .icon {
+                margin-right: 0;
+            }
             &.completion_complete {
                 color: $success;
             }
