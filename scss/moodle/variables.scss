@@ -16,7 +16,7 @@ $state-danger-bg: shift-color($danger, -80%) !default;
 $state-danger-border: shift-color($danger, -70%) !default;
 $primary-nav-padding-y: ($spacer * 0.25) !default;
 $primary-nav-padding-x: ($spacer * 0.5) !default;
-$navbar-height: 60px !default;
+$navbar-height: 90px !default;
 $stickyfooter-height: calc(max(80px, calc(#{$font-size-base} * 3))) !default;
 $course-content-maxwidth: 830px !default;
 $medium-content-maxwidth: 1120px !default;
