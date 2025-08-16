@@ -13,20 +13,16 @@ $drawer-shadow-color: rgba(0, 0, 0, .25) !default;
 :focus {
     scroll-margin-top: $fixed-header-y + 10px;
 }
-
 .pagelayout-embedded :target {
     padding-top: initial;
     margin-top: initial;
 }
-
 #nav-drawer.closed {
     left: -($drawer-width + $drawer-offscreen-gutter);
 }
-
 #nav-drawer[aria-hidden=true] .list-group-item {
     display: none;
 }
-
 /* Use a variable for the drawer background colors. */
 $drawer-bg: darken($body-bg, 5%) !default;
 [data-region="drawer"] {
@@ -40,7 +36,6 @@ $drawer-bg: darken($body-bg, 5%) !default;
     background-color: $drawer-bg;
     @include transition(right 0.5s ease, left 0.5s ease);
 }
-
 @include media-breakpoint-up(sm) {
     [data-region="drawer"] {
         padding: $drawer-padding-x $drawer-padding-y;
@@ -51,7 +46,6 @@ $drawer-bg: darken($body-bg, 5%) !default;
         @include transition(0.2s);
     }
 }
-
 #nav-drawer {
     right: auto;
     left: 0;
@@ -61,12 +55,10 @@ $drawer-bg: darken($body-bg, 5%) !default;
     .list-group-item.active {
         z-index: inherit;
     }
-
     .list-group-item-action.active + .list-group-item,
     .list-group-item.active + .list-group-item {
         border-top: none;
     }
-
     .list-group {
         // Remove default list styling in nav menus.
         ul {
@@ -74,47 +66,39 @@ $drawer-bg: darken($body-bg, 5%) !default;
             padding: 0;
             margin: 0;
         }
-
         // Add margin to be consistent with `.list-group-item` spacing.
         li {
             margin-bottom: -1px;
         }
-
         li:last-child {
             margin-bottom: 0;
         }
     }
 }
-
 body.drawer-ease {
     @include transition(margin-left 0.5s ease, margin-right 0.5s ease);
 }
-
 body:not(.uses-drawers).drawer-open-left {
     @include media-breakpoint-up(md) {
         margin-left: $drawer-left-width;
     }
 }
-
 body.drawer-open-left #page.drawers {
     @include media-breakpoint-up(md) {
         margin-left: $drawer-left-width;
         padding-left: 1rem;
     }
 }
-
 body.drawer-open-right {
     @include media-breakpoint-up(md) {
         margin-right: $drawer-right-width;
     }
 }
-
 $right-drawer-width: 320px;
 [data-region=right-hand-drawer] {
     display: flex;
     flex-direction: column;
     @include transition(right .2s ease-in-out);
-
     &.drawer {
         z-index: 999999999;
         position: fixed;
@@ -127,7 +111,6 @@ $right-drawer-width: 320px;
         visibility: visible;
         opacity: 1;
     }
-
     &.hidden {
         display: block;
         right: $right-drawer-width * -1;
@@ -139,7 +122,6 @@ $right-drawer-width: 320px;
         @include transition(right .2s ease-in-out, visibility 0s ease-in-out .2s, opacity 0s ease-in-out .2s);
     }
 }
-
 @include media-breakpoint-down(md) {
     [data-region=right-hand-drawer] {
         &.drawer {
@@ -153,13 +135,11 @@ $right-drawer-width: 320px;
         overflow: hidden;
     }
 }
-
 .dir-rtl {
     [data-region=right-hand-drawer] {
         box-shadow: 2px 2px 4px $drawer-shadow-color;
     }
 }
-
 @mixin drawer() {
     //background-color: $drawer-bg-color;
     // Drawers has a z-index higher than the page content,
@@ -177,7 +157,6 @@ $right-drawer-width: 320px;
         display: none;
     }
 }
-
 @mixin drawertypes() {
     &.drawer-right {
         @include transition(right 0.2s ease, top 0.2s ease, bottom 0.2s ease, visibility 0.2s ease, transform 0.5s ease);
@@ -186,12 +165,10 @@ $right-drawer-width: 320px;
         right: calc(-#{$drawer-right-width} + -10px);
         visibility: hidden;
         @include box-shadow($box-shadow-drawer-right);
-
         &.show {
             right: 0;
             visibility: visible;
         }
-
         .drawertoggle {
             margin-left: auto;
             margin-right: 5px;
@@ -204,17 +181,15 @@ $right-drawer-width: 320px;
         left: calc(-#{$drawer-left-width} + -10px);
         visibility: hidden;
         @include box-shadow($box-shadow-drawer-left);
-
         &.show {
             left: 0;
             visibility: visible;
             background: mix(white, $primary, 95%);
         }
-
         .drawertoggle {
-            margin-right: auto;
+            // margin-right: auto;
             margin-left: 5px;
-            color: #fff;
+            color: #ffffff;
             background-color: #172b4d;
             border-color: #172b4d;
             box-shadow: 0 4px 6px rgba(50, 50, 93, .11), 0 1px 3px rgba(0, 0, 0, .08);
@@ -222,7 +197,6 @@ $right-drawer-width: 320px;
     }
     &.drawer-bottom {
         bottom: -110%;
-
         &.show {
             bottom: 0;
         }
@@ -234,12 +208,10 @@ $right-drawer-width: 320px;
         }
     }
 }
-
 .drawer {
     @include drawer();
     @include drawertypes();
 }
-
 @include media-breakpoint-up(lg) {
     .drawer {
         // Workaround to display the skip link elements from the blocks drawer infront of the navbar.
@@ -250,24 +222,20 @@ $right-drawer-width: 320px;
         &#theme_eadtraining-drawers-blocks:focus-within {
             z-index: $zindex-fixed + 1;
         }
-
         &.not-initialized {
             display: block;
         }
     }
 }
-
 .drawer-md,
 .drawer-sm {
     display: none;
 }
-
 .drawerheader {
     padding: 0;
     height: $navbar-height;
     display: flex;
     align-items: center;
-
     .sitename {
         overflow: hidden;
         white-space: nowrap;
@@ -275,11 +243,9 @@ $right-drawer-width: 320px;
         margin-right: 16px;
     }
 }
-
 .drawer.scrolled .drawerheader {
     box-shadow: 0 8px 11px -7px $drawer-shadow-color;
 }
-
 @include media-breakpoint-down(lg) {
     .drawer-md {
         display: block;
@@ -287,7 +253,6 @@ $right-drawer-width: 320px;
         @include drawertypes();
     }
 }
-
 @include media-breakpoint-down(md) {
     .drawer-sm {
         display: block;
@@ -295,7 +260,42 @@ $right-drawer-width: 320px;
         @include drawertypes();
     }
 }
-
+.course-progressbar-wrapper {
+    width: 100%;
+    padding: 0 3px 0 12px;
+    margin: 0;
+    position: relative;
+    .progress-info {
+        margin-bottom: 0.5rem;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        .progress-label {
+            span {
+                display: inline-block;
+                color: #5e72e4;
+                font-size: .625rem;
+                font-weight: 600;
+                text-transform: uppercase;
+                background: rgba(94, 114, 228, .1);
+                padding: 0.25rem 1rem;
+                border-radius: 30px;
+            }
+        }
+        .progress-percentage {
+            text-align: right;
+            span {
+                display: inline-block;
+                color: #8898aa;
+                font-size: .875rem;
+                font-weight: 600;
+            }
+        }
+    }
+    .progress {
+        height: 8px;
+    }
+}
 .drawercontent {
     position: relative;
     z-index: -1;
@@ -305,52 +305,9 @@ $right-drawer-width: 320px;
     flex-wrap: nowrap;
     overflow-y: auto;
     padding: 18px 25px;
-
-    .course-progressbar-wrapper {
-        padding: 0 5px;
-        margin: 0 0 25px;
-        position: relative;
-
-        .progress-info {
-            margin-bottom: 0.5rem;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-
-            .progress-label {
-                span {
-                    display: inline-block;
-                    color: #5e72e4;
-                    font-size: .625rem;
-                    font-weight: 600;
-                    text-transform: uppercase;
-                    background: rgba(94, 114, 228, .1);
-                    padding: 0.25rem 1rem;
-                    border-radius: 30px;
-                }
-            }
-
-            .progress-percentage {
-                text-align: right;
-
-                span {
-                    display: inline-block;
-                    color: #8898aa;
-                    font-size: .875rem;
-                    font-weight: 600;
-                }
-            }
-        }
-
-        .progress {
-            height: 8px;
-        }
-    }
-
     .dropdown-menu .dropdown-item {
         width: 220px;
         white-space: normal;
     }
-
     @include thin-scrolls($drawer-scroll-bg-track);
 }
