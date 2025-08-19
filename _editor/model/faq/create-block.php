@@ -33,5 +33,5 @@ function faq_createblocks($page) {
         }
     }
 
-    return "<div class=\"owl-carousel owl-course-banner\">{$blocks}</div>";
+    return "<div>{$blocks}</div>";
 }
