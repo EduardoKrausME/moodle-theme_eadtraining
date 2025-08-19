@@ -135,11 +135,12 @@ if (optional_param("embed-frame-top", 0, PARAM_INT)) {
         theme_eadtraining_default_color("footer_background_color", $brandcolor);
     $templatecontext["footer_background_text_color"] =
         theme_eadtraining_get_footer_color($templatecontext["footer_background_color"], "#333", false);
+
     for ($i = 1; $i <= 4; $i++) {
         $footertitle = get_config("theme_eadtraining", "footer_title_{$i}");
         $footerhtml = get_config("theme_eadtraining", "footer_html_{$i}");
 
-        if (isset($footertitle[3]) && isset($footerhtml[20])) {
+        if (isset($footertitle[2]) && isset($footerhtml[5])) {
             $templatecontext["footercount"]++;
             $templatecontext["footercontents"][] = [
                 "footertitle" => $footertitle,

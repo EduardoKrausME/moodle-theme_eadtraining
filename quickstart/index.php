@@ -264,7 +264,7 @@ $numblocks = 0;
 for ($i = 1; $i <= 4; $i++) {
     $footertitle = get_config("theme_eadtraining", "footer_title_{$i}");
     $footerhtml = get_config("theme_eadtraining", "footer_html_{$i}");
-    if (isset($footertitle[3]) && isset($footerhtml[20])) {
+    if (isset($footertitle[2]) && isset($footerhtml[5])) {
         $numblocks++;
     }
 }
