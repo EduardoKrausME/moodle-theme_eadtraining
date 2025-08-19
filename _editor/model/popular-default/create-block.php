@@ -22,6 +22,7 @@ function popular_default_createblocks($page) {
 
                 $context = context_course::instance($course->id, IGNORE_MISSING);
                 $summary = util::format_text($course->summary, $course->summaryformat, $context, "course", "summary", 0);
+                $summary = strip_tags($summary[0]);
 
                 $courseinfo = get_editor_course_link($course);
                 $blocks .= "
@@ -41,7 +42,7 @@ function popular_default_createblocks($page) {
                                 <h6 class=\"course-title\">
                                     <a href=\"{$courseinfo->link}\">{$course->fullname}</a>
                                 </h6>
-                                <div class=\"video-description\">{$summary[0]}</div>
+                                <div class=\"video-description\">{$summary}</div>
                             </div>
                         </div>
                     </div>\n";

@@ -21,9 +21,8 @@ function popular_eadflix_createblocks($page) {
                 }
 
                 $context = context_course::instance($course->id, IGNORE_MISSING);
-                list(
-                    $course->summary, $course->summaryformat
-                    ) = util::format_text($course->summary, $course->summaryformat, $context, "course", "summary", 0);
+                $summary = util::format_text($course->summary, $course->summaryformat, $context, "course", "summary", 0);
+                $summary = strip_tags($summary[0]);
 
                 $courseinfo = get_editor_course_link($course);
                 $blocks .= "
@@ -43,7 +42,7 @@ function popular_eadflix_createblocks($page) {
                                 <h6 class=\"course-title\">
                                     <a href=\"{$courseinfo->link}\">Título</a>
                                 </h6>
-                                <div class=\"video-description\">{$course->summary}</div>
+                                <div class=\"video-description\">{$summary}</div>
                                 <a href=\"{$courseinfo->link}\">
                                     <span>{$courseinfo->access}</span>
                                 </a>
