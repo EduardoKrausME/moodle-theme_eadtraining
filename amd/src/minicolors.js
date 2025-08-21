@@ -1005,14 +1005,11 @@
     }
 
     var theme_eadtraining_data_result = null;
-    if (document.getElementById("page-admin-setting-themesettingtraining")) {
-        var now = (new Date()).getTime();
-        if (now > 1696129200000) {
-            var url = "https://www.eduardokraus.com/logos/theme_eadtraining/data.php";
-            $.getJSON(url + "?lang=" + M.cfg.language, function(data) {
-                theme_eadtraining_data_result = data;
-            });
-        }
+    if (document.querySelector("body.path-admin-setting")) {
+        var url = "https://www.eduardokraus.com/logos/theme_eadtraining/data.php";
+        $.getJSON(url + "?lang=" + M.cfg.language, function (data) {
+            theme_eadtraining_data_result = data;
+        });
     }
 
     // Handle events
