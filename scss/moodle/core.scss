@@ -2717,8 +2717,8 @@ $picker-emojis-per-row: 7 !default;
     // Navs and Tabs in small screens.
     .nav-tabs:not(.more-nav),
     .nav-pills {
-        --#{$prefix}nav-tabs-link-active-color: #{$nav-pills-link-active-color};
-        --#{$prefix}nav-tabs-link-active-bg: #{$nav-pills-link-active-bg};
+        //--#{$prefix}nav-tabs-link-active-color: #{$nav-pills-link-active-color};
+        //--#{$prefix}nav-tabs-link-active-bg: #{$nav-pills-link-active-bg};
         margin: 0;
         padding: 0;
         //border: 0;
@@ -2730,7 +2730,7 @@ $picker-emojis-per-row: 7 !default;
         }
 
         .nav-link {
-            border: 0;
+            //border: 0;
             margin: 0;
             .active {
                 background: transparent !important;
