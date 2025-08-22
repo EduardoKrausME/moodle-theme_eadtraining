@@ -199,6 +199,7 @@ class core_hook_output {
     private static function acctoolbar() {
         if (get_config("theme_eadtraining", "enable_accessibility")) {
             global $PAGE;
+            $PAGE->requires->strings_for_js(["acctoolbar_image_without_alt"], "theme_eadtraining");
             $PAGE->requires->js_call_amd("theme_eadtraining/acctoolbar", "init");
         }
     }

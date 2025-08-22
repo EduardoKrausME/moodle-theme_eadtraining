@@ -278,7 +278,6 @@ training_AccessTool.prototype.fontsChange = function (event) {
     window.training_toolboxAppstate.fontSize = counter;
     training_AccessTool.prototype.getFontsChanges(counter);
     training_AccessTool.prototype.updateState();
-
 };
 
 // INITIAL FONT SIZE
@@ -354,11 +353,10 @@ training_AccessTool.prototype.imagesAddTitles = function () {
         } else {
             var title = document.createElement('span');
             title.className = 'mic-toolbox-images-titles';
-            title.textContent = 'image without text';
+            title.textContent = M.util.get_string("acctoolbar_image_without_alt", "theme_eadtraining");
             img.parentNode.insertBefore(title, img);
         }
     }
-
 };
 
 training_AccessTool.prototype.updateState = function () {
@@ -369,7 +367,6 @@ training_AccessTool.prototype.updateState = function () {
         console.log('No Storage Found');
     }
 };
-
 
 training_AccessTool.prototype.openBox = function (event) {
     this.toolBox.classList.add('opened-mic-access-tool');
