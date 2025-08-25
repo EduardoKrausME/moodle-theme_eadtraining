@@ -131,6 +131,9 @@
         // Troca a cor principal e recalcula as demais
         function updateMainColor(newColor, newFooterColor) {
             const root = document.querySelector("#colors-body-{{{uniqid}}}");
+            if(!root) {
+                return;
+            }
 
             if ($('[id^="id_s_"][id$="brandcolor_background_menu"]').is(':checked')) {
                 $(".eadtraining-colors-preview .card__header").addClass("card__header-dark");
