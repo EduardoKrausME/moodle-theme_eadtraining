@@ -38,7 +38,6 @@ if (optional_param("POST", false, PARAM_INT)) {
 
         // Course.
         "course_summary_banner" => PARAM_INT,
-        "svg_animate" => PARAM_INT,
 
         // Brandcolor.
         "brandcolor" => PARAM_RAW,
@@ -200,7 +199,6 @@ echo $OUTPUT->render_from_template("theme_eadtraining/quickstart/home", $homemus
 // Course.
 $bannerfile = theme_eadtraining_setting_file_url("banner_course_file");
 $coursesmustache = [
-    "svg_animate" => get_config("theme_eadtraining", "svg_animate"),
     "course_summary_banner_0" => get_config("theme_eadtraining", "course_summary_banner") == 0,
     "course_summary_banner_1" => get_config("theme_eadtraining", "course_summary_banner") == 1,
     "course_summary_banner_2" => get_config("theme_eadtraining", "course_summary_banner") == 2,
@@ -210,8 +208,6 @@ $coursesmustache = [
     "next" => "logos",
 ];
 echo $OUTPUT->render_from_template("theme_eadtraining/quickstart/courses", $coursesmustache);
-$PAGE->requires->js_call_amd("theme_eadtraining/default_image", "generateimage", ["svg-courseid-111", 111, true]);
-$PAGE->requires->js_call_amd("theme_eadtraining/default_image", "generateimage", ["svg-courseid-222", 222, false]);
 
 // Logos.
 $logosmustache = [
