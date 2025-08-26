@@ -4,16 +4,17 @@
 }
 $navbar-color: #b5bcc7;
 .navbar.fixed-top {
+    --navbar-height: #{$navbar-height};
     padding-top: 0;
     padding-bottom: 0;
     align-items: stretch;
-    height: $navbar-height + 1px;
+    height: calc(var(--navbar-height) + 1px);
     box-shadow: 0 0.563rem 1.125rem rgba(92, 107, 121, .1);
     background: #ffffff;
     .navbar-brand {
         margin-right: $spacer !important;
         .logo {
-            max-height: calc(#{$navbar-height} - (#{$primary-nav-padding-y} * 2));
+            max-height: calc(var(--navbar-height) - (#{$primary-nav-padding-y} * 2));
         }
     }
     .nav-link {
@@ -395,8 +396,4 @@ $navbar-color: #b5bcc7;
             text-overflow: ellipsis;
         }
     }
-}
-// Make navbar height available for non-sass use.
-:root {
-    --navbar-height: #{$navbar-height};
 }

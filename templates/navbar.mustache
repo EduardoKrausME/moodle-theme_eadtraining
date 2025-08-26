@@ -105,3 +105,23 @@
 </nav>
 
 {{> theme_eadtraining/primary-drawer-mobile }}
+
+<script>
+(function () {
+    let lastHeight = -1;
+    document.addEventListener("scroll", function () {
+        let scrollY = window.scrollY;
+        let limitedScroll = Math.min(scrollY, 180);
+        let newHeight = 91 - (limitedScroll / 6);
+        newHeight = Math.ceil(Math.max(newHeight, 61));
+
+        if (lastHeight == newHeight) return;
+        lastHeight = newHeight;
+
+        const navbar = document.querySelector(".navbar.fixed-top");
+        if (navbar) {
+            navbar.style.setProperty("--navbar-height", `${newHeight}px`);
+        }
+    });
+})();
+</script>
