@@ -140,12 +140,8 @@ $blocks-plus-gutter: calc(#{$blocks-column-width} + (#{$grid-gutter-width} * 0.5
 
     span.categoryname {
         display: inline-block;
-        padding: 1px 10px;
-        border-radius: 3px;
-        background-color: darken($primary, 25%);
         color: #fff;
         text-transform: uppercase;
-        font-size: .75rem;
         font-weight: 600;
         letter-spacing: .5px;
         transition: all 0.2s;
@@ -169,6 +165,7 @@ $blocks-plus-gutter: calc(#{$blocks-column-width} + (#{$grid-gutter-width} * 0.5
         width: 36px;
         padding: 0;
         border-radius: 50%;
+        color: $primary;
     }
 }
 
@@ -193,7 +190,7 @@ $blocks-plus-gutter: calc(#{$blocks-column-width} + (#{$grid-gutter-width} * 0.5
         flex: 1;
         @include media-breakpoint-up(sm) {
             flex: 0 1 auto;
-            width: 240px;
+            width: 32%;
             max-width: 100%;
         }
     }
@@ -202,11 +199,17 @@ $blocks-plus-gutter: calc(#{$blocks-column-width} + (#{$grid-gutter-width} * 0.5
 .course-card,
 .theme-card {
     border-radius: 11px;
+    &, * {
+        transition: all 0.3s cubic-bezier(.215, .61, .355, 1);
+    }
+    &:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 14px 34px rgba(16, 24, 40, .14);
+    }
 
     .card-img-top {
         position: relative;
-        //height: 7rem;
-        padding-top: 52%;
+        padding-top: 43%;
         border-radius: 11px 11px 0 0;
         overflow: hidden;
         background-size: cover;
@@ -218,17 +221,21 @@ $blocks-plus-gutter: calc(#{$blocks-column-width} + (#{$grid-gutter-width} * 0.5
             height: 100%;
             background-position: center;
             background-size: cover;
-            transition: all 0.3s cubic-bezier(0.215, 0.61, 0.355, 1);
         }
 
         &:hover .background-image {
-            transform: scale(1.12);
+            // transform: scale(1.12);
         }
 
         .categoryarea {
             position: absolute;
             top: 10px;
-            right: 10px;
+            left: 10px;
+            background: rgba(0, 0, 0, .25);
+            backdrop-filter: blur(6px);
+            border-radius: 999px;
+            font-size: 14px;
+            padding: 6px 10px;
         }
     }
 
@@ -238,14 +245,28 @@ $blocks-plus-gutter: calc(#{$blocks-column-width} + (#{$grid-gutter-width} * 0.5
         z-index: 2;
         position: relative;
         .coursename {
-            line-height: 1.5 !important;
-            font-size: 18px;
             color: darken($primary, 25%);
+            margin: 0 0 12px;
+            font-size: clamp(18px, 2.2vw, 24px);
+            line-height: 1.2;
+            text-decoration: none;
         }
     }
 
     .card-footer {
         background: transparent;
+        .progress {
+            --bs-progress-bar-bg: #365df7;
+            --bs-progress-bg: #e5ecff;
+            &[data-progress="100"] {
+                --bs-progress-bar-bg: #22c55e;
+                --bs-progress-bg: #dbf7e6;
+            }
+            &[data-progress="0"] {
+                --bs-progress-bar-bg: #fb923c;
+                --bs-progress-bg: #ffe8d6;
+            }
+        }
     }
 }
 
@@ -348,6 +369,31 @@ $blocks-plus-gutter: calc(#{$blocks-column-width} + (#{$grid-gutter-width} * 0.5
     // Make space for active item indicator.
     .dropdown-item {
         padding-left: map-get($spacers, 4);
+    }
+}
+.page-mycourses {
+    #region-main {
+        background-color: transparent;
+    }
+    #page.drawers div[role="main"] {
+        box-shadow: transparent 0 0 0;
+        background: transparent;
+        padding: 0;
+    }
+    .block_myoverview {
+        .card-header {
+            display: none;
+        }
+        [data-region="filter"] {
+            background: #ffffff;
+            padding: 8px 8px 4px;
+            border-radius: 9px;
+            width: fit-content;
+            margin-bottom: 19px !important;
+        }
+        [data-region="paged-content-page"] {
+            margin: 0 -10px;
+        }
     }
 }
 
