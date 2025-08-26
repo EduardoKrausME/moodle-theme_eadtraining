@@ -7,10 +7,11 @@
         <license>BSD 3-Clause</license>
     </library>
     <library>
-        <location>amd/src/trianglify.js</location>
-        <name>Trianglify</name>
-        <version>4.1.1</version>
-        <license> GPL-3.0 license</license>
+        <location>amd/src/geopattern.js</location>
+        <name>GeoPattern</name>
+        <repository>https://github.com/btmills/geopattern/</repository>
+        <version>1.2.3</version>
+        <license>MIT license</license>
     </library>
     <library>
         <location>scss/bootstrap</location>
