@@ -261,6 +261,7 @@ $divider-hover-color: $primary !default;
     }
 }
 
+.activity,
 .activity-item {
     padding: $activity-item-padding;
     @include border-radius($activity-border-radius);
@@ -419,6 +420,10 @@ $divider-hover-color: $primary !default;
         a[role="button"] {
             min-height: map-get($iconsizes, 5);
         }
+        button:not(.btn-success) {
+            background: rgba(0, 0, 0, .45);
+            color: #ffffff;
+        }
 
         @include media-breakpoint-down(sm) {
             width: 100%;
@@ -452,6 +457,19 @@ $divider-hover-color: $primary !default;
             }
             [role=list] span {
                 white-space: nowrap;
+            }
+        }
+    }
+    &.theme-block .activity-completion {
+        button {
+            backdrop-filter: blur(6px);
+            &.btn-success {
+                --bs-btn-bg: rgba(25, 135, 84, .25);
+                --bs-btn-border-color: rgba(25, 135, 84, .35);
+            }
+            &:not(.btn-success) {
+                background: rgba(0, 0, 0, .25);
+                color: #ffffff;
             }
         }
     }
