@@ -22,6 +22,8 @@
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
+// phpcs:disable moodle.Files.RequireLogin.Missing
+
 require_once('../../config.php');
 
 header("content-disposition: attachment; filename=\"course.svg\"");
