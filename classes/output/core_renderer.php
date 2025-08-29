@@ -564,12 +564,8 @@ class core_renderer extends \core_renderer {
      * @throws Exception
      */
     public function get_default_image_for_courseid($courseid): string {
-        $basecolor = get_config("theme_boost", "brandcolor");
-        $imageid = "svg-courseid-{$courseid}-" . uniqid();
-        $this->page->requires->js_call_amd("theme_eadtraining/default_image", "generateimage", [$imageid, $courseid, $basecolor]);
-
-        $imagesvg = "<svg xmlns='http://www.w3.org/2000/svg' id={$imageid}></svg>";
-        return "data:image/svg+xml;utf8,{$imagesvg}";
+        global $CFG;
+        return "{$CFG->wwwroot}/theme/eadtraining/course-image-default.php?id={$courseid}";
     }
 
     /**
