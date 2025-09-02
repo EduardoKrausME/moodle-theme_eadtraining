@@ -55,7 +55,7 @@
 <div class="usermenu">
     {{#unauthenticateduser}}
         {{#url}}
-            <a class="login pl-2 btn btn-primary" href="{{url}}">{{#str}} login, core {{/str}}</a>
+            <a class="login pl-2 btn btn-primary" href="{{{url}}}">{{#str}} login, core {{/str}}</a>
         {{/url}}
     {{/unauthenticateduser}}
     {{^unauthenticateduser}}
@@ -75,7 +75,7 @@
                 title: "{{{userfullname}}}",
                 body: `
                 {{#avatardata}}
-                    <span class="avatar d-none {{classes}}">
+                    <span class="avatar d-none {{{classes}}}">
                         {{{content}}}
                     </span>
                 {{/avatardata}}
@@ -150,7 +150,7 @@
                     modal.root.find(".usermenu-modal-tabs-content").html(`
                         <div class="user m-2">
                             {{#avatardata}}
-                                <span class="avatar d-none {{classes}}">
+                                <span class="avatar d-none {{{classes}}}">
                                     {{{content}}}
                                 </span>
                             {{/avatardata}}

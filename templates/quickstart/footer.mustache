@@ -91,12 +91,12 @@
                 <!-- Nav tabs -->
                 <ul class="nav nav-tabs nav-pills" id="footerTab" role="tablist">
                     {{#blocks}}
-                        <li class="nav-item" data-block="{{num}}">
+                        <li class="nav-item" data-block="{{{num}}}">
                             <button class="nav-link {{#active}}active{{/active}}"
-                                    id="footer-tab-{{num}}" data-bs-toggle="tab"
-                                    data-bs-target="#footer{{num}}" type="button" role="tab" aria-controls="footer{{num}}"
+                                    id="footer-tab-{{{num}}}" data-bs-toggle="tab"
+                                    data-bs-target="#footer{{{num}}}" type="button" role="tab" aria-controls="footer{{{num}}}"
                                     aria-selected="{{#active}}true{{/active}}{{^active}}false{{/active}}">
-                                {{#str}}footer_heading, theme_eadtraining, {{num}}{{/str}}
+                                {{#str}}footer_heading, theme_eadtraining, {{{num}}}{{/str}}
                             </button>
                         </li>
                     {{/blocks}}
@@ -105,20 +105,20 @@
                 <!-- Tab panes -->
                 <div class="tab-content" id="footerTabContent">
                     {{#blocks}}
-                        <div class="tab-pane fade {{#active}}show active{{/active}}" id="footer{{num}}"
-                             role="tabpanel" data-block="{{num}}" aria-labelledby="footer-tab-{{num}}">
+                        <div class="tab-pane fade {{#active}}show active{{/active}}" id="footer{{{num}}}"
+                             role="tabpanel" data-block="{{{num}}}" aria-labelledby="footer-tab-{{{num}}}">
                             <div class="card">
                                 <div class="card-body">
                                     <h5>{{#str}}footer_title, theme_eadtraining, {{{num}}} {{/str}}</h5>
-                                    <input type="text" class="form-control" id="footer_title_{{num}}"
-                                           name="footer_title_{{num}}" value="{{{footer_title}}}">
+                                    <input type="text" class="form-control" id="footer_title_{{{num}}}"
+                                           name="footer_title_{{{num}}}" value="{{{footer_title}}}">
                                     <div class="form-text text-muted">
                                         {{#str}}footer_title_desc, theme_eadtraining{{/str}}
                                     </div>
 
                                     <h5 class="mt-2">{{#str}}footer_html, theme_eadtraining, {{{num}}} {{/str}}</h5>
-                                    <textarea class="form-control" id="footer_html_{{num}}" style="height:300px"
-                                              name="footer_html_{{num}}">{{footer_html}}</textarea>
+                                    <textarea class="form-control" id="footer_html_{{{num}}}" style="height:300px"
+                                              name="footer_html_{{{num}}}">{{{footer_html}}}</textarea>
                                     <div class="form-text text-muted">
                                         {{#str}}footer_html_desc, theme_eadtraining{{/str}}
                                     </div>
