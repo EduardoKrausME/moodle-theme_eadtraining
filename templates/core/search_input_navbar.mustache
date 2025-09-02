@@ -35,27 +35,27 @@
 <div class="d-flex align-items-center">
     <div id="searchinput-navbar-{{{uniqid}}}" class="simplesearchform">
         <div id="searchform-navbar">
-            <form autocomplete="off" action="{{{ action }}}" method="get" accept-charset="utf-8"
+            <form autocomplete="off" action="{{{action}}}" method="get" accept-charset="utf-8"
                   class="mform d-flex flex-wrap align-items-center searchform-navbar">
                 {{#hiddenfields}}
-                    <input type="hidden" name="{{ name }}" value="{{ value }}">
+                    <input type="hidden" name="{{{name}}}" value="{{{value}}}">
                 {{/hiddenfields}}
                 <div class="input-group">
                     <label for="searchinput-{{{uniqid}}}">
-                        <span class="sr-only">{{{ searchstring }}}</span>
+                        <span class="sr-only">{{{searchstring}}}</span>
                     </label>
                     <input type="text"
                            id="searchinput-{{{uniqid}}}"
                            class="form-control withclear"
-                           placeholder="{{{ searchstring }}}"
-                           aria-label="{{{ searchstring }}}"
-                           name="{{{ inputname }}}"
+                           placeholder="{{{searchstring}}}"
+                           aria-label="{{{searchstring}}}"
+                           name="{{{inputname}}}"
                            data-region="input"
                            autocomplete="off">
                     <div class="input-group-append">
                         <button type="submit" class="btn btn-submit" data-action="submit">
                             {{#pix}} a/search, core {{/pix}}
-                            <span class="sr-only">{{{ searchstring }}}</span>
+                            <span class="sr-only">{{{searchstring}}}</span>
                         </button>
                     </div>
                 </div>
