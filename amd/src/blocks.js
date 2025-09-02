@@ -15,29 +15,42 @@ define(["jquery"], function ($) {
 
         icons: function (cmid, thumb) {
             $(`#course-index-cm-${cmid}`).addClass("personal-icon");
-
-            $("<style>")
-                .prop("type", "text/css")
-                .html(`
+            let rule = `
+                    #module-${cmid} .courseicon {
+                        background       : #fff;
+                        background-color : #fff;
+                    }
                     #course-index-cm-${cmid} .activity-icon img,
                     #module-${cmid} .courseicon img,
                     .cmid-${cmid} #page-header .activityiconcontainer img {
                         content : url('${thumb}');
                         filter  : none;
-                    }`)
-                .appendTo("head");
+                    }`
+            blocks.add_style_tag(rule);
         },
 
         color: function (cmid, color) {
-            $("<style>")
-                .prop("type", "text/css")
-                .html(`
+            if (!color || color.length < 4) {
+                return;
+            }
+            let rule = `
                     #module-${cmid} .courseicon {
                         background       : ${color} !important;
                         background-color : ${color} !important;
-                    }`)
-                .appendTo("head");
+                    }`;
+            blocks.add_style_tag(rule);
         },
+
+        add_style_tag:function (rule){
+            let styleTag = $("#eadtraining-custom-style");
+            if (styleTag.length) {
+                styleTag.append(rule);
+                return;
+            }
+            styleTag = $("<style>", { id: "eadtraining-custom-style", type: "text/css" })
+                .appendTo("head");
+            styleTag.append(rule);
+        }
     };
 
     return blocks;
