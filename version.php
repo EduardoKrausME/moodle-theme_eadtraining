@@ -25,9 +25,9 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-$plugin->version = 2025082900;
+$plugin->version = 2025090200;
 $plugin->requires = 2022010100;
-$plugin->release = "9.0.8";
+$plugin->release = "9.0.9";
 $plugin->maturity = MATURITY_STABLE;
 $plugin->component = 'theme_eadtraining';
 $plugin->dependencies = [
