@@ -56,6 +56,7 @@
     }
 }}
 <nav class="navbar fixed-top navbar-light navbar-expand {{{output.brandcolor_background_menu_class}}}" aria-label="{{#str}}sitemenubar, admin{{/str}}">
+    <div class="navbar-content-background"></div>
     <div class="container-fluid">
         <button class="navbar-toggler aabtn d-block d-md-none px-1 my-1 border-0" data-toggler="drawers"
                 data-action="toggle" data-target="theme_eadtraining-drawers-primary">
@@ -121,6 +122,9 @@
         const navbar = document.querySelector(".navbar.fixed-top");
         if (navbar) {
             navbar.style.setProperty("--navbar-height", `${newHeight}px`);
+
+            const navbarcontentbackground = document.querySelector(".navbar.fixed-top .navbar-content-background");
+            navbarcontentbackground.style.opacity = 1 - (newHeight - 61) / (91 - 61);
         }
     });
 })();

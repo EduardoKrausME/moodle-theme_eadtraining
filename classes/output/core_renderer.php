@@ -573,7 +573,14 @@ class core_renderer extends \core_renderer {
      * @throws Exception
      */
     public function brandcolor_background_menu_class() {
-        $background = get_config("theme_eadtraining", "brandcolor_background_menu");
-        return $background ? "brandcolor-background" : "";
+        $class = [];
+        if(get_config("theme_eadtraining", "brandcolor_background_menu")){
+            $class[] =  "brandcolor-background";
+        }
+        if (get_config("theme_eadtraining", "top_scroll_fix")) {
+            $class[] = "top-scroll-fix";
+        }
+
+        return implode(" ", $class);
     }
 }

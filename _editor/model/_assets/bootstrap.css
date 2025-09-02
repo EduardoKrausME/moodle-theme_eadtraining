@@ -7591,11 +7591,16 @@ textarea.form-control-lg {
 }
 
 .fixed-top {
-  position: fixed;
   top: 0;
   right: 0;
   left: 0;
   z-index: 1030;
+}
+.fixed-top.top-scroll-fix {
+  position: fixed;
+}
+.fixed-top:not(.top-scroll-fix) {
+  position: absolute;
 }
 
 .fixed-bottom {

@@ -144,16 +144,6 @@ function theme_eadtraining_get_main_scss_content($theme) {
 }
 
 /**
- * Get compiled css.
- *
- * @return string compiled css
- */
-function theme_eadtraining_get_precompiled_css() {
-    global $CFG;
-    return file_get_contents("{$CFG->dirroot}/theme/eadtraining/scss/style.css");
-}
-
-/**
  * Get SCSS to prepend.
  *
  * @param theme_config $theme The theme config object.
@@ -162,27 +152,19 @@ function theme_eadtraining_get_precompiled_css() {
  */
 function theme_eadtraining_get_pre_scss($theme) {
     $scss = "";
-    $configurable = [
-        // Config key => [variableName, ...].
-        "brandcolor" => ["primary"],
-    ];
+    $brandcolor = get_config("theme_boost", "brandcolor");
+    if ($brandcolor) {
+        $scss .= "\$primary: {$brandcolor};\n";
+    }
 
-    $configboost = get_config("theme_boost");
-    // Prepend variables first.
-    foreach ($configurable as $configkey => $targets) {
-        $value = isset($configboost->{$configkey}) ? $configboost->{$configkey} : null;
-        if (empty($value)) {
-            continue;
-        }
-        array_map(function ($target) use (&$scss, $value) {
-            $scss .= "\${$target}: {$value};\n";
-        }, (array)$targets);
+    if ($topscrollbackgroundcolor = get_config("theme_eadtraining", "top_scroll_background_color")) {
+        $scss .= "\$top_scroll_background_color: {$topscrollbackgroundcolor};\n";
     }
 
     $callbacks = get_plugins_with_function("theme_eadtraining_get_pre_scss");
-    foreach ($callbacks as $plugintype => $plugins) {
-        foreach ($plugins as $plugin => $callback) {
-            if ($newscss = $callback($configurable)) {
+    foreach ($callbacks as $plugins) {
+        foreach ($plugins as $callback) {
+            if ($newscss = $callback()) {
                 $scss = $newscss;
             }
         }

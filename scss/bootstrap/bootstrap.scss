@@ -6567,7 +6567,12 @@ textarea.form-control-lg {
     --bs-aspect-ratio: 42.8571428571%;
 }
 .fixed-top {
-    position: fixed;
+    &.top-scroll-fix {
+        position: fixed;
+    }
+    &:not(.top-scroll-fix) {
+        position: absolute;
+    }
     top: 0;
     right: 0;
     left: 0;

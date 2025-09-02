@@ -45,8 +45,8 @@ if (!isset($config->startcolor[2])) {
         ]);
 
     $setting = new admin_setting_configtext("theme_eadtraining/startcolor",
-        get_string('brandcolor', 'theme_boost'),
-        get_string('brandcolor_desc', 'theme_eadtraining') . $htmlselect,
+        get_string("brandcolor", "theme_boost"),
+        get_string("brandcolor_desc", "theme_eadtraining") . $htmlselect,
         "#1a2a6c");
     $PAGE->requires->js_call_amd("theme_eadtraining/settings", "minicolors", [$setting->get_id()]);
     $setting->set_updatedcallback("theme_eadtraining_change_color");
@@ -60,9 +60,9 @@ if (!isset($config->startcolor[2])) {
 
     // We use an empty default value because the default colour should come from the preset.
     $setting = new admin_setting_configtext("theme_boost/brandcolor",
-        get_string('brandcolor', 'theme_eadtraining'),
-        get_string('brandcolor_desc', 'theme_eadtraining') . $htmlselect,
-        '#1a2a6c');
+        get_string("brandcolor", "theme_eadtraining"),
+        get_string("brandcolor_desc", "theme_eadtraining") . $htmlselect,
+        "#1a2a6c");
     $setting->set_updatedcallback("theme_eadtraining_change_color");
     $page->add($setting);
     $PAGE->requires->js_call_amd("theme_eadtraining/settings", "minicolors", [$setting->get_id()]);
@@ -72,19 +72,67 @@ $page->add(new admin_setting_configcheckbox("theme_eadtraining/brandcolor_backgr
     get_string("brandcolor_background_menu", "theme_eadtraining"),
     get_string("brandcolor_background_menu_desc", "theme_eadtraining"), 0));
 
+// Cores do topo.
+$setting = new admin_setting_heading("theme_eadtraining/top_color_heading",
+    get_string("top_color_heading", "theme_eadtraining"), "");
+$page->add($setting);
+$PAGE->requires->js_call_amd("theme_eadtraining/settings", "form_hide");
+
+$setting = new admin_setting_configcheckbox("theme_eadtraining/top_scroll_fix",
+    get_string("top_scroll_fix", "theme_eadtraining"),
+    get_string("top_scroll_fix_desc", "theme_eadtraining"),
+    0);
+$setting->set_updatedcallback("theme_reset_all_caches");
+$page->add($setting);
+
+$setting = new admin_setting_configtext("theme_eadtraining/top_scroll_background_color",
+    get_string("top_scroll_background_color", "theme_eadtraining"),
+    get_string("top_scroll_background_color_desc", "theme_eadtraining"), "#5C5D5F");
+$setting->set_updatedcallback("theme_reset_all_caches");
+$page->add($setting);
+$PAGE->requires->js_call_amd("theme_eadtraining/settings", "minicolors", [$setting->get_id()]);
+
+// Images.
+$setting = new admin_setting_heading("theme_eadtraining/favicon_heading",
+    get_string("logocompact", "admin") . " / " . get_string("favicon", "admin"), "");
+$page->add($setting);
+
+// Small logo file setting.
+$setting = new admin_setting_configstoredfile("core_admin/logocompact",
+    get_string("logocompact", "admin"),
+    get_string("logocompact_desc", "admin"),
+    "logocompact", 0,
+    ["maxfiles" => 1, "accepted_types" => [".jpg", ".jpeg", ".svg", ".png"]]);
+$setting->set_updatedcallback("theme_reset_all_caches");
+$page->add($setting);
+
+// Favicon file setting.
+$setting = new admin_setting_configstoredfile("core_admin/favicon",
+    get_string("favicon", "admin"),
+    get_string("favicon_desc", "admin"),
+    "favicon", 0,
+    ["maxfiles" => 1, "accepted_types" => [".jpg", ".jpeg", ".png"]]);
+$setting->set_updatedcallback("theme_reset_all_caches");
+$page->add($setting);
+
 // Background image setting.
+$setting = new admin_setting_heading("theme_eadtraining/backgroundimage_heading",
+    get_string("backgroundimage", "theme_eadtraining"), "");
+$page->add($setting);
+
 $name = "theme_eadtraining/backgroundimage";
-$title = get_string("backgroundimage", "theme_eadtraining");
-$description = get_string("backgroundimage_desc", "theme_eadtraining");
-$setting = new admin_setting_configstoredfile($name, $title, $description, "backgroundimage");
+$setting = new admin_setting_configstoredfile($name,
+    get_string("backgroundimage", "theme_eadtraining"),
+    get_string("backgroundimage_desc", "theme_eadtraining"),
+    "backgroundimage", 0,
+    ["maxfiles" => 1, "accepted_types" => [".jpg", ".jpeg", ".svg", ".png"]]);
 $setting->set_updatedcallback("theme_reset_all_caches");
 $page->add($setting);
 
 // Login Background image setting.
-$name = "theme_eadtraining/loginbackgroundimage";
-$title = get_string("loginbackgroundimage", "theme_eadtraining");
-$description = get_string("loginbackgroundimage_desc", "theme_eadtraining");
-$setting = new admin_setting_configstoredfile($name, $title, $description, "loginbackgroundimage");
+$setting = new admin_setting_configstoredfile("theme_eadtraining/loginbackgroundimage",
+    get_string("loginbackgroundimage", "theme_eadtraining"),
+    get_string("loginbackgroundimage_desc", "theme_eadtraining"), "loginbackgroundimage");
 $setting->set_updatedcallback("theme_reset_all_caches");
 $page->add($setting);
 
