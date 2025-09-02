@@ -90,7 +90,7 @@ admin_renderer extends \core_admin_renderer {
         $output .= $this->forgotten_password_url_warning($invalidforgottenpasswordurl);
         $output .= $this->campaign_content($showcampaigncontent);
 
-        //  It is illegal and a violation of the gpl to hide, remove or modify this copyright notice.
+        // It is illegal and a violation of the gpl to hide, remove or modify this copyright notice.
         $output .= $this->moodle_copyright();
 
         $output .= $this->footer();
