@@ -30,5 +30,12 @@
  * @throws Exception
  */
 function xmldb_theme_eadtraining_upgrade($oldversion) {
+    if ($oldversion < 2025090300) {
+        set_config("top_scroll_fix", 1, "theme_eadtraining");
+        set_config("top_scroll_background_color", "#5C5D5F", "theme_eadtraining");
+
+        upgrade_plugin_savepoint(true, 2025090300, "theme", "eadtraining");
+    }
+
     return true;
 }

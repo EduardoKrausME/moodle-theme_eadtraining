@@ -15,7 +15,7 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Training.
+ * eadtraining version.
  *
  * @package   theme_eadtraining
  * @copyright 2025 Eduardo Kraus {@link https://eduardokraus.com}
@@ -25,12 +25,12 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-$plugin->version = 2025090200;
+$plugin->version = 2025090300;
 $plugin->requires = 2022010100;
 $plugin->release = "9.0.9";
 $plugin->maturity = MATURITY_STABLE;
 $plugin->component = 'theme_eadtraining';
 $plugin->dependencies = [
     "customfield_picture" => 2024100800,
-    "theme_boost" => 2022000000,
+    "theme_boost" => 2022010100,
 ];
