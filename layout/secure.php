@@ -25,23 +25,23 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-$blockshtml = $OUTPUT->blocks('side-pre');
-$hasblocks = strpos($blockshtml, 'data-block=') !== false;
+$blockshtml = $OUTPUT->blocks("side-pre");
+$hasblocks = strpos($blockshtml, "data-block=") !== false;
 $bodyattributes = $OUTPUT->body_attributes();
 
 $templatecontext = [
-    'sitename' => format_string($SITE->shortname, true, ['context' => context_course::instance(SITEID), "escape" => false]),
-    'output' => $OUTPUT,
-    'bodyattributes' => $bodyattributes,
-    'sidepreblocks' => $blockshtml,
-    'hasblocks' => $hasblocks,
+    "sitename" => format_string($SITE->shortname, true, ["context" => context_course::instance(SITEID), "escape" => false]),
+    "output" => $OUTPUT,
+    "bodyattributes" => $bodyattributes,
+    "sidepreblocks" => $blockshtml,
+    "hasblocks" => $hasblocks,
 ];
 
-if (empty($PAGE->layout_options['noactivityheader'])) {
+if (empty($PAGE->layout_options["noactivityheader"])) {
     $header = $PAGE->activityheader;
-    $renderer = $PAGE->get_renderer('core');
-    $templatecontext['headercontent'] = $header->export_for_template($renderer);
+    $renderer = $PAGE->get_renderer("core");
+    $templatecontext["headercontent"] = $header->export_for_template($renderer);
 }
 
-echo $OUTPUT->render_from_template('theme_eadtraining/secure', $templatecontext);
+echo $OUTPUT->render_from_template("theme_eadtraining/secure", $templatecontext);
 
