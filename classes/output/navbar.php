@@ -14,13 +14,14 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
-namespace theme_eadtraining;
+namespace theme_eadtraining\output;
 
-use core\navigation\views\view;
-use navigation_node;
-use moodle_url;
 use action_link;
+use core\navigation\views\view;
 use lang_string;
+use moodle_page;
+use moodle_url;
+use navigation_node;
 
 /**
  * Creates a navbar for boost that allows easy control of the navbar items.
@@ -30,7 +31,7 @@ use lang_string;
  * @copyright based on work by 2021 Adrian Greeve <adrian@moodle.com>
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class eadtrainingnavbar implements \renderable {
+class navbar implements \renderable {
 
     /** @var array The individual items of the navbar. */
     protected $items = [];
@@ -285,7 +286,7 @@ class eadtrainingnavbar implements \renderable {
         // to compare whether any of the breadcrumb items matches these pairs.
         $navigationviewitems = [];
         foreach ($navigationview->children as $child) {
-            list($childtext, $childaction) = $this->get_node_text_and_action($child);
+            [$childtext, $childaction] = $this->get_node_text_and_action($child);
             if ($childaction) {
                 $navigationviewitems[$childtext] = $childaction;
             }
@@ -293,7 +294,7 @@ class eadtrainingnavbar implements \renderable {
         // Loop through the breadcrumb items and if the item's 'text' and 'action' values matches with any of the
         // existing navigation view items, remove it from the breadcrumbs.
         foreach ($this->items as $item) {
-            list($itemtext, $itemaction) = $this->get_node_text_and_action($item);
+            [$itemtext, $itemaction] = $this->get_node_text_and_action($item);
             if ($itemaction) {
                 if (array_key_exists($itemtext, $navigationviewitems) &&
                     $navigationviewitems[$itemtext] === $itemaction) {
@@ -312,7 +313,7 @@ class eadtrainingnavbar implements \renderable {
         $taken = [];
         // Reverse the order of the items before filtering so that the first occurrence is removed instead of the last.
         $filtereditems = array_values(array_filter(array_reverse($this->items), function ($item) use (&$taken) {
-            list($itemtext, $itemaction) = $this->get_node_text_and_action($item);
+            [$itemtext, $itemaction] = $this->get_node_text_and_action($item);
             if ($itemaction) {
                 if (array_key_exists($itemtext, $taken) && $taken[$itemtext] === $itemaction) {
                     return false;

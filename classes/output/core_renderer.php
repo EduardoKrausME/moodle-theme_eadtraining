@@ -21,9 +21,8 @@ use core_course\external\course_summary_exporter;
 use core_message\api;
 use core_message\helper;
 use Exception;
-use moodle_url;
 use html_writer;
-use theme_eadtraining\eadtrainingnavbar;
+use moodle_url;
 use user_picture;
 
 /**
@@ -67,7 +66,7 @@ class core_renderer extends \core_renderer {
      * @throws Exception
      */
     public function navbar(): string {
-        $newnav = new eadtrainingnavbar($this->page);
+        $newnav = new navbar($this->page);
         return $this->render_from_template("core/navbar", $newnav);
     }
 
