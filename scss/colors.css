@@ -1,8 +1,8 @@
-.training-theme-select-itens {
+.eadtraining-theme-select-itens {
   display: flex;
   flex-wrap: wrap;
 }
-.training-theme-select-itens .training-theme-select-item .preview {
+.eadtraining-theme-select-itens .eadtraining-theme-select-item .preview {
   padding: 13px;
   font-family: monospace;
   font-weight: bold;
@@ -11,7 +11,7 @@
   cursor: pointer;
   transition: 0.3s ease-out;
 }
-.training-theme-select-itens .training-theme-select-item .preview span {
+.eadtraining-theme-select-itens .eadtraining-theme-select-item .preview span {
   color: #ffffff;
 }
 

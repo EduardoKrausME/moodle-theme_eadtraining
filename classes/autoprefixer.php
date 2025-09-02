@@ -17,9 +17,7 @@
 /**
  * Autoprefixer.
  *
- * This autoprefixer has been developed to satisfy the basic needs of the
- * theme Training when working with Bootstrap 4 alpha. We do not recommend
- * that this tool is shared, nor used outside of this theme.
+ * This autoprefixer has been developed to satisfy the basic needs of the theme when working with Bootstrap.
  *
  * @package   theme_eadtraining
  * @copyright 2025 Eduardo Kraus {@link https://eduardokraus.com}

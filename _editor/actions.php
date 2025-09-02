@@ -95,7 +95,7 @@ if ($action == "langedit") {
 
 
     if (isset($_POST["save"])) {
-        $savedata = training_clear_params_array($_POST["save"], PARAM_RAW);
+        $savedata = theme_eadtraining_clear_params_array($_POST["save"], PARAM_RAW);
         $info = json_decode($page->info);
         $info->savedata = array_values($savedata);
         $page->info = json_encode($info);
@@ -109,7 +109,7 @@ if ($action == "langedit") {
     }
     die;
 } elseif ($action == "page-order") {
-    $orders = training_clear_params_array($_POST["order"], PARAM_INT);
+    $orders = theme_eadtraining_clear_params_array($_POST["order"], PARAM_INT);
 
     $pageorder = 0;
     foreach ($orders as $pageid) {

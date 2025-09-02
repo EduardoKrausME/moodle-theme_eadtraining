@@ -160,7 +160,7 @@ class navbar implements \renderable {
     /**
      * Get all the boostnavbaritem elements.
      *
-     * @return boostnavbaritem[] Training navbar items.
+     * @return boostnavbaritem[] Theme navbar items.
      */
     public function get_items(): array {
         return $this->items;

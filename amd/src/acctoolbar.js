@@ -6,7 +6,7 @@ define(["core/templates"], function (Templates) {
         init: function () {
             Templates.render('theme_eadtraining/settings/acctoolbar', {})
                 .then(function (html, js) {
-                    window.micAccessTool = new training_AccessTool(html);
+                    window.micAccessTool = new eadtraining_AccessTool(html);
                 })
                 .fail(function (ex) {
                     console.error(ex);
@@ -15,7 +15,7 @@ define(["core/templates"], function (Templates) {
     };
 });
 
-function training_AccessTool(html) {
+function eadtraining_AccessTool(html) {
     this.init = {
         link: "",
         contact: "",
@@ -64,9 +64,9 @@ function training_AccessTool(html) {
     this.initialApp();
 }
 
-training_AccessTool.prototype.initialApp = function () {
+eadtraining_AccessTool.prototype.initialApp = function () {
 
-    window.training_toolboxAppstate = JSON.parse(localStorage.getItem('training_ACCESSTOOL')) || {
+    window.eadtraining_toolboxAppstate = JSON.parse(localStorage.getItem('eadtraining_ACCESSTOOL')) || {
         bodyClassList: {},
         fontSize: 1,
         imagesTitle: false,
@@ -86,10 +86,10 @@ training_AccessTool.prototype.initialApp = function () {
     }
 
     // INIT ADDING CLASSES TO BODY
-    if (window.training_toolboxAppstate.bodyClassList) {
+    if (window.eadtraining_toolboxAppstate.bodyClassList) {
 
-        for (var bodyClass in window.training_toolboxAppstate.bodyClassList) {
-            var initBodyClassList = window.training_toolboxAppstate.bodyClassList[bodyClass];
+        for (var bodyClass in window.eadtraining_toolboxAppstate.bodyClassList) {
+            var initBodyClassList = window.eadtraining_toolboxAppstate.bodyClassList[bodyClass];
             var enabledButton = document.getElementById(initBodyClassList);
             if (enabledButton) {
                 enabledButton.classList.add('vi-enabled');
@@ -99,17 +99,17 @@ training_AccessTool.prototype.initialApp = function () {
     }
 
     // FONT SIZE INIT
-    if (window.training_toolboxAppstate.fontSize > 1) {
+    if (window.eadtraining_toolboxAppstate.fontSize > 1) {
         this.initFontsChange();
     }
 
     // SET IMAGES TITLES
-    if (window.training_toolboxAppstate.imagesTitle) {
+    if (window.eadtraining_toolboxAppstate.imagesTitle) {
         this.imagesAddTitles();
     }
 
     // SET KEBOARD ROOTING
-    if (window.training_toolboxAppstate.keyboardRoot) {
+    if (window.eadtraining_toolboxAppstate.keyboardRoot) {
         this.keyboardRootEnable();
     }
     if (this.init.buttonPosition === 'right') {
@@ -121,9 +121,9 @@ training_AccessTool.prototype.initialApp = function () {
     }
 };
 
-training_AccessTool.prototype.initialApp_iframe = function (iframe) {
+eadtraining_AccessTool.prototype.initialApp_iframe = function (iframe) {
     setInterval(function () {
-        var appstate = JSON.parse(localStorage.getItem('training_ACCESSTOOL')) || {
+        var appstate = JSON.parse(localStorage.getItem('eadtraining_ACCESSTOOL')) || {
             bodyClassList: false
         };
 
@@ -137,7 +137,7 @@ training_AccessTool.prototype.initialApp_iframe = function (iframe) {
     }, 2000);
 };
 
-training_AccessTool.prototype.buildToolBox = function (html) {
+eadtraining_AccessTool.prototype.buildToolBox = function (html) {
     if (document.querySelector("body.pagelayout-embedded")) {
         return false;
     }
@@ -152,82 +152,82 @@ training_AccessTool.prototype.buildToolBox = function (html) {
 };
 
 // CONTRAST FUNCTION
-training_AccessTool.prototype.contrastChange = function (event) {
+eadtraining_AccessTool.prototype.contrastChange = function (event) {
     event.preventDefault();
 
     if (document.body.classList.contains(this.id)) {
         this.classList.remove('vi-enabled');
         document.body.classList.remove(this.id);
 
-        delete window.training_toolboxAppstate.bodyClassList[this.id];
+        delete window.eadtraining_toolboxAppstate.bodyClassList[this.id];
     } else {
         var buttons = document.querySelectorAll('.mic-contrast-block button');
         for (var i = 0; i < buttons.length; i++) {
             buttons[i].classList.remove('vi-enabled');
             document.body.classList.remove(buttons[i].id);
 
-            delete window.training_toolboxAppstate.bodyClassList[buttons[i].id];
+            delete window.eadtraining_toolboxAppstate.bodyClassList[buttons[i].id];
         }
         this.classList.add('vi-enabled');
         document.body.classList.add(this.id);
 
-        window.training_toolboxAppstate.bodyClassList[this.id] = this.id;
+        window.eadtraining_toolboxAppstate.bodyClassList[this.id] = this.id;
     }
-    training_AccessTool.prototype.updateState();
+    eadtraining_AccessTool.prototype.updateState();
 };
 
 // CURSOR CHANGE
-training_AccessTool.prototype.cursorChange = function (event) {
+eadtraining_AccessTool.prototype.cursorChange = function (event) {
     event.preventDefault();
 
     if (document.body.classList.contains(this.id)) {
         this.classList.remove('vi-enabled');
         document.body.classList.remove(this.id);
-        delete window.training_toolboxAppstate.bodyClassList[this.id];
+        delete window.eadtraining_toolboxAppstate.bodyClassList[this.id];
     } else {
         var buttons = document.querySelectorAll('#mic-toolbox-cursor-big-black,#mic-toolbox-cursor-big-white');
         for (var i = 0; i < buttons.length; i++) {
             buttons[i].classList.remove('vi-enabled');
             document.body.classList.remove(buttons[i].id);
 
-            delete window.training_toolboxAppstate.bodyClassList[buttons[i].id];
+            delete window.eadtraining_toolboxAppstate.bodyClassList[buttons[i].id];
         }
         this.classList.add('vi-enabled');
         document.body.classList.add(this.id);
 
-        window.training_toolboxAppstate.bodyClassList[this.id] = this.id;
+        window.eadtraining_toolboxAppstate.bodyClassList[this.id] = this.id;
     }
-    training_AccessTool.prototype.updateState();
+    eadtraining_AccessTool.prototype.updateState();
 };
 
-training_AccessTool.prototype.onceButtonChange = function (event) {
+eadtraining_AccessTool.prototype.onceButtonChange = function (event) {
     event.preventDefault();
 
     if (this.id === 'mic-toolbox-disable-buttons-keyboard') {
-        window.training_toolboxAppstate.keyboardRoot = !window.training_toolboxAppstate.keyboardRoot;
-        training_AccessTool.prototype.keyboardRootEnable();
+        window.eadtraining_toolboxAppstate.keyboardRoot = !window.eadtraining_toolboxAppstate.keyboardRoot;
+        eadtraining_AccessTool.prototype.keyboardRootEnable();
     }
 
     if (this.id === 'mic-toolbox-content-images') {
-        training_AccessTool.prototype.imagesChange();
+        eadtraining_AccessTool.prototype.imagesChange();
     }
 
     if (document.body.classList.contains(this.id)) {
         this.classList.remove('vi-enabled');
         document.body.classList.remove(this.id);
 
-        delete window.training_toolboxAppstate.bodyClassList[this.id];
+        delete window.eadtraining_toolboxAppstate.bodyClassList[this.id];
     } else {
         this.classList.add('vi-enabled');
         document.body.classList.add(this.id);
 
-        window.training_toolboxAppstate.bodyClassList[this.id] = this.id;
+        window.eadtraining_toolboxAppstate.bodyClassList[this.id] = this.id;
     }
-    training_AccessTool.prototype.updateState();
+    eadtraining_AccessTool.prototype.updateState();
 };
 
-training_AccessTool.prototype.keyboardRootEnable = function () {
-    if (window.training_toolboxAppstate.keyboardRoot) {
+eadtraining_AccessTool.prototype.keyboardRootEnable = function () {
+    if (window.eadtraining_toolboxAppstate.keyboardRoot) {
         var headers = document.querySelectorAll('h1,h2,h3,h4,h5,h6,p,a,button,input,select,textarea');
         for (var i = 0; i < headers.length; i++) {
             var item = headers[i];
@@ -239,12 +239,12 @@ training_AccessTool.prototype.keyboardRootEnable = function () {
 };
 
 // FONTS CHANGE
-training_AccessTool.prototype.fontsChange = function (event) {
+eadtraining_AccessTool.prototype.fontsChange = function (event) {
     event.preventDefault();
 
     // var mainBody = Number(document.body.style.fontSize.split('px')[0]);
 
-    var counter = window.training_toolboxAppstate.fontSize;
+    var counter = window.eadtraining_toolboxAppstate.fontSize;
 
     if (this.id === 'mic-toolbox-fonts-up') {
         if (counter >= 1.6) {
@@ -261,8 +261,8 @@ training_AccessTool.prototype.fontsChange = function (event) {
     }
     if (this.id === 'mic-toolbox-fonts-down') {
         if (counter <= 1) {
-            window.training_toolboxAppstate.fontSize = 1;
-            training_AccessTool.prototype.updateState();
+            window.eadtraining_toolboxAppstate.fontSize = 1;
+            eadtraining_AccessTool.prototype.updateState();
             return;
         }
         var items = document.querySelectorAll('body,h1,h2,h3,h4,h5,h6,p,a,button,input,textarea,li,td,th,strong,span,blockquote,div');
@@ -275,15 +275,15 @@ training_AccessTool.prototype.fontsChange = function (event) {
         counter = (counter / 1.1).toFixed(2);
     }
 
-    window.training_toolboxAppstate.fontSize = counter;
-    training_AccessTool.prototype.getFontsChanges(counter);
-    training_AccessTool.prototype.updateState();
+    window.eadtraining_toolboxAppstate.fontSize = counter;
+    eadtraining_AccessTool.prototype.getFontsChanges(counter);
+    eadtraining_AccessTool.prototype.updateState();
 };
 
 // INITIAL FONT SIZE
-training_AccessTool.prototype.initFontsChange = function () {
+eadtraining_AccessTool.prototype.initFontsChange = function () {
     var items = document.querySelectorAll('body,h1,h2,h3,h4,h5,h6,p,a,button,input,textarea,li,td,th,strong,span,blockquote,div');
-    var initFontSize = window.training_toolboxAppstate.fontSize;
+    var initFontSize = window.eadtraining_toolboxAppstate.fontSize;
     for (var i = 0; i < items.length; i++) {
         var item = items[i];
         var font = window.getComputedStyle(item).getPropertyValue('font-size');
@@ -301,7 +301,7 @@ training_AccessTool.prototype.initFontsChange = function () {
     }
 };
 
-training_AccessTool.prototype.initFontsChangeFirst = function () {
+eadtraining_AccessTool.prototype.initFontsChangeFirst = function () {
     var items = document.querySelectorAll('body,h1,h2,h3,h4,h5,h6,p,a,button,input,textarea,li,td,th,strong,span,blockquote,div');
     for (var i = 0; i < items.length; i++) {
         var item = items[i];
@@ -311,7 +311,7 @@ training_AccessTool.prototype.initFontsChangeFirst = function () {
     }
 };
 
-training_AccessTool.prototype.getFontsChanges = function (initFontSize) {
+eadtraining_AccessTool.prototype.getFontsChanges = function (initFontSize) {
     if (initFontSize > 1) {
         document.getElementById('mic-toolbox-fonts-up').classList.add('vi-font-enabled');
         var initPerc = (Number(initFontSize) * 100 - 100).toFixed();
@@ -324,7 +324,7 @@ training_AccessTool.prototype.getFontsChanges = function (initFontSize) {
 };
 
 // IMAGES CHANGE
-training_AccessTool.prototype.imagesChange = function () {
+eadtraining_AccessTool.prototype.imagesChange = function () {
 
     if (document.body.classList.contains('mic-toolbox-content-images')) {
 
@@ -333,14 +333,14 @@ training_AccessTool.prototype.imagesChange = function () {
             var parent = titles[i].parentElement;
             parent.removeChild(titles[i]);
         }
-        window.training_toolboxAppstate.imagesTitle = false;
+        window.eadtraining_toolboxAppstate.imagesTitle = false;
     } else {
         this.imagesAddTitles();
-        window.training_toolboxAppstate.imagesTitle = true;
+        window.eadtraining_toolboxAppstate.imagesTitle = true;
     }
 };
 
-training_AccessTool.prototype.imagesAddTitles = function () {
+eadtraining_AccessTool.prototype.imagesAddTitles = function () {
 
     var images = document.images;
     for (var i = 0; i < images.length; i++) {
@@ -359,29 +359,29 @@ training_AccessTool.prototype.imagesAddTitles = function () {
     }
 };
 
-training_AccessTool.prototype.updateState = function () {
-    var jsonSting = JSON.stringify(window.training_toolboxAppstate);
+eadtraining_AccessTool.prototype.updateState = function () {
+    var jsonSting = JSON.stringify(window.eadtraining_toolboxAppstate);
     if (typeof (Storage) !== "undefined") {
-        localStorage.setItem('training_ACCESSTOOL', jsonSting);
+        localStorage.setItem('eadtraining_ACCESSTOOL', jsonSting);
     } else {
         console.log('No Storage Found');
     }
 };
 
-training_AccessTool.prototype.openBox = function (event) {
+eadtraining_AccessTool.prototype.openBox = function (event) {
     this.toolBox.classList.add('opened-mic-access-tool');
-    if (!window.training_toolboxAppstate.initFontSize || window.training_toolboxAppstate.fontSize <= 1) {
+    if (!window.eadtraining_toolboxAppstate.initFontSize || window.eadtraining_toolboxAppstate.fontSize <= 1) {
         this.initFontsChangeFirst();
-        window.training_toolboxAppstate.initFontSize = true;
+        window.eadtraining_toolboxAppstate.initFontSize = true;
     }
     this.toolBoxCloseButton.focus();
 };
 
-training_AccessTool.prototype.closeBox = function (event) {
+eadtraining_AccessTool.prototype.closeBox = function (event) {
     this.toolBox.classList.remove('opened-mic-access-tool');
 };
 
-training_AccessTool.prototype.openCloseBoxKeyboard = function (event) {
+eadtraining_AccessTool.prototype.openCloseBoxKeyboard = function (event) {
     if (event.keyCode == 27) {
         this.closeBox();
     }
@@ -390,7 +390,7 @@ training_AccessTool.prototype.openCloseBoxKeyboard = function (event) {
     }
 };
 
-training_AccessTool.prototype.resetApp = function (event) {
-    localStorage.removeItem('training_ACCESSTOOL');
+eadtraining_AccessTool.prototype.resetApp = function (event) {
+    localStorage.removeItem('eadtraining_ACCESSTOOL');
     window.location.reload();
 };

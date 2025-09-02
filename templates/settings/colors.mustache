@@ -27,9 +27,9 @@
 }}
 
 <div class="mb-3">
-    <div id="{{{uniqid}}}" class="training-theme-select-itens">
+    <div id="{{{uniqid}}}" class="eadtraining-theme-select-itens">
         {{#colors}}
-            <div class="training-theme-select-item">
+            <div class="eadtraining-theme-select-item">
                 <div class="preview" style="background:{{{.}}}"
                      data-color="{{{.}}}">
                     <span>{{{.}}}</span>
@@ -41,7 +41,7 @@
 
 <div class="eadtraining-colors-preview colors-body" id="colors-body-{{{uniqid}}}">
     <section class="card">
-        <header class="card__header">Training Preview</header>
+        <header class="card__header">{{#str}}pluginname, theme_eadtraining{{/str}} Preview</header>
         <div class="card__body">
             <!-- Left -->
             <div class="left">
@@ -77,7 +77,7 @@
             </aside>
         </div>
         {{#footercolor}}
-            <footer class="card__footer">© 2025 Training Preview. All rights reserved.</footer>
+            <footer class="card__footer">© 2025 {{#str}}pluginname, theme_eadtraining{{/str}} Preview. All rights reserved.</footer>
         {{/footercolor}}
     </section>
 </div>

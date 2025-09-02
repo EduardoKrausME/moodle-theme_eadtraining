@@ -93,7 +93,7 @@ function compile_pages($pages) {
                 $page->html = "<div class='alert alert-warning page-editor-preview'>{$html}<style>{$css}</style></div>";
             }
 
-            $savedata = training_clear_params_array($_POST["save"], PARAM_RAW);
+            $savedata = theme_eadtraining_clear_params_array($_POST["save"], PARAM_RAW);
             $info = json_decode($page->info);
             $info->savedata = array_values($savedata);
             $page->info = json_encode($info);
@@ -168,11 +168,11 @@ function compile_pages($pages) {
  * @param $type
  * @return array|mixed
  */
-function training_clear_params_array($in, $type) {
+function theme_eadtraining_clear_params_array($in, $type) {
     $out = [];
     if (is_array($in)) {
         foreach ($in as $key => $value) {
-            $out[$key] = training_clear_params_array($value, $type);
+            $out[$key] = theme_eadtraining_clear_params_array($value, $type);
         }
     } elseif (is_string($in)) {
         try {
