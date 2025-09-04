@@ -47,7 +47,7 @@ function xmldb_theme_eadtraining_install() {
     set_config("brandcolor_background_menu", 0, "theme_eadtraining");
 
     set_config("top_scroll_fix", 1, "theme_eadtraining");
-    set_config("top_scroll_background_color", "#5C5D5F", "theme_eadtraining");
+    set_config("top_scroll_background_color", "", "theme_eadtraining");
 
     set_config("backgroundimage", "", "theme_eadtraining");
     set_config("loginbackgroundimage", "", "theme_eadtraining");
