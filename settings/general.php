@@ -35,37 +35,39 @@ $setting = new admin_setting_heading("theme_eadtraining_quickstart_brandcolor", 
     get_string("quickstart_settings_link", "theme_eadtraining", $url));
 $page->add($setting);
 
-$htmlselect = "<link rel=\"stylesheet\" href=\"{$CFG->wwwroot}/theme/eadtraining/scss/colors.css\" />";
-$config = get_config("theme_eadtraining");
-if (!isset($config->startcolor[2])) {
-    $htmlselect .= "\n\n" . $OUTPUT->render_from_template("theme_eadtraining/settings/colors", [
-            "startcolor" => true,
-            "colors" => theme_eadtraining_colors(),
-            "defaultcolor" => theme_eadtraining_default_color("startcolor", "#1a2a6c"),
-        ]);
-
-    $setting = new admin_setting_configtext("theme_eadtraining/startcolor",
-        get_string("brandcolor", "theme_boost"),
-        get_string("brandcolor_desc", "theme_eadtraining") . $htmlselect,
-        "#1a2a6c");
-    $PAGE->requires->js_call_amd("theme_eadtraining/settings", "minicolors", [$setting->get_id()]);
-    $setting->set_updatedcallback("theme_eadtraining_change_color");
-    $page->add($setting);
+if (file_exists(__DIR__ . "/general-colors.php")) {
+    require_once(__DIR__ . "/general-colors.php");
 } else {
-    $htmlselect .= "\n\n" . $OUTPUT->render_from_template("theme_eadtraining/settings/colors", [
-            "brandcolor" => true,
-            "colors" => theme_eadtraining_colors(),
-            "defaultcolor" => theme_eadtraining_default_color("brandcolor", "#1a2a6c", "theme_boost"),
-        ]);
+    $htmlselect = "<link rel=\"stylesheet\" href=\"{$CFG->wwwroot}/theme/eadtraining/scss/colors.css\" />";
+    $config = get_config("theme_eadtraining");
+    if (!isset($config->startcolor[2])) {
+        $htmlselect .= "\n\n" . $OUTPUT->render_from_template("theme_eadtraining/settings/colors", [
+                "startcolor" => true, "colors" => theme_eadtraining_colors(),
+                "defaultcolor" => theme_eadtraining_default_color("startcolor", "#1a2a6c"),
+            ]);
 
-    // We use an empty default value because the default colour should come from the preset.
-    $setting = new admin_setting_configtext("theme_boost/brandcolor",
-        get_string("brandcolor", "theme_eadtraining"),
-        get_string("brandcolor_desc", "theme_eadtraining") . $htmlselect,
-        "#1a2a6c");
-    $setting->set_updatedcallback("theme_eadtraining_change_color");
-    $page->add($setting);
-    $PAGE->requires->js_call_amd("theme_eadtraining/settings", "minicolors", [$setting->get_id()]);
+        $setting = new admin_setting_configtext(
+            "theme_eadtraining/startcolor", get_string("brandcolor", "theme_boost"),
+            get_string("brandcolor_desc", "theme_eadtraining") . $htmlselect, "#1a2a6c"
+        );
+        $PAGE->requires->js_call_amd("theme_eadtraining/settings", "minicolors", [$setting->get_id()]);
+        $setting->set_updatedcallback("theme_eadtraining_change_color");
+        $page->add($setting);
+    } else {
+        $htmlselect .= "\n\n" . $OUTPUT->render_from_template("theme_eadtraining/settings/colors", [
+                "brandcolor" => true, "colors" => theme_eadtraining_colors(),
+                "defaultcolor" => theme_eadtraining_default_color("brandcolor", "#1a2a6c", "theme_boost"),
+            ]);
+
+        // We use an empty default value because the default colour should come from the preset.
+        $setting = new admin_setting_configtext(
+            "theme_boost/brandcolor", get_string("brandcolor", "theme_eadtraining"),
+            get_string("brandcolor_desc", "theme_eadtraining") . $htmlselect, "#1a2a6c"
+        );
+        $setting->set_updatedcallback("theme_eadtraining_change_color");
+        $page->add($setting);
+        $PAGE->requires->js_call_amd("theme_eadtraining/settings", "minicolors", [$setting->get_id()]);
+    }
 }
 
 $page->add(new admin_setting_configcheckbox("theme_eadtraining/brandcolor_background_menu",
@@ -87,7 +89,7 @@ $page->add($setting);
 
 $setting = new admin_setting_configtext("theme_eadtraining/top_scroll_background_color",
     get_string("top_scroll_background_color", "theme_eadtraining"),
-    get_string("top_scroll_background_color_desc", "theme_eadtraining"), "#5C5D5F");
+    get_string("top_scroll_background_color_desc", "theme_eadtraining"), "");
 $setting->set_updatedcallback("theme_reset_all_caches");
 $page->add($setting);
 $PAGE->requires->js_call_amd("theme_eadtraining/settings", "minicolors", [$setting->get_id()]);
