@@ -89,8 +89,8 @@ $templatecontext["footer_background_color"] =
 $templatecontext["footer_background_text_color"] =
     theme_eadtraining_get_footer_color($templatecontext["footer_background_color"], "#333", false);
 for ($i = 1; $i <= 4; $i++) {
-    $footertitle = $config->{"footer_title_{$i}"};
-    $footerhtml = $config->{"footer_html_{$i}"};
+    $footertitle = @$config->{"footer_title_{$i}"};
+    $footerhtml = @$config->{"footer_html_{$i}"};
 
     if (isset($footerhtml[5])) {
         $templatecontext["footercount"]++;
