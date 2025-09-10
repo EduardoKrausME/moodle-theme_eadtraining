@@ -29,12 +29,14 @@ $page = new admin_settingpage("theme_eadtraining_advanced", get_string("advanced
 
 // Raw SCSS to include before the content.
 $setting = new admin_setting_scsscode('theme_eadtraining/scsspre',
-    get_string('rawscsspre', 'theme_boost'), get_string('rawscsspre_desc', 'theme_boost'), '', PARAM_RAW);
+    get_string('rawscsspre', 'theme_boost'),
+    get_string('rawscsspre_desc', 'theme_boost'), '', PARAM_RAW);
 $setting->set_updatedcallback('theme_reset_all_caches');
 $page->add($setting);
 
 // Raw SCSS to include after the content.
-$setting = new admin_setting_scsscode('theme_eadtraining/scss', get_string('rawscss', 'theme_boost'),
+$setting = new admin_setting_scsscode('theme_eadtraining/scsspos',
+    get_string('rawscss', 'theme_boost'),
     get_string('rawscss_desc', 'theme_boost'), '', PARAM_RAW);
 $setting->set_updatedcallback('theme_reset_all_caches');
 $page->add($setting);
