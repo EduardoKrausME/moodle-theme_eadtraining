@@ -96,7 +96,7 @@ $PAGE->requires->js_call_amd("theme_eadtraining/settings", "minicolors", [$setti
 
 // Images.
 $setting = new admin_setting_heading("theme_eadtraining/favicon_heading",
-    get_string("logocompact", "admin") . " / " . get_string("favicon", "admin"), "");
+    get_string("logocompact", "admin") . " / " . get_string("favicon", "theme_eadtraining"), "");
 $page->add($setting);
 
 // Small logo file setting.
@@ -110,8 +110,8 @@ $page->add($setting);
 
 // Favicon file setting.
 $setting = new admin_setting_configstoredfile("core_admin/favicon",
-    get_string("favicon", "admin"),
-    get_string("favicon_desc", "admin"),
+    get_string("favicon", "theme_eadtraining"),
+    get_string("favicon_desc", "theme_eadtraining"),
     "favicon", 0,
     ["maxfiles" => 1, "accepted_types" => [".jpg", ".jpeg", ".png"]]);
 $setting->set_updatedcallback("theme_reset_all_caches");
