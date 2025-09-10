@@ -50,7 +50,7 @@ Activity block system: when an image is uploaded, the activity is transformed in
 
 ## 👤 Modern Popup Profile
 
-Popup-style display with a customizable top section and fully customizable background.  
+Popup-style display with a customizable top section and fully customizable background.
 Includes quick-access menus for:
 
 - View and edit profile
@@ -69,7 +69,7 @@ The footer supports 0 to 4 fully customizable blocks. Use your creativity to des
 
 Even better: the "Made by" text can be removed directly in the settings at no additional cost.
 
-![Footer Example 1](https://eduardokraus.com/logos/theme_eadtraining/rodape-1.png)  
+![Footer Example 1](https://eduardokraus.com/logos/theme_eadtraining/rodape-1.png)
 ![Footer Example 2](https://eduardokraus.com/logos/theme_eadtraining/rodape-2.png)
 
 ## 🙏 Acknowledgments and Sponsorship
