@@ -53,7 +53,7 @@ function xmldb_theme_eadtraining_install() {
     set_config("loginbackgroundimage", "", "theme_eadtraining");
 
     set_config("scsspre", "", "theme_eadtraining");
-    set_config("scss", "", "theme_eadtraining");
+    set_config("scsspos", "", "theme_eadtraining");
 
     set_config("course_summary", 0, "theme_eadtraining");
     set_config("course_summary_banner", 0, "theme_eadtraining");
