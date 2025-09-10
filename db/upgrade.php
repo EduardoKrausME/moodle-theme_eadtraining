@@ -52,6 +52,8 @@ function xmldb_theme_eadtraining_upgrade($oldversion) {
         $scss = get_config("scss", "theme_eadtraining");
         set_config("scsspos", $scss, "theme_eadtraining");
         unset_config("scsspos", "theme_eadtraining");
+
+        upgrade_plugin_savepoint(true, 2025091001, "theme", "eadtraining");
     }
 
     return true;
