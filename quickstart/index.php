@@ -182,6 +182,7 @@ if ($savetheme == "eadtraining") {
 }
 
 // Home.
+require_once(__DIR__ . "/../_editor/editor-lib.php");
 $pages = $DB->get_records("theme_eadtraining_pages", ["local" => "home"]);
 $templates = [];
 foreach ($pages as $page) {
@@ -193,6 +194,7 @@ $homemustache = [
     "homemode" => get_config("theme_eadtraining", "homemode"),
     "templates" => $templates,
     "next" => "courses",
+    "all_templates" => list_templates_category(),
 ];
 echo $OUTPUT->render_from_template("theme_eadtraining/quickstart/home", $homemustache);
 

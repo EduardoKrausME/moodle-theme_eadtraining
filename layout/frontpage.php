@@ -111,7 +111,6 @@ if (isset($config->homemode) && $config->homemode) {
     $PAGE->requires->jquery_plugin("ui-css");
 
     if ($editing) {
-        $PAGE->requires->js_call_amd("theme_eadtraining/frontpage", "editingswitch", []);
         $PAGE->requires->js_call_amd("theme_eadtraining/frontpage", "block_order", []);
     }
 }
@@ -119,6 +118,10 @@ if ($editing) {
     $templatecontext["editing"] = true;
     $url = "{$CFG->wwwroot}/theme/eadtraining/_editor/actions.php?action=homemode&local=editing&sesskey=" . sesskey();
     $templatecontext["homemode_form_action"] = $url;
+
+    $url = "{$CFG->wwwroot}/theme/eadtraining/quickstart/";
+    $templatecontext["homemode_quickstart_action"] = $url;
+    $PAGE->requires->js_call_amd("theme_eadtraining/frontpage", "editingswitch", []);
 }
 
 echo $OUTPUT->render_from_template("theme_eadtraining/frontpage", $templatecontext);
