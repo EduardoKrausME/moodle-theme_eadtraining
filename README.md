@@ -1,6 +1,6 @@
-# Training
+# Ead Training
 
-At Training, we believe in free education that is accessible to everyone, visually appealing in both content and design.
+At Ead Training, we believe in free education that is accessible to everyone, visually appealing in both content and design.
 
 ## 🔧 Accessibility Features
 
@@ -16,7 +16,7 @@ At Training, we believe in free education that is accessible to everyone, visual
 
 ## 🏠 Frontpage
 
-Training offers two homepage options: the default Moodle layout and a customized version with editable blocks featuring the following elements:
+Ead Training offers two homepage options: the default Moodle layout and a customized version with editable blocks featuring the following elements:
 
 - Four Netflix-style slideshows
 - Three types of banners
@@ -29,7 +29,7 @@ Training offers two homepage options: the default Moodle layout and a customized
 
 ## 🎓 Course Page
 
-Training features a modern course page with an optional information banner, enabled via settings.
+Ead Training features a modern course page with an optional information banner, enabled via settings.
 
 Activity block system: when an image is uploaded, the activity is transformed into a block. This works for both Topics and Weekly formats.
 
