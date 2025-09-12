@@ -49,11 +49,13 @@ $setting = new admin_setting_configtext("theme_eadtraining/footer_background_col
     "#1a2a6c");
 $setting->set_updatedcallback("theme_reset_all_caches");
 $PAGE->requires->js_call_amd("theme_eadtraining/settings", "minicolors", [$setting->get_id()]);
+$setting->set_updatedcallback('theme_reset_all_caches');
 $page->add($setting);
 
 $setting = new admin_setting_heading("theme_eadtraining_footer_heading_description",
     get_string("footer_heading_description_title", "theme_eadtraining"),
     get_string("footer_heading_description_desc", "theme_eadtraining"));
+$setting->set_updatedcallback('theme_reset_all_caches');
 $page->add($setting);
 
 for ($i = 1; $i <= 4; $i++) {
@@ -65,11 +67,13 @@ for ($i = 1; $i <= 4; $i++) {
     $setting = new admin_setting_configtext("theme_eadtraining/footer_title_{$i}",
         get_string("footer_title", "theme_eadtraining", $i),
         get_string("footer_title_desc", "theme_eadtraining", $i), "");
+    $setting->set_updatedcallback('theme_reset_all_caches');
     $page->add($setting);
 
     $setting = new admin_setting_confightmleditor("theme_eadtraining/footer_html_{$i}",
         get_string("footer_html", "theme_eadtraining", $i),
         get_string("footer_html_desc", "theme_eadtraining", $i), "");
+    $setting->set_updatedcallback('theme_reset_all_caches');
     $page->add($setting);
 }
 
@@ -80,6 +84,7 @@ $page->add($setting);
 $setting = new admin_setting_configcheckbox('theme_eadtraining/footer_show_copywriter',
     get_string('footer_show_copywriter', 'theme_eadtraining'),
     get_string('footer_show_copywriter_desc', 'theme_eadtraining'), 1);
+$setting->set_updatedcallback('theme_reset_all_caches');
 $page->add($setting);
 
 $settings->add($page);
