@@ -30,6 +30,8 @@ use ScssPhp\ScssPhp\Compiler;
 use ScssPhp\ScssPhp\Exception\SassException;
 use Throwable;
 
+require_once("{$CFG->dirroot}/lib/adminlib.php");
+
 /**
  * Settings class that validates a SCSS snippet entered in a textarea.
  *
