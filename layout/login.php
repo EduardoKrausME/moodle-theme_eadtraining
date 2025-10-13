@@ -29,7 +29,7 @@ defined('MOODLE_INTERNAL') || die();
 
 $bodyattributes = $OUTPUT->body_attributes();
 
-$loginthemename = theme_eadtraining_default( "logintheme", "dark-elegante");
+$loginthemename = theme_eadtraining_default("logintheme", "dark-elegante");
 $loginbackgroundimageurl = theme_eadtraining_setting_file_url("loginbackgroundimage");
 if (!$loginbackgroundimageurl) {
     $loginbackgroundimageurl = $OUTPUT->image_url("login/{$loginthemename}", "theme_eadtraining")->out(false);
@@ -46,4 +46,3 @@ $templatecontext = [
 ];
 
 echo $OUTPUT->render_from_template("theme_eadtraining/login", $templatecontext);
-
