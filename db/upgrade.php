@@ -22,6 +22,8 @@
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
+use theme_eadtraining\admin\setting_scss;
+
 /**
  * function xmldb_supervideo_upgrade
  *
@@ -49,11 +51,33 @@ function xmldb_theme_eadtraining_upgrade($oldversion) {
     }
 
     if ($oldversion < 2025100400) {
+        $settingscss = new setting_scss("test", "test", "", "");
         $scss = get_config("theme_eadtraining", "scss");
-        set_config("scsspos", $scss, "theme_eadtraining");
+
+        if ($settingscss->validate($scss) === true) {
+            set_config("scsspos", $scss, "theme_eadtraining");
+        }
 
         upgrade_plugin_savepoint(true, 2025100400, "theme", "eadtraining");
     }
+
+    if ($oldversion < 2025101300) {
+        $settingscss = new setting_scss("test", "test", "", "");
+
+        $scss = get_config("theme_eadtraining", "scsspos");
+        if (!$settingscss->validate($scss) === true) {
+            set_config("scsspos", "", "theme_eadtraining");
+        }
+
+        $scss = get_config("theme_eadtraining", "scsspre");
+        if (!$settingscss->validate($scss) === true) {
+            set_config("scsspre", "", "theme_eadtraining");
+        }
+
+        upgrade_plugin_savepoint(true, 2025101300, "theme", "eadtraining");
+    }
+
+
 
     return true;
 }
