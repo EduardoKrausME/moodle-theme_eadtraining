@@ -1,111 +1,60 @@
-name: Deploy Moodle Plugin on Release
+name: Deploy on Release
 
 on:
   release:
     types: [published]
 
-jobs:
-  build-and-deploy:
-    runs-on: ubuntu-latest
+env:
+  MOODLE_MOD_DIR: moodle/public/theme
+  PLUGIN_DIR: eadtraining
 
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    permissions: write-all
     steps:
-      - name: Checkout
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Get Info
+        run: |
+          echo "version=$(grep -Eo '[0-9]+(\.[0-9]+)+' CHANGELOG.md | head -n 1)" >> $GITHUB_OUTPUT
+        id: info
+      - name: Generate Changelog
+        run: |
+          awk '/## [0-9]/{p++} p; /## [0-9]/{if (p > 1) exit}' CHANGELOG.md | awk 'NR>2 {print last} {last=$0}' > RELEASE.md
+      - name: Prepare Plugin
+        run: |
+          cd ${{ github.workspace }}
+          mkdir -p "./$PLUGIN_DIR"
+          rsync -av --exclude='eadtraining' ./ "./$PLUGIN_DIR"
+          cd "./$PLUGIN_DIR"
+          rm -rf ./.github/
+          rm -rf ./.git/
+      - name: Checkout Moodle
         uses: actions/checkout@v4
         with:
-          fetch-depth: 0
-
-      # Lê $plugin->component do version.php para descobrir "tipo" e "slug"
-      - name: Detect component from version.php
+          repository: moodle/moodle
+          path: ./moodle
+      - name: Copy Plugin
         run: |
-          COMPONENT=$(php -r 'include "version.php"; echo $plugin->component ?? "";')
-          if [ -z "$COMPONENT" ]; then
-            echo "Falha: \$plugin->component não encontrado no version.php"; exit 1
-          fi
-          echo "COMPONENT=$COMPONENT" >> $GITHUB_ENV
-          TYPE="${COMPONENT%%_*}"
-          SLUG="${COMPONENT#*_}"
-          echo "TYPE=$TYPE" >> $GITHUB_ENV
-          echo "SLUG=$SLUG" >> $GITHUB_ENV
-          echo "Diretório de destino: $TYPE/$SLUG"
-
-      # (Opcional, mas recomendado) Valida que a tag do release bate com $plugin->release
-      - name: Validate release tag vs plugin release
+          cp -r "$PLUGIN_DIR" "./$MOODLE_MOD_DIR/$PLUGIN_DIR"
+      - name: Build Plugin
         run: |
-          TAG="${GITHUB_REF_NAME}"
-          REL=$(php -r 'include "version.php"; echo $plugin->release ?? "";')
-          echo "Tag: $TAG / Release no plugin: $REL"
-          if [ -n "$REL" ] && [ "$TAG" != "$REL" ]; then
-            echo "Aviso: tag do release ($TAG) difere de \$plugin->release ($REL)."
-          fi
-
-      - name: Make ZIP package
+          cd ./moodle
+          npm install
+          grunt
+      - name: Zip Artifact
         run: |
-          ZIPNAME="${{ env.COMPONENT }}.zip"
-          # Empacota tudo, exceto git e workflows
-          zip -r "$ZIPNAME" . -x ".git/*" ".github/*" "*node_modules/*" "*.gitignore" ".DS_Store"
-          echo "ZIPNAME=$ZIPNAME" >> $GITHUB_ENV
-          ls -lh "$ZIPNAME"
-
-      - name: Upload ZIP to server
-        uses: appleboy/scp-action@v0.1.7
+          cd "$MOODLE_MOD_DIR/"
+          mv "$PLUGIN_DIR" moodle-theme_eadtraining-${{ steps.info.outputs.version }}
+          zip -r moodle-theme_eadtraining-${{ steps.info.outputs.version }}.zip moodle-theme_eadtraining-${{ steps.info.outputs.version }}/
+      - name: Create Release
+        uses: ncipollo/release-action@v1
+        id: create_release
         with:
-          host: ${{ secrets.SSH_HOST }}
-          username: ${{ secrets.SSH_USER }}
-          key: ${{ secrets.SSH_KEY }}
-          port: ${{ secrets.SSH_PORT }}
-          source: ${{ env.ZIPNAME }}
-          target: /tmp/
-
-      - name: Deploy on server & run Moodle upgrade
-        uses: appleboy/ssh-action@v1.0.3
-        with:
-          host: ${{ secrets.SSH_HOST }}
-          username: ${{ secrets.SSH_USER }}
-          key: ${{ secrets.SSH_KEY }}
-          port: ${{ secrets.SSH_PORT }}
-          script: |
-            set -e
-            ZIP="/tmp/${{ env.ZIPNAME }}"
-            MOODLE="${{ secrets.MOODLE_PATH }}"
-            TYPE="${{ env.TYPE }}"
-            SLUG="${{ env.SLUG }}"
-            PHPBIN="${{ secrets.PHP_BIN || 'php' }}"
-
-            # Caminho final do plugin, ex.: /var/www/moodle/local/meuplugin
-            DEST="$MOODLE/$TYPE/$SLUG"
-
-            echo "Parando cron do Moodle (se aplicável)..."
-            # adapte se tiver supervisor/systemd
-
-            echo "Backup leve do plugin atual (se existir)..."
-            if [ -d "$DEST" ]; then
-              ts=$(date +%Y%m%d%H%M%S)
-              tar -czf "/tmp/${SLUG}-${ts}.tar.gz" -C "$MOODLE/$TYPE" "$SLUG" || true
-            fi
-
-            echo "Removendo pasta antiga e substituindo pelo novo conteúdo..."
-            rm -rf "$DEST"
-            mkdir -p "$MOODLE/$TYPE"
-            unzip -q "$ZIP" -d "$MOODLE/$TYPE"
-            # O zip extrai como "local_meuplugin" etc.; movemos para "$SLUG"
-            if [ -d "$MOODLE/$TYPE/${{ env.COMPONENT }}" ]; then
-              mv "$MOODLE/$TYPE/${{ env.COMPONENT }}" "$DEST"
-            fi
-
-            echo "Ajustando permissões (ajuste ao seu ambiente)..."
-            chown -R www-data:www-data "$DEST" || true
-            find "$DEST" -type d -exec chmod 755 {} \; || true
-            find "$DEST" -type f -exec chmod 644 {} \; || true
-
-            echo "Rodando upgrade do Moodle..."
-            cd "$MOODLE"
-            $PHPBIN admin/cli/maintenance.php --enable
-            $PHPBIN admin/cli/upgrade.php --non-interactive --allow-unstable
-            $PHPBIN admin/cli/purge_caches.php
-            $PHPBIN admin/cli/maintenance.php --disable
-
-            echo "Limpando artefatos temporários..."
-            rm -f "$ZIP"
-
-      - name: Done
-        run: echo "Deploy concluído 🎉"
+          artifacts: "${{ env.MOODLE_MOD_DIR }}/moodle-theme_eadtraining-${{ steps.info.outputs.version }}.zip"
+          bodyFile: RELEASE.md
+          tag: v${{ steps.info.outputs.version }}
