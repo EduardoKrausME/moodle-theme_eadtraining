@@ -77,7 +77,5 @@ function xmldb_theme_eadtraining_upgrade($oldversion) {
         upgrade_plugin_savepoint(true, 2025101300, "theme", "eadtraining");
     }
 
-
-
     return true;
 }
