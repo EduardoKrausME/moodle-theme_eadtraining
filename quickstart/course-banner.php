@@ -29,9 +29,8 @@ require_once("../lib.php");
 global $CFG, $PAGE, $OUTPUT, $DB, $USER;
 
 $courseid = required_param("courseid", PARAM_INT);
-$modal = optional_param("modal", false, PARAM_INT);
 
-if (!isloggedin() && $modal) {
+if (!isloggedin()) {
     $PAGE->set_url(new moodle_url("/course/view.php", ["id" => $courseid]));
 }
 
@@ -43,6 +42,7 @@ if (optional_param("POST", false, PARAM_INT)) {
     // Save configs.
     $configkeys = [
         "course_summary_banner" => PARAM_INT,
+        "override_course_color" => PARAM_RAW,
     ];
     foreach ($configkeys as $name => $type) {
         $value = optional_param($name, false, $type);
@@ -103,9 +103,11 @@ if (optional_param("POST", false, PARAM_INT)) {
         }
     }
 
-    \cache::make("theme_eadtraining", "course_cache")->purge();
-    \cache::make("theme_eadtraining", "css_cache")->purge();
-    \cache::make("theme_eadtraining", "frontpage_cache")->purge();
+    cache::make("theme_eadtraining", "course_cache")->purge();
+    cache::make("theme_eadtraining", "css_cache")->purge();
+    cache::make("theme_eadtraining", "frontpage_cache")->purge();
+    purge_caches(["theme", "courses", "template"]);
+    purge_caches();
 
     redirect(new moodle_url("/course/view.php?id={$courseid}"), get_string("quickstart_banner-saved", "theme_eadtraining"));
 }
@@ -116,11 +118,9 @@ $PAGE->set_title(get_string("quickstart_title", "theme_eadtraining"));
 $PAGE->set_heading(get_string("quickstart_title", "theme_eadtraining"));
 
 $PAGE->requires->css("/theme/eadtraining/quickstart/style.css");
-if ($modal) {
-    echo "<link rel=\"stylesheet\" href=\"{$CFG->wwwroot}/theme/eadtraining/quickstart/style.css\"/>";
-} else {
-    echo $OUTPUT->header();
-}
+$PAGE->requires->css("/theme/eadtraining/scss/colors.css");
+$PAGE->requires->jquery();
+echo $OUTPUT->header();
 
 // Course.
 $bannerfileurl = theme_eadtraining_setting_file_url("banner_course_file_{$courseid}");
@@ -150,6 +150,16 @@ if ( $coursesummarycourse !== false) {
     $coursesummary = $coursesummarycourse;
 }
 
+$showchangecolors=false;
+$savetheme = optional_param("savetheme", "eadtraining", PARAM_TEXT);
+if ($savetheme == "eadtraining") {
+    require_once("{$CFG->dirroot}/theme/eadtraining/lib.php");
+    $themecolors = theme_eadtraining_colors();
+    $showchangecolors = true;
+} else {
+    $themecolors = [];
+}
+$brandcolor = theme_eadtraining_default("brandcolor", "#1a2a6c", "theme_boost");
 $coursesmustache = [
     "no_accordion" => true, // For when calling out of the accordion.
     "course_summary_banner_0" => $coursesummary == 0,
@@ -157,8 +167,19 @@ $coursesmustache = [
     "course_summary_banner_2" => $coursesummary == 2,
     "banner_course_file_url" => $bannerfileurl,
     "banner_course_file_extensions" => "PNG, JPG",
+    "show_change_colors" => $showchangecolors,
+    "courseid" => $courseid,
+    "override_course_color" => get_config("theme_eadtraining", "override_course_color_{$courseid}"),
+    "colorselect" => $OUTPUT->render_from_template("theme_eadtraining/settings/colors", [
+        "coursecolor" => true,
+        "colors" => $themecolors,
+        "defaultcolor" => theme_eadtraining_default("override_course_color_{$courseid}", $brandcolor),
+        "defaultcolorfooter" => theme_eadtraining_default("footer_background_color", "#1a2a6c"),
+        "brandcolor_background_menu" => (int) theme_eadtraining_default("brandcolor_background_menu", 0),
+    ]),
 ];
 echo $OUTPUT->render_from_template("theme_eadtraining/quickstart/courses", $coursesmustache);
+$PAGE->requires->js_call_amd("theme_eadtraining/settings", "minicolors", ["override_course_color"]);
 
 echo "</form>";
 
