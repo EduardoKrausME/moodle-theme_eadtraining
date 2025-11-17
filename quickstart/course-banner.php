@@ -150,7 +150,7 @@ if ( $coursesummarycourse !== false) {
     $coursesummary = $coursesummarycourse;
 }
 
-$showchangecolors=false;
+$showchangecolors = false;
 $savetheme = optional_param("savetheme", "eadtraining", PARAM_TEXT);
 if ($savetheme == "eadtraining") {
     require_once("{$CFG->dirroot}/theme/eadtraining/lib.php");
