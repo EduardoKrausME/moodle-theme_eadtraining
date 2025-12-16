@@ -215,7 +215,10 @@ class core_hook_output {
 
         $vlibras = get_config("theme_eadtraining", "enable_vlibras") && $CFG->lang == "pt_br";
         if ($vlibras) {
-            echo $OUTPUT->render_from_template("theme_eadtraining/settings/vlibras", []);
+            echo $OUTPUT->render_from_template("theme_eadtraining/settings/vlibras", [
+                "position" => get_config("theme_eadtraining", "vlibras_position") ?: "R",
+                "avatar" => get_config("theme_eadtraining", "vlibras_avatar") ?: "icaro",
+            ]);
         }
     }
 }
