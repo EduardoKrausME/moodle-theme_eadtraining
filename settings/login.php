@@ -22,9 +22,11 @@
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
+use core\context\course as context_course;
+
 defined('MOODLE_INTERNAL') || die;
 
-global $CFG, $OUTPUT, $PAGE;
+global $CFG, $OUTPUT, $PAGE, $SITE;
 require_once("{$CFG->dirroot}/theme/eadtraining/lib.php");
 
 $page = new admin_settingpage("theme_eadtraining_login",
@@ -36,10 +38,27 @@ $options = [
     "selva-canopy" => get_string("logintheme_selva-canopy", "theme_eadtraining"),
     "clean-minimal" => get_string("logintheme_clean-minimal", "theme_eadtraining"),
     "clean-outline" => get_string("logintheme_clean-outline", "theme_eadtraining"),
+    "glassmorphism" => get_string("logintheme_glassmorphism", "theme_eadtraining"),
+    "serenity-med-blue" => get_string("logintheme_serenity-med-blue", "theme_eadtraining"),
+    "serenity-med-red" => get_string("logintheme_serenity-med-red", "theme_eadtraining"),
 ];
+$mustachecontext = (object)[];
+$url = $OUTPUT->get_logo_url();
+$mustachecontext->logourl = $url ? $url->out(false) : null;
+$mustachecontext->sitename = format_string($SITE->fullname);
+$mustachecontext->themes=[];
+foreach ($options as $loginthemename => $option){
+    $mustachecontext->themes[] = [
+        "login_theme" => $loginthemename,
+        "loginbackgroundimageurl" => $OUTPUT->image_url("login/{$loginthemename}", "theme_eadtraining")->out(false),
+    ];
+}
+$htmldescextra = $OUTPUT->render_from_template("theme_eadtraining/settings/login", $mustachecontext);
+$htmldescextra = preg_replace('/\s+/', ' ', $htmldescextra);
+
 $setting = new admin_setting_configselect("theme_eadtraining/logintheme",
     get_string("logintheme", "theme_eadtraining"),
-    get_string("logintheme_desc", "theme_eadtraining"),
+    get_string("logintheme_desc", "theme_eadtraining") . $htmldescextra,
     "aurora", $options);
 $page->add($setting);
 
