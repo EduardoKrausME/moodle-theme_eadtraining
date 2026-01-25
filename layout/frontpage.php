@@ -103,8 +103,8 @@ if ($editing) {
     $PAGE->requires->js_call_amd("theme_eadtraining/frontpage", "editingswitch", []);
 }
 
-$this->page->requires->jquery();
-$this->page->requires->jquery_plugin("ui");
-$this->page->requires->jquery_plugin("ui-css");
+$PAGE->requires->jquery();
+$PAGE->requires->jquery_plugin("ui");
+$PAGE->requires->jquery_plugin("ui-css");
 
 echo $OUTPUT->render_from_template("theme_eadtraining/frontpage", $templatecontext);
