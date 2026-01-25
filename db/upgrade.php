@@ -65,12 +65,12 @@ function xmldb_theme_eadtraining_upgrade($oldversion) {
         $settingscss = new setting_scss("test", "test", "", "");
 
         $scss = get_config("theme_eadtraining", "scsspos");
-        if (!$settingscss->validate($scss) === true) {
+        if ($settingscss->validate($scss) !== true) {
             set_config("scsspos", "", "theme_eadtraining");
         }
 
         $scss = get_config("theme_eadtraining", "scsspre");
-        if (!$settingscss->validate($scss) === true) {
+        if ($settingscss->validate($scss) !== true) {
             set_config("scsspre", "", "theme_eadtraining");
         }
 
