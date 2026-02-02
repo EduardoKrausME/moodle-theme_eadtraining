@@ -100,7 +100,7 @@ class course_renderer extends \core_course_renderer {
                     $templatecontext["homemode_page_warningnopages"] = true;
                 }
 
-                $this->page->requires->strings_for_js(["preview"], "theme_eadtraining");
+                $this->page->requires->strings_for_js(["preview", "add_block_edit"], "theme_eadtraining");
                 $this->page->requires->js_call_amd("theme_eadtraining/frontpage", "add_block", [$lang]);
                 $this->page->requires->js_call_amd("theme_eadtraining/frontpage", "block_order");
             }
