@@ -50,4 +50,11 @@ $setting = new admin_setting_configselect("theme_eadtraining/course_summary_bann
     0, $options);
 $page->add($setting);
 
+// SCORM auto enter setting.
+$setting = new admin_setting_configcheckbox("theme_eadtraining/scorm_autoenter",
+    get_string("course_scorm_autoenter", "theme_eadtraining"),
+    get_string("course_scorm_autoenter_desc", "theme_eadtraining"),
+    1);
+$page->add($setting);
+
 $settings->add($page);
