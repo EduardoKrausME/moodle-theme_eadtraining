@@ -27,12 +27,16 @@ defined('MOODLE_INTERNAL') || die;
 global $CFG, $OUTPUT, $PAGE;
 require_once("{$CFG->dirroot}/theme/eadtraining/lib.php");
 
-$page = new admin_settingpage("theme_eadtraining_general",
-    get_string("generalsettings", "theme_eadtraining"));
+$page = new admin_settingpage(
+    "theme_eadtraining_general",
+    get_string("generalsettings", "theme_eadtraining")
+);
 
 $url = "{$CFG->wwwroot}/theme/eadtraining/quickstart/#brandcolor";
-$setting = new admin_setting_heading("theme_eadtraining_quickstart_brandcolor", "",
-    get_string("quickstart_settings_link", "theme_eadtraining", $url));
+$setting = new admin_setting_heading(
+    "theme_eadtraining_quickstart_brandcolor", "",
+    get_string("quickstart_settings_link", "theme_eadtraining", $url)
+);
 $page->add($setting);
 
 if (file_exists(__DIR__ . "/general-colors.php")) {
@@ -67,67 +71,107 @@ if (file_exists(__DIR__ . "/general-colors.php")) {
         $setting->set_updatedcallback("theme_eadtraining_change_color");
         $page->add($setting);
         $PAGE->requires->js_call_amd("theme_eadtraining/settings", "minicolors", [$setting->get_id()]);
+
+        $setting = new admin_setting_configtext(
+            "theme_boost/secondary", get_string("secondary", "theme_eadtraining"),
+            get_string("secondary_desc", "theme_eadtraining"), "#ced4da"
+        );
+        $page->add($setting);
+        $PAGE->requires->js_call_amd("theme_eadtraining/settings", "minicolors", [$setting->get_id()]);
     }
 }
 
-$page->add(new admin_setting_configcheckbox("theme_eadtraining/brandcolor_background_menu",
+$setting = new admin_setting_configcheckbox(
+    "theme_eadtraining/brandcolor_background_menu",
     get_string("brandcolor_background_menu", "theme_eadtraining"),
-    get_string("brandcolor_background_menu_desc", "theme_eadtraining"), 0));
+    get_string("brandcolor_background_menu_desc", "theme_eadtraining"), 0
+);
+$page->add($setting);
 
-// Cores do topo.
-$setting = new admin_setting_heading("theme_eadtraining/top_color_heading",
-    get_string("top_color_heading", "theme_eadtraining"), "");
+// Navbar layout.
+$navbarlayoutoptions = [
+    "classic" => get_string("navbarlayout_classic", "theme_eadtraining"),
+    "institutional" => get_string("navbarlayout_institutional", "theme_eadtraining"),
+];
+$setting = new admin_setting_configselect(
+    "theme_eadtraining/navbarlayout",
+    get_string("navbarlayout", "theme_eadtraining"),
+    get_string("navbarlayout_desc", "theme_eadtraining"),
+    "classic",
+    $navbarlayoutoptions
+);
+$page->add($setting);
+
+// Top colors.
+$setting = new admin_setting_heading(
+    "theme_eadtraining/top_color_heading",
+    get_string("top_color_heading", "theme_eadtraining"), ""
+);
 $page->add($setting);
 $PAGE->requires->js_call_amd("theme_eadtraining/settings", "form_hide");
 
-$setting = new admin_setting_configcheckbox("theme_eadtraining/top_scroll_fix",
+$setting = new admin_setting_configcheckbox(
+    "theme_eadtraining/top_scroll_fix",
     get_string("top_scroll_fix", "theme_eadtraining"),
     get_string("top_scroll_fix_desc", "theme_eadtraining"),
-    0);
+    0
+);
 $setting->set_updatedcallback("theme_reset_all_caches");
 $page->add($setting);
 
-$setting = new admin_setting_configtext("theme_eadtraining/top_scroll_background_color",
+$setting = new admin_setting_configtext(
+    "theme_eadtraining/top_scroll_background_color",
     get_string("top_scroll_background_color", "theme_eadtraining"),
-    get_string("top_scroll_background_color_desc", "theme_eadtraining"), "");
+    get_string("top_scroll_background_color_desc", "theme_eadtraining"), ""
+);
 $setting->set_updatedcallback("theme_reset_all_caches");
 $page->add($setting);
 $PAGE->requires->js_call_amd("theme_eadtraining/settings", "minicolors", [$setting->get_id()]);
 
 // Images.
-$setting = new admin_setting_heading("theme_eadtraining/favicon_heading",
-    get_string("logocompact", "admin") . " / " . get_string("favicon", "theme_eadtraining"), "");
+$setting = new admin_setting_heading(
+    "theme_eadtraining/favicon_heading",
+    get_string("logocompact", "admin") . " / " . get_string("favicon", "theme_eadtraining"), ""
+);
 $page->add($setting);
 
 // Small logo file setting.
-$setting = new admin_setting_configstoredfile("core_admin/logocompact",
+$setting = new admin_setting_configstoredfile(
+    "core_admin/logocompact",
     get_string("logocompact", "admin"),
     get_string("logocompact_desc", "admin"),
     "logocompact", 0,
-    ["maxfiles" => 1, "accepted_types" => [".jpg", ".jpeg", ".svg", ".png"]]);
+    ["maxfiles" => 1, "accepted_types" => [".jpg", ".jpeg", ".svg", ".png"]]
+);
 $setting->set_updatedcallback("theme_reset_all_caches");
 $page->add($setting);
 
 // Favicon file setting.
-$setting = new admin_setting_configstoredfile("core_admin/favicon",
+$setting = new admin_setting_configstoredfile(
+    "core_admin/favicon",
     get_string("favicon", "theme_eadtraining"),
     get_string("favicon_desc", "theme_eadtraining"),
     "favicon", 0,
-    ["maxfiles" => 1, "accepted_types" => [".jpg", ".jpeg", ".png"]]);
+    ["maxfiles" => 1, "accepted_types" => [".jpg", ".jpeg", ".png"]]
+);
 $setting->set_updatedcallback("theme_reset_all_caches");
 $page->add($setting);
 
 // Background image setting.
-$setting = new admin_setting_heading("theme_eadtraining/backgroundimage_heading",
-    get_string("backgroundimage", "theme_eadtraining"), "");
+$setting = new admin_setting_heading(
+    "theme_eadtraining/backgroundimage_heading",
+    get_string("backgroundimage", "theme_eadtraining"), ""
+);
 $page->add($setting);
 
 $name = "theme_eadtraining/backgroundimage";
-$setting = new admin_setting_configstoredfile($name,
+$setting = new admin_setting_configstoredfile(
+    $name,
     get_string("backgroundimage", "theme_eadtraining"),
     get_string("backgroundimage_desc", "theme_eadtraining"),
     "backgroundimage", 0,
-    ["maxfiles" => 1, "accepted_types" => [".jpg", ".jpeg", ".svg", ".png"]]);
+    ["maxfiles" => 1, "accepted_types" => [".jpg", ".jpeg", ".svg", ".png"]]
+);
 $setting->set_updatedcallback("theme_reset_all_caches");
 $page->add($setting);
 

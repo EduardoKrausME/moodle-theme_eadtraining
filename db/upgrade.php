@@ -77,5 +77,12 @@ function xmldb_theme_eadtraining_upgrade($oldversion) {
         upgrade_plugin_savepoint(true, 2025101300, "theme", "eadtraining");
     }
 
+    if ($oldversion < 2026022500) {
+        set_config("secondary", "#ced4da", "theme_boost");
+        set_config("navbarlayout", "classic", "theme_eadtraining");
+
+        upgrade_plugin_savepoint(true, 2026022500, "theme", "eadtraining");
+    }
+
     return true;
 }

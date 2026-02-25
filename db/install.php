@@ -43,8 +43,12 @@ function xmldb_theme_eadtraining_install() {
         "filename" => "user-modal-background.jpg",
     ];
     $fs->create_file_from_pathname($filerecord, "{$CFG->dirroot}/theme/eadtraining/pix/user-modal-background.jpg");
+
+    set_config("secondary", "#ced4da", "theme_boost");
+
     set_config("background_profile_image", "/user-modal-background.jpg", "theme_eadtraining");
     set_config("brandcolor_background_menu", 0, "theme_eadtraining");
+    set_config("navbarlayout", "classic", "theme_eadtraining");
 
     set_config("top_scroll_fix", 1, "theme_eadtraining");
     set_config("top_scroll_background_color", "", "theme_eadtraining");
