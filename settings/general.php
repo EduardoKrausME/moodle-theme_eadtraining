@@ -76,6 +76,7 @@ if (file_exists(__DIR__ . "/general-colors.php")) {
             "theme_boost/secondary", get_string("secondary", "theme_eadtraining"),
             get_string("secondary_desc", "theme_eadtraining"), "#ced4da"
         );
+        $setting->set_updatedcallback("theme_reset_all_caches");
         $page->add($setting);
         $PAGE->requires->js_call_amd("theme_eadtraining/settings", "minicolors", [$setting->get_id()]);
     }
@@ -86,6 +87,7 @@ $setting = new admin_setting_configcheckbox(
     get_string("brandcolor_background_menu", "theme_eadtraining"),
     get_string("brandcolor_background_menu_desc", "theme_eadtraining"), 0
 );
+$setting->set_updatedcallback("theme_reset_all_caches");
 $page->add($setting);
 
 // Navbar layout.
