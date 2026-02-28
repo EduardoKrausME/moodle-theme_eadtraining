@@ -84,5 +84,23 @@ function xmldb_theme_eadtraining_upgrade($oldversion) {
         upgrade_plugin_savepoint(true, 2026022500, "theme", "eadtraining");
     }
 
+    if ($oldversion < 2026022800) {
+        $records = $DB->get_records_select(
+            'config_plugins',
+            "plugin = 'theme_eadtraining' AND name LIKE 'override_course_color_%'"
+        );
+
+        if ($records) {
+            foreach ($records as $record) {
+                $suffix = substr($record->name, strlen("override_course_color_"));
+                $newname = "override_course_primarycolor_{$suffix}";
+
+                set_config($newname, $record->value, 'theme_eadtraining');
+                unset_config($record->name, 'theme_eadtraining');
+            }
+        }
+        upgrade_plugin_savepoint(true, 2026022800, "theme", "eadtraining");
+    }
+
     return true;
 }

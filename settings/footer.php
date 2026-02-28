@@ -42,6 +42,8 @@ $htmlselect .= "\n\n" . $OUTPUT->render_from_template("theme_eadtraining/setting
         "colors" => theme_eadtraining_colors(),
         "defaultcolor" => theme_eadtraining_default("brandcolor", "#1a2a6c", "theme_boost"),
         "defaultcolorfooter" => theme_eadtraining_default("footer_background_color", "#1a2a6c"),
+        "navbar_layout_is_institutional" => $OUTPUT->navbar_layout_is_institutional(),
+        "secondary_color" => $OUTPUT->secondary_color(),
     ]);
 $setting = new admin_setting_configtext("theme_eadtraining/footer_background_color",
     get_string("footer_background_color", "theme_eadtraining"),

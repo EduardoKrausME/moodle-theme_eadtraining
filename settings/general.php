@@ -48,6 +48,8 @@ if (file_exists(__DIR__ . "/general-colors.php")) {
         $htmlselect .= "\n\n" . $OUTPUT->render_from_template("theme_eadtraining/settings/colors", [
                 "startcolor" => true, "colors" => theme_eadtraining_colors(),
                 "defaultcolor" => theme_eadtraining_default("startcolor", "#1a2a6c"),
+                "navbar_layout_is_institutional" => $OUTPUT->navbar_layout_is_institutional(),
+                "secondary_color" => $OUTPUT->secondary_color(),
             ]);
 
         $setting = new admin_setting_configtext(
@@ -61,6 +63,8 @@ if (file_exists(__DIR__ . "/general-colors.php")) {
         $htmlselect .= "\n\n" . $OUTPUT->render_from_template("theme_eadtraining/settings/colors", [
                 "brandcolor" => true, "colors" => theme_eadtraining_colors(),
                 "defaultcolor" => theme_eadtraining_default("brandcolor", "#1a2a6c", "theme_boost"),
+                "navbar_layout_is_institutional" => $OUTPUT->navbar_layout_is_institutional(),
+                "secondary_color" => $OUTPUT->secondary_color(),
             ]);
 
         // We use an empty default value because the default colour should come from the preset.
@@ -82,14 +86,6 @@ if (file_exists(__DIR__ . "/general-colors.php")) {
     }
 }
 
-$setting = new admin_setting_configcheckbox(
-    "theme_eadtraining/brandcolor_background_menu",
-    get_string("brandcolor_background_menu", "theme_eadtraining"),
-    get_string("brandcolor_background_menu_desc", "theme_eadtraining"), 0
-);
-$setting->set_updatedcallback("theme_reset_all_caches");
-$page->add($setting);
-
 // Navbar layout.
 $navbarlayoutoptions = [
     "classic" => get_string("navbarlayout_classic", "theme_eadtraining"),
@@ -104,13 +100,20 @@ $setting = new admin_setting_configselect(
 );
 $page->add($setting);
 
+$setting = new admin_setting_configcheckbox(
+    "theme_eadtraining/brandcolor_background_menu",
+    get_string("brandcolor_background_menu", "theme_eadtraining"),
+    get_string("brandcolor_background_menu_desc", "theme_eadtraining"), 0
+);
+$setting->set_updatedcallback("theme_reset_all_caches");
+$page->add($setting);
+
 // Top colors.
 $setting = new admin_setting_heading(
     "theme_eadtraining/top_color_heading",
     get_string("top_color_heading", "theme_eadtraining"), ""
 );
 $page->add($setting);
-$PAGE->requires->js_call_amd("theme_eadtraining/settings", "form_hide");
 
 $setting = new admin_setting_configcheckbox(
     "theme_eadtraining/top_scroll_fix",
