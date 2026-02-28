@@ -48,7 +48,7 @@ if (file_exists(__DIR__ . "/general-colors.php")) {
         $htmlselect .= "\n\n" . $OUTPUT->render_from_template("theme_eadtraining/settings/colors", [
                 "startcolor" => true, "colors" => theme_eadtraining_colors(),
                 "defaultcolor" => theme_eadtraining_default("startcolor", "#1a2a6c"),
-                "navbar_layout_is_institutional" => get_config("theme_boost_magnific", "navbarlayout") == "institutional",
+                "navbar_layout_is_institutional" => get_config("theme_eadtraining", "navbarlayout") == "institutional",
                 "secondary_color" => theme_eadtraining_secondary_color(),
             ]);
 
