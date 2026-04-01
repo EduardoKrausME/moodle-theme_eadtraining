@@ -204,17 +204,18 @@
 {{#js}}
     {{^error}}
         {{#autofocusform}}
-            require(['core_form/events'], function(FormEvent) {
-            function autoFocus() {
-            const userNameField = document.getElementById('username');
-            if (userNameField.value.length == 0) {
-            userNameField.focus();
-            } else {
-            document.getElementById('password').focus();
-            }
-            }
-            autoFocus();
-            window.addEventListener(FormEvent.eventTypes.fieldStructureChanged, autoFocus);
+            require(['core_form/events'], function (FormEvent) {
+                function autoFocus() {
+                    const userNameField = document.getElementById('username');
+                    if (userNameField.value.length == 0) {
+                        userNameField.focus();
+                    } else {
+                        document.getElementById('password').focus();
+                    }
+                }
+
+                autoFocus();
+                window.addEventListener(FormEvent.eventTypes.fieldStructureChanged, autoFocus);
             });
         {{/autofocusform}}
     {{/error}}
@@ -222,9 +223,9 @@
         document.getElementById('loginerrormessage').focus();
     {{/error}}
     require(['core_form/submit'], function(Submit) {
-    Submit.init("loginbtn");
-    {{#canloginasguest}}
-        Submit.init("loginguestbtn");
-    {{/canloginasguest}}
+        Submit.init("loginbtn");
+        {{#canloginasguest}}
+            Submit.init("loginguestbtn");
+        {{/canloginasguest}}
     });
 {{/js}}
