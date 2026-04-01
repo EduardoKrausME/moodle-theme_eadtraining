@@ -40,8 +40,8 @@ $htmlselect = "<link rel=\"stylesheet\" href=\"{$CFG->wwwroot}/theme/eadtraining
 $htmlselect .= "\n\n" . $OUTPUT->render_from_template("theme_eadtraining/settings/colors", [
         "footercolor" => true,
         "colors" => theme_eadtraining_colors(),
-        "defaultcolor" => theme_eadtraining_default("brandcolor", "#1a2a6c", "theme_boost"),
-        "defaultcolorfooter" => theme_eadtraining_default("footer_background_color", "#1a2a6c"),
+        "defaultcolor" => theme_eadtraining_default("brandcolor", "#1a2a6c", '/^#[a-fA-F0-9]{6}([a-fA-F0-9]{2})?$/', "theme_boost"),
+        "defaultcolorfooter" => theme_eadtraining_default("footer_background_color", "#1a2a6c", '/^#[a-fA-F0-9]{6}([a-fA-F0-9]{2})?$/'),
         "navbar_layout_is_institutional" => get_config("theme_eadtraining", "navbarlayout") == "institutional",
         "secondary_color" => theme_eadtraining_secondary_color(),
     ]);
