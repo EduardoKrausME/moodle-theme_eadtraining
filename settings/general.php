@@ -62,7 +62,8 @@ if (file_exists(__DIR__ . "/general-colors.php")) {
     } else {
         $htmlselect .= "\n\n" . $OUTPUT->render_from_template("theme_eadtraining/settings/colors", [
                 "brandcolor" => true, "colors" => theme_eadtraining_colors(),
-                "defaultcolor" => theme_eadtraining_default("brandcolor", "#1a2a6c", '/^#[a-fA-F0-9]{6}([a-fA-F0-9]{2})?$/', "theme_boost"),
+                "defaultcolor" => theme_eadtraining_default("brandcolor", "#1a2a6c",
+                    '/^#[a-fA-F0-9]{6}([a-fA-F0-9]{2})?$/', "theme_boost"),
                 "navbar_layout_is_institutional" => get_config("theme_eadtraining", "navbarlayout") == "institutional",
                 "secondary_color" => theme_eadtraining_secondary_color(),
             ]);
