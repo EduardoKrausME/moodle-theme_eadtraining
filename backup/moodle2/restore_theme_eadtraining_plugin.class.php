@@ -41,6 +41,10 @@ class restore_theme_eadtraining_plugin extends restore_theme_plugin {
                 "eadtraining_courseopts",
                 $this->get_pathfor("/courseopts")
             ),
+            new restore_path_element(
+                "eadtraining_moduleopt",
+                $this->get_pathfor("/moduleopts/moduleopt")
+            ),
         ];
     }
 
@@ -83,5 +87,71 @@ class restore_theme_eadtraining_plugin extends restore_theme_plugin {
      */
     protected function after_execute_course() {
         $this->add_related_files("theme_eadtraining", "banner_course_file", null);
+
+        $this->add_related_files(
+            "theme_eadtraining",
+            "theme_eadtraining_customimage",
+            "theme_eadtraining_custommodule"
+        );
+
+        $this->add_related_files(
+            "theme_eadtraining",
+            "theme_eadtraining_customicon",
+            "theme_eadtraining_custommodule"
+        );
+
+        cache::make("theme_eadtraining", "css_cache")->purge();
+    }
+
+    /**
+     * Restore module visual customizations.
+     *
+     * @param array $data
+     * @return void
+     */
+    public function process_eadtraining_moduleopt($data) {
+        $data = (object) $data;
+
+        if (empty($data->cmid)) {
+            return;
+        }
+
+        $newcmid = $this->get_mappingid("course_module", $data->cmid);
+        if (!$newcmid) {
+            return;
+        }
+
+        if (!empty($data->customimage)) {
+            set_config(
+                "theme_eadtraining_customimage_{$newcmid}",
+                $data->customimage,
+                "theme_eadtraining"
+            );
+        }
+
+        if (!empty($data->customicon)) {
+            set_config(
+                "theme_eadtraining_customicon_{$newcmid}",
+                $data->customicon,
+                "theme_eadtraining"
+            );
+        }
+
+        if (!empty($data->customcolor)) {
+            set_config(
+                "theme_eadtraining_customcolor_{$newcmid}",
+                $data->customcolor,
+                "theme_eadtraining"
+            );
+        }
+
+        // Register old cmid -> new cmid and old module context for file restore.
+        $this->set_mapping(
+            "theme_eadtraining_custommodule",
+            $data->cmid,
+            $newcmid,
+            true,
+            $data->contextid
+        );
     }
 }
