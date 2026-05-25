@@ -47,14 +47,14 @@ if (file_exists(__DIR__ . "/general-colors.php")) {
     if (!isset($config->startcolor[2])) {
         $htmlselect .= "\n\n" . $OUTPUT->render_from_template("theme_eadtraining/settings/colors", [
                 "startcolor" => true, "colors" => theme_eadtraining_colors(),
-                "defaultcolor" => theme_eadtraining_default("startcolor", "#1a2a6c", '/^#[a-fA-F0-9]{6}([a-fA-F0-9]{2})?$/'),
+                "defaultcolor" => theme_eadtraining_default("startcolor", "#314755", '/^#[a-fA-F0-9]{6}([a-fA-F0-9]{2})?$/'),
                 "navbar_layout_is_institutional" => get_config("theme_eadtraining", "navbarlayout") == "institutional",
                 "secondary_color" => theme_eadtraining_secondary_color(),
             ]);
 
         $setting = new admin_setting_configtext(
             "theme_eadtraining/startcolor", get_string("brandcolor", "theme_boost"),
-            get_string("brandcolor_desc", "theme_eadtraining") . $htmlselect, "#1a2a6c"
+            get_string("brandcolor_desc", "theme_eadtraining") . $htmlselect, "#314755"
         );
         $PAGE->requires->js_call_amd("theme_eadtraining/settings", "minicolors", [$setting->get_id()]);
         $setting->set_updatedcallback("theme_eadtraining_change_color");
@@ -62,7 +62,7 @@ if (file_exists(__DIR__ . "/general-colors.php")) {
     } else {
         $htmlselect .= "\n\n" . $OUTPUT->render_from_template("theme_eadtraining/settings/colors", [
                 "brandcolor" => true, "colors" => theme_eadtraining_colors(),
-                "defaultcolor" => theme_eadtraining_default("brandcolor", "#1a2a6c",
+                "defaultcolor" => theme_eadtraining_default("brandcolor", "#314755",
                     '/^#[a-fA-F0-9]{6}([a-fA-F0-9]{2})?$/', "theme_boost"),
                 "navbar_layout_is_institutional" => get_config("theme_eadtraining", "navbarlayout") == "institutional",
                 "secondary_color" => theme_eadtraining_secondary_color(),
@@ -71,7 +71,7 @@ if (file_exists(__DIR__ . "/general-colors.php")) {
         // We use an empty default value because the default colour should come from the preset.
         $setting = new admin_setting_configtext(
             "theme_boost/brandcolor", get_string("brandcolor", "theme_eadtraining"),
-            get_string("brandcolor_desc", "theme_eadtraining") . $htmlselect, "#1a2a6c"
+            get_string("brandcolor_desc", "theme_eadtraining") . $htmlselect, "#314755"
         );
         $setting->set_updatedcallback("theme_eadtraining_change_color");
         $page->add($setting);
