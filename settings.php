@@ -35,6 +35,10 @@ if ($hassiteconfig) {
     $title = "{$pluginname} - " . get_string("quickstart_title", "theme_eadtraining");
     $url = new moodle_url("/theme/eadtraining/quickstart/");
     $ADMIN->add("themes", new admin_externalpage("theme_eadtraining_link2", $title, $url));
+
+    $title = "{$pluginname} - " . get_string("report_accessibility_title", "theme_eadtraining");
+    $url = new moodle_url("/theme/eadtraining/report.php");
+    $ADMIN->add("themes", new admin_externalpage("theme_eadtraining_report", $title, $url));
 }
 
 if ($ADMIN->fulltree) {
