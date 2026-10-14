@@ -78,7 +78,9 @@ class backup_theme_eadtraining_plugin extends backup_theme_plugin {
         $pluginwrapper = new backup_nested_element($this->get_recommended_name());
         $plugin->add_child($pluginwrapper);
 
-        $courseopts = new backup_nested_element("courseopts", ["courseid"], [
+        // Moodle combines backup structures from all installed themes in one optigroup.
+        // Namespace the XML elements to avoid collisions with other themes.
+        $courseopts = new backup_nested_element("eadtraining_courseopts", ["courseid"], [
             "course_summary_banner",
             "course_sections_icons",
             "override_course_primarycolor",
@@ -126,8 +128,8 @@ class backup_theme_eadtraining_plugin extends backup_theme_plugin {
         $courseopts->annotate_files("theme_eadtraining", "banner_course_file", null);
 
         // Course module visual customizations.
-        $moduleopts = new backup_nested_element("moduleopts");
-        $moduleopt = new backup_theme_eadtraining_module_element("moduleopt", ["cmid"], [
+        $moduleopts = new backup_nested_element("eadtraining_moduleopts");
+        $moduleopt = new backup_theme_eadtraining_module_element("eadtraining_moduleopt", ["cmid"], [
             "contextid",
             "customimage",
             "customicon",
