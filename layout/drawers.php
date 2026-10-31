@@ -62,6 +62,10 @@ if (!$courseindex) {
     $courseindexopen = false;
 }
 
+if ($PAGE->pagelayout === "frontpage" && get_config("theme_eadtraining", "hidefrontpagetitle")) {
+    $extraclasses[] = "hide-frontpage-site-title";
+}
+
 $bodyattributes = $OUTPUT->body_attributes($extraclasses);
 $forceblockdraweropen = $OUTPUT->firstview_fakeblocks();
 
