@@ -109,14 +109,6 @@ $setting = new admin_setting_configcheckbox(
 $setting->set_updatedcallback("theme_reset_all_caches");
 $page->add($setting);
 
-// Hide the frontpage site title without hiding other header actions.
-$setting = new admin_setting_configcheckbox(
-    "theme_eadtraining/hidefrontpagetitle",
-    get_string("hidefrontpagetitle", "theme_eadtraining"),
-    get_string("hidefrontpagetitle_desc", "theme_eadtraining"),
-    0
-);
-$page->add($setting);
 
 // Top colors.
 $setting = new admin_setting_heading(
