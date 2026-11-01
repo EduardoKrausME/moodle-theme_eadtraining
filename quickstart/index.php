@@ -93,7 +93,7 @@ if (optional_param("POST", false, PARAM_INT)) {
             theme_eadtraining_editor_create_page($template, $lang, "home");
             $existingtemplates[$template] = true;
         } catch (\Throwable $e) {
-            error_log("theme_eadtraining Quick Start: could not create homepage section {$template}: " . $e->getMessage());
+            debugging("theme_eadtraining Quick Start: could not create homepage section {$template}: " . $e->getMessage(), DEBUG_DEVELOPER);
             $failedtemplates[] = $template;
         }
     }
