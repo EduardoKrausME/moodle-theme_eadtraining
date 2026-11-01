@@ -17,14 +17,13 @@
 {{!
     @template theme_eadtraining/primary-drawer-mobile
 
-    This template renders the mobile version of the top navbar menu in a drawer.
+    This template renders the mobile primary navigation, the course index on small screens,
+    and the site name instead of a logo in the drawer header.
 
     Example context (json):
     {
-        "output": {
-            "should_display_navbar_logo": true,
-            "get_compact_logo_url": "http://placekitten.com/50/50"
-        },
+        "sitename": "Example campus",
+        "config": {"homeurl": "/"},
         "mobileprimarynav": [
             {
                 "text": "Dashboard",
@@ -50,12 +49,13 @@
     {{$drawerclasses}}drawer drawer-left drawer-primary drawer-primary-mobile{{/drawerclasses}}
     {{$drawercloseonresize}}1{{/drawercloseonresize}}
     {{$drawerheading}}
-        {{# output.should_display_navbar_logo }}
-            <img src="{{{output.get_compact_logo_url}}}" class="logo py-1 h-100" alt="{{{sitename}}}">
-        {{/ output.should_display_navbar_logo }}
-        {{^ output.should_display_navbar_logo }}
-            <span class="sitename" title="{{{sitename}}}">{{{sitename}}}</span>
-        {{/ output.should_display_navbar_logo }}
+        {{! The mobile drawer always uses the site name, regardless of the navbar logo setting. }}
+        <a href="{{{ config.homeurl }}}"
+           data-region="site-home-link"
+           class="aabtn text-reset"
+           title="{{sitename}}">
+            <span class="sitename">{{{sitename}}}</span>
+        </a>
     {{/drawerheading}}
     {{$drawercontent}}
         <nav class="mobile-primary-navigation" aria-label="{{#str}}navigation, core{{/str}}">
