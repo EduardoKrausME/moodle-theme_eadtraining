@@ -268,4 +268,3 @@ $string['top_scroll_background_color_desc'] = 'Set the background color when scr
 $string['top_scroll_fix'] = 'Pin the menu when scrolling the page';
 $string['top_scroll_fix_desc'] = 'When enabled, the menu will be pinned to the top of the screen while you scroll the page, ensuring easy access to menu options.';
 $string['userprofilesettings'] = 'User Profile';
-
